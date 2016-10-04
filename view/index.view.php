@@ -1,9 +1,15 @@
+<?php
+  $pageTitle = 'Planner';
+
+  require_once('include/header.php');
+?>
+
 <!--Navigation Bar START-->
 
 <div class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a href="#" class="navbar-brand">Planner
+            <a href="/" class="navbar-brand">Planner
             </a>
             <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
                 <span class="icon-bar"></span>
@@ -22,7 +28,7 @@
                             <a href="#">Plan</a>
                         </li>
                         <li>
-                            <a href="#">Transactions</a>
+                            <a href="/budget/transaction">Transactions</a>
                         </li>
                         <li>
                             <a href="#">Calculator</a>
@@ -244,3 +250,5 @@
     <!--***************************************************************************Main Content END***************************************************************************-->
 
 </div>
+
+<?php require_once('include/footer.php'); ?>
