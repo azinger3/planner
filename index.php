@@ -8,20 +8,7 @@ $container = $app->getContainer();
 
 $container['view'] = new \Slim\Views\PhpRenderer("view/");
 
+require 'route/index.route.php';
+require 'route/budget.route.php';
 
-// Routes
-$app->get('/', function ($request, $response, $args) {
-    $response = $this->view->render($response, "index.view.php");
-
-    return $response;
-});
-
-$app->get('/budget/transaction', function ($request, $response, $args) {
-    $response = $this->view->render($response, "transaction.view.php");
-
-    return $response;
-});
-
-
-// App Run
 $app->run();

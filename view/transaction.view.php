@@ -1,254 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
 <?php
-  $pageTitle = 'Budget Transactions';
+  $pageTitle = 'Transactions';
 
   require_once('include/header.php');
 ?>
 
-<!--Navigation Bar START-->
+<style>
 
-<div class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <a href="/" class="navbar-brand">Planner1
-            </a>
-            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-        </div>
-        <div class="navbar-collapse collapse" id="navbar-main">
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Budget
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="#">Plan</a>
-                        </li>
-                        <li>
-                            <a href="#">Transactions</a>
-                        </li>
-                        <li>
-                            <a href="#">Calculator</a>
-                        </li>
-                        <li>
-                            <a href="#">Summaries</a>
-                        </li>
+</style>
 
-                        <li>
-                            <a href="#">History</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">To Do List</a>
-                </li>
-                <li>
-                    <a href="#">Tracker</a>
-                </li>
-                <li>
-                    <a href="#">Wish List</a>
-                </li>
-                <li>
-                    <a href="#">Admin</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
+</head>
+<body>
 
-<!--Navigation Bar END-->
+  <!--Navigation START-->
 
-<div class="container">
+  <div id="navigation"></div>
 
-    <!--Page Header START-->
+  <!--Navigation END-->
 
-    <div class="page-header">
-        <div class="row">
-            <div class="col-lg-6 col-xs-6">
-                <h1>Budget Transactions</h1>
-            </div>
-            <div class="col-lg-6 col-xs-6">
-                <div class="pull-right">
-                    <h1 title="Add Transaction"><i class="fa fa-plus"></i></h1>
-                </div>
-            </div>
-        </div>
-    </div>
+  <div class="container">
 
-    <!--Page Header END-->
+      <!--Page Header START-->
 
-    <!--***********************************************************************Main Content START***********************************************************************-->
+      <div class="page-header">
+          <div class="row">
+              <div class="col-lg-12">
+                  <h1>Transactions</h1>
+              </div>
+          </div>
+      </div>
 
-    <div class="row">
-        <div class="col-md-8">
+      <!--Page Header END-->
 
-            <!--Remaining Variable Funds START-->
+      <!--***********************************************************************Main Content START***********************************************************************-->
 
+      <div class="row">
+          <div class="col-md-4">
             <div class="panel panel-primary">
-                <div class="panel-heading">Remaining Variable Funds1</div>
+                <div class="panel-heading">Add Transaction</div>
                 <div class="panel-body">
-                    <div class="currentMonth"><strong>September 2016</strong></div>
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th class="categoryWidth"></th>
-                                <th class="progressWidth"></th>
-                                <th class="remainingWidth"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Eat Out</td>
-                                <td>
-                                    <div class="progress progress-sm">
-                                        <div class="progress-bar progress-bar-info" style="width: 60%"></div>
-                                    </div>
-                                </td>
-                                <td class="remaining">$300.00</td>
-                            </tr>
-                            <tr>
-                                <td>Gas</td>
-                                <td>
-                                    <div class="progress progress-sm">
-                                        <div class="progress-bar progress-bar-success" style="width: 40%"></div>
-                                    </div>
-                                </td>
-                                <td class="remaining">$300.00</td>
-                            </tr>
-                            <tr>
-                                <td>Grocery</td>
-                                <td>
-                                    <div class="progress progress-sm">
-                                        <div class="progress-bar progress-bar-warning" style="width: 30%"></div>
-                                    </div>
-                                </td>
-                                <td class="remaining">$300.00</td>
-                            </tr>
-                            <tr>
-                                <td>Needs</td>
-                                <td>
-                                    <div class="progress progress-sm">
-                                        <div class="progress-bar progress-bar-danger" style="width: 80%"></div>
-                                    </div>
-                                </td>
-                                <td class="remaining">$300.00</td>
-                            </tr>
-                            <tr>
-                                <td>WAM</td>
-                                <td>
-                                    <div class="progress progress-sm">
-                                        <div class="progress-bar progress-bar-info" style="width: 75%"></div>
-                                    </div>
-                                </td>
-                                <td class="remaining">$300.00</td>
-                            </tr>
-                            <tr>
-                                <td>Wants</td>
-                                <td>
-                                    <div class="progress progress-sm">
-                                        <div class="progress-bar progress-bar-success" style="width: 20%"></div>
-                                    </div>
-                                </td>
-                                <td class="remaining">$300.00</td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td>
-                                    <h4><strong>TOTAL</strong></h4>
-                                </td>
-                                <td>
-                                    <div class="progress progress-striped progress-lg">
-                                        <div class="progress-bar progress-bar-danger" style="width: 20%"></div>
-                                    </div>
-                                </td>
-                                <td class="remaining">
-                                    <h4><strong>$1860.00</strong></h4>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-            </div>
-
-            <!--Remaining Variable Funds END-->
-
-            <!--Savings Breakdown START-->
-
-            <div class="panel panel-primary">
-                <div class="panel-heading">Savings Breakdown</div>
-                <div class="panel-body">
-                    <table class="table table-hover">
-                        <tbody>
-                            <tr>
-                                <td>Emergency Fund</td>
-                                <td class="balance">$300.00</td>
-                            </tr>
-                            <tr>
-                                <td>Car Replacement</td>
-                                <td class="balance">$300.00</td>
-                            </tr>
-                            <tr>
-                                <td>Travel</td>
-                                <td class="balance">$300.00</td>
-                            </tr>
-                            <tr>
-                                <td>Christmas Fund</td>
-                                <td class="balance">$300.00</td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td>
-                                    <h4><strong>TOTAL</strong></h4>
-                                </td>
-                                <td class="balance">
-                                    <h4><strong>$30000.00</strong></h4>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-            </div>
-
-            <!--Savings Breakdown END-->
-
-        </div>
-        <div class="col-md-4">
-
-            <!--Budget Summaries START-->
-
-            <div class="panel panel-primary">
-                <div class="panel-heading">Budget Summaries</div>
-                <div class="panel-body">
-                    <div class="list-group">
-                        <a class="list-group-item" href="#">September 2016</a>
-                        <a class="list-group-item" href="#">August 2016</a>
-                        <a class="list-group-item" href="#">July 2016</a>
-                        <a class="list-group-item" href="#">June 2016</a>
-                        <a class="list-group-item" href="#">May 2016</a>
-                        <a class="list-group-item" href="#">April 2016</a>
-                        <a class="list-group-item" href="#">March 2016</a>
-                        <a class="list-group-item" href="#">February 2016</a>
-                        <a class="list-group-item" href="#">January 2016</a>
-                        <a class="list-group-item" href="#">December 2015</a>
-                        <a class="list-group-item" href="#">November 2015</a>
-                        <a class="list-group-item" href="#">October 2015</a>
-                        <a class="list-group-item" href="#">September 2015</a>
+                  <form>
+                    <div class="form-group">
+                      <div class="btn-group btn-group-justified btn-group-xs" data-toggle="buttons">
+                        <label class="btn btn-success active">
+                          <input type="radio" id="uxTransactionTypeExpense" name="uxTransactionType" />
+                          Expense
+                        </label>
+                        <label class="btn btn-success">
+                          <input type="radio" id="uxTransactionTypeIncome" name="uxTransactionType" />
+                          Income
+                        </label>
+                        </div>
                     </div>
+                    <div class="form-group">
+                      <div class="input-group input-group-sm">
+                        <input type="text" id="uxTransactionDT" class="form-control" placeholder="Transaction Date" />
+                        <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="uxDescription" class="form-control input-sm" placeholder="Description" />
+                    </div>
+                    <div class="form-group">
+                      <div class="input-group input-group-sm">
+                        <input type="text" id="uxAmount" class="form-control input-sm" placeholder="Amount" />
+                        <span class="input-group-addon"><i class="fa fa-usd" aria-hidden="true"></i></span>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="uxBudgetCategory" class="form-control input-sm" placeholder="TODO budget category select boxes" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="uxTransactionNumber" class="form-control input-sm" placeholder="Transaction Number" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="uxNote" class="form-control input-sm" placeholder="Note" />
+                    </div>
+                    <div class="form-group pull-right">
+                        <!-- <button type="button" class="btn btn-danger">Delete</button>
+                        <button type="button" class="btn btn-info">Update</button> -->
+                        <button type="button" class="btn btn-default">Clear</button>
+                        <button type="button" class="btn btn-success">Add</button>
+                    </div>
+                  </form>
                 </div>
             </div>
+          </div>
+          <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">Recent Transactions</div>
+                <div class="panel-body">
+                  <table class="table table-striped table-hover">
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>09/25/2016</td>
+                        <td>Trader Joes</td>
+                        <td>$128.86</td>
+                      </tr>
+                      <tr>
+                        <td>09/23/2016</td>
+                        <td>Dinner</td>
+                        <td>$18.61</td>
+                      </tr>
+                      <tr>
+                        <td>09/19/2016</td>
+                        <td>Cash Withdrawl</td>
+                        <td>$20.00</td>
+                      </tr>
+                      <tr>
+                        <td>09/18/2016</td>
+                        <td>Netflix</td>
+                        <td>$9.99</td>
+                      </tr>
+                      <tr>
+                        <td>09/16/2016</td>
+                        <td>iTunes</td>
+                        <td>$10.59</td>
+                      </tr>
+                      <tr>
+                        <td>09/14/2016</td>
+                        <td>Vanguard IRA</td>
+                        <td>$40.00</td>
+                      </tr>
+                      <tr>
+                        <td>09/12/2016</td>
+                        <td>Lunch</td>
+                        <td>$16.11</td>
+                      </tr>
+                      <tr>
+                        <td>09/07/2016</td>
+                        <td>Cat- Feeders Supply</td>
+                        <td>$22.25</td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+          </div>
+      </div>
 
-            <!--Budget Summaries END-->
+      <!--***************************************************************************Main Content END*********************************************************************-->
 
-        </div>
-    </div>
+  </div>
 
-    <!--***************************************************************************Main Content END***************************************************************************-->
+  <?php require_once('include/footer.php'); ?>
 
-</div>
+  <script type="text/babel" src="../../../component/navigation.js"></script>
 
-<?php require_once('include/footer.php'); ?>
+</body>
+</html>
