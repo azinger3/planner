@@ -1,8 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
 <?php
   $pageTitle = 'Planner';
 
   require_once('include/header.php');
 ?>
+
+<style>
+    .addTransactionLink {
+        color: #2c3e50;
+    }
+</style>
+
+</head>
+<body>
 
   <!--Navigation START-->
 
@@ -16,12 +30,12 @@
 
       <div class="page-header">
           <div class="row">
-              <div class="col-lg-6 col-xs-6">
+              <div class="col-lg-6 col-xs-6 visible-lg">
                   <h1>Dashboard</h1>
               </div>
-              <div class="col-lg-6 col-xs-6">
+              <div class="col-lg-6 col-xs-6 visible-lg">
                   <div class="pull-right">
-                      <h1 title="Add Transaction"><i class="fa fa-plus"></i></h1>
+                      <a href="budget/transaction" class="addTransactionLink"><h1 title="Add Transaction"><i class="fa fa-plus"></i></h1></a>
                   </div>
               </div>
           </div>

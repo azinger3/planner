@@ -10,7 +10,9 @@
 ?>
 
 <style>
-
+    .optionHide {
+        display: none;
+    }
 </style>
 
 </head>
@@ -28,7 +30,7 @@
 
       <div class="page-header">
           <div class="row">
-              <div class="col-lg-12">
+              <div class="col-lg-12 visible-lg">
                   <h1>Transactions</h1>
               </div>
           </div>
@@ -40,55 +42,67 @@
 
       <div class="row">
           <div class="col-md-4">
-            <div class="panel panel-primary">
+            <!--<div class="panel panel-primary">
                 <div class="panel-heading">Add Transaction</div>
-                <div class="panel-body">
+                <div class="panel-body">-->
+                <div class="well">
                   <form>
-                    <div class="form-group">
-                      <div class="btn-group btn-group-justified btn-group-xs" data-toggle="buttons">
-                        <label class="btn btn-success active">
-                          <input type="radio" id="uxTransactionTypeExpense" name="uxTransactionType" />
-                          Expense
-                        </label>
-                        <label class="btn btn-success">
-                          <input type="radio" id="uxTransactionTypeIncome" name="uxTransactionType" />
-                          Income
-                        </label>
+                    <fieldset>
+                      <legend>Add Transaction</legend>
+                      <div class="form-group">
+                        <div class="btn-group btn-group-justified btn-group-sm" data-toggle="buttons">
+                          <label class="btn btn-success active">
+                            <input type="radio" id="uxTransactionTypeExpense" name="uxTransactionType" />
+                            Expense
+                          </label>
+                          <label class="btn btn-success">
+                            <input type="radio" id="uxTransactionTypeIncome" name="uxTransactionType" />
+                            Income
+                          </label>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="input-group">
+                          <input type="text" id="uxTransactionDT" class="form-control" placeholder="Transaction Date" />
+                          <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                         </div>
-                    </div>
-                    <div class="form-group">
-                      <div class="input-group input-group-sm">
-                        <input type="text" id="uxTransactionDT" class="form-control" placeholder="Transaction Date" />
-                        <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
                       </div>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="uxDescription" class="form-control input-sm" placeholder="Description" />
-                    </div>
-                    <div class="form-group">
-                      <div class="input-group input-group-sm">
-                        <input type="text" id="uxAmount" class="form-control input-sm" placeholder="Amount" />
-                        <span class="input-group-addon"><i class="fa fa-usd" aria-hidden="true"></i></span>
+                      <div class="form-group">
+                          <input type="text" id="uxDescription" class="form-control" placeholder="Description" />
                       </div>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="uxBudgetCategory" class="form-control input-sm" placeholder="TODO budget category select boxes" />
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="uxTransactionNumber" class="form-control input-sm" placeholder="Transaction Number" />
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="uxNote" class="form-control input-sm" placeholder="Note" />
-                    </div>
-                    <div class="form-group pull-right">
-                        <!-- <button type="button" class="btn btn-danger">Delete</button>
-                        <button type="button" class="btn btn-info">Update</button> -->
-                        <button type="button" class="btn btn-default">Clear</button>
-                        <button type="button" class="btn btn-success">Add</button>
-                    </div>
+                      <div class="form-group">
+                        <div class="input-group">
+                          <input type="text" id="uxAmount" class="form-control" placeholder="Amount" />
+                          <span class="input-group-addon"><i class="fa fa-usd" aria-hidden="true"></i></span>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                          <select class="form-control placeholder" id="uxBudgetCategory">
+                            <option value="" selected="selected" class="optionHide">Budget Category</option>
+                            <option value="1">Giving</option>
+                            <option value="2">Car Replacement</option>
+                            <option value="3">Mortgage</option>
+                            <option value="4">Home Owners Fee</option>
+                            <option value="5">Needs</option>
+                          </select>
+                      </div>
+                      <div class="form-group">
+                          <input type="text" id="uxTransactionNumber" class="form-control" placeholder="Transaction Number" />
+                      </div>
+                      <div class="form-group">
+                          <input type="text" id="uxNote" class="form-control" placeholder="Note" />
+                      </div>
+                      <div class="form-group pull-right">
+                          <!-- <button type="button" class="btn btn-danger">Delete</button>
+                          <button type="button" class="btn btn-info">Update</button> -->
+                          <button type="button" class="btn btn-default">Clear</button>
+                          <button type="button" class="btn btn-success">Add</button>
+                      </div>
+                    </fieldset>
                   </form>
                 </div>
-            </div>
+                <!--</div>
+            </div>-->
           </div>
           <div class="col-md-8">
             <div class="panel panel-default">
