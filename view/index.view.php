@@ -30,8 +30,8 @@
 
       <div class="page-header">
           <div class="row">
-              <div class="col-lg-6 col-xs-6 visible-lg">
-                  <h1>Dashboard</h1>
+              <div class="col-lg-6 col-xs-6">
+                  <h1 class="visible-lg">Dashboard</h1>
               </div>
               <div class="col-lg-6 col-xs-6">
                   <div class="pull-right">
