@@ -22,7 +22,7 @@ var Navigation = React.createClass({
                             <a href="/budget/transaction">Transactions</a>
                           </li>
                           <li>
-                            <a href="#">Plan</a>
+                            <a href="#">Budget Plan</a>
                           </li>
                           <li>
                             <a href="#">Calculator</a>

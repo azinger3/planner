@@ -10,6 +10,47 @@
 ?>
 
 <style>
+    .progress {
+        margin-bottom: 10px;
+    }
+
+    .remaining {
+        text-align: right;
+    }
+
+    .balance {
+        text-align: right;
+    }
+
+    .total {
+        background-color: #f2f2f2;
+    }
+
+    .categoryWidth {
+        width: 15%;
+    }
+
+    .progressWidth {
+        width: 70%;
+    }
+
+    .remainingWidth {
+        width: 15%;
+    }
+
+    .progress-sm {
+        margin-top: 5px !important;
+        margin-bottom: 5px !important;
+    }
+
+    .progress-lg {
+        margin-top: 15px !important;
+    }
+
+    .currentMonth {
+        text-align: center;
+    }
+
     .addTransactionLink {
         color: #2c3e50;
     }
@@ -217,6 +258,12 @@
   <?php require_once('include/footer.php'); ?>
 
   <script type="text/babel" src="../../../component/navigation.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      console.log("ready!");
+    });
+  </script>
 
 </body>
 </html>
