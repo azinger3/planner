@@ -72,7 +72,7 @@
       <div class="page-header">
           <div class="row">
               <div class="col-lg-6 col-xs-6">
-                  <h1 class="visible-lg">Budget</h1>
+                  <h1>Budget</h1>
               </div>
               <div class="col-lg-6 col-xs-6">
                   <div class="pull-right">
