@@ -28,3 +28,11 @@ body {
 .nav-tabs {
     margin-bottom: 15px;
 }
+
+.fa-1 {
+    font-size: 1.25em;
+}
+
+.fa-2 {
+    font-size: 2em;
+}

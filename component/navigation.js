@@ -19,16 +19,19 @@ var Navigation = React.createClass({
                       </a>
                         <ul className="dropdown-menu">
                           <li>
+                            <a href="/budget">Home</a>
+                          </li>
+                          <li>
+                            <a href="#">Monthly Plan</a>
+                          </li>
+                          <li>
                             <a href="/budget/transaction">Transactions</a>
                           </li>
                           <li>
-                            <a href="#">Budget Plan</a>
+                            <a href="#">Summaries</a>
                           </li>
                           <li>
                             <a href="#">Calculator</a>
-                          </li>
-                          <li>
-                            <a href="#">Summaries</a>
                           </li>
                           <li>
                             <a href="#">History</a>
@@ -45,7 +48,7 @@ var Navigation = React.createClass({
                         <a href="#">Wish List</a>
                       </li>
                       <li>
-                        <a href="#">Admin</a>
+                        <a href="#"><i className="fa fa-cog fa-1" aria-hidden="true"></i></a>
                       </li>
                   </ul>
                 </div>
