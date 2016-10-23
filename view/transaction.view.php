@@ -27,6 +27,14 @@
     .input-transaction-date-edit {
         width: 110px;
     }
+
+    @media (max-width: 768px) {
+      .recentTransactionContainter {
+          overflow: auto;
+          overflow-y: auto;
+          height: auto;
+      }
+}
 </style>
 
 </head>

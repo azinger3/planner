@@ -11,3 +11,9 @@ $app->get('/budget/transaction', function ($request, $response, $args) {
 
     return $response;
 });
+
+$app->get('/budget/summary', function ($request, $response, $args) {
+    $response = $this->view->render($response, "summary.view.php");
+
+    return $response;
+});
