@@ -33,6 +33,8 @@
 
   <!--Navigation END-->
 
+  <!--Container START-->
+
   <div class="container">
 
       <!--Page Header START-->
@@ -385,6 +387,8 @@
       <!--**********************************************************Main Content END**********************************************************-->
 
   </div>
+
+  <!--Container END-->
 
   <?php require_once('include/footer.php'); ?>
 
