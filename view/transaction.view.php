@@ -14,12 +14,6 @@
         display: none;
     }
 
-    .recentTransactionContainter {
-        overflow: hidden;
-        overflow-y: scroll;
-        height: 520px;
-    }
-
     .dropdown-menu {
         min-width: 0;
     }
@@ -31,13 +25,6 @@
     .input-amount-edit {
         width: 70px;
     }
-
-    @media (max-width: 768px) {
-      .recentTransactionContainter {
-          overflow: auto;
-          overflow-y: auto;
-          height: auto;
-      }
 }
 </style>
 
@@ -1116,12 +1103,6 @@
           todayHighlight: true,
           orientation: "bottom"
       });
-
-      $('#sidebar').affix({
-  offset: {
-    top: 235
-  }
-});
     });
   </script>
 
