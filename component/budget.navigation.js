@@ -20,9 +20,8 @@ var BudgetNavigation = React.createClass({
                         <a href="/budget/transaction">Transactions</a>
                       </li>
                       <li>
-                        <a href="/budget/summary">Summaries</a>
+                        <a href="/budget/summary">Summary</a>
                       </li>
-
                       <li>
                         <a href="#">Calculator</a>
                       </li>
@@ -30,7 +29,7 @@ var BudgetNavigation = React.createClass({
                         <a href="http://jordanandrobert.com/budget">History</a>
                       </li>
                       <li>
-                        <a href="#"><i className="fa fa-cog fa-1" aria-hidden="true"></i></a>
+                        <a href="#">Admin</a>
                       </li>
                   </ul>
                   <ul className="nav navbar-nav navbar-right">
