@@ -29,10 +29,18 @@ body {
     margin-bottom: 15px;
 }
 
+.dropdown-menu {
+    min-width: 0;
+}
+
 .fa-1 {
     font-size: 1.25em;
 }
 
 .fa-2 {
     font-size: 2em;
+}
+
+.plannerBackArrow {
+    font-size: 16px;
 }

@@ -15,7 +15,7 @@
     }
 
     a.plannerButton {
-        font-size: 15vw;
+        font-size: 20vw;
         display: inline-block;
         padding: 10px;
     }
@@ -38,7 +38,7 @@
 
   <!--Navigation START-->
 
-  <div id="navigation"></div>
+  <div id="indexNavigation"></div>
 
   <!--Navigation END-->
 
@@ -58,27 +58,20 @@
       <!--**********************************************************Main Content START**********************************************************-->
 
       <div class="row text-center">
-          <div class="col-md-4">
-              <a href="/budget" class="plannerButton" title="Budget"><span class="fa fa-usd"></span></a>
-          </div>
-          <div class="col-md-4">
-              <a href="#" class="plannerButton" title="To Do List"><span class="fa fa-list"></span></a>
-          </div>
-          <div class="col-md-4">
-              <a href="#" class="plannerButton" title="Tracker"><span class="fa fa-thumb-tack"></span></a>
-          </div>
+         <div class="col-md-6">
+            <a href="/budget" class="plannerButton" title="Budget"><span class="fa fa-usd"></span></a>
+         </div>
+         <div class="col-md-6">
+            <a href="#" class="plannerButton" title="To Do List"><span class="fa fa-list"></span></a>
+         </div>
       </div>
       <div class="row text-center">
-          <div class="col-md-3">
-          </div>
-          <div class="col-md-3">
-              <a href="#" class="plannerButton" title="Wish List"><span class="fa fa-magic"></span></a>
-          </div>
-          <div class="col-md-3">
-              <a href="#" class="plannerButton" title="Administration"><span class="fa fa-cog"></span></a>
-          </div>
-          <div class="col-md-3">
-          </div>
+         <div class="col-md-6">
+            <a href="#" class="plannerButton" title="Tracker"><span class="fa fa-thumb-tack"></span></a>
+         </div>
+         <div class="col-md-6">
+            <a href="#" class="plannerButton" title="Wish List"><span class="fa fa-magic"></span></a>
+         </div>
       </div>
 
       <!--**********************************************************Main Content END**********************************************************-->
@@ -89,7 +82,7 @@
 
   <?php require_once('include/footer.php'); ?>
 
-  <script type="text/babel" src="../../../component/navigation.js"></script>
+  <script type="text/babel" src="../../../component/index.navigation.js"></script>
 
   <script>
     $(document).ready(function() {

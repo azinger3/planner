@@ -1,4 +1,4 @@
-var Navigation = React.createClass({
+var IndexNavigation = React.createClass({
   render: function() {
     return (  <div className="navbar navbar-default navbar-fixed-top">
                 <div className="container">
@@ -22,13 +22,13 @@ var Navigation = React.createClass({
                             <a href="/budget">Home</a>
                           </li>
                           <li>
+                            <a href="#">Plan</a>
+                          </li>
+                          <li>
                             <a href="/budget/transaction">Transactions</a>
                           </li>
                           <li>
                             <a href="/budget/summary">Summaries</a>
-                          </li>
-                          <li>
-                            <a href="#">Budget Plan</a>
                           </li>
                           <li>
                             <a href="#">Calculator</a>
@@ -47,9 +47,6 @@ var Navigation = React.createClass({
                       <li>
                         <a href="#">Wish List</a>
                       </li>
-                      <li>
-                        <a href="#"><i className="fa fa-cog fa-1" aria-hidden="true"></i></a>
-                      </li>
                   </ul>
                 </div>
               </div>
@@ -58,6 +55,6 @@ var Navigation = React.createClass({
   }
 });
 
-var navigation = document.getElementById('navigation');
+var indexNavigation = document.getElementById("indexNavigation");
 
-ReactDOM.render(<Navigation />, navigation);
+ReactDOM.render(<IndexNavigation />, indexNavigation);

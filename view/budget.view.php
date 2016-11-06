@@ -52,7 +52,8 @@
     }
 
     .addTransactionLink {
-        color: #2c3e50;
+        color: #ffffff;
+        font-size: 17px;
     }
 </style>
 
@@ -61,7 +62,7 @@
 
   <!--Navigation START-->
 
-  <div id="navigation"></div>
+  <div id="budgetNavigation"></div>
 
   <!--Navigation END-->
 
@@ -73,14 +74,6 @@
 
       <div class="page-header">
           <div class="row">
-              <div class="col-lg-6 col-xs-6">
-                  <h1>Budget</h1>
-              </div>
-              <div class="col-lg-6 col-xs-6">
-                  <div class="pull-right">
-                      <a href="budget/transaction" class="addTransactionLink"><h1 title="Add Transaction"><i class="fa fa-plus"></i></h1></a>
-                  </div>
-              </div>
           </div>
       </div>
 
@@ -94,7 +87,11 @@
               <!--Remaining Variable Funds START-->
 
               <div class="panel panel-primary">
-                  <div class="panel-heading">Remaining Variable Funds</div>
+                  <div class="panel-heading">Remaining Variable Funds
+                    <div class="pull-right">
+                        <a href="budget/transaction" class="addTransactionLink"><i class="fa fa-plus"></i></a>
+                    </div>
+                  </div>
                   <div class="panel-body">
                       <div class="currentMonth"><strong>September 2016</strong></div>
                       <table class="table table-hover">
@@ -261,7 +258,7 @@
 
   <?php require_once('include/footer.php'); ?>
 
-  <script type="text/babel" src="../../../component/navigation.js"></script>
+  <script type="text/babel" src="../../../component/budget.navigation.js"></script>
 
   <script>
     $(document).ready(function() {

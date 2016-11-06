@@ -29,7 +29,7 @@
 
   <!--Navigation START-->
 
-  <div id="navigation"></div>
+  <div id="budgetNavigation"></div>
 
   <!--Navigation END-->
 
@@ -41,9 +41,6 @@
 
       <div class="page-header">
           <div class="row">
-              <div class="col-lg-12 visible-lg">
-                  <h1>Summaries</h1>
-              </div>
           </div>
       </div>
 
@@ -392,7 +389,7 @@
 
   <?php require_once('include/footer.php'); ?>
 
-  <script type="text/babel" src="../../../component/navigation.js"></script>
+  <script type="text/babel" src="../../../component/budget.navigation.js"></script>
 
   <script>
     $(document).ready(function() {
