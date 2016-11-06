@@ -15,7 +15,7 @@
     }
 
     a.plannerButton {
-        font-size: 15vw;
+        font-size: 12vw;
         display: inline-block;
         padding: 10px;
     }
