@@ -55,8 +55,8 @@
       <div class="row">
           <div class="col-md-12">
               <ul class="nav nav-tabs">
-                  <li class="active"><a href="#BudgetSummary" data-toggle="tab" aria-expanded="true">Budget Summary</a></li>
-                  <li class=""><a href="#ExpenseBreakdown" data-toggle="tab" aria-expanded="false">Budget Breakdown</a></li>
+                  <li class="active"><a href="#BudgetSummary" data-toggle="tab" aria-expanded="true">Summary</a></li>
+                  <li class=""><a href="#ExpenseBreakdown" data-toggle="tab" aria-expanded="false">Breakdown</a></li>
               </ul>
               <div id="tabContent" class="tab-content">
                   <div class="tab-pane fade active in" id="BudgetSummary">

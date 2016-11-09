@@ -22,13 +22,13 @@ var IndexNavigation = React.createClass({
                             <a href="/budget">Home</a>
                           </li>
                           <li>
-                            <a href="#">Plan</a>
+                            <a href="#">Budget Plan</a>
                           </li>
                           <li>
                             <a href="/budget/transaction">Transactions</a>
                           </li>
                           <li>
-                            <a href="/budget/summary">Summaries</a>
+                            <a href="/budget/summary">Summary</a>
                           </li>
                           <li>
                             <a href="#">Calculator</a>
