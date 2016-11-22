@@ -48,8 +48,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#BudgetSummary" data-toggle="tab" aria-expanded="true">Summary</a></li>
-                        <li class=""><a href="#ExpenseBreakdown" data-toggle="tab" aria-expanded="false">Breakdown</a></li>
+                        <li class="active"><a href="#BudgetSummary" data-toggle="tab" aria-expanded="true">Summaries</a></li>
+                        <li class=""><a href="#BudgetAverage" data-toggle="tab" aria-expanded="true">Averages</a></li>
+                        <li class=""><a href="#ExpenseBreakdown" data-toggle="tab" aria-expanded="false">Expense Breakdown</a></li>
                     </ul>
                     <div id="tabContent" class="tab-content">
                         <div class="tab-pane fade active in" id="BudgetSummary">
@@ -57,27 +58,52 @@
                                 <form>
                                     <fieldset>
                                         <div class="form-group col-md-3">
-                                            <label for="3">Category:</label>
+                                            <label for="3">Month:</label>
                                             <select class="form-control placeholder" id="3">
-                                                <option value="" selected="selected">Select All...</option>
-                                                <option value="1">Giving</option>
-                                                <option value="2">Car Replacement</option>
-                                                <option value="3">Mortgage</option>
-                                                <option value="4">Home Owners Fee</option>
-                                                <option value="5">Needs</option>
+                                                <option value="" selected="selected">Select One...</option>
+                                                <option value="1">November 2016</option>
+                                                <option value="2">October 2016</option>
+                                                <option value="3">September 2016</option>
+                                                <option value="4">August 2016</option>
                                             </select>
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="2">Keyword:</label>
-                                            <input type="text" class="form-control" id="2">
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="1">Date Range:</label>
-                                            <input type="text" class="form-control input-daterangepicker" id="1">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>&nbsp;</label>
                                             <button type="button" class="form-control btn btn-info col-md-2">Search</button>
+                                        </div>
+                                        <div class="form-group col-md-3 hidden-xs hidden-sm">
+                                        </div>
+                                        <div class="form-group col-md-3 hidden-xs hidden-sm">
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>Budget Summary</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="BudgetAverage">
+                            <div class="well">
+                                <form>
+                                    <fieldset>
+                                        <div class="form-group col-md-3">
+                                            <label for="3">Year:</label>
+                                            <select class="form-control placeholder" id="3">
+                                                <option value="" selected="selected">Select One...</option>
+                                                <option value="1">Year 3</option>
+                                                <option value="2">Year 2</option>
+                                                <option value="3">Year 1</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>&nbsp;</label>
+                                            <button type="button" class="form-control btn btn-info col-md-2">Search</button>
+                                        </div>
+                                        <div class="form-group col-md-3 hidden-xs hidden-sm">
+                                        </div>
+                                        <div class="form-group col-md-3 hidden-xs hidden-sm">
                                         </div>
                                     </fieldset>
                                 </form>
@@ -90,29 +116,28 @@
                                 <form>
                                     <fieldset>
                                         <div class="form-group col-md-3">
-                                            <label for="3">Type:</label>
+                                            <label for="3">Year:</label>
                                             <select class="form-control placeholder" id="3">
                                                 <option value="" selected="selected">Select One...</option>
-                                                <option value="1">Expense</option>
-                                                <option value="2">Income</option>
+                                                <option value="1">Year 3</option>
+                                                <option value="2">Year 2</option>
+                                                <option value="3">Year 1</option>
                                             </select>
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label for="1">Date Range:</label>
-                                            <input type="text" class="form-control input-daterangepicker" id="1">
-                                        </div>
-                                        <div class="form-group col-md-3 hidden-xs hidden-sm">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>&nbsp;</label>
                                             <button type="button" class="form-control btn btn-info col-md-2">Search</button>
+                                        </div>
+                                        <div class="form-group col-md-3 hidden-xs hidden-sm">
+                                        </div>
+                                        <div class="form-group col-md-3 hidden-xs hidden-sm">
                                         </div>
                                     </fieldset>
                                 </form>
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                <canvas id="myChart" width="400" height="400"></canvas>
+                                    <canvas id="myChart" width="400" height="400"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -129,10 +154,10 @@
         <script id="tmplSummary" type="text/x-handlebars-template">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Summary</h2>
+                    <h2>Budget Averages</h2>
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Income and Expenses by Category</h3>
+                            <h3 class="panel-title">Summary</h3>
                         </div>
                         <div class="panel-body">
                             <table class="table table-striped table-bordered table-hover">
@@ -296,7 +321,6 @@
                 apiData.EndDT = endDT;
 
                 TransactionSummaryGet();
-
 
                 // Date Range Picker
                 var startDate = startDT.split("-");
