@@ -20,7 +20,6 @@
             .input-amount-edit {
                 width: 70px;
             }
-        }
         </style>
     </head>
     <body>
@@ -47,6 +46,7 @@
                         <form>
                             <fieldset>
                                 <legend>Add Transaction</legend>
+                                <div id="HardErrorMessage"></div>
                                 <div class="form-group">
                                     <div class="btn-group btn-group-justified btn-group-sm" data-toggle="buttons">
                                         <label class="btn btn-info">
@@ -60,13 +60,13 @@
                                     </div>  
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" id="uxTransactionDT" class="form-control input-datepicker" placeholder="MM/DD/YYYY" />
+                                    <input type="text" id="uxTransactionDT" class="form-control input-datepicker" placeholder="Date" />
                                 </div>
                                 <div class="form-group">
                                     <input type="text" id="uxDescription" class="form-control" placeholder="Description" />
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" id="uxAmount" class="form-control" placeholder="$" />
+                                    <input type="text" id="uxAmount" class="form-control" placeholder="Amount $" />
                                 </div>
                                 <div class="form-group">
                                     <div id="uxBudgetCategoryOptionAdd">
@@ -106,6 +106,7 @@
 
         <!--Templates START-->
         <script id="tmplTransactionRecent" type="text/x-handlebars-template">
+            <div id="HardErrorMessageEdit"></div>
             <table class="table table-striped table-hover small">
                 <thead>
                     <tr>
@@ -154,6 +155,10 @@
             <td>
                 <a href="javascript:TransactionSave('{{TransactionID}}');" class="btn btn-info btn-xs">
                     <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                </a>
+                &nbsp;&nbsp;
+                <a href="javascript:TransactionRecentRender();" class="btn btn-danger btn-xs">
+                    <i class="fa fa-times" aria-hidden="true"></i>
                 </a>
             </td>
         </script>
@@ -319,26 +324,39 @@
             var transactionTypeRadio = $("input[name=uxTransactionType]:checked");
 
             objTransaction.TransactionTypeID = transactionTypeRadio.data("transaction-type-id");
+
+            if(objTransaction.TransactionTypeID == "1") {
+                var dropdown = "<select class='form-control placeholder' id='uxBudgetCategory'>" 
+                    + "<option value='29' selected='selected'>Income</option>" 
+                    + "</select>"
+
+                $("#uxBudgetCategoryOptionAdd").html(dropdown);
+            }
+            else {
+                BudgetCategoryOptionAddRender();
+            }
         }
 
-        function TransactionAdd() {        
-            var transactionDT = $("#uxTransactionDT").val().split("/");
-            var description = $("#uxDescription").val();
-            var amount = $("#uxAmount").val();
-            var budgetCategoryID = $("#uxBudgetCategory option:selected").val();
-            var transactionNumber = $("#uxTransactionNumber").val();
-            var note = $("#uxNote").val();
+        function TransactionAdd() {    
+            if(ValidateAdd()) {
+                var transactionDT = $("#uxTransactionDT").val().split("/");
+                var description = $("#uxDescription").val();
+                var amount = $("#uxAmount").val();
+                var budgetCategoryID = $("#uxBudgetCategory option:selected").val();
+                var transactionNumber = $("#uxTransactionNumber").val();
+                var note = $("#uxNote").val();
 
-            objTransaction.TransactionDT = transactionDT[2] + "-" + transactionDT[0] + "-" + transactionDT[1];
-            objTransaction.Description = description;
-            objTransaction.Amount = amount;
-            objTransaction.BudgetCategoryID = budgetCategoryID;
-            objTransaction.TransactionNumber = transactionNumber;
-            objTransaction.Note = note;
+                objTransaction.TransactionDT = transactionDT[2] + "-" + transactionDT[0] + "-" + transactionDT[1];
+                objTransaction.Description = description;
+                objTransaction.Amount = amount;
+                objTransaction.BudgetCategoryID = budgetCategoryID;
+                objTransaction.TransactionNumber = transactionNumber;
+                objTransaction.Note = note;
 
-            TransactionInsert();
-            TransactionRecentRender();
-            TransactionClear();
+                TransactionInsert();
+                TransactionRecentRender();
+                TransactionClear();
+            }    
         }              
 
         function TransactionEdit(TransactionID, TransactionDT, Description, BudgetCategoryID, BudgetCategory, Amount) {
@@ -361,26 +379,30 @@
         }
 
         function TransactionSave(TransactionID) {
-            var transactionDT = $("#uxTransactionDT_" + TransactionID).val().split("/");
-            var description = $("#uxDescription_" + TransactionID).val();
-            var amount = $("#uxAmount_" + TransactionID).val();
-            var budgetCategoryID = $("#uxBudgetCategory_" + TransactionID + " option:selected").val();
+            if(ValidateEdit(TransactionID)) {
+                var transactionDT = $("#uxTransactionDT_" + TransactionID).val().split("/");
+                var description = $("#uxDescription_" + TransactionID).val();
+                var amount = $("#uxAmount_" + TransactionID).val();
+                var budgetCategoryID = $("#uxBudgetCategory_" + TransactionID + " option:selected").val();
 
-            objTransaction.TransactionDT = transactionDT[2] + "-" + transactionDT[0] + "-" + transactionDT[1];
-            objTransaction.Description = description;
-            objTransaction.Amount = amount;
-            objTransaction.BudgetCategoryID = budgetCategoryID;
-            objTransaction.TransactionID = TransactionID
+                objTransaction.TransactionDT = transactionDT[2] + "-" + transactionDT[0] + "-" + transactionDT[1];
+                objTransaction.Description = description;
+                objTransaction.Amount = amount;
+                objTransaction.BudgetCategoryID = budgetCategoryID;
+                objTransaction.TransactionID = TransactionID
 
-            TransactionUpdate();
-            TransactionRecentRender();
+                TransactionUpdate();
+                TransactionRecentRender();
+            }
         }
 
         function TransactionRemove(TransactionID) {
-            objTransaction.TransactionID = TransactionID
+            if(ConfirmAction()) {
+                objTransaction.TransactionID = TransactionID
 
-            TransactionDelete();
-            TransactionRecentRender();
+                TransactionDelete();
+                TransactionRecentRender();
+            }
         }
 
         function TransactionClear() {
@@ -390,6 +412,7 @@
             $("#uxBudgetCategory option[value='']").prop("selected", true);
             $("#uxTransactionNumber").val("");
             $("#uxNote").val("");
+            $("#HardErrorMessage").html("");
         }
 
         function TransactionRecentRender() {
@@ -443,6 +466,91 @@
                 todayHighlight: true,
                 orientation: "bottom"
             });
+        }
+
+        function ConfirmAction() {
+            if (confirm("Are you sure?")) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        function ValidateAdd() {
+            var error = "";
+            var numRegEx = /^-{0,1}\d*\.{0,1}\d+$/;
+
+            if ($("#uxTransactionDT").val().length == 0) {
+                error += "<li>Date is required.</li>";
+            }
+
+            if ($("#uxDescription").val().length == 0) {
+                error += "<li>Description is required.</li>";
+            }
+
+            if ($("#uxBudgetCategory option:selected").val().length == 0) {
+                error += "<li>Category is required.</li>";
+            }
+
+            if ($("#uxAmount").val().length == 0) {
+                error += "<li>Amount is required.</li>";
+            }
+
+            if ($("#uxAmount").val().length > 0) {
+                if (!numRegEx.test($("#uxAmount").val())) {
+                    error += "<li>Amount must be a numeric.</li>";
+                }
+            }
+
+            if (error.length > 0) {
+                error = "<div class=\"alert alert-danger\" role=\"alert\"><ul>" 
+                    + error 
+                    + "</ul></div>";
+                $("#HardErrorMessage").html(error);
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+
+        function ValidateEdit(TransactionID) {
+            var error = "";
+            var numRegEx = /^-{0,1}\d*\.{0,1}\d+$/;
+
+            if ($("#uxTransactionDT_" + TransactionID).val().length == 0) {
+                error += "<li>Date is required.</li>";
+            }
+
+            if ($("#uxDescription_" + TransactionID).val().length == 0) {
+                error += "<li>Description is required.</li>";
+            }
+
+            if ($("#uxBudgetCategory_" + TransactionID + " option:selected").val().length == 0) {
+                error += "<li>Category is required.</li>";
+            }
+
+            if ($("#uxAmount_" + TransactionID).val().length == 0) {
+                error += "<li>Amount is required.</li>";
+            }
+
+            if ($("#uxAmount_" + TransactionID).val().length > 0) {
+                if (!numRegEx.test($("#uxAmount_" + TransactionID).val())) {
+                    error += "<li>Amount must be a numeric.</li>";
+                }
+            }
+
+            if (error.length > 0) {
+                error = "<div class=\"alert alert-danger\" role=\"alert\"><ul>" 
+                    + error 
+                    + "</ul></div>";
+                $("#HardErrorMessageEdit").html(error);
+                return false;
+            }
+            else {
+                return true;
+            }
         }
         </script>
         <!--Javascript END-->
