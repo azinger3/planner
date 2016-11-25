@@ -61,6 +61,10 @@
             .section-default {
                 padding: 10px 20px 10px 20px;
             }
+
+            .amount-red {
+                color: red;
+            }
         </style>
     </head>
     <body>
@@ -168,7 +172,11 @@
                         <td class="hidden-xs">{{BudgetCategory}}</td>
                         <td class="hidden-xs">{{TransactionNumber}}</td>
                         <td class="hidden-xs">{{Note}}</td>
+                        {{#if IsExpenseFlg}}
+                        <td class="amount-red">{{Amount}}</td>
+                        {{else}}
                         <td>{{Amount}}</td>
+                        {{/if}}
                         <td>
                             <div class="btn-group">
                                 <a href="#" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
