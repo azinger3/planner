@@ -25,6 +25,10 @@
                 width: 70px;
             }
 
+            .btn-save {
+                width: 80px;
+            }
+
             .autocomplete-suggestions { 
                 border: 1px solid #999; 
                 background: #FFF; 
@@ -199,7 +203,7 @@
             <td>
                 <input type="text" class="form-control input-sm input-amount-edit" id="uxAmount_{{TransactionID}}" value="{{Amount}}" />
             </td>
-            <td>
+            <td class="btn-save">
                 <a href="javascript:TransactionSave('{{TransactionID}}');" class="btn btn-info btn-xs">
                     <i class="fa fa-floppy-o" aria-hidden="true"></i>
                 </a>
