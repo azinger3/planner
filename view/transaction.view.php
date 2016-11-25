@@ -3,9 +3,9 @@
     <head>
 
         <?php
-        $pageTitle = 'Transactions';
+            $pageTitle = 'Transactions';
 
-        require_once('include/header.php');
+            require_once('include/header.php');
         ?>
 
         <style>
@@ -23,10 +23,6 @@
 
             .input-amount-edit {
                 width: 70px;
-            }
-
-            .btn-transaction-save {
-                width: 80px;
             }
 
             .autocomplete-suggestions { 
@@ -148,7 +144,7 @@
         <!--Templates START-->
         <script id="tmplTransactionRecent" type="text/x-handlebars-template">
             <div id="HardErrorMessageEdit"></div>
-            <table class="table table-striped table-hover small">
+            <table class="table table-striped table-hover table-condensed small">
                 <thead>
                     <tr>
                         <th>Date</th>
@@ -203,7 +199,7 @@
             <td>
                 <input type="text" class="form-control input-sm input-amount-edit" id="uxAmount_{{TransactionID}}" value="{{Amount}}" />
             </td>
-            <td class="btn-transaction-save">
+            <td>
                 <a href="javascript:TransactionSave('{{TransactionID}}');" class="btn btn-info btn-xs">
                     <i class="fa fa-floppy-o" aria-hidden="true"></i>
                 </a>
