@@ -314,7 +314,7 @@
                     $.map(objDescription.Transaction, function (transaction) {
                         if (transaction.TransactionID == suggestion.data) {                       
                             $("#uxAmount").val(transaction.Amount);
-                            $("#uxBudgetCategory option[value='" + transaction.BudgetCategoryID + "']").attr("selected", true);
+                            $("#uxBudgetCategory option[value='" + transaction.BudgetCategoryID + "']").prop("selected", true);
                         }
                     });
                 }
