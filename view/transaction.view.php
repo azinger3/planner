@@ -618,7 +618,7 @@
 
             if ($("#uxAmount").val().length > 0) {
                 if (!numRegEx.test($("#uxAmount").val())) {
-                    error += "<li>Amount must be a numeric.</li>";
+                    error += "<li>Amount must be numeric.</li>";
                 }
             }
 
@@ -656,7 +656,7 @@
 
             if ($("#uxAmount_" + TransactionID).val().length > 0) {
                 if (!numRegEx.test($("#uxAmount_" + TransactionID).val())) {
-                    error += "<li>Amount must be a numeric.</li>";
+                    error += "<li>Amount must be numeric.</li>";
                 }
             }
 
