@@ -20,6 +20,35 @@
             .input-amount-edit {
                 width: 70px;
             }
+
+            .autocomplete-suggestions { 
+                border: 1px solid #999; 
+                background: #FFF; 
+                overflow: auto; 
+            }
+
+            .autocomplete-suggestion { 
+                padding: 2px 5px; 
+                white-space: nowrap; 
+                overflow: hidden; 
+            }
+
+            .autocomplete-selected { 
+                background: #F0F0F0; 
+            }
+            .autocomplete-suggestions strong { 
+                font-weight: normal; 
+                color: #3399FF; 
+            }
+
+            .autocomplete-group { 
+                padding: 2px 5px; 
+            }
+
+            .autocomplete-group strong { 
+                display: block; 
+                border-bottom: 1px solid #000; 
+            }
         </style>
     </head>
     <body>
@@ -193,6 +222,10 @@
         var objBudgetCategory = new Object();
         objBudgetCategory.Category = "";
 
+        var objDescription = new Object();
+        objDescription.Keyword = "";
+        objDescription.Transaction = "";
+
         $(document).ready(function() {
             console.log("Ready!");
 
@@ -201,6 +234,61 @@
             DatePickerSet();
 
             $("#uxExpense").click();
+
+            $("#uxTransactionDT").val(Date.today().toString("MM/dd/yyyy"));
+
+            $('#uxDescription').autocomplete({
+                minChars: 1,
+                noCache: true,
+                lookup: function (query, done) {
+                    objDescription.Keyword = query;
+
+                    var result = {};
+
+                    $.ajax({
+                        type: "GET",
+                        url: api + "transaction/description",
+                        cache: false,
+                        data: objDescription,
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        async: false,
+                        success: function (msg) {
+                            var Transaction = $.map(msg, function (item) {
+                                return { TransactionID: item.TransactionID,
+                                         Amount: item.Amount,
+                                         BudgetCategoryID: item.BudgetCategoryID };
+                            });
+
+                            objDescription.Transaction = Transaction;
+                            
+                            var suggestions = $.map(msg, function (item) {
+                                return { value: item.Description, data: item.TransactionID };
+                            });
+
+                            result.suggestions = suggestions;
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            if (XMLHttpRequest.readyState < 4) {
+                                return true;
+                            }
+                            else {
+                                alert('Error :' + XMLHttpRequest.responseText);
+                            }
+                        }
+                    });
+
+                    done(result);
+                },
+                onSelect: function (suggestion) {
+                    $.map(objDescription.Transaction, function (transaction) {
+                        if (transaction.TransactionID == suggestion.data) {                       
+                            $("#uxAmount").val(transaction.Amount);
+                            $("#uxBudgetCategory option[value='" + transaction.BudgetCategoryID + "']").attr("selected", true);
+                        }
+                    });
+                }
+            });
         });
 
         function TransactionRecentGet() {
@@ -406,7 +494,6 @@
         }
 
         function TransactionClear() {
-            $("#uxTransactionDT").val("");
             $("#uxDescription").val("");
             $("#uxAmount").val("");
             $("#uxBudgetCategory option[value='']").prop("selected", true);
@@ -489,10 +576,6 @@
                 error += "<li>Description is required.</li>";
             }
 
-            if ($("#uxBudgetCategory option:selected").val().length == 0) {
-                error += "<li>Category is required.</li>";
-            }
-
             if ($("#uxAmount").val().length == 0) {
                 error += "<li>Amount is required.</li>";
             }
@@ -501,6 +584,10 @@
                 if (!numRegEx.test($("#uxAmount").val())) {
                     error += "<li>Amount must be a numeric.</li>";
                 }
+            }
+
+            if ($("#uxBudgetCategory option:selected").val().length == 0) {
+                error += "<li>Category is required.</li>";
             }
 
             if (error.length > 0) {
@@ -527,10 +614,6 @@
                 error += "<li>Description is required.</li>";
             }
 
-            if ($("#uxBudgetCategory_" + TransactionID + " option:selected").val().length == 0) {
-                error += "<li>Category is required.</li>";
-            }
-
             if ($("#uxAmount_" + TransactionID).val().length == 0) {
                 error += "<li>Amount is required.</li>";
             }
@@ -539,6 +622,10 @@
                 if (!numRegEx.test($("#uxAmount_" + TransactionID).val())) {
                     error += "<li>Amount must be a numeric.</li>";
                 }
+            }
+
+            if ($("#uxBudgetCategory_" + TransactionID + " option:selected").val().length == 0) {
+                error += "<li>Category is required.</li>";
             }
 
             if (error.length > 0) {
