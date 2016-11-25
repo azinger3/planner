@@ -116,7 +116,7 @@
                                 <div class="form-group">
                                     <div id="uxBudgetCategoryOptionAdd">
                                         <select class="form-control placeholder" id="uxBudgetCategory">
-                                            <option value="" selected="selected" class="optionHide">Category</option>
+                                            <option value="" selected="selected" class="optionHide">Select a Category...</option>
                                         </select>
                                     </div>
                                 </div>
@@ -558,7 +558,7 @@
             var html = template(context);
 
             var dropdown = "<select class='form-control placeholder' id='uxBudgetCategory'>" 
-                        + "<option value='' selected='selected' class='optionHide'>Category</option>"
+                        + "<option value='' selected='selected' class='optionHide'>Select a Category...</option>"
                         + html 
                         + "</select>"
 
