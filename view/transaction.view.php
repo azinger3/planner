@@ -282,7 +282,7 @@
                         data: objDescription,
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
-                        async: false,
+                        async: true,
                         success: function (msg) {
                             var Transaction = $.map(msg, function (item) {
                                 return { TransactionID: item.TransactionID,
