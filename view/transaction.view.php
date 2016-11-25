@@ -17,8 +17,16 @@
                 width: 95px;
             }
 
+            .input-transaction-number-edit {
+                width: 95px;
+            }
+
             .input-amount-edit {
                 width: 70px;
+            }
+
+            .btn-transaction-save {
+                width: 80px;
             }
 
             .autocomplete-suggestions { 
@@ -49,6 +57,10 @@
                 display: block; 
                 border-bottom: 1px solid #000; 
             }
+
+            .section-default {
+                padding: 10px 20px 10px 20px;
+            }
         </style>
     </head>
     <body>
@@ -58,7 +70,7 @@
         <!--Navigation END-->
 
         <!--Container START-->
-        <div class="container">
+        <section class="section-default">
             <!--**********************************************************Main Content START**********************************************************-->
 
             <!--Page Header START-->
@@ -130,7 +142,7 @@
             <!--Content END-->
 
             <!--**********************************************************Main Content END**********************************************************-->
-        </div>
+        </section>
         <!--Container END-->
 
         <!--Templates START-->
@@ -142,6 +154,8 @@
                         <th>Date</th>
                         <th>Description</th>
                         <th class="hidden-xs">Category</th>
+                        <th class="hidden-xs">#</th>
+                        <th class="hidden-xs">Note</th>
                         <th>Amount</th>
                         <th></th>
                     </tr>
@@ -152,12 +166,14 @@
                         <td>{{TransactionDT}}</td>
                         <td>{{Description}}</td>
                         <td class="hidden-xs">{{BudgetCategory}}</td>
+                        <td class="hidden-xs">{{TransactionNumber}}</td>
+                        <td class="hidden-xs">{{Note}}</td>
                         <td>{{Amount}}</td>
                         <td>
                             <div class="btn-group">
                                 <a href="#" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
                                 <ul class="dropdown-menu dropdown-menu-right">
-                                    <li><a href="javascript:TransactionEdit('{{TransactionID}}','{{TransactionDT}}','{{Description}}','{{BudgetCategoryID}}','{{BudgetCategory}}','{{Amount}}');">Edit</a></li>
+                                    <li><a href="javascript:TransactionEdit('{{TransactionID}}','{{TransactionDT}}','{{Description}}','{{BudgetCategoryID}}','{{BudgetCategory}}','{{Amount}}','{{TransactionNumber}}','{{Note}}');">Edit</a></li>
                                     <li><a href="javascript:TransactionRemove('{{TransactionID}}');">Remove</a></li>
                                 </ul>
                             </div>
@@ -178,10 +194,16 @@
             <td class="hidden-xs">
                 <div id="uxBudgetCategoryOptionEdit_{{TransactionID}}"></div>
             </td>
+            <td class="hidden-xs">
+                <input type="text" class="form-control input-sm input-transaction-number-edit" id="uxTransactionNumber_{{TransactionID}}" value="{{TransactionNumber}}" />
+            </td>
+            <td class="hidden-xs">
+                <input type="text" class="form-control input-sm" id="uxNote_{{TransactionID}}" value="{{Note}}" />
+            </td>
             <td>
                 <input type="text" class="form-control input-sm input-amount-edit" id="uxAmount_{{TransactionID}}" value="{{Amount}}" />
             </td>
-            <td>
+            <td class="btn-transaction-save">
                 <a href="javascript:TransactionSave('{{TransactionID}}');" class="btn btn-info btn-xs">
                     <i class="fa fa-floppy-o" aria-hidden="true"></i>
                 </a>
@@ -447,13 +469,15 @@
             }    
         }              
 
-        function TransactionEdit(TransactionID, TransactionDT, Description, BudgetCategoryID, BudgetCategory, Amount) {
+        function TransactionEdit(TransactionID, TransactionDT, Description, BudgetCategoryID, BudgetCategory, Amount, TransactionNumber, Note) {
             objTransaction.TransactionID = TransactionID
             objTransaction.TransactionDT = TransactionDT;
             objTransaction.Description = Description;
             objTransaction.BudgetCategoryID = BudgetCategoryID;
             objTransaction.BudgetCategory = BudgetCategory;
             objTransaction.Amount = Amount;
+            objTransaction.TransactionNumber = TransactionNumber;
+            objTransaction.Note = Note;
 
             var source = $("#tmplTransactionEdit").html();
             var template = Handlebars.compile(source);
@@ -472,11 +496,15 @@
                 var description = $("#uxDescription_" + TransactionID).val();
                 var amount = $("#uxAmount_" + TransactionID).val();
                 var budgetCategoryID = $("#uxBudgetCategory_" + TransactionID + " option:selected").val();
+                var transactionNumber = $("#uxTransactionNumber_" + TransactionID).val();
+                var note = $("#uxNote_" + TransactionID).val();
 
                 objTransaction.TransactionDT = transactionDT[2] + "-" + transactionDT[0] + "-" + transactionDT[1];
                 objTransaction.Description = description;
                 objTransaction.Amount = amount;
                 objTransaction.BudgetCategoryID = budgetCategoryID;
+                objTransaction.TransactionNumber = transactionNumber;
+                objTransaction.Note = note;
                 objTransaction.TransactionID = TransactionID
 
                 TransactionUpdate();
