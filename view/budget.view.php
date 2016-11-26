@@ -89,7 +89,7 @@
               <div class="panel panel-primary">
                   <div class="panel-heading">Remaining Variable Funds
                     <div class="pull-right">
-                        <a href="budget/transaction" class="addTransactionLink"><i class="fa fa-plus"></i></a>
+                        <a href="budget/transaction" title="Add Transaction" class="addTransactionLink"><i class="fa fa-plus"></i></a>
                     </div>
                   </div>
                   <div class="panel-body">
