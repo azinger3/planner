@@ -173,9 +173,9 @@
                         <td class="hidden-xs">{{TransactionNumber}}</td>
                         <td class="hidden-xs">{{Note}}</td>
                         {{#if IsExpenseFlg}}
-                        <td class="amount-red">{{Amount}}</td>
+                        <td class="amount-red">${{Amount}}</td>
                         {{else}}
-                        <td>{{Amount}}</td>
+                        <td>${{Amount}}</td>
                         {{/if}}
                         <td>
                             <div class="btn-group">
