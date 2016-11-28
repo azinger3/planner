@@ -38,7 +38,7 @@
 
   <!--Navigation START-->
 
-  <div id="indexNavigation"></div>
+  <?php require_once('include/index.navigation.php'); ?>
 
   <!--Navigation END-->
 
@@ -82,13 +82,9 @@
 
   <?php require_once('include/footer.php'); ?>
 
-  <script type="text/babel" src="../../../component/index.navigation.js"></script>
-
   <script>
     $(document).ready(function() {
       console.log("ready!");
-
-      $('[data-toggle="tooltip"]').tooltip();
     });
   </script>
 

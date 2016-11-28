@@ -29,8 +29,7 @@
     <body>
 
         <!--Navigation START-->
-        <div id="budgetNavigation">
-        </div>
+        <?php require_once('include/budget.navigation.php'); ?>
         <!--Navigation END-->
 
         <!--Container START-->
@@ -48,9 +47,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#BudgetSummary" data-toggle="tab" aria-expanded="true">Summaries</a></li>
+                        <li class="active"><a href="#BudgetSummary" data-toggle="tab" aria-expanded="true">Summary</a></li>
                         <li class=""><a href="#BudgetAverage" data-toggle="tab" aria-expanded="true">Averages</a></li>
-                        <li class=""><a href="#ExpenseBreakdown" data-toggle="tab" aria-expanded="false">Expense Breakdown</a></li>
+                        <li class=""><a href="#ExpenseBreakdown" data-toggle="tab" aria-expanded="false">Breakdown</a></li>
                     </ul>
                     <div id="tabContent" class="tab-content">
                         <div class="tab-pane fade active in" id="BudgetSummary">
@@ -241,8 +240,6 @@
         <!--Footer END-->
 
         <!--Javascript START-->
-        <script type="text/babel" src="../../../component/budget.navigation.js"></script>
-
         <script>
             var apiUrl = "http://api.jordanandrobert.com/budget/transaction/summary";
             var apiData = {};

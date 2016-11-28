@@ -61,9 +61,7 @@
 <body>
 
   <!--Navigation START-->
-
-  <div id="budgetNavigation"></div>
-
+  <?php require_once('include/budget.navigation.php'); ?>
   <!--Navigation END-->
 
   <!--Container START-->
@@ -257,9 +255,7 @@
   <!--Container END-->
 
   <?php require_once('include/footer.php'); ?>
-
-  <script type="text/babel" src="../../../component/budget.navigation.js"></script>
-
+  
   <script>
     $(document).ready(function() {
       console.log("ready!");

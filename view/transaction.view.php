@@ -70,7 +70,7 @@
     <body>
 
         <!--Navigation START-->
-        <div id="budgetNavigation"></div>
+        <?php require_once('include/budget.navigation.php'); ?>
         <!--Navigation END-->
 
         <!--Container START-->
@@ -234,447 +234,445 @@
         <!--Footer END-->
 
         <!--Javascript START-->
-        <script type="text/babel" src="../../../component/budget.navigation.js"></script>
-
         <script>
-        var api = "http://api.jordanandrobert.com/budget/";
+            var api = "http://api.jordanandrobert.com/budget/";
 
-        var objTransaction = new Object();
-        objTransaction.TransactionID = ""
-        objTransaction.TransactionTypeID = "";
-        objTransaction.TransactionDT = "";
-        objTransaction.Description = "";
-        objTransaction.Amount = "";
-        objTransaction.BudgetCategoryID = "";
-        objTransaction.TransactionNumber = "";
-        objTransaction.Note = "";
+            var objTransaction = new Object();
+            objTransaction.TransactionID = ""
+            objTransaction.TransactionTypeID = "";
+            objTransaction.TransactionDT = "";
+            objTransaction.Description = "";
+            objTransaction.Amount = "";
+            objTransaction.BudgetCategoryID = "";
+            objTransaction.TransactionNumber = "";
+            objTransaction.Note = "";
 
-        var objBudgetCategory = new Object();
-        objBudgetCategory.Category = "";
+            var objBudgetCategory = new Object();
+            objBudgetCategory.Category = "";
 
-        var objDescription = new Object();
-        objDescription.Keyword = "";
-        objDescription.Transaction = "";
+            var objDescription = new Object();
+            objDescription.Keyword = "";
+            objDescription.Transaction = "";
 
-        $(document).ready(function() {
-            console.log("Ready!");
+            $(document).ready(function() {
+                console.log("Ready!");
 
-            TransactionRecentRender();
-            BudgetCategoryOptionAddRender();
-            DatePickerSet();
+                TransactionRecentRender();
+                BudgetCategoryOptionAddRender();
+                DatePickerSet();
 
-            $("#uxExpense").click();
+                $("#uxExpense").click();
 
-            $("#uxTransactionDT").val(Date.today().toString("MM/dd/yyyy"));
+                $("#uxTransactionDT").val(Date.today().toString("MM/dd/yyyy"));
 
-            $('#uxDescription').autocomplete({
-                minChars: 1,
-                noCache: true,
-                lookup: function (query, done) {
-                    objDescription.Keyword = query;
+                $('#uxDescription').autocomplete({
+                    minChars: 1,
+                    noCache: true,
+                    lookup: function (query, done) {
+                        objDescription.Keyword = query;
 
-                    var result = {};
+                        var result = {};
 
-                    $.ajax({
-                        type: "GET",
-                        url: api + "transaction/description",
-                        cache: false,
-                        data: objDescription,
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        async: false,
-                        success: function (msg) {
-                            var Transaction = $.map(msg, function (item) {
-                                return { TransactionID: item.TransactionID,
-                                         Amount: item.Amount,
-                                         BudgetCategoryID: item.BudgetCategoryID };
-                            });
+                        $.ajax({
+                            type: "GET",
+                            url: api + "transaction/description",
+                            cache: false,
+                            data: objDescription,
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            async: false,
+                            success: function (msg) {
+                                var Transaction = $.map(msg, function (item) {
+                                    return { TransactionID: item.TransactionID,
+                                            Amount: item.Amount,
+                                            BudgetCategoryID: item.BudgetCategoryID };
+                                });
 
-                            objDescription.Transaction = Transaction;
-                            
-                            var suggestions = $.map(msg, function (item) {
-                                return { value: item.Description, data: item.TransactionID };
-                            });
+                                objDescription.Transaction = Transaction;
+                                
+                                var suggestions = $.map(msg, function (item) {
+                                    return { value: item.Description, data: item.TransactionID };
+                                });
 
-                            result.suggestions = suggestions;
-                        },
-                        error: function (XMLHttpRequest, textStatus, errorThrown) {
-                            if (XMLHttpRequest.readyState < 4) {
-                                return true;
+                                result.suggestions = suggestions;
+                            },
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                if (XMLHttpRequest.readyState < 4) {
+                                    return true;
+                                }
+                                else {
+                                    alert('Error :' + XMLHttpRequest.responseText);
+                                }
                             }
-                            else {
-                                alert('Error :' + XMLHttpRequest.responseText);
+                        });
+
+                        done(result);
+                    },
+                    onSelect: function (suggestion) {
+                        $.map(objDescription.Transaction, function (transaction) {
+                            if (transaction.TransactionID == suggestion.data) {                       
+                                $("#uxAmount").val(transaction.Amount);
+                                $("#uxBudgetCategory option[value='" + transaction.BudgetCategoryID + "']").prop("selected", true);
                             }
+                        });
+                    }
+                });
+            });
+
+            function TransactionRecentGet() {
+                var result = {};
+
+                $.ajax({
+                    type: "GET",
+                    url: api + "transaction/recent",
+                    cache: false,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    success: function (msg) {
+                        result = msg;
+
+                        objTransaction.Transaction = result;
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        if (XMLHttpRequest.readyState < 4) {
+                            return true;
                         }
-                    });
-
-                    done(result);
-                },
-                onSelect: function (suggestion) {
-                    $.map(objDescription.Transaction, function (transaction) {
-                        if (transaction.TransactionID == suggestion.data) {                       
-                            $("#uxAmount").val(transaction.Amount);
-                            $("#uxBudgetCategory option[value='" + transaction.BudgetCategoryID + "']").prop("selected", true);
+                        else {
+                            alert('Error :' + XMLHttpRequest.responseText);
                         }
-                    });
+                    }
+                });
+            }
+
+            function TransactionInsert() {
+                $.ajax({
+                    type: "POST",
+                    url: api + "transaction",
+                    cache: false,
+                    data: JSON.stringify(objTransaction),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    success: function (msg) {
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        if (XMLHttpRequest.readyState < 4) {
+                            return true;
+                        }
+                        else {
+                            alert('Error :' + XMLHttpRequest.responseText);
+                        }
+                    }
+                });
+            }
+
+            function TransactionUpdate() {
+                $.ajax({
+                    type: "PUT",
+                    url: api + "transaction/" + objTransaction.TransactionID,
+                    cache: false,
+                    data: JSON.stringify(objTransaction),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    success: function (msg) {
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        if (XMLHttpRequest.readyState < 4) {
+                            return true;
+                        }
+                        else {
+                            alert('Error :' + XMLHttpRequest.responseText);
+                        }
+                    }
+                });
+            }
+
+            function TransactionDelete() {
+                $.ajax({
+                    type: "DELETE",
+                    url: api + "transaction/" + objTransaction.TransactionID,
+                    cache: false,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    success: function (msg) {
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        if (XMLHttpRequest.readyState < 4) {
+                            return true;
+                        }
+                        else {
+                            alert('Error :' + XMLHttpRequest.responseText);
+                        }
+                    }
+                });
+            }
+
+            function BudgetCategoryGet() {
+                var result = {};
+
+                $.ajax({
+                    type: "GET",
+                    url: api + "category",
+                    cache: false,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: false,
+                    success: function (msg) {
+                        result = msg;
+
+                        objBudgetCategory.Category = result;
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        if (XMLHttpRequest.readyState < 4) {
+                            return true;
+                        }
+                        else {
+                            alert('Error :' + XMLHttpRequest.responseText);
+                        }
+                    }
+                });
+            }
+
+            function TransactionTypeSet() {
+                var transactionTypeRadio = $("input[name=uxTransactionType]:checked");
+
+                objTransaction.TransactionTypeID = transactionTypeRadio.data("transaction-type-id");
+
+                if(objTransaction.TransactionTypeID == "1") {
+                    var dropdown = "<select class='form-control placeholder' id='uxBudgetCategory'>" 
+                        + "<option value='29' selected='selected'>Income</option>" 
+                        + "</select>"
+
+                    $("#uxBudgetCategoryOptionAdd").html(dropdown);
                 }
-            });
-        });
-
-        function TransactionRecentGet() {
-            var result = {};
-
-            $.ajax({
-                type: "GET",
-                url: api + "transaction/recent",
-                cache: false,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                async: false,
-                success: function (msg) {
-                    result = msg;
-
-                    objTransaction.Transaction = result;
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    if (XMLHttpRequest.readyState < 4) {
-                        return true;
-                    }
-                    else {
-                        alert('Error :' + XMLHttpRequest.responseText);
-                    }
+                else {
+                    BudgetCategoryOptionAddRender();
                 }
-            });
-        }
+            }
 
-        function TransactionInsert() {
-            $.ajax({
-                type: "POST",
-                url: api + "transaction",
-                cache: false,
-                data: JSON.stringify(objTransaction),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                async: false,
-                success: function (msg) {
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    if (XMLHttpRequest.readyState < 4) {
-                        return true;
-                    }
-                    else {
-                        alert('Error :' + XMLHttpRequest.responseText);
-                    }
+            function TransactionAdd() {    
+                if(ValidateAdd()) {
+                    var transactionDT = $("#uxTransactionDT").val().split("/");
+                    var description = $("#uxDescription").val();
+                    var amount = $("#uxAmount").val();
+                    var budgetCategoryID = $("#uxBudgetCategory option:selected").val();
+                    var transactionNumber = $("#uxTransactionNumber").val();
+                    var note = $("#uxNote").val();
+
+                    objTransaction.TransactionDT = transactionDT[2] + "-" + transactionDT[0] + "-" + transactionDT[1];
+                    objTransaction.Description = description;
+                    objTransaction.Amount = amount;
+                    objTransaction.BudgetCategoryID = budgetCategoryID;
+                    objTransaction.TransactionNumber = transactionNumber;
+                    objTransaction.Note = note;
+
+                    TransactionInsert();
+                    TransactionRecentRender();
+                    TransactionClear();
+                }    
+            }              
+
+            function TransactionEdit(TransactionID, TransactionDT, Description, BudgetCategoryID, BudgetCategory, Amount, TransactionNumber, Note) {
+                objTransaction.TransactionID = TransactionID
+                objTransaction.TransactionDT = TransactionDT;
+                objTransaction.Description = Description;
+                objTransaction.BudgetCategoryID = BudgetCategoryID;
+                objTransaction.BudgetCategory = BudgetCategory;
+                objTransaction.Amount = Amount;
+                objTransaction.TransactionNumber = TransactionNumber;
+                objTransaction.Note = Note;
+
+                var source = $("#tmplTransactionEdit").html();
+                var template = Handlebars.compile(source);
+                var context = objTransaction;
+                var html = template(context);
+
+                $("#uxTransactionEdit_" + objTransaction.TransactionID).html(html);
+
+                BudgetCategoryOptionEditRender(objTransaction.TransactionID, objTransaction.BudgetCategoryID, objTransaction.BudgetCategory);
+                DatePickerSet();
+            }
+
+            function TransactionSave(TransactionID) {
+                if(ValidateEdit(TransactionID)) {
+                    var transactionDT = $("#uxTransactionDT_" + TransactionID).val().split("/");
+                    var description = $("#uxDescription_" + TransactionID).val();
+                    var amount = $("#uxAmount_" + TransactionID).val();
+                    var budgetCategoryID = $("#uxBudgetCategory_" + TransactionID + " option:selected").val();
+                    var transactionNumber = $("#uxTransactionNumber_" + TransactionID).val();
+                    var note = $("#uxNote_" + TransactionID).val();
+
+                    objTransaction.TransactionDT = transactionDT[2] + "-" + transactionDT[0] + "-" + transactionDT[1];
+                    objTransaction.Description = description;
+                    objTransaction.Amount = amount;
+                    objTransaction.BudgetCategoryID = budgetCategoryID;
+                    objTransaction.TransactionNumber = transactionNumber;
+                    objTransaction.Note = note;
+                    objTransaction.TransactionID = TransactionID
+
+                    TransactionUpdate();
+                    TransactionRecentRender();
                 }
-            });
-        }
+            }
 
-        function TransactionUpdate() {
-            $.ajax({
-                type: "PUT",
-                url: api + "transaction/" + objTransaction.TransactionID,
-                cache: false,
-                data: JSON.stringify(objTransaction),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                async: false,
-                success: function (msg) {
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    if (XMLHttpRequest.readyState < 4) {
-                        return true;
-                    }
-                    else {
-                        alert('Error :' + XMLHttpRequest.responseText);
-                    }
+            function TransactionRemove(TransactionID) {
+                if(ConfirmAction()) {
+                    objTransaction.TransactionID = TransactionID
+
+                    TransactionDelete();
+                    TransactionRecentRender();
                 }
-            });
-        }
+            }
 
-        function TransactionDelete() {
-            $.ajax({
-                type: "DELETE",
-                url: api + "transaction/" + objTransaction.TransactionID,
-                cache: false,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                async: false,
-                success: function (msg) {
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    if (XMLHttpRequest.readyState < 4) {
-                        return true;
-                    }
-                    else {
-                        alert('Error :' + XMLHttpRequest.responseText);
-                    }
-                }
-            });
-        }
+            function TransactionClear() {
+                $("#uxDescription").val("");
+                $("#uxAmount").val("");
+                $("#uxBudgetCategory option[value='']").prop("selected", true);
+                $("#uxTransactionNumber").val("");
+                $("#uxNote").val("");
+                $("#HardErrorMessage").html("");
+            }
 
-        function BudgetCategoryGet() {
-            var result = {};
+            function TransactionRecentRender() {
+                TransactionRecentGet();
 
-            $.ajax({
-                type: "GET",
-                url: api + "category",
-                cache: false,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                async: false,
-                success: function (msg) {
-                    result = msg;
+                var source = $("#tmplTransactionRecent").html();
+                var template = Handlebars.compile(source);
+                var context = objTransaction;
+                var html = template(context);
 
-                    objBudgetCategory.Category = result;
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    if (XMLHttpRequest.readyState < 4) {
-                        return true;
-                    }
-                    else {
-                        alert('Error :' + XMLHttpRequest.responseText);
-                    }
-                }
-            });
-        }
+                $("#uxTransactionRecent").html(html);
+            }
 
-        function TransactionTypeSet() {
-            var transactionTypeRadio = $("input[name=uxTransactionType]:checked");
+            function BudgetCategoryOptionAddRender() {
+                BudgetCategoryGet();
 
-            objTransaction.TransactionTypeID = transactionTypeRadio.data("transaction-type-id");
+                var source = $("#tmplBudgetCategoryOption").html();
+                var template = Handlebars.compile(source);
+                var context = objBudgetCategory;
+                var html = template(context);
 
-            if(objTransaction.TransactionTypeID == "1") {
                 var dropdown = "<select class='form-control placeholder' id='uxBudgetCategory'>" 
-                    + "<option value='29' selected='selected'>Income</option>" 
-                    + "</select>"
+                            + "<option value='' selected='selected' class='optionHide'>Select a Category...</option>"
+                            + html 
+                            + "</select>"
 
                 $("#uxBudgetCategoryOptionAdd").html(dropdown);
             }
-            else {
-                BudgetCategoryOptionAddRender();
-            }
-        }
 
-        function TransactionAdd() {    
-            if(ValidateAdd()) {
-                var transactionDT = $("#uxTransactionDT").val().split("/");
-                var description = $("#uxDescription").val();
-                var amount = $("#uxAmount").val();
-                var budgetCategoryID = $("#uxBudgetCategory option:selected").val();
-                var transactionNumber = $("#uxTransactionNumber").val();
-                var note = $("#uxNote").val();
+            function BudgetCategoryOptionEditRender(TransactionID, BudgetCategoryID, BudgetCategory) {
+                BudgetCategoryGet();
 
-                objTransaction.TransactionDT = transactionDT[2] + "-" + transactionDT[0] + "-" + transactionDT[1];
-                objTransaction.Description = description;
-                objTransaction.Amount = amount;
-                objTransaction.BudgetCategoryID = budgetCategoryID;
-                objTransaction.TransactionNumber = transactionNumber;
-                objTransaction.Note = note;
+                var source = $("#tmplBudgetCategoryOption").html();
+                var template = Handlebars.compile(source);
+                var context = objBudgetCategory;
+                var html = template(context);
 
-                TransactionInsert();
-                TransactionRecentRender();
-                TransactionClear();
-            }    
-        }              
+                var dropdown = "<select class='form-control input-sm' id='uxBudgetCategory_" + TransactionID + "'>" 
+                            + "<option value='" + BudgetCategoryID + "' selected='selected' class='optionHide'>" + BudgetCategory + "</option>"
+                            + html 
+                            + "</select>"
 
-        function TransactionEdit(TransactionID, TransactionDT, Description, BudgetCategoryID, BudgetCategory, Amount, TransactionNumber, Note) {
-            objTransaction.TransactionID = TransactionID
-            objTransaction.TransactionDT = TransactionDT;
-            objTransaction.Description = Description;
-            objTransaction.BudgetCategoryID = BudgetCategoryID;
-            objTransaction.BudgetCategory = BudgetCategory;
-            objTransaction.Amount = Amount;
-            objTransaction.TransactionNumber = TransactionNumber;
-            objTransaction.Note = Note;
-
-            var source = $("#tmplTransactionEdit").html();
-            var template = Handlebars.compile(source);
-            var context = objTransaction;
-            var html = template(context);
-
-            $("#uxTransactionEdit_" + objTransaction.TransactionID).html(html);
-
-            BudgetCategoryOptionEditRender(objTransaction.TransactionID, objTransaction.BudgetCategoryID, objTransaction.BudgetCategory);
-            DatePickerSet();
-        }
-
-        function TransactionSave(TransactionID) {
-            if(ValidateEdit(TransactionID)) {
-                var transactionDT = $("#uxTransactionDT_" + TransactionID).val().split("/");
-                var description = $("#uxDescription_" + TransactionID).val();
-                var amount = $("#uxAmount_" + TransactionID).val();
-                var budgetCategoryID = $("#uxBudgetCategory_" + TransactionID + " option:selected").val();
-                var transactionNumber = $("#uxTransactionNumber_" + TransactionID).val();
-                var note = $("#uxNote_" + TransactionID).val();
-
-                objTransaction.TransactionDT = transactionDT[2] + "-" + transactionDT[0] + "-" + transactionDT[1];
-                objTransaction.Description = description;
-                objTransaction.Amount = amount;
-                objTransaction.BudgetCategoryID = budgetCategoryID;
-                objTransaction.TransactionNumber = transactionNumber;
-                objTransaction.Note = note;
-                objTransaction.TransactionID = TransactionID
-
-                TransactionUpdate();
-                TransactionRecentRender();
-            }
-        }
-
-        function TransactionRemove(TransactionID) {
-            if(ConfirmAction()) {
-                objTransaction.TransactionID = TransactionID
-
-                TransactionDelete();
-                TransactionRecentRender();
-            }
-        }
-
-        function TransactionClear() {
-            $("#uxDescription").val("");
-            $("#uxAmount").val("");
-            $("#uxBudgetCategory option[value='']").prop("selected", true);
-            $("#uxTransactionNumber").val("");
-            $("#uxNote").val("");
-            $("#HardErrorMessage").html("");
-        }
-
-        function TransactionRecentRender() {
-            TransactionRecentGet();
-
-            var source = $("#tmplTransactionRecent").html();
-            var template = Handlebars.compile(source);
-            var context = objTransaction;
-            var html = template(context);
-
-            $("#uxTransactionRecent").html(html);
-        }
-
-        function BudgetCategoryOptionAddRender() {
-            BudgetCategoryGet();
-
-            var source = $("#tmplBudgetCategoryOption").html();
-            var template = Handlebars.compile(source);
-            var context = objBudgetCategory;
-            var html = template(context);
-
-            var dropdown = "<select class='form-control placeholder' id='uxBudgetCategory'>" 
-                        + "<option value='' selected='selected' class='optionHide'>Select a Category...</option>"
-                        + html 
-                        + "</select>"
-
-            $("#uxBudgetCategoryOptionAdd").html(dropdown);
-        }
-
-        function BudgetCategoryOptionEditRender(TransactionID, BudgetCategoryID, BudgetCategory) {
-            BudgetCategoryGet();
-
-            var source = $("#tmplBudgetCategoryOption").html();
-            var template = Handlebars.compile(source);
-            var context = objBudgetCategory;
-            var html = template(context);
-
-            var dropdown = "<select class='form-control input-sm' id='uxBudgetCategory_" + TransactionID + "'>" 
-                        + "<option value='" + BudgetCategoryID + "' selected='selected' class='optionHide'>" + BudgetCategory + "</option>"
-                        + html 
-                        + "</select>"
-
-            $("#uxBudgetCategoryOptionEdit_" + TransactionID).html(dropdown);
-        }
-
-        function DatePickerSet() {
-           $('.input-datepicker').datepicker({
-                clearBtn: true,
-                todayBtn: true,
-                autoclose: true,
-                todayHighlight: true,
-                orientation: "bottom"
-            });
-        }
-
-        function ConfirmAction() {
-            if (confirm("Are you sure?")) {
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
-
-        function ValidateAdd() {
-            var error = "";
-            var numRegEx = /^-{0,1}\d*\.{0,1}\d+$/;
-
-            if ($("#uxTransactionDT").val().length == 0) {
-                error += "<li>Date is required.</li>";
+                $("#uxBudgetCategoryOptionEdit_" + TransactionID).html(dropdown);
             }
 
-            if ($("#uxDescription").val().length == 0) {
-                error += "<li>Description is required.</li>";
+            function DatePickerSet() {
+            $('.input-datepicker').datepicker({
+                    clearBtn: true,
+                    todayBtn: true,
+                    autoclose: true,
+                    todayHighlight: true,
+                    orientation: "bottom"
+                });
             }
 
-            if ($("#uxAmount").val().length == 0) {
-                error += "<li>Amount is required.</li>";
-            }
-
-            if ($("#uxAmount").val().length > 0) {
-                if (!numRegEx.test($("#uxAmount").val())) {
-                    error += "<li>Amount must be numeric.</li>";
+            function ConfirmAction() {
+                if (confirm("Are you sure?")) {
+                    return true;
+                }
+                else {
+                    return false;
                 }
             }
 
-            if ($("#uxBudgetCategory option:selected").val().length == 0) {
-                error += "<li>Category is required.</li>";
-            }
+            function ValidateAdd() {
+                var error = "";
+                var numRegEx = /^-{0,1}\d*\.{0,1}\d+$/;
 
-            if (error.length > 0) {
-                error = "<div class=\"alert alert-danger\" role=\"alert\"><ul>" 
-                    + error 
-                    + "</ul></div>";
-                $("#HardErrorMessage").html(error);
-                return false;
-            }
-            else {
-                return true;
-            }
-        }
+                if ($("#uxTransactionDT").val().length == 0) {
+                    error += "<li>Date is required.</li>";
+                }
 
-        function ValidateEdit(TransactionID) {
-            var error = "";
-            var numRegEx = /^-{0,1}\d*\.{0,1}\d+$/;
+                if ($("#uxDescription").val().length == 0) {
+                    error += "<li>Description is required.</li>";
+                }
 
-            if ($("#uxTransactionDT_" + TransactionID).val().length == 0) {
-                error += "<li>Date is required.</li>";
-            }
+                if ($("#uxAmount").val().length == 0) {
+                    error += "<li>Amount is required.</li>";
+                }
 
-            if ($("#uxDescription_" + TransactionID).val().length == 0) {
-                error += "<li>Description is required.</li>";
-            }
+                if ($("#uxAmount").val().length > 0) {
+                    if (!numRegEx.test($("#uxAmount").val())) {
+                        error += "<li>Amount must be numeric.</li>";
+                    }
+                }
 
-            if ($("#uxAmount_" + TransactionID).val().length == 0) {
-                error += "<li>Amount is required.</li>";
-            }
+                if ($("#uxBudgetCategory option:selected").val().length == 0) {
+                    error += "<li>Category is required.</li>";
+                }
 
-            if ($("#uxAmount_" + TransactionID).val().length > 0) {
-                if (!numRegEx.test($("#uxAmount_" + TransactionID).val())) {
-                    error += "<li>Amount must be numeric.</li>";
+                if (error.length > 0) {
+                    error = "<div class=\"alert alert-danger\" role=\"alert\"><ul>" 
+                        + error 
+                        + "</ul></div>";
+                    $("#HardErrorMessage").html(error);
+                    return false;
+                }
+                else {
+                    return true;
                 }
             }
 
-            if ($("#uxBudgetCategory_" + TransactionID + " option:selected").val().length == 0) {
-                error += "<li>Category is required.</li>";
-            }
+            function ValidateEdit(TransactionID) {
+                var error = "";
+                var numRegEx = /^-{0,1}\d*\.{0,1}\d+$/;
 
-            if (error.length > 0) {
-                error = "<div class=\"alert alert-danger\" role=\"alert\"><ul>" 
-                    + error 
-                    + "</ul></div>";
-                $("#HardErrorMessageEdit").html(error);
-                return false;
+                if ($("#uxTransactionDT_" + TransactionID).val().length == 0) {
+                    error += "<li>Date is required.</li>";
+                }
+
+                if ($("#uxDescription_" + TransactionID).val().length == 0) {
+                    error += "<li>Description is required.</li>";
+                }
+
+                if ($("#uxAmount_" + TransactionID).val().length == 0) {
+                    error += "<li>Amount is required.</li>";
+                }
+
+                if ($("#uxAmount_" + TransactionID).val().length > 0) {
+                    if (!numRegEx.test($("#uxAmount_" + TransactionID).val())) {
+                        error += "<li>Amount must be numeric.</li>";
+                    }
+                }
+
+                if ($("#uxBudgetCategory_" + TransactionID + " option:selected").val().length == 0) {
+                    error += "<li>Category is required.</li>";
+                }
+
+                if (error.length > 0) {
+                    error = "<div class=\"alert alert-danger\" role=\"alert\"><ul>" 
+                        + error 
+                        + "</ul></div>";
+                    $("#HardErrorMessageEdit").html(error);
+                    return false;
+                }
+                else {
+                    return true;
+                }
             }
-            else {
-                return true;
-            }
-        }
         </script>
         <!--Javascript END-->
 
