@@ -132,7 +132,7 @@
                                   <td>Needs</td>
                                   <td>
                                       <div class="progress progress-sm">
-                                          <div class="progress-bar progress-bar-danger" style="width: 80%"></div>
+                                          <div class="progress-bar progress-bar-danger" style="width: 125%"></div>
                                       </div>
                                   </td>
                                   <td class="remaining">$300.00</td>
