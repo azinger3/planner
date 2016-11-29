@@ -38,7 +38,7 @@
 
   <!--Navigation START-->
 
-  <?php require_once('include/index.navigation.php'); ?>
+  <?php require_once('include/navigation.index.php'); ?>
 
   <!--Navigation END-->
 
