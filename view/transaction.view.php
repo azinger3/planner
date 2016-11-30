@@ -87,6 +87,10 @@
                 color: #2c3e50 !important;
                 text-decoration: none !important;
             }
+
+            .amount-fund {
+                font-size: 12px;
+            }
         </style>
     </head>
     <body>
@@ -170,7 +174,7 @@
                                 <div class="col-md-8">
                                     <div class="transaction-recent-heading">Recent Transactions</div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-4 hidden-xs hidden-sm">
                                     <div class="input-group">
                                         <input type="search" class="form-control input-sm input-filter" id="TransactionRecentFilter">
                                         <span class="input-group-addon input-sm input-filter">
@@ -216,9 +220,13 @@
                         <td class="hidden-xs">{{TransactionNumber}}</td>
                         <td class="hidden-xs">{{Note}}</td>
                         {{#if IsExpenseFlg}}
-                        <td class="amount-red">${{Amount}}</td>
+                        <td class="amount-red" title="Expense">${{Amount}}</td>
+                        {{else if IsSavedFlg}}
+                        <td><span class="label label-success amount-fund" title="Saved">${{Amount}}</span></td>
+                        {{else if IsSpentFlg}}
+                        <td><span class="label label-danger amount-fund" title="Spent">${{Amount}}</span></td>
                         {{else}}
-                        <td>${{Amount}}</td>
+                        <td title="Income">${{Amount}}</td>
                         {{/if}}
                         <td>
                             <div class="btn-group">
