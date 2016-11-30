@@ -59,11 +59,33 @@
             }
 
             .section-default {
-                padding: 10px 20px 10px 20px;
+                padding: 1px 20px 10px 20px;
             }
 
             .amount-red {
                 color: red;
+            }
+
+            .input-filter {
+                height: 25px !important;
+            }
+
+            .input-group-addon.input-filter {
+                font-size: 10px !important;
+            }
+
+            .transaction-recent-heading {
+                font-size: 16px;
+            }
+
+            .showMore {
+                color: #2c3e50;
+                font-size: 24px;
+            }
+
+            a.showMore:hover, a.showMore:focus {
+                color: #2c3e50 !important;
+                text-decoration: none !important;
             }
         </style>
     </head>
@@ -121,10 +143,17 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" id="uxTransactionNumber" class="form-control" placeholder="Transaction #" />
+                                    <a href="javascript:void(0);" title="Show More" class="showMore" data-toggle="collapse" data-target="#MoreInfo">
+                                        <i class="fa fa-plus"></i>
+                                    </a>
                                 </div>
-                                <div class="form-group">
-                                    <input type="text" id="uxNote" class="form-control" placeholder="Note" />
+                                <div id="MoreInfo" class="collapse">
+                                    <div class="form-group">
+                                        <input type="text" id="uxTransactionNumber" class="form-control" placeholder="Transaction #" />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" id="uxNote" class="form-control" placeholder="Note" />
+                                    </div>
                                 </div>
                                 <div class="form-group pull-right">
                                     <button type="button" class="btn btn-default" id="uxClear" onclick="TransactionClear()">Clear</button>
@@ -136,7 +165,21 @@
                 </div>
                 <div class="col-md-8">
                     <div class="panel panel-primary">
-                        <div class="panel-heading">Recent Transactions</div>
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="transaction-recent-heading">Recent Transactions</div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <input type="search" class="form-control input-sm input-filter" id="TransactionRecentFilter">
+                                        <span class="input-group-addon input-sm input-filter">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="panel-body">
                             <div id="uxTransactionRecent"></div>
                         </div>
@@ -152,7 +195,7 @@
         <!--Templates START-->
         <script id="tmplTransactionRecent" type="text/x-handlebars-template">
             <div id="HardErrorMessageEdit"></div>
-            <table class="table table-striped table-hover table-condensed small">
+            <table class="table table-striped table-hover table-condensed small" id="TransactionRecentTable">
                 <thead>
                     <tr>
                         <th>Date</th>
@@ -257,10 +300,6 @@
             $(document).ready(function() {
                 console.log("Ready!");
 
-                TransactionRecentRender();
-                BudgetCategoryOptionAddRender();
-                DatePickerSet();
-
                 $("#uxExpense").click();
 
                 $("#uxTransactionDT").val(Date.today().toString("MM/dd/yyyy"));
@@ -317,6 +356,10 @@
                         });
                     }
                 });
+
+                BudgetCategoryOptionAddRender();
+                DatePickerSet();
+                TransactionRecentRender();
             });
 
             function TransactionRecentGet() {
@@ -545,6 +588,11 @@
                 var html = template(context);
 
                 $("#uxTransactionRecent").html(html);
+
+                $.tablefilter({
+                    inputElement: "#TransactionRecentFilter",
+                    tableElement: "#TransactionRecentTable"
+                });
             }
 
             function BudgetCategoryOptionAddRender() {
@@ -602,17 +650,9 @@
                 var error = "";
                 var numRegEx = /^-{0,1}\d*\.{0,1}\d+$/;
 
-                if ($("#uxTransactionDT").val().length == 0) {
-                    error += "<li>Date is required.</li>";
-                }
-
-                if ($("#uxDescription").val().length == 0) {
-                    error += "<li>Description is required.</li>";
-                }
-
-                if ($("#uxAmount").val().length == 0) {
-                    error += "<li>Amount is required.</li>";
-                }
+                if ($("#uxTransactionDT").val().length == 0) { error += "<li>Date is required.</li>"; }
+                if ($("#uxDescription").val().length == 0) { error += "<li>Description is required.</li>"; }
+                if ($("#uxAmount").val().length == 0) { error += "<li>Amount is required.</li>"; }
 
                 if ($("#uxAmount").val().length > 0) {
                     if (!numRegEx.test($("#uxAmount").val())) {
@@ -620,15 +660,13 @@
                     }
                 }
 
-                if ($("#uxBudgetCategory option:selected").val().length == 0) {
-                    error += "<li>Category is required.</li>";
-                }
+                if ($("#uxBudgetCategory option:selected").val().length == 0) { error += "<li>Category is required.</li>"; }
 
                 if (error.length > 0) {
-                    error = "<div class=\"alert alert-danger\" role=\"alert\"><ul>" 
-                        + error 
-                        + "</ul></div>";
+                    error = "<div class=\"alert alert-danger\" role=\"alert\"><ul>" + error + "</ul></div>";
+                    
                     $("#HardErrorMessage").html(error);
+                    
                     return false;
                 }
                 else {
@@ -640,17 +678,9 @@
                 var error = "";
                 var numRegEx = /^-{0,1}\d*\.{0,1}\d+$/;
 
-                if ($("#uxTransactionDT_" + TransactionID).val().length == 0) {
-                    error += "<li>Date is required.</li>";
-                }
-
-                if ($("#uxDescription_" + TransactionID).val().length == 0) {
-                    error += "<li>Description is required.</li>";
-                }
-
-                if ($("#uxAmount_" + TransactionID).val().length == 0) {
-                    error += "<li>Amount is required.</li>";
-                }
+                if ($("#uxTransactionDT_" + TransactionID).val().length == 0) { error += "<li>Date is required.</li>"; }
+                if ($("#uxDescription_" + TransactionID).val().length == 0) { error += "<li>Description is required.</li>"; }
+                if ($("#uxAmount_" + TransactionID).val().length == 0) { error += "<li>Amount is required.</li>"; }
 
                 if ($("#uxAmount_" + TransactionID).val().length > 0) {
                     if (!numRegEx.test($("#uxAmount_" + TransactionID).val())) {
@@ -658,15 +688,13 @@
                     }
                 }
 
-                if ($("#uxBudgetCategory_" + TransactionID + " option:selected").val().length == 0) {
-                    error += "<li>Category is required.</li>";
-                }
+                if ($("#uxBudgetCategory_" + TransactionID + " option:selected").val().length == 0) { error += "<li>Category is required.</li>"; }
 
                 if (error.length > 0) {
-                    error = "<div class=\"alert alert-danger\" role=\"alert\"><ul>" 
-                        + error 
-                        + "</ul></div>";
+                    error = "<div class=\"alert alert-danger\" role=\"alert\"><ul>" + error + "</ul></div>";
+                    
                     $("#HardErrorMessageEdit").html(error);
+                    
                     return false;
                 }
                 else {
