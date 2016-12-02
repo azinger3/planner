@@ -88,8 +88,18 @@
                 text-decoration: none !important;
             }
 
+            .moreOption {
+                font-size: 18px;
+            }
+
             .amount-fund {
                 font-size: 12px;
+            }
+
+            @media (max-width: 666px){
+                .transaction-hidden-xs {
+                    display: none !important;
+                }
             }
         </style>
     </head>
@@ -148,7 +158,10 @@
                                 </div>
                                 <div class="form-group">
                                     <a href="javascript:void(0);" title="Show More" class="showMore" data-toggle="collapse" data-target="#MoreInfo">
-                                        <i class="fa fa-plus"></i>
+                                        <span class="moreOption">
+                                            <i class="fa fa-plus"></i>
+                                            More Options
+                                        </span>
                                     </a>
                                 </div>
                                 <div id="MoreInfo" class="collapse">
@@ -204,7 +217,7 @@
                     <tr>
                         <th>Date</th>
                         <th>Description</th>
-                        <th class="hidden-xs">Category</th>
+                        <th class="transaction-hidden-xs">Category</th>
                         <th class="hidden-xs">#</th>
                         <th class="hidden-xs">Note</th>
                         <th>Amount</th>
@@ -216,7 +229,7 @@
                     <tr id="uxTransactionEdit_{{TransactionID}}">
                         <td>{{TransactionDT}}</td>
                         <td>{{Description}}</td>
-                        <td class="hidden-xs">{{BudgetCategory}}</td>
+                        <td class="transaction-hidden-xs">{{BudgetCategory}}</td>
                         <td class="hidden-xs">{{TransactionNumber}}</td>
                         <td class="hidden-xs">{{Note}}</td>
                         {{#if IsExpenseFlg}}
@@ -250,7 +263,7 @@
             <td>
                 <input type="text" class="form-control input-sm" id="uxDescription_{{TransactionID}}" value="{{Description}}" />
             </td>
-            <td class="hidden-xs">
+            <td class="transaction-hidden-xs">
                 <div id="uxBudgetCategoryOptionEdit_{{TransactionID}}"></div>
             </td>
             <td class="hidden-xs">
