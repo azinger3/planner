@@ -17,7 +17,7 @@
               <a href="/budget">Home</a>
             </li>
             <li>
-              <a href="#">Budget Plan</a>
+              <a href="http://jordanandrobert.com/budget/BudgetPlan.pdf" target="_blank">Budget Plan</a>
             </li>
             <li>
               <a href="/budget/transaction">Transactions</a>
@@ -25,15 +25,15 @@
             <li>
               <a href="/budget/summary">Summary</a>
             </li>
-            <li>
+            <!--<li>
               <a href="#">Calculator</a>
-            </li>
+            </li>-->
             <li>
-              <a href="http://jordanandrobert.com/budget">History</a>
+              <a href="http://jordanandrobert.com/budget" target="_blank">History</a>
             </li>
-            <li>
+            <!--<li>
               <a href="#">Admin</a>
-            </li>
+            </li>-->
           </ul>
         </li>
         <li>
