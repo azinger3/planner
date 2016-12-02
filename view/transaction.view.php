@@ -326,7 +326,7 @@
                 $("#uxTransactionDT").val(Date.today().toString("MM/dd/yyyy"));
 
                 $('#uxDescription').autocomplete({
-                    minChars: 1,
+                    minChars: 3,
                     noCache: true,
                     lookup: function (query, done) {
                         objDescription.Keyword = query;
