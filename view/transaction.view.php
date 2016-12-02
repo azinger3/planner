@@ -171,10 +171,10 @@
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-10">
                                     <div class="transaction-recent-heading">Recent Transactions</div>
                                 </div>
-                                <div class="col-md-4 hidden-xs hidden-sm">
+                                <div class="col-md-2 hidden-xs hidden-sm">
                                     <div class="input-group">
                                         <input type="search" class="form-control input-sm input-filter" id="TransactionRecentFilter">
                                         <span class="input-group-addon input-sm input-filter">

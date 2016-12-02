@@ -79,7 +79,6 @@
         <!--Content START-->
         <div class="row">
           <div class="col-md-8">
-
             <!--Remaining Variable Funds START-->
             <div class="panel panel-primary">
               <div class="panel-heading">
@@ -88,44 +87,16 @@
                   <a href="budget/transaction" title="Add Transaction" class="addTransactionLink"><i class="fa fa-plus"></i></a>
                 </div>
               </div>
-              <div id="uxBudgetCategorySpotlight"></div>
+              <div class="panel-body">
+                <div id="uxBudgetCategorySpotlight"></div>
+              </div>
             </div>
             <!--Remaining Variable Funds END-->
-
             <!--Savings Breakdown START-->
             <div class="panel panel-primary">
               <div class="panel-heading">Savings Breakdown</div>
               <div class="panel-body">
-                <table class="table table-hover">
-                  <tbody>
-                    <tr>
-                      <td>Emergency Fund</td>
-                      <td class="balance">$300.00</td>
-                    </tr>
-                    <tr>
-                      <td>Car Replacement</td>
-                      <td class="balance">$300.00</td>
-                    </tr>
-                    <tr>
-                      <td>Travel</td>
-                      <td class="balance">$300.00</td>
-                    </tr>
-                    <tr>
-                      <td>Christmas Fund</td>
-                      <td class="balance">$300.00</td>
-                    </tr>
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <td>
-                        <h4><strong>TOTAL</strong></h4>
-                      </td>
-                      <td class="balance">
-                        <h4><strong>$30000.00</strong></h4>
-                      </td>
-                    </tr>
-                  </tfoot>
-                </table>
+                <div id="uxBudgetFundSpotlight"></div>
               </div>
             </div>
             <!--Savings Breakdown END-->
@@ -135,21 +106,7 @@
             <div class="panel panel-primary">
               <div class="panel-heading">Budget Summaries</div>
               <div class="panel-body">
-                <div class="list-group text-center">
-                  <a class="list-group-item" href="#">September 2016</a>
-                  <a class="list-group-item" href="#">August 2016</a>
-                  <a class="list-group-item" href="#">July 2016</a>
-                  <a class="list-group-item" href="#">June 2016</a>
-                  <a class="list-group-item" href="#">May 2016</a>
-                  <a class="list-group-item" href="#">April 2016</a>
-                  <a class="list-group-item" href="#">March 2016</a>
-                  <a class="list-group-item" href="#">February 2016</a>
-                  <a class="list-group-item" href="#">January 2016</a>
-                  <a class="list-group-item" href="#">December 2015</a>
-                  <a class="list-group-item" href="#">November 2015</a>
-                  <a class="list-group-item" href="#">October 2015</a>
-                  <a class="list-group-item" href="#">September 2015</a>
-                </div>
+                <div id="uxBudgetSummarySpotlight"></div>
               </div>
             </div>
             <!--Budget Summaries END-->
@@ -163,53 +120,82 @@
 
       <!--Templates START-->
       <script id="tmplBudgetCategorySpotlight" type="text/x-handlebars-template">
-        <div class="panel-body">
-          <div class="currentMonth"><strong>{{BudgetMonth}}</strong></div>
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th class="categoryWidth"></th>
-                <th class="progressWidth"></th>
-                <th class="remainingWidth"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {{#each BudgetCategorySpotlight}}
-              <tr>
-                <td>{{BudgetCategory}}</td>
-                <td>
-                  <div class="progress progress-sm">
-                    <div class="progress-bar progress-bar-{{CategoryProgressBarStyle}}" style="width: {{CategoryPercentageSpent}}%"></div>
-                  </div>
-                </td>
-                {{#if IsCategoryNegativeFlg}}
-                <td class="remaining amount-red">${{CategoryActualVsBudget}}</td>
+        <div class="currentMonth"><strong>{{BudgetMonth}}</strong></div>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th class="categoryWidth"></th>
+              <th class="progressWidth"></th>
+              <th class="remainingWidth"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each BudgetCategorySpotlight}}
+            <tr>
+              <td>{{BudgetCategory}}</td>
+              <td>
+                <div class="progress progress-sm">
+                  <div class="progress-bar progress-bar-{{CategoryProgressBarStyle}}" style="width: {{CategoryPercentageSpent}}%"></div>
+                </div>
+              </td>
+              {{#if IsCategoryNegativeFlg}}
+              <td class="remaining amount-red">${{CategoryActualVsBudget}}</td>
+              {{else}}
+              <td class="remaining">${{CategoryActualVsBudget}}</td>
+              {{/if}}
+            </tr>
+            {{/each}}
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>
+                <h4><strong>TOTAL</strong></h4>
+              </td>
+              <td>
+                <div class="progress progress-striped progress-lg">
+                  <div class="progress-bar progress-bar-{{TotalCategoryProgressBarStyle}}" style="width: {{TotalCategoryPercentageSpent}}%"></div>
+                </div>
+              </td>
+              <td class="remaining">
+                {{#if IsTotalCategoryNegativeFlg}}
+                <h4 class="amount-red"><strong>${{TotalCategoryActualVsBudget}}</strong></h4> 
                 {{else}}
-                <td class="remaining">${{CategoryActualVsBudget}}</td>
+                <h4><strong>${{TotalCategoryActualVsBudget}}</strong></h4> 
                 {{/if}}
-              </tr>
-              {{/each}}
-            </tbody>
-            <tfoot>
-              <tr>
-                <td>
-                  <h4><strong>TOTAL</strong></h4>
-                </td>
-                <td>
-                  <div class="progress progress-striped progress-lg">
-                    <div class="progress-bar progress-bar-{{TotalCategoryProgressBarStyle}}" style="width: {{TotalCategoryPercentageSpent}}%"></div>
-                  </div>
-                </td>
-                <td class="remaining">
-                  {{#if IsTotalCategoryNegativeFlg}}
-                  <h4 class="amount-red"><strong>${{TotalCategoryActualVsBudget}}</strong></h4> 
-                  {{else}}
-                  <h4><strong>${{TotalCategoryActualVsBudget}}</strong></h4> 
-                  {{/if}}
-                </td>
-              </tr>
-            </tfoot>
-          </table>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </script>
+
+      <script id="tmplBudgetFundSpotlight" type="text/x-handlebars-template">
+        <table class="table table-hover table-striped">
+          <tbody>
+            {{#each BudgetFundSpotlight}}
+            <tr>
+              <td>{{FundName}}</td>
+              <td class="balance">${{FundSpentVsReceived}}</td>
+            </tr>
+            {{/each}}
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>
+                <h4><strong>TOTAL</strong></h4>
+              </td>
+              <td class="balance">
+                <h4><strong>${{TotalFundSpentVsReceived}}</strong></h4>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </script>
+
+      <script id="tmplBudgetSummarySpotlight" type="text/x-handlebars-template">
+        <div class="list-group text-center">
+          {{#each BudgetSummarySpotlight}}
+          <a class="list-group-item" href="/budget/summary?BudgetMonth={{BudgetMonthSummaryUrl}}">{{BudgetMonthSummary}}</a>
+          {{/each}}
         </div>
       </script>
       <!--Templates END-->
@@ -225,12 +211,14 @@
         var objBudget = new Object();
         objBudget.BudgetCategorySpotlight = "";
         objBudget.BudgetFundSpotlight = "";
-        objBudget.BudgetSummary = "";
+        objBudget.BudgetSummarySpotlight = "";
 
         $(document).ready(function() {
           console.log("ready!");
 
           BudgetCategorySpotlightRender();
+          BudgetFundSpotlightRender();
+          BudgetSummarySpotlightRender();
         });
 
         function BudgetCategorySpotlightGet() {
@@ -263,6 +251,57 @@
           });
         }
 
+        function BudgetFundSpotlightGet() {
+          var result = {};
+
+          $.ajax({
+            type: "GET",
+            url: api + "fund/spotlight",
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function(msg) {
+              result = msg;
+
+              objBudget.TotalFundSpentVsReceived = result[0].TotalFundSpentVsReceived;
+              objBudget.BudgetFundSpotlight = result;
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              if (XMLHttpRequest.readyState < 4) {
+                return true;
+              } else {
+                alert('Error :' + XMLHttpRequest.responseText);
+              }
+            }
+          });
+        }
+
+        function BudgetSummarySpotlightGet() {
+          var result = {};
+
+          $.ajax({
+            type: "GET",
+            url: api + "summary/spotlight",
+            cache: false,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function(msg) {
+              result = msg;
+
+              objBudget.BudgetSummarySpotlight = result;
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              if (XMLHttpRequest.readyState < 4) {
+                return true;
+              } else {
+                alert('Error :' + XMLHttpRequest.responseText);
+              }
+            }
+          });
+        }
+
         function BudgetCategorySpotlightRender() {
           BudgetCategorySpotlightGet();
 
@@ -272,6 +311,28 @@
           var html = template(context);
 
           $("#uxBudgetCategorySpotlight").html(html);
+        }
+
+        function BudgetFundSpotlightRender() {
+          BudgetFundSpotlightGet();
+
+          var source = $("#tmplBudgetFundSpotlight").html();
+          var template = Handlebars.compile(source);
+          var context = objBudget;
+          var html = template(context);
+
+          $("#uxBudgetFundSpotlight").html(html);
+        }
+
+        function BudgetSummarySpotlightRender() {
+          BudgetSummarySpotlightGet();
+
+          var source = $("#tmplBudgetSummarySpotlight").html();
+          var template = Handlebars.compile(source);
+          var context = objBudget;
+          var html = template(context);
+
+          $("#uxBudgetSummarySpotlight").html(html);
         }
       </script>
       <!--Javascript END-->
