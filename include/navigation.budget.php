@@ -11,6 +11,9 @@
     <div class="navbar-collapse collapse" id="navbar-main">
       <ul class="nav navbar-nav">
         <li>
+          <a href="/budget">Home</a>
+        </li>
+        <li>
           <a href="http://jordanandrobert.com/budget/BudgetPlan.pdf" target="_blank">Budget Plan</a>
         </li>
         <li>

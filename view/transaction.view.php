@@ -323,10 +323,10 @@
 
                 $("#uxExpense").click();
 
-                $("#uxTransactionDT").val(Date.today().toString("MM/dd/yyyy"));
+                $("#uxTransactionDT").val(Date.today().moveToLastDayOfMonth().toString("MM/dd/yyyy"));
 
                 $('#uxDescription').autocomplete({
-                    minChars: 2,
+                    minChars: 3,
                     noCache: true,
                     lookup: function (query, done) {
                         objDescription.Keyword = query;
