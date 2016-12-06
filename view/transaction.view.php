@@ -141,7 +141,7 @@
                                     </div>  
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" id="uxTransactionDT" class="form-control input-datepicker" placeholder="Date" />
+                                    <input type="text" id="uxTransactionDT" class="form-control input-datepicker" />
                                 </div>
                                 <div class="form-group">
                                     <input type="text" id="uxDescription" class="form-control" placeholder="Description" />
