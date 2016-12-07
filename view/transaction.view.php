@@ -280,7 +280,7 @@
                     <i class="fa fa-floppy-o" aria-hidden="true"></i>
                 </a>
                 &nbsp;&nbsp;
-                <a href="javascript:TransactionRecentRender();" class="btn btn-danger btn-xs">
+                <a href="javascript:TransactionRecentGet();" class="btn btn-danger btn-xs">
                     <i class="fa fa-times" aria-hidden="true"></i>
                 </a>
             </td>
@@ -316,7 +316,9 @@
 
             var objDescription = new Object();
             objDescription.Keyword = "";
-            objDescription.Transaction = "";
+
+            var objAutoFill = new Object();
+            objAutoFill.Transaction = "";
 
             $(document).ready(function() {
                 console.log("Ready!");
@@ -326,7 +328,7 @@
                 $("#uxTransactionDT").val(Date.today().moveToLastDayOfMonth().toString("MM/dd/yyyy"));
 
                 $('#uxDescription').autocomplete({
-                    minChars: 3,
+                    minChars: 1,
                     noCache: true,
                     lookup: function (query, done) {
                         objDescription.Keyword = query;
@@ -340,7 +342,7 @@
                             data: objDescription,
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
-                            async: false,
+                            async: true,
                             success: function (msg) {
                                 var Transaction = $.map(msg, function (item) {
                                     return { TransactionID: item.TransactionID,
@@ -348,13 +350,15 @@
                                             BudgetCategoryID: item.BudgetCategoryID };
                                 });
 
-                                objDescription.Transaction = Transaction;
+                                objAutoFill.Transaction = Transaction;
                                 
                                 var suggestions = $.map(msg, function (item) {
                                     return { value: item.Description, data: item.TransactionID };
                                 });
 
                                 result.suggestions = suggestions;
+
+                                done(result);
                             },
                             error: function (XMLHttpRequest, textStatus, errorThrown) {
                                 if (XMLHttpRequest.readyState < 4) {
@@ -365,11 +369,9 @@
                                 }
                             }
                         });
-
-                        done(result);
                     },
                     onSelect: function (suggestion) {
-                        $.map(objDescription.Transaction, function (transaction) {
+                        $.map(objAutoFill.Transaction, function (transaction) {
                             if (transaction.TransactionID == suggestion.data) {                       
                                 $("#uxAmount").val(transaction.Amount);
                                 $("#uxBudgetCategory option[value='" + transaction.BudgetCategoryID + "']").prop("selected", true);
@@ -378,9 +380,9 @@
                     }
                 });
 
-                BudgetCategoryOptionAddRender();
+                BudgetCategoryGet(1);
                 DatePickerSet();
-                TransactionRecentRender();
+                TransactionRecentGet();
             });
 
             function TransactionRecentGet() {
@@ -392,11 +394,13 @@
                     cache: false,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
-                    async: false,
+                    async: true,
                     success: function (msg) {
                         result = msg;
 
                         objTransaction.Transaction = result;
+
+                        TransactionRecentRender();
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
                         if (XMLHttpRequest.readyState < 4) {
@@ -417,8 +421,9 @@
                     data: JSON.stringify(objTransaction),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
-                    async: false,
+                    async: true,
                     success: function (msg) {
+                        TransactionRecentGet();
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
                         if (XMLHttpRequest.readyState < 4) {
@@ -439,8 +444,9 @@
                     data: JSON.stringify(objTransaction),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
-                    async: false,
+                    async: true,
                     success: function (msg) {
+                        TransactionRecentGet();
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
                         if (XMLHttpRequest.readyState < 4) {
@@ -460,8 +466,9 @@
                     cache: false,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
-                    async: false,
+                    async: true,
                     success: function (msg) {
+                        TransactionRecentGet();
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
                         if (XMLHttpRequest.readyState < 4) {
@@ -474,7 +481,7 @@
                 });
             }
 
-            function BudgetCategoryGet() {
+            function BudgetCategoryGet(renderType) {
                 var result = {};
 
                 $.ajax({
@@ -483,11 +490,18 @@
                     cache: false,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
-                    async: false,
+                    async: true,
                     success: function (msg) {
                         result = msg;
 
                         objBudgetCategory.Category = result;
+                        
+                        if (renderType == "1") {
+                            BudgetCategoryOptionAddRender();
+                        }
+                        else if (renderType == "2") {
+                            BudgetCategoryOptionEditRender(objTransaction.TransactionID, objTransaction.BudgetCategoryID, objTransaction.BudgetCategory);
+                        }
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
                         if (XMLHttpRequest.readyState < 4) {
@@ -513,8 +527,17 @@
                     $("#uxBudgetCategoryOptionAdd").html(dropdown);
                 }
                 else {
-                    BudgetCategoryOptionAddRender();
+                    BudgetCategoryGet(1);
                 }
+            }
+
+            function TransactionClear() {
+                $("#uxDescription").val("");
+                $("#uxAmount").val("");
+                $("#uxBudgetCategory option[value='']").prop("selected", true);
+                $("#uxTransactionNumber").val("");
+                $("#uxNote").val("");
+                $("#HardErrorMessage").html("");
             }
 
             function TransactionAdd() {    
@@ -534,7 +557,6 @@
                     objTransaction.Note = note;
 
                     TransactionInsert();
-                    TransactionRecentRender();
                     TransactionClear();
                 }    
             }              
@@ -556,8 +578,16 @@
 
                 $("#uxTransactionEdit_" + objTransaction.TransactionID).html(html);
 
-                BudgetCategoryOptionEditRender(objTransaction.TransactionID, objTransaction.BudgetCategoryID, objTransaction.BudgetCategory);
+                BudgetCategoryGet(2);
                 DatePickerSet();
+            }
+
+            function TransactionRemove(TransactionID) {
+                if(ConfirmAction()) {
+                    objTransaction.TransactionID = TransactionID
+
+                    TransactionDelete();
+                }
             }
 
             function TransactionSave(TransactionID) {
@@ -577,32 +607,11 @@
                     objTransaction.Note = note;
                     objTransaction.TransactionID = TransactionID
 
-                    TransactionUpdate();
-                    TransactionRecentRender();
+                    TransactionUpdate();  
                 }
-            }
-
-            function TransactionRemove(TransactionID) {
-                if(ConfirmAction()) {
-                    objTransaction.TransactionID = TransactionID
-
-                    TransactionDelete();
-                    TransactionRecentRender();
-                }
-            }
-
-            function TransactionClear() {
-                $("#uxDescription").val("");
-                $("#uxAmount").val("");
-                $("#uxBudgetCategory option[value='']").prop("selected", true);
-                $("#uxTransactionNumber").val("");
-                $("#uxNote").val("");
-                $("#HardErrorMessage").html("");
             }
 
             function TransactionRecentRender() {
-                TransactionRecentGet();
-
                 var source = $("#tmplTransactionRecent").html();
                 var template = Handlebars.compile(source);
                 var context = objTransaction;
@@ -617,8 +626,6 @@
             }
 
             function BudgetCategoryOptionAddRender() {
-                BudgetCategoryGet();
-
                 var source = $("#tmplBudgetCategoryOption").html();
                 var template = Handlebars.compile(source);
                 var context = objBudgetCategory;
@@ -627,14 +634,12 @@
                 var dropdown = "<select class='form-control placeholder' id='uxBudgetCategory'>" 
                             + "<option value='' selected='selected' class='optionHide'>Select a Category...</option>"
                             + html 
-                            + "</select>"
+                            + "</select>";
 
                 $("#uxBudgetCategoryOptionAdd").html(dropdown);
             }
 
             function BudgetCategoryOptionEditRender(TransactionID, BudgetCategoryID, BudgetCategory) {
-                BudgetCategoryGet();
-
                 var source = $("#tmplBudgetCategoryOption").html();
                 var template = Handlebars.compile(source);
                 var context = objBudgetCategory;
@@ -643,7 +648,7 @@
                 var dropdown = "<select class='form-control input-sm' id='uxBudgetCategory_" + TransactionID + "'>" 
                             + "<option value='" + BudgetCategoryID + "' selected='selected' class='optionHide'>" + BudgetCategory + "</option>"
                             + html 
-                            + "</select>"
+                            + "</select>";
 
                 $("#uxBudgetCategoryOptionEdit_" + TransactionID).html(dropdown);
             }
@@ -674,13 +679,7 @@
                 if ($("#uxTransactionDT").val().length == 0) { error += "<li>Date is required.</li>"; }
                 if ($("#uxDescription").val().length == 0) { error += "<li>Description is required.</li>"; }
                 if ($("#uxAmount").val().length == 0) { error += "<li>Amount is required.</li>"; }
-
-                if ($("#uxAmount").val().length > 0) {
-                    if (!numRegEx.test($("#uxAmount").val())) {
-                        error += "<li>Amount must be numeric.</li>";
-                    }
-                }
-
+                if ($("#uxAmount").val().length > 0) { if (!numRegEx.test($("#uxAmount").val())) { error += "<li>Amount must be numeric.</li>"; } }
                 if ($("#uxBudgetCategory option:selected").val().length == 0) { error += "<li>Category is required.</li>"; }
 
                 if (error.length > 0) {
@@ -702,13 +701,7 @@
                 if ($("#uxTransactionDT_" + TransactionID).val().length == 0) { error += "<li>Date is required.</li>"; }
                 if ($("#uxDescription_" + TransactionID).val().length == 0) { error += "<li>Description is required.</li>"; }
                 if ($("#uxAmount_" + TransactionID).val().length == 0) { error += "<li>Amount is required.</li>"; }
-
-                if ($("#uxAmount_" + TransactionID).val().length > 0) {
-                    if (!numRegEx.test($("#uxAmount_" + TransactionID).val())) {
-                        error += "<li>Amount must be numeric.</li>";
-                    }
-                }
-
+                if ($("#uxAmount_" + TransactionID).val().length > 0) { if (!numRegEx.test($("#uxAmount_" + TransactionID).val())) { error += "<li>Amount must be numeric.</li>"; } }
                 if ($("#uxBudgetCategory_" + TransactionID + " option:selected").val().length == 0) { error += "<li>Category is required.</li>"; }
 
                 if (error.length > 0) {

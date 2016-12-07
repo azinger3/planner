@@ -214,11 +214,11 @@
         objBudget.BudgetSummarySpotlight = "";
 
         $(document).ready(function() {
-          console.log("ready!");
+          console.log("Ready!");
 
-          BudgetCategorySpotlightRender();
-          BudgetFundSpotlightRender();
-          BudgetSummarySpotlightRender();
+          BudgetCategorySpotlightGet();
+          BudgetFundSpotlightGet();
+          BudgetSummarySpotlightGet();
         });
 
         function BudgetCategorySpotlightGet() {
@@ -230,7 +230,7 @@
             cache: false,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            async: false,
+            async: true,
             success: function(msg) {
               result = msg;
 
@@ -240,6 +240,8 @@
               objBudget.TotalCategoryProgressBarStyle = result[0].TotalCategoryProgressBarStyle;
               objBudget.IsTotalCategoryNegativeFlg = result[0].IsTotalCategoryNegativeFlg;
               objBudget.BudgetCategorySpotlight = result;
+
+              BudgetCategorySpotlightRender();
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
               if (XMLHttpRequest.readyState < 4) {
@@ -260,12 +262,14 @@
             cache: false,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            async: false,
+            async: true,
             success: function(msg) {
               result = msg;
 
               objBudget.TotalFundSpentVsReceived = result[0].TotalFundSpentVsReceived;
               objBudget.BudgetFundSpotlight = result;
+
+              BudgetFundSpotlightRender();
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
               if (XMLHttpRequest.readyState < 4) {
@@ -286,11 +290,13 @@
             cache: false,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            async: false,
+            async: true,
             success: function(msg) {
               result = msg;
 
               objBudget.BudgetSummarySpotlight = result;
+
+              BudgetSummarySpotlightRender();
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
               if (XMLHttpRequest.readyState < 4) {
@@ -303,8 +309,6 @@
         }
 
         function BudgetCategorySpotlightRender() {
-          BudgetCategorySpotlightGet();
-
           var source = $("#tmplBudgetCategorySpotlight").html();
           var template = Handlebars.compile(source);
           var context = objBudget;
@@ -314,8 +318,6 @@
         }
 
         function BudgetFundSpotlightRender() {
-          BudgetFundSpotlightGet();
-
           var source = $("#tmplBudgetFundSpotlight").html();
           var template = Handlebars.compile(source);
           var context = objBudget;
@@ -325,8 +327,6 @@
         }
 
         function BudgetSummarySpotlightRender() {
-          BudgetSummarySpotlightGet();
-
           var source = $("#tmplBudgetSummarySpotlight").html();
           var template = Handlebars.compile(source);
           var context = objBudget;

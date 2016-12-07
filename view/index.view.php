@@ -84,7 +84,7 @@
 
   <script>
     $(document).ready(function() {
-      console.log("ready!");
+      console.log("Ready!");
     });
   </script>
 

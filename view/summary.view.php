@@ -24,6 +24,14 @@
             .nav-tabs>li>a {
                 color: #2c3e50;
             }
+
+            .amount-red {
+                color: red;
+            }
+
+            .transactionDetail {
+                width: 20%;
+            }
         </style>
     </head>
     <body>
@@ -50,6 +58,7 @@
                         <li class="active"><a href="#BudgetSummary" data-toggle="tab" aria-expanded="true">Summary</a></li>
                         <li class=""><a href="#BudgetAverage" data-toggle="tab" aria-expanded="true">Averages</a></li>
                         <li class=""><a href="#ExpenseBreakdown" data-toggle="tab" aria-expanded="false">Breakdown</a></li>
+                        <li class=""><a href="#FundSummary" data-toggle="tab" aria-expanded="false">Funds</a></li>
                     </ul>
                     <div id="tabContent" class="tab-content">
                         <div class="tab-pane fade active in" id="BudgetSummary">
@@ -57,18 +66,12 @@
                                 <form>
                                     <fieldset>
                                         <div class="form-group col-md-3">
-                                            <label for="3">Month:</label>
-                                            <select class="form-control placeholder" id="3">
-                                                <option value="" selected="selected">Select One...</option>
-                                                <option value="1">November 2016</option>
-                                                <option value="2">October 2016</option>
-                                                <option value="3">September 2016</option>
-                                                <option value="4">August 2016</option>
-                                            </select>
+                                            <label>Month:</label>
+                                            <div id="uxBudgetMonthOption"></div>
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>&nbsp;</label>
-                                            <button type="button" class="form-control btn btn-info col-md-2">Search</button>
+                                            <button type="button" class="form-control btn btn-info col-md-2" id="uxBudgetSummarySearch">Search</button>
                                         </div>
                                         <div class="form-group col-md-3 hidden-xs hidden-sm">
                                         </div>
@@ -77,10 +80,7 @@
                                     </fieldset>
                                 </form>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <p>Budget Summary</p>
-                                </div>
+                            <div id="uxBudgetSummary">
                             </div>
                         </div>
                         <div class="tab-pane fade" id="BudgetAverage">
@@ -108,6 +108,7 @@
                                 </form>
                             </div>
                             <div id="uxSummary">
+                            Budget Averages
                             </div>
                         </div>
                         <div class="tab-pane fade" id="ExpenseBreakdown">
@@ -134,10 +135,36 @@
                                     </fieldset>
                                 </form>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <canvas id="myChart" width="400" height="400"></canvas>
-                                </div>
+                            <div>
+                                Expense Breakdown
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="FundSummary">
+                            <div class="well">
+                                <form>
+                                    <fieldset>
+                                        <div class="form-group col-md-3">
+                                            <label for="3">Fund:</label>
+                                            <select class="form-control placeholder" id="3">
+                                                <option value="" selected="selected">Select One...</option>
+                                                <option value="1">Car Fund</option>
+                                                <option value="2">Emergency Fund</option>
+                                                <option value="3">Travel Fund</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>&nbsp;</label>
+                                            <button type="button" class="form-control btn btn-info col-md-2">Search</button>
+                                        </div>
+                                        <div class="form-group col-md-3 hidden-xs hidden-sm">
+                                        </div>
+                                        <div class="form-group col-md-3 hidden-xs hidden-sm">
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                            <div id="uxSummary">
+                            Fund Summary
                             </div>
                         </div>
                     </div>
@@ -150,10 +177,10 @@
         <!--Container END-->
 
         <!--Templates START-->
-        <script id="tmplSummary" type="text/x-handlebars-template">
+        <script id="tmplBudgetSummary" type="text/x-handlebars-template">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Budget Averages</h2>
+                    <h4>{{BudgetMonth}}</h4>
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h3 class="panel-title">Summary</h3>
@@ -164,29 +191,50 @@
                                     <tr>
                                         <th>Category</th>
                                         <th class="hidden-xs hidden-sm">Actual</th>
-                                        <th class="hidden-xs hidden-sm">Budgeted</th>
+                                        <th class="hidden-xs hidden-sm">Budget</th>
                                         <th>Balance</th>
-                                        <th>Average</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 {{#each Category}}
                                     <tr>
                                         <td>{{BudgetCategory}}</td>
+                                    {{#if IsExpenseFlg}}
+                                        <td class="hidden-xs hidden-sm amount-red">${{CategoryActual}}</td>
+                                        <td class="hidden-xs hidden-sm amount-red">${{CategoryBudget}}</td>
+                                    {{else}}
                                         <td class="hidden-xs hidden-sm">${{CategoryActual}}</td>
                                         <td class="hidden-xs hidden-sm">${{CategoryBudget}}</td>
+                                    {{/if}}
+                                          
+                                    {{#if IsCategoryActualVsBudgetNegative}}
+                                        <td class="amount-red">${{CategoryActualVsBudget}}</td>
+                                    {{else}}
                                         <td>${{CategoryActualVsBudget}}</td>
-                                        <td>${{CategoryAverage}}</td>
+                                    {{/if}}
                                     </tr>
                                 {{/each}}
                                 </tbody>
                                 <tfoot>
                                     <tr>
                                         <td><h4><strong>TOTAL</strong></h4></td>
+                                    {{#if IsTotalIncomeVsExpenseActualNegative}}
+                                        <td class="hidden-xs hidden-sm amount-red"><h4><strong>${{TotalIncomeVsExpenseActual}}</strong></h4></td>
+                                    {{else}}
                                         <td class="hidden-xs hidden-sm"><h4><strong>${{TotalIncomeVsExpenseActual}}</strong></h4></td>
+                                    {{/if}}
+
+                                    {{#if IsTotalIncomeVsExpenseBudgetNegative}}
+                                        <td class="hidden-xs hidden-sm amount-red"><h4><strong>${{TotalIncomeVsExpenseBudget}}</strong></h4></td>
+                                    {{else}}
                                         <td class="hidden-xs hidden-sm"><h4><strong>${{TotalIncomeVsExpenseBudget}}</strong></h4></td>
+                                    {{/if}}
+
+                                    {{#if IsTotalIncomeVsExpenseActualVsBudgetNegative}}
+                                        <td class="amount-red"><h4><strong>${{TotalIncomeVsExpenseActualVsBudget}}</strong></h4></td>
+                                    {{else}}
                                         <td><h4><strong>${{TotalIncomeVsExpenseActualVsBudget}}</strong></h4></td>
-                                        <td><h4><strong>${{TotalIncomeVsExpenseAverage}}</strong></h4></td>
+                                    {{/if}}
                                     </tr>
                                 </tfoot>
                             </table>
@@ -196,14 +244,15 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Details</h2>
+                    <h4>Details</h4>
                     {{#each Category}}
+                        {{#if TransactionTypeID}}
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h3 class="panel-title">{{BudgetCategory}}</h3>
                         </div>
                         <div class="panel-body">
-                            <table class="table table-striped table-hover table-bordered small">
+                            <table class="table table-striped table-hover table-bordered table-condensed small">
                                 <thead>
                                     <tr>
                                         <th>Date</th>
@@ -216,20 +265,31 @@
                                 <tbody>
                                 {{#each Transaction}}
                                     <tr>
-                                        <td>{{TransactionDT}}</td>
-                                        <td>{{Description}}</td>
-                                        <td class="hidden-xs hidden-sm">{{TransactionNumber}}</td>
-                                        <td>${{Amount}}</td>
-                                        <td class="hidden-xs hidden-sm">{{Note}}</td>
+                                        <td class="transactionDetail">{{TransactionDT}}</td>
+                                        <td class="transactionDetail">{{Description}}</td>
+                                        <td class="hidden-xs hidden-sm transactionDetail">{{TransactionNumber}}</td>
+                                    {{#if IsExpenseFlg}}
+                                        <td class="transactionDetail amount-red">${{Amount}}</td>
+                                    {{else}}
+                                        <td class="transactionDetail">${{Amount}}</td>
+                                    {{/if}}
+                                        <td class="hidden-xs hidden-sm transactionDetail">{{Note}}</td>
                                     </tr>
                                 {{/each}}
                                 </tbody>
                             </table>
                         </div>
                     </div>
+                        {{/if}}
                     {{/each}}
                 </div>
             </div>      
+        </script>
+
+        <script id="tmplBudgetMonthOption" type="text/x-handlebars-template">
+            {{#each Budget}}
+                <option value="{{BudgetMonthSummaryUrl}}">{{BudgetMonthSummary}}</option>
+            {{/each}}
         </script>
         <!--Templates END-->
 
@@ -241,31 +301,31 @@
 
         <!--Javascript START-->
         <script>
-            var apiUrl = "http://api.jordanandrobert.com/budget/transaction/summary";
-            var apiData = {};
+            var api = "http://api.jordanandrobert.com/budget";
+            var data = new Object();
 
-            apiData.BudgetCategoryID = "";
-            apiData.Keyword = "";
-            apiData.StartDT = "";
-            apiData.EndDT = "";
+            var budgetMonth = "";
 
-            var objSummary = {};
+            var objSummary = new Object();
             objSummary.TotalIncomeVsExpenseActual = "";
             objSummary.TotalIncomeVsExpenseBudget = "";
             objSummary.TotalIncomeVsExpenseActualVsBudget = "";
-            objSummary.TotalIncomeVsExpenseAverage = "";
+            objSummary.IsTotalIncomeVsExpenseActualNegative = "";
+            objSummary.IsTotalIncomeVsExpenseBudgetNegative = "";
+            objSummary.IsTotalIncomeVsExpenseActualVsBudgetNegative = "";
             objSummary.Category = "";
 
-            var objCategory = {};
+            var objCategory = new Object();
             objCategory.BudgetCategoryID = "";
             objCategory.BudgetCategory = "";
             objCategory.CategoryActual = "";
             objCategory.CategoryBudget = "";
             objCategory.CategoryActualVsBudget = "";
-            objCategory.CategoryAverage = "";
+            objCategory.IsCategoryActualVsBudgetNegative = "";
+            objCategory.TransactionTypeID = "";
             objCategory.Transaction = "";
 
-            var objTransaction = {};
+            var objTransaction = new Object();
             objTransaction.TransactionID = "";
             objTransaction.TransactionDT = "";
             objTransaction.TransactionTypeID = "";
@@ -275,76 +335,60 @@
             objTransaction.Amount = "";
             objTransaction.Note = "";
 
+            var objBudget = new Object();
+            objBudget.Budget = "";
+
             $(document).ready(function() {
-                console.log("ready!");
+                console.log("Ready!");
 
                 $.urlParam = function (name, url) {
                     if (!url) {
                         url = window.location.href;
                     }
+
                     var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(url);
+                    
                     if (!results) {
                         return undefined;
                     }
+
                     return results[1] || undefined;
                 }
 
-                var dateRange = "";
-                var startDT = "";
-                var endDT = "";
+                BudgetGet();
 
-                if ($.urlParam("DateRange") != undefined) {
-                    dateRange = $.urlParam("DateRange");
+                if ($.urlParam("BudgetMonth") != undefined) {
+                    budgetMonth = $.urlParam("BudgetMonth"); 
+                    data.BudgetMonth = $.urlParam("BudgetMonth"); 
 
-                    if(dateRange == "CurrentMonth") {
-                        startDT = Date.today().moveToFirstDayOfMonth().toString("yyyy-MM-dd");
-                        endDT = Date.today().moveToLastDayOfMonth().toString("yyyy-MM-dd");
-                    }
-                    else if(dateRange == "CurrentYear") {
-                        startDT = Date.today().moveToMonth(3, -1).toString("yyyy-MM-01");
-                        endDT = Date.today().moveToLastDayOfMonth().toString("yyyy-MM-dd");
-                    }
-                    else {
-                        startDT = Date.today().moveToMonth(3, -1).toString("yyyy-MM-01");
-                        endDT = Date.today().moveToLastDayOfMonth().toString("yyyy-MM-dd");
-                    }
-                }
-                else {
-                    startDT = Date.today().moveToMonth(3, -1).toString("yyyy-MM-01");
-                    endDT = Date.today().moveToLastDayOfMonth().toString("yyyy-MM-dd");
-                }
-
-                apiData.StartDT = startDT;
-                apiData.EndDT = endDT;
-
-                TransactionSummaryGet();
-
-                // Date Range Picker
-                var startDate = startDT.split("-");
-                var endDate = endDT.split("-");
-
-                $('.input-daterangepicker').daterangepicker({
-                    "startDate": startDate[1] + "/" + startDate[2] + "/" + startDate[0],
-                    "endDate": endDate[1] + "/" + endDate[2] + "/" + endDate[0]
-                });
+                    BudgetSummaryGet();
+                }                
             });
 
-            function TransactionSummaryGet() {
+            $("#uxBudgetSummarySearch").click(function() {
+                data.BudgetMonth = $("#uxBudgetMonth option:selected").val();
+
+                BudgetSummaryGet();
+
+                history.pushState({}, null, "summary?BudgetMonth=" + data.BudgetMonth);
+            });
+
+            function BudgetSummaryGet() {
                 var result = {};
 
                 $.ajax({
                     type: "GET",
-                    url: apiUrl,
+                    url: api + "/summary",
                     cache: false,
-                    data: apiData,
+                    data: data,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     async: true,
                     success: function (msg) {
                         result = msg;
 
-                        TransactionSummaryContextSet(result);
-                        TransactionSummaryTemplateSet();
+                        BudgetSummaryContext(result);
+                        BudgetSummaryRender();
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
                         if (XMLHttpRequest.readyState < 4) {
@@ -357,7 +401,37 @@
                 });
             }
 
-            function TransactionSummaryContextSet(result) {
+            function BudgetGet() {
+                var result = {};
+
+                $.ajax({
+                    type: "GET",
+                    url: api,
+                    cache: false,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: true,
+                    success: function (msg) {
+                        result = msg;
+
+                        objBudget.Budget = result;
+
+                        BudgetMonthOptionRender();
+
+                        $("#uxBudgetMonth option[value='" + budgetMonth + "']").prop("selected", true);
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        if (XMLHttpRequest.readyState < 4) {
+                            return true;
+                        }
+                        else {
+                            alert('Error :' + XMLHttpRequest.responseText);
+                        }
+                    }
+                });
+            }
+
+            function BudgetSummaryContext(result) {
                 objSummary = {};
 
                 var tmpCategory = $.map(result, function (item) {
@@ -367,16 +441,18 @@
                         CategoryActual: item.CategoryActual,
                         CategoryBudget: item.CategoryBudget,
                         CategoryActualVsBudget: item.CategoryActualVsBudget,
-                        CategoryAverage: item.CategoryAverage
+                        IsCategoryActualVsBudgetNegative: item.IsCategoryActualVsBudgetNegative,
+                        TransactionTypeID: item.TransactionTypeID,
+                        IsExpenseFlg: item.IsExpenseFlg
                     };
                 });
 
                 var uniqCategory = _.uniqWith(tmpCategory, _.isEqual);
 
-                var arrayCategory = [];
+                var arrCategory = [];
 
                 $.map(uniqCategory, function (category) {
-                    var arrayTransaction = [];
+                    var arrTransaction = [];
 
                     $.map(result, function (transaction) {
                         if (category.BudgetCategoryID == transaction.BudgetCategoryID) {
@@ -389,8 +465,9 @@
                             objTransaction.Description = transaction.Description;
                             objTransaction.Amount = transaction.Amount;
                             objTransaction.Note = transaction.Note;
+                            objTransaction.IsExpenseFlg = transaction.IsExpenseFlg;
 
-                            arrayTransaction.push(objTransaction);
+                            arrTransaction.push(objTransaction);
                         }
                     });
 
@@ -400,27 +477,47 @@
                     objCategory.CategoryActual = category.CategoryActual;
                     objCategory.CategoryBudget = category.CategoryBudget;
                     objCategory.CategoryActualVsBudget = category.CategoryActualVsBudget;
-                    objCategory.CategoryAverage = category.CategoryAverage;
-                    objCategory.Transaction = arrayTransaction;
-
-                    arrayCategory.push(objCategory);
+                    objCategory.IsCategoryActualVsBudgetNegative = category.IsCategoryActualVsBudgetNegative;
+                    objCategory.TransactionTypeID = category.TransactionTypeID;
+                    objCategory.IsExpenseFlg = category.IsExpenseFlg;
+                    objCategory.Transaction = arrTransaction;
+                    
+                    arrCategory.push(objCategory);
                 });
 
+                objSummary.BudgetMonth = result[0].BudgetMonth;
                 objSummary.TotalIncomeVsExpenseActual = result[0].TotalIncomeVsExpenseActual;
                 objSummary.TotalIncomeVsExpenseBudget = result[0].TotalIncomeVsExpenseBudget;
                 objSummary.TotalIncomeVsExpenseActualVsBudget = result[0].TotalIncomeVsExpenseActualVsBudget;
-                objSummary.TotalIncomeVsExpenseAverage = result[0].TotalIncomeVsExpenseAverage;
-                objSummary.Category = arrayCategory;
+                objSummary.IsTotalIncomeVsExpenseActualNegative = result[0].IsTotalIncomeVsExpenseActualNegative;
+                objSummary.IsTotalIncomeVsExpenseBudgetNegative = result[0].IsTotalIncomeVsExpenseBudgetNegative;
+                objSummary.IsTotalIncomeVsExpenseActualVsBudgetNegative = result[0].IsTotalIncomeVsExpenseActualVsBudgetNegative;
+                objSummary.Category = arrCategory;
             }
 
-            function TransactionSummaryTemplateSet() {
-                var source = $("#tmplSummary").html();
+            function BudgetSummaryRender() {
+                var source = $("#tmplBudgetSummary").html();
                 var template = Handlebars.compile(source);
 
                 var context = objSummary;
                 var html = template(context);
 
-                $("#uxSummary").html(html);
+                $("#uxBudgetSummary").html(html);
+            }
+
+            function BudgetMonthOptionRender() {
+                var source = $("#tmplBudgetMonthOption").html();
+                var template = Handlebars.compile(source);
+
+                var context = objBudget;
+                var html = template(context);
+
+                var dropdown = "<select class='form-control placeholder' id='uxBudgetMonth'>" 
+                            + "<option value='' selected='selected'>Select a Month...</option>"
+                            + html 
+                            + "</select>";
+
+                $("#uxBudgetMonthOption").html(dropdown);
             }
         </script>
         <!--Javascript END-->
