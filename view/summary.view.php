@@ -2,35 +2,27 @@
 <html lang="en">
     <head>
         <?php
-            $pageTitle = 'Summaries';
+            $pageTitle = 'Summary';
 
             require_once('include/header.php');
         ?>
 
         <style>
-            .optionHide {
-                display: none;
-            }
-
-            .nav-tabs {
-                margin-bottom: 0;
-            }
-
-            .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
-                color: #3498db;
-                background-color: #ecf0f1;
-            }
-
-            .nav-tabs>li>a {
-                color: #2c3e50;
-            }
-
             .amount-red {
                 color: red;
             }
 
             .transactionDetail {
                 width: 20%;
+            }
+
+            .summaryHeader {
+                font-size: 26px; 
+                margin-bottom: 15px; 
+            }
+
+            #uxBudgetMonth {
+                width: 175px;
             }
         </style>
     </head>
@@ -53,122 +45,14 @@
 
             <!--Content START-->
             <div class="row">
-                <div class="col-md-12">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a href="#BudgetSummary" data-toggle="tab" aria-expanded="true">Summary</a></li>
-                        <li class=""><a href="#BudgetAverage" data-toggle="tab" aria-expanded="true">Averages</a></li>
-                        <li class=""><a href="#ExpenseBreakdown" data-toggle="tab" aria-expanded="false">Breakdown</a></li>
-                        <li class=""><a href="#FundSummary" data-toggle="tab" aria-expanded="false">Funds</a></li>
-                    </ul>
-                    <div id="tabContent" class="tab-content">
-                        <div class="tab-pane fade active in" id="BudgetSummary">
-                            <div class="well">
-                                <form>
-                                    <fieldset>
-                                        <div class="form-group col-md-3">
-                                            <label>Month:</label>
-                                            <div id="uxBudgetMonthOption"></div>
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label>&nbsp;</label>
-                                            <button type="button" class="form-control btn btn-info col-md-2" id="uxBudgetSummarySearch">Search</button>
-                                        </div>
-                                        <div class="form-group col-md-3 hidden-xs hidden-sm">
-                                        </div>
-                                        <div class="form-group col-md-3 hidden-xs hidden-sm">
-                                        </div>
-                                    </fieldset>
-                                </form>
-                            </div>
-                            <div id="uxBudgetSummary">
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="BudgetAverage">
-                            <div class="well">
-                                <form>
-                                    <fieldset>
-                                        <div class="form-group col-md-3">
-                                            <label for="3">Year:</label>
-                                            <select class="form-control placeholder" id="3">
-                                                <option value="" selected="selected">Select One...</option>
-                                                <option value="1">Year 3</option>
-                                                <option value="2">Year 2</option>
-                                                <option value="3">Year 1</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label>&nbsp;</label>
-                                            <button type="button" class="form-control btn btn-info col-md-2">Search</button>
-                                        </div>
-                                        <div class="form-group col-md-3 hidden-xs hidden-sm">
-                                        </div>
-                                        <div class="form-group col-md-3 hidden-xs hidden-sm">
-                                        </div>
-                                    </fieldset>
-                                </form>
-                            </div>
-                            <div id="uxSummary">
-                            Budget Averages
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="ExpenseBreakdown">
-                            <div class="well">
-                                <form>
-                                    <fieldset>
-                                        <div class="form-group col-md-3">
-                                            <label for="3">Year:</label>
-                                            <select class="form-control placeholder" id="3">
-                                                <option value="" selected="selected">Select One...</option>
-                                                <option value="1">Year 3</option>
-                                                <option value="2">Year 2</option>
-                                                <option value="3">Year 1</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label>&nbsp;</label>
-                                            <button type="button" class="form-control btn btn-info col-md-2">Search</button>
-                                        </div>
-                                        <div class="form-group col-md-3 hidden-xs hidden-sm">
-                                        </div>
-                                        <div class="form-group col-md-3 hidden-xs hidden-sm">
-                                        </div>
-                                    </fieldset>
-                                </form>
-                            </div>
-                            <div>
-                                Expense Breakdown
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="FundSummary">
-                            <div class="well">
-                                <form>
-                                    <fieldset>
-                                        <div class="form-group col-md-3">
-                                            <label for="3">Fund:</label>
-                                            <select class="form-control placeholder" id="3">
-                                                <option value="" selected="selected">Select One...</option>
-                                                <option value="1">Car Fund</option>
-                                                <option value="2">Emergency Fund</option>
-                                                <option value="3">Travel Fund</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-3">
-                                            <label>&nbsp;</label>
-                                            <button type="button" class="form-control btn btn-info col-md-2">Search</button>
-                                        </div>
-                                        <div class="form-group col-md-3 hidden-xs hidden-sm">
-                                        </div>
-                                        <div class="form-group col-md-3 hidden-xs hidden-sm">
-                                        </div>
-                                    </fieldset>
-                                </form>
-                            </div>
-                            <div id="uxSummary">
-                            Fund Summary
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="summaryHeader">Summary</div>
                 </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="pull-right" id="uxBudgetMonthOption"></div>
+                </div>
+            </div>
+            <div id="uxBudgetSummary">
             </div>
             <!--Content END-->
 
@@ -180,13 +64,12 @@
         <script id="tmplBudgetSummary" type="text/x-handlebars-template">
             <div class="row">
                 <div class="col-md-12">
-                    <h4>{{BudgetMonth}}</h4>
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Summary</h3>
+                            <h3 class="panel-title">{{BudgetMonth}}</h3>
                         </div>
                         <div class="panel-body">
-                            <table class="table table-striped table-bordered table-hover">
+                            <table class="table table-striped table-bordered table-hover table-condensed">
                                 <thead>
                                     <tr>
                                         <th>Category</th>
@@ -244,12 +127,12 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h4>Details</h4>
+                    <h3>Details</h3>
                     {{#each Category}}
                         {{#if TransactionTypeID}}
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h3 class="panel-title">{{BudgetCategory}}</h3>
+                            <h3 class="panel-title" id="{{BudgetCategoryID}}">{{BudgetCategory}}</h3>
                         </div>
                         <div class="panel-body">
                             <table class="table table-striped table-hover table-bordered table-condensed small">
@@ -355,17 +238,23 @@
                     return results[1] || undefined;
                 }
 
-                BudgetGet();
-
                 if ($.urlParam("BudgetMonth") != undefined) {
                     budgetMonth = $.urlParam("BudgetMonth"); 
                     data.BudgetMonth = $.urlParam("BudgetMonth"); 
 
                     BudgetSummaryGet();
-                }                
+                }
+                else {
+                    budgetMonth = Date.today().toString("yyyy-MM-01"); 
+                    data.BudgetMonth = budgetMonth;
+
+                    BudgetSummaryGet();
+                }   
+
+                BudgetGet();          
             });
 
-            $("#uxBudgetSummarySearch").click(function() {
+            $("#uxBudgetMonth").change(function() {
                 data.BudgetMonth = $("#uxBudgetMonth option:selected").val();
 
                 BudgetSummaryGet();
@@ -419,6 +308,14 @@
                         BudgetMonthOptionRender();
 
                         $("#uxBudgetMonth option[value='" + budgetMonth + "']").prop("selected", true);
+
+                        $("#uxBudgetMonth").change(function() {
+                            data.BudgetMonth = $("#uxBudgetMonth option:selected").val();
+
+                            BudgetSummaryGet();
+
+                            history.pushState({}, null, "summary?BudgetMonth=" + data.BudgetMonth);
+                        });
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
                         if (XMLHttpRequest.readyState < 4) {
@@ -512,8 +409,7 @@
                 var context = objBudget;
                 var html = template(context);
 
-                var dropdown = "<select class='form-control placeholder' id='uxBudgetMonth'>" 
-                            + "<option value='' selected='selected'>Select a Month...</option>"
+                var dropdown = "<select class='form-control' id='uxBudgetMonth'>" 
                             + html 
                             + "</select>";
 
