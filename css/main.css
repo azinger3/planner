@@ -58,3 +58,16 @@ input[type="search"]::-webkit-search-cancel-button {
 table span.highlight {
     background-color: #FFFF88;
 }
+
+a.back-to-top {
+    display: none;
+    width: 60px;
+    height: 60px;
+    text-indent: -9999px;
+    position: fixed;
+    z-index: 999;
+    right: 20px;
+    bottom: 20px;
+    opacity: 0.6;
+    background: url(../image/backtotop.png) no-repeat center 43%;
+}
