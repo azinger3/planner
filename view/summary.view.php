@@ -397,7 +397,7 @@
                 var context = objBudget;
                 var html = template(context);
 
-                var dropdown = "<select class='form-control' id='uxBudgetMonth'>" 
+                var dropdown = "<select class='form-control input-sm' id='uxBudgetMonth'>" 
                             + html 
                             + "</select>";
 
