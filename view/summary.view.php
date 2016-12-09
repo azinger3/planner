@@ -65,9 +65,6 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">{{BudgetMonth}}</h3>
-                        </div>
                         <div class="panel-body">
                             <table class="table table-striped table-bordered table-hover table-condensed">
                                 <thead>
