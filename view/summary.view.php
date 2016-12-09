@@ -18,8 +18,8 @@
 
             .summaryHeader {
                 font-size: 28px; 
-                margin-bottom: 12px;
-                margin-top: -5px;
+                margin-bottom: 15px;
+                margin-top: 0px;
             }
 
             #uxBudgetMonth {
