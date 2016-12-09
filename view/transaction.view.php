@@ -95,12 +95,6 @@
             .amount-fund {
                 font-size: 12px;
             }
-
-            @media (max-width: 666px){
-                .transaction-hidden-xs {
-                    display: none !important;
-                }
-            }
         </style>
     </head>
     <body>
@@ -217,7 +211,7 @@
                     <tr>
                         <th>Date</th>
                         <th>Description</th>
-                        <th class="transaction-hidden-xs">Category</th>
+                        <th class="custom-hidden-xs">Category</th>
                         <th class="hidden-xs">#</th>
                         <th class="hidden-xs">Note</th>
                         <th>Amount</th>
@@ -229,7 +223,7 @@
                     <tr id="uxTransactionEdit_{{TransactionID}}">
                         <td>{{TransactionDT}}</td>
                         <td>{{Description}}</td>
-                        <td class="transaction-hidden-xs">{{BudgetCategory}}</td>
+                        <td class="custom-hidden-xs">{{BudgetCategory}}</td>
                         <td class="hidden-xs">{{TransactionNumber}}</td>
                         <td class="hidden-xs">{{Note}}</td>
                         {{#if IsExpenseFlg}}
@@ -263,7 +257,7 @@
             <td>
                 <input type="text" class="form-control input-sm" id="uxDescription_{{TransactionID}}" value="{{Description}}" />
             </td>
-            <td class="transaction-hidden-xs">
+            <td class="custom-hidden-xs">
                 <div id="uxBudgetCategoryOptionEdit_{{TransactionID}}"></div>
             </td>
             <td class="hidden-xs">
@@ -299,7 +293,7 @@
 
         <!--Javascript START-->
         <script>
-            var api = "http://api.jordanandrobert.com/budget/";
+            var api = "http://api.jordanandrobert.com/budget";
 
             var objTransaction = new Object();
             objTransaction.TransactionID = ""
@@ -337,7 +331,7 @@
 
                         $.ajax({
                             type: "GET",
-                            url: api + "transaction/description",
+                            url: api + "/transaction/description",
                             cache: false,
                             data: objDescription,
                             contentType: "application/json; charset=utf-8",
@@ -390,7 +384,7 @@
 
                 $.ajax({
                     type: "GET",
-                    url: api + "transaction/recent",
+                    url: api + "/transaction/recent",
                     cache: false,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
@@ -416,7 +410,7 @@
             function TransactionInsert() {
                 $.ajax({
                     type: "POST",
-                    url: api + "transaction",
+                    url: api + "/transaction",
                     cache: false,
                     data: JSON.stringify(objTransaction),
                     contentType: "application/json; charset=utf-8",
@@ -439,7 +433,7 @@
             function TransactionUpdate() {
                 $.ajax({
                     type: "PUT",
-                    url: api + "transaction/" + objTransaction.TransactionID,
+                    url: api + "/transaction/" + objTransaction.TransactionID,
                     cache: false,
                     data: JSON.stringify(objTransaction),
                     contentType: "application/json; charset=utf-8",
@@ -462,7 +456,7 @@
             function TransactionDelete() {
                 $.ajax({
                     type: "DELETE",
-                    url: api + "transaction/" + objTransaction.TransactionID,
+                    url: api + "/transaction/" + objTransaction.TransactionID,
                     cache: false,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
@@ -486,7 +480,7 @@
 
                 $.ajax({
                     type: "GET",
-                    url: api + "category",
+                    url: api + "/category",
                     cache: false,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",

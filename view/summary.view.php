@@ -73,8 +73,8 @@
                                 <thead>
                                     <tr>
                                         <th>Category</th>
-                                        <th class="hidden-xs hidden-sm">Actual</th>
-                                        <th class="hidden-xs hidden-sm">Budget</th>
+                                        <th class="custom-hidden-xs hidden-sm">Actual</th>
+                                        <th class="custom-hidden-xs hidden-sm">Budget</th>
                                         <th>Balance</th>
                                     </tr>
                                 </thead>
@@ -83,11 +83,11 @@
                                     <tr>
                                         <td>{{BudgetCategory}}</td>
                                     {{#if IsExpenseFlg}}
-                                        <td class="hidden-xs hidden-sm amount-red">${{CategoryActual}}</td>
-                                        <td class="hidden-xs hidden-sm amount-red">${{CategoryBudget}}</td>
+                                        <td class="custom-hidden-xs hidden-sm amount-red">${{CategoryActual}}</td>
+                                        <td class="custom-hidden-xs hidden-sm amount-red">${{CategoryBudget}}</td>
                                     {{else}}
-                                        <td class="hidden-xs hidden-sm">${{CategoryActual}}</td>
-                                        <td class="hidden-xs hidden-sm">${{CategoryBudget}}</td>
+                                        <td class="custom-hidden-xs hidden-sm">${{CategoryActual}}</td>
+                                        <td class="custom-hidden-xs hidden-sm">${{CategoryBudget}}</td>
                                     {{/if}}
                                           
                                     {{#if IsCategoryActualVsBudgetNegative}}
@@ -102,15 +102,15 @@
                                     <tr>
                                         <td><h4><strong>TOTAL</strong></h4></td>
                                     {{#if IsTotalIncomeVsExpenseActualNegative}}
-                                        <td class="hidden-xs hidden-sm amount-red"><h4><strong>${{TotalIncomeVsExpenseActual}}</strong></h4></td>
+                                        <td class="custom-hidden-xs hidden-sm amount-red"><h4><strong>${{TotalIncomeVsExpenseActual}}</strong></h4></td>
                                     {{else}}
-                                        <td class="hidden-xs hidden-sm"><h4><strong>${{TotalIncomeVsExpenseActual}}</strong></h4></td>
+                                        <td class="custom-hidden-xs hidden-sm"><h4><strong>${{TotalIncomeVsExpenseActual}}</strong></h4></td>
                                     {{/if}}
 
                                     {{#if IsTotalIncomeVsExpenseBudgetNegative}}
-                                        <td class="hidden-xs hidden-sm amount-red"><h4><strong>${{TotalIncomeVsExpenseBudget}}</strong></h4></td>
+                                        <td class="custom-hidden-xs hidden-sm amount-red"><h4><strong>${{TotalIncomeVsExpenseBudget}}</strong></h4></td>
                                     {{else}}
-                                        <td class="hidden-xs hidden-sm"><h4><strong>${{TotalIncomeVsExpenseBudget}}</strong></h4></td>
+                                        <td class="custom-hidden-xs hidden-sm"><h4><strong>${{TotalIncomeVsExpenseBudget}}</strong></h4></td>
                                     {{/if}}
 
                                     {{#if IsTotalIncomeVsExpenseActualVsBudgetNegative}}
@@ -127,10 +127,10 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <h3>Details</h3>
+                    <h3>Transactions</h3>
                     {{#each Category}}
                         {{#if TransactionTypeID}}
-                    <div class="panel panel-primary">
+                    <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title" id="{{BudgetCategoryID}}">{{BudgetCategory}}</h3>
                         </div>
@@ -254,14 +254,6 @@
                 BudgetGet();          
             });
 
-            $("#uxBudgetMonth").change(function() {
-                data.BudgetMonth = $("#uxBudgetMonth option:selected").val();
-
-                BudgetSummaryGet();
-
-                history.pushState({}, null, "summary?BudgetMonth=" + data.BudgetMonth);
-            });
-
             function BudgetSummaryGet() {
                 var result = {};
 
@@ -276,7 +268,7 @@
                     success: function (msg) {
                         result = msg;
 
-                        BudgetSummaryContext(result);
+                        BudgetSummaryContextSet(result);
                         BudgetSummaryRender();
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -312,9 +304,7 @@
                         $("#uxBudgetMonth").change(function() {
                             data.BudgetMonth = $("#uxBudgetMonth option:selected").val();
 
-                            BudgetSummaryGet();
-
-                            history.pushState({}, null, "summary?BudgetMonth=" + data.BudgetMonth);
+                            window.location.href = "summary?BudgetMonth=" + data.BudgetMonth;
                         });
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -328,7 +318,7 @@
                 });
             }
 
-            function BudgetSummaryContext(result) {
+            function BudgetSummaryContextSet(result) {
                 objSummary = {};
 
                 var tmpCategory = $.map(result, function (item) {

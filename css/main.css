@@ -17,6 +17,12 @@ body {
         }
 }
 
+@media (max-width: 666px){
+    .custom-hidden-xs {
+        display: none !important;
+    }
+}
+
 .page-header {
     margin-bottom: 0px;
 }

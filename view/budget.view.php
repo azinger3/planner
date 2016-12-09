@@ -206,7 +206,7 @@
 
       <!--Javascript START-->
       <script>
-        var api = "http://api.jordanandrobert.com/budget/";
+        var api = "http://api.jordanandrobert.com/budget";
 
         var objBudget = new Object();
         objBudget.BudgetCategorySpotlight = "";
@@ -226,7 +226,7 @@
 
           $.ajax({
             type: "GET",
-            url: api + "category/spotlight",
+            url: api + "/category/spotlight",
             cache: false,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -258,7 +258,7 @@
 
           $.ajax({
             type: "GET",
-            url: api + "fund/spotlight",
+            url: api + "/fund/spotlight",
             cache: false,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -286,7 +286,7 @@
 
           $.ajax({
             type: "GET",
-            url: api + "summary/spotlight",
+            url: api + "/summary/spotlight",
             cache: false,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
