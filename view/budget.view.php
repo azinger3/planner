@@ -58,6 +58,11 @@
       .amount-red {
         color: red;
       }
+
+      a.summaryLink {
+        text-decoration: none; 
+        color: #2c3e50;
+      }
     </style>
   </head>
   <body>
@@ -120,7 +125,11 @@
 
       <!--Templates START-->
       <script id="tmplBudgetCategorySpotlight" type="text/x-handlebars-template">
-        <div class="currentMonth"><strong>{{BudgetMonth}}</strong></div>
+        <div class="currentMonth">
+          <a class="summaryLink" href="/budget/summary">
+            <strong>{{BudgetMonth}}</strong>
+          </a>
+        </div>
         <table class="table table-hover">
           <thead>
             <tr>
