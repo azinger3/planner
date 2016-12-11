@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <?php
-            $pageTitle = 'Summary';
+            $pageTitle = 'Averages';
 
             require_once('include/header.php');
         ?>
@@ -16,14 +16,14 @@
                 width: 20%;
             }
 
-            .summaryHeader {
+            .averageHeader {
                 font-size: 26px; 
                 margin-bottom: 12px;
                 margin-top: -5px;
             }
 
-            #uxBudgetMonth {
-                width: 175px;
+            #uxBudgetYear {
+                width: 235px;
             }
         </style>
     </head>
@@ -47,13 +47,13 @@
             <!--Content START-->
             <div class="row">
                 <div class="col-xs-6 col-sm-6 col-md-6">
-                    <div class="summaryHeader">Summary</div>
+                    <div class="averageHeader">Averages</div>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6">
-                    <div class="pull-right" id="uxBudgetMonthOption"></div>
+                    <div class="pull-right" id="uxBudgetYearOption"></div>
                 </div>
             </div>
-            <div id="uxBudgetSummary">
+            <div id="uxBudgetAverage">
             </div>
             <!--Content END-->
 
@@ -62,7 +62,7 @@
         <!--Container END-->
 
         <!--Templates START-->
-        <script id="tmplBudgetSummary" type="text/x-handlebars-template">
+        <script id="tmplBudgetAverage" type="text/x-handlebars-template">
             <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-primary">
@@ -72,8 +72,7 @@
                                     <tr>
                                         <th>Category</th>
                                         <th class="custom-hidden-xs hidden-sm">Actual</th>
-                                        <th class="custom-hidden-xs hidden-sm">Budget</th>
-                                        <th>Balance</th>
+                                        <th>Average</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -82,16 +81,10 @@
                                         <td>{{BudgetCategory}}</td>
                                     {{#if IsExpenseFlg}}
                                         <td class="custom-hidden-xs hidden-sm amount-red">${{CategoryActual}}</td>
-                                        <td class="custom-hidden-xs hidden-sm amount-red">${{CategoryBudget}}</td>
+                                        <td class="amount-red">${{CategoryAverage}}</td>
                                     {{else}}
                                         <td class="custom-hidden-xs hidden-sm">${{CategoryActual}}</td>
-                                        <td class="custom-hidden-xs hidden-sm">${{CategoryBudget}}</td>
-                                    {{/if}}
-                                          
-                                    {{#if IsCategoryActualVsBudgetNegative}}
-                                        <td class="amount-red">${{CategoryActualVsBudget}}</td>
-                                    {{else}}
-                                        <td>${{CategoryActualVsBudget}}</td>
+                                        <td class="">${{CategoryAverage}}</td>
                                     {{/if}}
                                     </tr>
                                 {{/each}}
@@ -105,16 +98,10 @@
                                         <td class="custom-hidden-xs hidden-sm"><h4><strong>${{TotalIncomeVsExpenseActual}}</strong></h4></td>
                                     {{/if}}
 
-                                    {{#if IsTotalIncomeVsExpenseBudgetNegative}}
-                                        <td class="custom-hidden-xs hidden-sm amount-red"><h4><strong>${{TotalIncomeVsExpenseBudget}}</strong></h4></td>
+                                    {{#if IsTotalIncomeVsExpenseAverageNegative}}
+                                        <td class="amount-red"><h4><strong>${{TotalIncomeVsExpenseAverage}}</strong></h4></td>
                                     {{else}}
-                                        <td class="custom-hidden-xs hidden-sm"><h4><strong>${{TotalIncomeVsExpenseBudget}}</strong></h4></td>
-                                    {{/if}}
-
-                                    {{#if IsTotalIncomeVsExpenseActualVsBudgetNegative}}
-                                        <td class="amount-red"><h4><strong>${{TotalIncomeVsExpenseActualVsBudget}}</strong></h4></td>
-                                    {{else}}
-                                        <td><h4><strong>${{TotalIncomeVsExpenseActualVsBudget}}</strong></h4></td>
+                                        <td><h4><strong>${{TotalIncomeVsExpenseAverage}}</strong></h4></td>
                                     {{/if}}
                                     </tr>
                                 </tfoot>
@@ -167,9 +154,9 @@
             </div>      
         </script>
 
-        <script id="tmplBudgetMonthOption" type="text/x-handlebars-template">
-            {{#each Budget}}
-                <option value="{{BudgetMonthSummaryUrl}}">{{BudgetMonthSummary}}</option>
+        <script id="tmplBudgetYearOption" type="text/x-handlebars-template">
+            {{#each BudgetYear}}
+                <option value="{{YearValue}}">{{YearName}}</option>
             {{/each}}
         </script>
         <!--Templates END-->
@@ -185,24 +172,22 @@
             var api = "http://api.jordanandrobert.com/budget";
             var data = new Object();
 
-            var budgetMonth = "";
+            var budgetYear = "";
+            var startDT = "";
+            var endDT = "";
 
-            var objSummary = new Object();
-            objSummary.TotalIncomeVsExpenseActual = "";
-            objSummary.TotalIncomeVsExpenseBudget = "";
-            objSummary.TotalIncomeVsExpenseActualVsBudget = "";
-            objSummary.IsTotalIncomeVsExpenseActualNegative = "";
-            objSummary.IsTotalIncomeVsExpenseBudgetNegative = "";
-            objSummary.IsTotalIncomeVsExpenseActualVsBudgetNegative = "";
-            objSummary.Category = "";
+            var objAverage = new Object();
+            objAverage.TotalIncomeVsExpenseActual = "";
+            objAverage.TotalIncomeVsExpenseAverage = "";
+            objAverage.IsTotalIncomeVsExpenseActualNegative = "";
+            objAverage.IsTotalIncomeVsExpenseAverageNegative = "";
+            objAverage.Category = "";
 
             var objCategory = new Object();
             objCategory.BudgetCategoryID = "";
             objCategory.BudgetCategory = "";
             objCategory.CategoryActual = "";
-            objCategory.CategoryBudget = "";
-            objCategory.CategoryActualVsBudget = "";
-            objCategory.IsCategoryActualVsBudgetNegative = "";
+            objCategory.CategoryAverage = "";
             objCategory.TransactionTypeID = "";
             objCategory.Transaction = "";
 
@@ -216,48 +201,44 @@
             objTransaction.Amount = "";
             objTransaction.Note = "";
 
-            var objBudget = new Object();
-            objBudget.Budget = "";
+            var objBudgetYear = new Object();
+            objBudgetYear.BudgetYear = "";
 
             $(document).ready(function() {
                 console.log("Ready!");
 
-                $.urlParam = function (name, url) {
-                    if (!url) {
-                        url = window.location.href;
-                    }
+                if ($.urlParam("StartDT") != undefined && $.urlParam("EndDT") != undefined) {
+                    startDT = $.urlParam("StartDT"); 
+                    endDT = $.urlParam("EndDT"); 
 
-                    var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(url);
-                    
-                    if (!results) {
-                        return undefined;
-                    }
+                    budgetYear = startDT + "|" + endDT;
 
-                    return results[1] || undefined;
-                }
+                    data.StartDT = $.urlParam("StartDT"); 
+                    data.EndDT = $.urlParam("EndDT"); 
 
-                if ($.urlParam("BudgetMonth") != undefined) {
-                    budgetMonth = $.urlParam("BudgetMonth"); 
-                    data.BudgetMonth = $.urlParam("BudgetMonth"); 
-
-                    BudgetSummaryGet();
+                    BudgetAverageGet();
                 }
                 else {
-                    budgetMonth = Date.today().toString("yyyy-MM-01"); 
-                    data.BudgetMonth = budgetMonth;
+                    startDT = Date.today().moveToMonth(3, -1).toString("yyyy-MM-01"); 
+                    endDT = Date.today().addMonths(1).toString("yyyy-MM-01"); 
 
-                    BudgetSummaryGet();
+                    budgetYear = startDT + "|" + endDT;
+
+                    data.StartDT = startDT;
+                    data.EndDT = endDT;
+
+                    BudgetAverageGet();
                 }   
 
-                BudgetGet();          
+                BudgetYearGet();          
             });
 
-            function BudgetSummaryGet() {
+            function BudgetAverageGet() {
                 var result = {};
 
                 $.ajax({
                     type: "GET",
-                    url: api + "/summary",
+                    url: api + "/average",
                     cache: false,
                     data: data,
                     contentType: "application/json; charset=utf-8",
@@ -266,8 +247,8 @@
                     success: function (msg) {
                         result = msg;
 
-                        BudgetSummaryContextSet(result);
-                        BudgetSummaryRender();
+                        BudgetAverageContextSet(result);
+                        BudgetAverageRender();
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
                         if (XMLHttpRequest.readyState < 4) {
@@ -280,12 +261,12 @@
                 });
             }
 
-            function BudgetGet() {
+            function BudgetYearGet() {
                 var result = {};
 
                 $.ajax({
                     type: "GET",
-                    url: api,
+                    url: api + "/year",
                     cache: false,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
@@ -293,16 +274,21 @@
                     success: function (msg) {
                         result = msg;
 
-                        objBudget.Budget = result;
+                        objBudgetYear.BudgetYear = result;
 
-                        BudgetMonthOptionRender();
+                        BudgetYearOptionRender();
 
-                        $("#uxBudgetMonth option[value='" + budgetMonth + "']").prop("selected", true);
+                        $("#uxBudgetYear option[value='" + budgetYear + "']").prop("selected", true);
 
-                        $("#uxBudgetMonth").change(function() {
-                            data.BudgetMonth = $("#uxBudgetMonth option:selected").val();
+                        $("#uxBudgetYear").change(function() {
+                            budgetYear = $("#uxBudgetYear option:selected").val();
+                            
+                            var res = budgetYear.split("|");
 
-                            window.location.href = "summary?BudgetMonth=" + data.BudgetMonth;
+                            data.StartDT = res[0];
+                            data.EndDT = res[1];
+
+                            window.location.href = "average?StartDT=" + data.StartDT + "&EndDT=" + data.EndDT;
                         });
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -316,17 +302,15 @@
                 });
             }
 
-            function BudgetSummaryContextSet(result) {
-                objSummary = {};
+            function BudgetAverageContextSet(result) {
+                objAverage = {};
 
                 var tmpCategory = $.map(result, function (item) {
                     return {
                         BudgetCategoryID: item.BudgetCategoryID,
                         BudgetCategory: item.BudgetCategory,
                         CategoryActual: item.CategoryActual,
-                        CategoryBudget: item.CategoryBudget,
-                        CategoryActualVsBudget: item.CategoryActualVsBudget,
-                        IsCategoryActualVsBudgetNegative: item.IsCategoryActualVsBudgetNegative,
+                        CategoryAverage: item.CategoryAverage,
                         TransactionTypeID: item.TransactionTypeID,
                         IsExpenseFlg: item.IsExpenseFlg
                     };
@@ -360,9 +344,7 @@
                     objCategory.BudgetCategoryID = category.BudgetCategoryID;
                     objCategory.BudgetCategory = category.BudgetCategory;
                     objCategory.CategoryActual = category.CategoryActual;
-                    objCategory.CategoryBudget = category.CategoryBudget;
-                    objCategory.CategoryActualVsBudget = category.CategoryActualVsBudget;
-                    objCategory.IsCategoryActualVsBudgetNegative = category.IsCategoryActualVsBudgetNegative;
+                    objCategory.CategoryAverage = category.CategoryAverage;
                     objCategory.TransactionTypeID = category.TransactionTypeID;
                     objCategory.IsExpenseFlg = category.IsExpenseFlg;
                     objCategory.Transaction = arrTransaction;
@@ -370,38 +352,35 @@
                     arrCategory.push(objCategory);
                 });
 
-                objSummary.BudgetMonth = result[0].BudgetMonth;
-                objSummary.TotalIncomeVsExpenseActual = result[0].TotalIncomeVsExpenseActual;
-                objSummary.TotalIncomeVsExpenseBudget = result[0].TotalIncomeVsExpenseBudget;
-                objSummary.TotalIncomeVsExpenseActualVsBudget = result[0].TotalIncomeVsExpenseActualVsBudget;
-                objSummary.IsTotalIncomeVsExpenseActualNegative = result[0].IsTotalIncomeVsExpenseActualNegative;
-                objSummary.IsTotalIncomeVsExpenseBudgetNegative = result[0].IsTotalIncomeVsExpenseBudgetNegative;
-                objSummary.IsTotalIncomeVsExpenseActualVsBudgetNegative = result[0].IsTotalIncomeVsExpenseActualVsBudgetNegative;
-                objSummary.Category = arrCategory;
+                objAverage.TotalIncomeVsExpenseActual = result[0].TotalIncomeVsExpenseActual;
+                objAverage.TotalIncomeVsExpenseAverage = result[0].TotalIncomeVsExpenseAverage;
+                objAverage.IsTotalIncomeVsExpenseActualNegative = result[0].IsTotalIncomeVsExpenseActualNegative;
+                objAverage.IsTotalIncomeVsExpenseAverageNegative = result[0].IsTotalIncomeVsExpenseAverageNegative;
+                objAverage.Category = arrCategory;
             }
 
-            function BudgetSummaryRender() {
-                var source = $("#tmplBudgetSummary").html();
+            function BudgetAverageRender() {
+                var source = $("#tmplBudgetAverage").html();
                 var template = Handlebars.compile(source);
 
-                var context = objSummary;
+                var context = objAverage;
                 var html = template(context);
 
-                $("#uxBudgetSummary").html(html);
+                $("#uxBudgetAverage").html(html);
             }
 
-            function BudgetMonthOptionRender() {
-                var source = $("#tmplBudgetMonthOption").html();
+            function BudgetYearOptionRender() {
+                var source = $("#tmplBudgetYearOption").html();
                 var template = Handlebars.compile(source);
 
-                var context = objBudget;
+                var context = objBudgetYear;
                 var html = template(context);
 
-                var dropdown = "<select class='form-control input-sm' id='uxBudgetMonth'>" 
+                var dropdown = "<select class='form-control input-sm' id='uxBudgetYear'>" 
                             + html 
                             + "</select>";
 
-                $("#uxBudgetMonthOption").html(dropdown);
+                $("#uxBudgetYearOption").html(dropdown);
             }
         </script>
         <!--Javascript END-->

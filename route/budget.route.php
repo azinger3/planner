@@ -17,3 +17,9 @@ $app->get('/budget/summary', function ($request, $response, $args) {
 
     return $response;
 });
+
+$app->get('/budget/average', function ($request, $response, $args) {
+    $response = $this->view->render($response, "average.view.php");
+
+    return $response;
+});
