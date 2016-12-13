@@ -17,13 +17,17 @@
             }
 
             .summaryHeader {
-                font-size: 26px; 
-                margin-bottom: 12px;
+                font-size: 28px; 
+                margin-bottom: 20px;
                 margin-top: -5px;
             }
 
             #uxBudgetMonth {
                 width: 175px;
+            }
+
+            th {
+                font-size: 14px;
             }
         </style>
     </head>
@@ -67,58 +71,60 @@
                 <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-body">
-                            <table class="table table-striped table-bordered table-hover table-condensed">
-                                <thead>
-                                    <tr>
-                                        <th>Category</th>
-                                        <th class="custom-hidden-xs hidden-sm">Actual</th>
-                                        <th class="custom-hidden-xs hidden-sm">Budget</th>
-                                        <th>Balance</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                {{#each Category}}
-                                    <tr>
-                                        <td>{{BudgetCategory}}</td>
-                                    {{#if IsExpenseFlg}}
-                                        <td class="custom-hidden-xs hidden-sm amount-red">${{CategoryActual}}</td>
-                                        <td class="custom-hidden-xs hidden-sm amount-red">${{CategoryBudget}}</td>
-                                    {{else}}
-                                        <td class="custom-hidden-xs hidden-sm">${{CategoryActual}}</td>
-                                        <td class="custom-hidden-xs hidden-sm">${{CategoryBudget}}</td>
-                                    {{/if}}
-                                          
-                                    {{#if IsCategoryActualVsBudgetNegative}}
-                                        <td class="amount-red">${{CategoryActualVsBudget}}</td>
-                                    {{else}}
-                                        <td>${{CategoryActualVsBudget}}</td>
-                                    {{/if}}
-                                    </tr>
-                                {{/each}}
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td><h4><strong>TOTAL</strong></h4></td>
-                                    {{#if IsTotalIncomeVsExpenseActualNegative}}
-                                        <td class="custom-hidden-xs hidden-sm amount-red"><h4><strong>${{TotalIncomeVsExpenseActual}}</strong></h4></td>
-                                    {{else}}
-                                        <td class="custom-hidden-xs hidden-sm"><h4><strong>${{TotalIncomeVsExpenseActual}}</strong></h4></td>
-                                    {{/if}}
+                            <strong>
+                                <table class="table table-striped table-bordered table-hover table-condensed small">
+                                    <thead>
+                                        <tr>
+                                            <th>Category</th>
+                                            <th class="custom-hidden-xs hidden-sm">Actual</th>
+                                            <th class="custom-hidden-xs hidden-sm">Budget</th>
+                                            <th>Balance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {{#each Category}}
+                                        <tr>
+                                            <td>{{BudgetCategory}}</td>
+                                        {{#if IsExpenseFlg}}
+                                            <td class="custom-hidden-xs hidden-sm amount-red">${{CategoryActual}}</td>
+                                            <td class="custom-hidden-xs hidden-sm amount-red">${{CategoryBudget}}</td>
+                                        {{else}}
+                                            <td class="custom-hidden-xs hidden-sm">${{CategoryActual}}</td>
+                                            <td class="custom-hidden-xs hidden-sm">${{CategoryBudget}}</td>
+                                        {{/if}}
+                                            
+                                        {{#if IsCategoryActualVsBudgetNegative}}
+                                            <td class="amount-red">${{CategoryActualVsBudget}}</td>
+                                        {{else}}
+                                            <td>${{CategoryActualVsBudget}}</td>
+                                        {{/if}}
+                                        </tr>
+                                    {{/each}}
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td><h4><strong>TOTAL</strong></h4></td>
+                                        {{#if IsTotalIncomeVsExpenseActualNegative}}
+                                            <td class="custom-hidden-xs hidden-sm amount-red"><h4><strong>${{TotalIncomeVsExpenseActual}}</strong></h4></td>
+                                        {{else}}
+                                            <td class="custom-hidden-xs hidden-sm"><h4><strong>${{TotalIncomeVsExpenseActual}}</strong></h4></td>
+                                        {{/if}}
 
-                                    {{#if IsTotalIncomeVsExpenseBudgetNegative}}
-                                        <td class="custom-hidden-xs hidden-sm amount-red"><h4><strong>${{TotalIncomeVsExpenseBudget}}</strong></h4></td>
-                                    {{else}}
-                                        <td class="custom-hidden-xs hidden-sm"><h4><strong>${{TotalIncomeVsExpenseBudget}}</strong></h4></td>
-                                    {{/if}}
+                                        {{#if IsTotalIncomeVsExpenseBudgetNegative}}
+                                            <td class="custom-hidden-xs hidden-sm amount-red"><h4><strong>${{TotalIncomeVsExpenseBudget}}</strong></h4></td>
+                                        {{else}}
+                                            <td class="custom-hidden-xs hidden-sm"><h4><strong>${{TotalIncomeVsExpenseBudget}}</strong></h4></td>
+                                        {{/if}}
 
-                                    {{#if IsTotalIncomeVsExpenseActualVsBudgetNegative}}
-                                        <td class="amount-red"><h4><strong>${{TotalIncomeVsExpenseActualVsBudget}}</strong></h4></td>
-                                    {{else}}
-                                        <td><h4><strong>${{TotalIncomeVsExpenseActualVsBudget}}</strong></h4></td>
-                                    {{/if}}
-                                    </tr>
-                                </tfoot>
-                            </table>
+                                        {{#if IsTotalIncomeVsExpenseActualVsBudgetNegative}}
+                                            <td class="amount-red"><h4><strong>${{TotalIncomeVsExpenseActualVsBudget}}</strong></h4></td>
+                                        {{else}}
+                                            <td><h4><strong>${{TotalIncomeVsExpenseActualVsBudget}}</strong></h4></td>
+                                        {{/if}}
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </strong>
                         </div>
                     </div>
                 </div>
@@ -133,32 +139,34 @@
                             <h3 class="panel-title" id="{{BudgetCategoryID}}">{{BudgetCategory}}</h3>
                         </div>
                         <div class="panel-body">
-                            <table class="table table-striped table-hover table-bordered table-condensed small">
-                                <thead>
-                                    <tr>
-                                        <th>Date</th>
-                                        <th>Description</th>
-                                        <th class="hidden-xs hidden-sm">Transaction #</th>
-                                        <th>Amount</th>
-                                        <th class="hidden-xs hidden-sm">Note</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                {{#each Transaction}}
-                                    <tr>
-                                        <td class="transactionDetail">{{TransactionDT}}</td>
-                                        <td class="transactionDetail">{{Description}}</td>
-                                        <td class="hidden-xs hidden-sm transactionDetail">{{TransactionNumber}}</td>
-                                    {{#if IsExpenseFlg}}
-                                        <td class="transactionDetail amount-red">${{Amount}}</td>
-                                    {{else}}
-                                        <td class="transactionDetail">${{Amount}}</td>
-                                    {{/if}}
-                                        <td class="hidden-xs hidden-sm transactionDetail">{{Note}}</td>
-                                    </tr>
-                                {{/each}}
-                                </tbody>
-                            </table>
+                            <strong>
+                                <table class="table table-striped table-hover table-bordered table-condensed small">
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>Description</th>
+                                            <th class="hidden-xs hidden-sm">Transaction #</th>
+                                            <th>Amount</th>
+                                            <th class="hidden-xs hidden-sm">Note</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {{#each Transaction}}
+                                        <tr>
+                                            <td class="transactionDetail">{{TransactionDT}}</td>
+                                            <td class="transactionDetail">{{Description}}</td>
+                                            <td class="hidden-xs hidden-sm transactionDetail">{{TransactionNumber}}</td>
+                                        {{#if IsExpenseFlg}}
+                                            <td class="transactionDetail amount-red">${{Amount}}</td>
+                                        {{else}}
+                                            <td class="transactionDetail">${{Amount}}</td>
+                                        {{/if}}
+                                            <td class="hidden-xs hidden-sm transactionDetail">{{Note}}</td>
+                                        </tr>
+                                    {{/each}}
+                                    </tbody>
+                                </table>
+                            </strong>
                         </div>
                     </div>
                         {{/if}}
@@ -221,20 +229,6 @@
 
             $(document).ready(function() {
                 console.log("Ready!");
-
-                $.urlParam = function (name, url) {
-                    if (!url) {
-                        url = window.location.href;
-                    }
-
-                    var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(url);
-                    
-                    if (!results) {
-                        return undefined;
-                    }
-
-                    return results[1] || undefined;
-                }
 
                 if ($.urlParam("BudgetMonth") != undefined) {
                     budgetMonth = $.urlParam("BudgetMonth"); 
