@@ -23,7 +23,7 @@
             }
 
             #uxBudgetYear {
-                width: 235px;
+                width: 190px;
             }
 
             th {
