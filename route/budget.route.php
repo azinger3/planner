@@ -23,3 +23,9 @@ $app->get('/budget/average', function ($request, $response, $args) {
 
     return $response;
 });
+
+$app->get('/budget/breakdown', function ($request, $response, $args) {
+    $response = $this->view->render($response, "breakdown.view.php");
+
+    return $response;
+});
