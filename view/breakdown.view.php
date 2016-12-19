@@ -60,12 +60,12 @@
             <!--<div id="uxBudgetAverage">
             </div>-->
             <div class="row breakdownContainer">
-                <div class="col-md-3">
+                <div class="col-md-2">
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <canvas id="myChart"></canvas>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2">
                 </div>
             </div>
             <!--Content END-->
