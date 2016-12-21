@@ -234,18 +234,18 @@
                         datasets: [
                             {
                                 backgroundColor: [
-                                    "#2ecc71",
-                                    "#3498db",
-                                    "#95a5a6",
-                                    "#9b59b6",
-                                    "#f1c40f",
-                                    "#e74c3c",
-                                    "#34495e",
-                                    "#2eccc0",
-                                    "#3445db",
-                                    "#6d8082",
-                                    "#b659a3",
-                                    "#adf10f",
+                                    "#F44336",
+                                    "#90A4AE",
+                                    "#E91E63",
+                                    "#FFEB3B",
+                                    "#673AB7",
+                                    "#FF9800",
+                                    "#2196F3",
+                                    "#4CAF50",
+                                    "#795548",
+                                    "#76FF03",
+                                    "#455A64",
+                                    "#18FFFF"
                                 ],
                                 data: chartData
                             }
@@ -258,7 +258,7 @@
                             labels: {
                                 fontColor: "#2c3e50",
                                 fontFamily: "Lato",
-                                fontSize: 14,
+                                fontSize: 12,
                                 padding: 15,
                                 boxWidth: 20
                             }
@@ -266,7 +266,7 @@
                         tooltips: {
                             enabled: true,
                             bodyFontFamily: "Lato",
-                            bodyFontSize: 14,
+                            bodyFontSize: 12,
                             callbacks: {
                                 label: function(tooltipItem, data) {                                    
                                     var categoryPercentage = data.labels[tooltipItem.index];
