@@ -22,6 +22,9 @@
         <li>
           <a href="/budget/average">Averages</a>
         </li>
+        <li>
+          <a href="/budget/breakdown">Breakdown</a>
+        </li>
         <!--<li>
           <a href="#">Calculator</a>
         </li>-->
