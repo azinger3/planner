@@ -23,7 +23,7 @@
             }
 
             #uxBudgetYear {
-                width: 155px;
+                width: 150px;
             }
 
             .breakdownContainer {
