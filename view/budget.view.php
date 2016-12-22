@@ -50,9 +50,10 @@
         text-align: center;
       }
       
-      .addTransactionLink {
+      .quickLink {
         color: #ffffff;
         font-size: 17px;
+        margin: 6px;
       }
       
       .amount-red {
@@ -91,7 +92,9 @@
               <div class="panel-heading">
                 Remaining Variable Funds
                 <div class="pull-right">
-                  <a href="budget/transaction" title="Add Transaction" class="addTransactionLink"><i class="fa fa-plus"></i></a>
+                  <a href="budget/average" title="Go to Averages" class="quickLink"><i class="fa fa-line-chart"></i></a>
+                  <a href="budget/breakdown" title="Go to Breakdown" class="quickLink"><i class="fa fa-pie-chart"></i></a>
+                  <a href="budget/transaction" title="Add Transaction" class="quickLink"><i class="fa fa-plus"></i></a>
                 </div>
               </div>
               <div class="panel-body">
