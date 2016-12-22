@@ -64,6 +64,11 @@
         text-decoration: none; 
         color: #2c3e50;
       }
+
+      .loading {
+        vertical-align: super; 
+        margin: 5px;
+      }
     </style>
   </head>
   <body>
@@ -245,6 +250,9 @@
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             async: true,
+            beforeSend: function() {
+                $("#uxBudgetCategorySpotlight").html("<div class='text-center'><i class='fa fa-refresh fa-spin fa-2x fa-fw'></i><span class='loading'>Loading...</span></div>");
+            },
             success: function(msg) {
               result = msg;
 
@@ -277,6 +285,9 @@
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             async: true,
+            beforeSend: function() {
+                $("#uxBudgetFundSpotlight").html("<div class='text-center'><i class='fa fa-refresh fa-spin fa-2x fa-fw'></i><span class='loading'>Loading...</span></div>");
+            },
             success: function(msg) {
               result = msg;
 
@@ -305,6 +316,9 @@
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             async: true,
+            beforeSend: function() {
+                $("#uxBudgetSummarySpotlight").html("<div class='text-center'><i class='fa fa-refresh fa-spin fa-2x fa-fw'></i><span class='loading'>Loading...</span></div>");
+            },
             success: function(msg) {
               result = msg;
 

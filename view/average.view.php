@@ -258,6 +258,9 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     async: true,
+                    beforeSend: function() {
+                        $("#uxBudgetAverage").html("<div class='text-center'><i class='fa fa-refresh fa-spin fa-2x fa-fw'></i><span class='loading'>Loading...</span></div>");
+                    },
                     success: function (msg) {
                         result = msg;
 

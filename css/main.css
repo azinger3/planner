@@ -71,3 +71,8 @@ a.back-to-top {
     opacity: 0.6;
     background: url(../image/backtotop.png) no-repeat center 43%;
 }
+
+.loading {
+    vertical-align: super; 
+    margin: 5px;
+}
