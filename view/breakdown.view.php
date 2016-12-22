@@ -23,7 +23,7 @@
             }
 
             #uxBudgetYear {
-                width: 200px;
+                width: 155px;
             }
 
             .breakdownContainer {
@@ -120,7 +120,13 @@
                     BudgetBreakdownGet();
                 }
                 else {
-                    startDT = Date.today().moveToMonth(3, -1).toString("yyyy-MM-01"); 
+                    if (Date.today().toString("M") == "4") {
+                        startDT = Date.today().toString("yyyy-MM-01");
+                    }
+                    else {
+                        startDT = Date.today().moveToMonth(3, -1).toString("yyyy-MM-01"); 
+                    }
+                    
                     endDT = Date.today().addMonths(1).toString("yyyy-MM-01"); 
 
                     budgetYear = startDT + "|" + endDT;
@@ -235,17 +241,17 @@
                             {
                                 backgroundColor: [
                                     "#e74c3c",
-                                    "#34495e",
-                                    "#795548",
-                                    "#0f3cf1",
-                                    "#76FF03",
-                                    "#2eccc0",
-                                    "#cc712e",
-                                    "#2ecc71",
                                     "#3498db",
-                                    "#95a5a6",
+                                    "#34495e",
+                                    "#76FF03",
+                                    "#0f3cf1",
+                                    "#2ecc71",
+                                    "#cc712e",
+                                    "#f1c40f",
+                                    "#2eccc0",
+                                    "#795548",
                                     "#9b59b6",
-                                    "#f1c40f"
+                                    "#95a5a6"
                                 ],
                                 data: chartData
                             }
@@ -258,6 +264,7 @@
                             labels: {
                                 fontColor: "#2c3e50",
                                 fontFamily: "Lato",
+                                fontStyle: "bold",
                                 fontSize: 12,
                                 padding: 15,
                                 boxWidth: 20

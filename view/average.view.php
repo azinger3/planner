@@ -23,7 +23,7 @@
             }
 
             #uxBudgetYear {
-                width: 200px;
+                width: 155px;
             }
 
             th {
@@ -227,7 +227,13 @@
                     BudgetAverageGet();
                 }
                 else {
-                    startDT = Date.today().moveToMonth(3, -1).toString("yyyy-MM-01"); 
+                    if (Date.today().toString("M") == "4") {
+                        startDT = Date.today().toString("yyyy-MM-01");
+                    }
+                    else {
+                        startDT = Date.today().moveToMonth(3, -1).toString("yyyy-MM-01"); 
+                    }
+                    
                     endDT = Date.today().addMonths(1).toString("yyyy-MM-01"); 
 
                     budgetYear = startDT + "|" + endDT;
