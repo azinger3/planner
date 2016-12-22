@@ -52,7 +52,7 @@
       
       .quickLink {
         color: #ffffff;
-        font-size: 17px;
+        font-size: 18px;
         margin: 6px;
       }
       
