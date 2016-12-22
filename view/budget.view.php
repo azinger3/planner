@@ -97,8 +97,8 @@
               <div class="panel-heading">
                 Remaining Variable Funds
                 <div class="pull-right">
-                  <a href="budget/average" title="Go to Averages" class="quickLink"><i class="fa fa-line-chart"></i></a>
                   <a href="budget/breakdown" title="Go to Breakdown" class="quickLink"><i class="fa fa-pie-chart"></i></a>
+                  <a href="budget/average" title="Go to Averages" class="quickLink"><i class="fa fa-line-chart"></i></a>
                   <a href="budget/transaction" title="Add Transaction" class="quickLink"><i class="fa fa-plus"></i></a>
                 </div>
               </div>
