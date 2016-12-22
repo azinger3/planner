@@ -23,7 +23,7 @@
             }
 
             #uxBudgetMonth {
-                width: 135px;
+                width: 145px;
             }
 
             th {
