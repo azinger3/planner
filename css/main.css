@@ -76,3 +76,7 @@ a.back-to-top {
     vertical-align: super; 
     margin: 5px;
 }
+
+#uxBudgetYear {
+    width: 165px;
+}

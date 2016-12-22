@@ -22,10 +22,6 @@
                 margin-top: -5px;
             }
 
-            #uxBudgetYear {
-                width: 160px;
-            }
-
             th {
                 font-size: 16px;
             }
