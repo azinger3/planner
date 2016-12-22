@@ -28,18 +28,9 @@
             <li>
               <a href="/budget/breakdown">Breakdown</a>
             </li>
-            <!--<li>
-              <a href="#">Calculator</a>
-            </li>-->
             <li>
-              <a href="http://jordanandrobert.com/budget/BudgetPlan.pdf" target="_blank">Budget Plan</a>
+              <a href="http://jordanandrobert.com/budget/BudgetPlan.pdf" target="_blank">Planning</a>
             </li>
-            <li>
-              <a href="http://jordanandrobert.com/budget" target="_blank">History</a>
-            </li>
-            <!--<li>
-              <a href="#">Admin</a>
-            </li>-->
           </ul>
         </li>
         <li>
