@@ -53,7 +53,7 @@
       .quickLink {
         color: #ffffff;
         font-size: 18px;
-        margin: 6px;
+        margin: 7px;
       }
       
       .amount-red {
