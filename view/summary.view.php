@@ -86,17 +86,17 @@
                                         <tr>
                                             <td>{{BudgetCategory}}</td>
                                         {{#if IsExpenseFlg}}
-                                            <td class="custom-hidden-xs hidden-sm amount-red">${{CategoryActual}}</td>
-                                            <td class="custom-hidden-xs hidden-sm amount-red">${{CategoryBudget}}</td>
+                                            <td class="custom-hidden-xs hidden-sm amount-red">${{NumberCommaFormat CategoryActual}}</td>
+                                            <td class="custom-hidden-xs hidden-sm amount-red">${{NumberCommaFormat CategoryBudget}}</td>
                                         {{else}}
-                                            <td class="custom-hidden-xs hidden-sm">${{CategoryActual}}</td>
-                                            <td class="custom-hidden-xs hidden-sm">${{CategoryBudget}}</td>
+                                            <td class="custom-hidden-xs hidden-sm">${{NumberCommaFormat CategoryActual}}</td>
+                                            <td class="custom-hidden-xs hidden-sm">${{NumberCommaFormat CategoryBudget}}</td>
                                         {{/if}}
                                             
                                         {{#if IsCategoryActualVsBudgetNegative}}
-                                            <td class="amount-red">${{CategoryActualVsBudget}}</td>
+                                            <td class="amount-red">${{NumberCommaFormat CategoryActualVsBudget}}</td>
                                         {{else}}
-                                            <td>${{CategoryActualVsBudget}}</td>
+                                            <td>${{NumberCommaFormat CategoryActualVsBudget}}</td>
                                         {{/if}}
                                         </tr>
                                     {{/each}}
@@ -105,21 +105,21 @@
                                         <tr>
                                             <td><h4><strong>TOTAL</strong></h4></td>
                                         {{#if IsTotalIncomeVsExpenseActualNegative}}
-                                            <td class="custom-hidden-xs hidden-sm amount-red"><h4><strong>${{TotalIncomeVsExpenseActual}}</strong></h4></td>
+                                            <td class="custom-hidden-xs hidden-sm amount-red"><h4><strong>${{NumberCommaFormat TotalIncomeVsExpenseActual}}</strong></h4></td>
                                         {{else}}
-                                            <td class="custom-hidden-xs hidden-sm"><h4><strong>${{TotalIncomeVsExpenseActual}}</strong></h4></td>
+                                            <td class="custom-hidden-xs hidden-sm"><h4><strong>${{NumberCommaFormat TotalIncomeVsExpenseActual}}</strong></h4></td>
                                         {{/if}}
 
                                         {{#if IsTotalIncomeVsExpenseBudgetNegative}}
-                                            <td class="custom-hidden-xs hidden-sm amount-red"><h4><strong>${{TotalIncomeVsExpenseBudget}}</strong></h4></td>
+                                            <td class="custom-hidden-xs hidden-sm amount-red"><h4><strong>${{NumberCommaFormat TotalIncomeVsExpenseBudget}}</strong></h4></td>
                                         {{else}}
-                                            <td class="custom-hidden-xs hidden-sm"><h4><strong>${{TotalIncomeVsExpenseBudget}}</strong></h4></td>
+                                            <td class="custom-hidden-xs hidden-sm"><h4><strong>${{NumberCommaFormat TotalIncomeVsExpenseBudget}}</strong></h4></td>
                                         {{/if}}
 
                                         {{#if IsTotalIncomeVsExpenseActualVsBudgetNegative}}
-                                            <td class="amount-red"><h4><strong>${{TotalIncomeVsExpenseActualVsBudget}}</strong></h4></td>
+                                            <td class="amount-red"><h4><strong>${{NumberCommaFormat TotalIncomeVsExpenseActualVsBudget}}</strong></h4></td>
                                         {{else}}
-                                            <td><h4><strong>${{TotalIncomeVsExpenseActualVsBudget}}</strong></h4></td>
+                                            <td><h4><strong>${{NumberCommaFormat TotalIncomeVsExpenseActualVsBudget}}</strong></h4></td>
                                         {{/if}}
                                         </tr>
                                     </tfoot>
@@ -157,9 +157,9 @@
                                             <td class="transactionDetail">{{Description}}</td>
                                             <td class="hidden-xs hidden-sm transactionDetail">{{TransactionNumber}}</td>
                                         {{#if IsExpenseFlg}}
-                                            <td class="transactionDetail amount-red">${{Amount}}</td>
+                                            <td class="transactionDetail amount-red">${{NumberCommaFormat Amount}}</td>
                                         {{else}}
-                                            <td class="transactionDetail">${{Amount}}</td>
+                                            <td class="transactionDetail">${{NumberCommaFormat Amount}}</td>
                                         {{/if}}
                                             <td class="hidden-xs hidden-sm transactionDetail">{{Note}}</td>
                                         </tr>

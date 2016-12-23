@@ -1,17 +1,3 @@
-$.urlParam = function (name, url) {
-    if (!url) {
-        url = window.location.href;
-    }
-
-    var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(url);
-    
-    if (!results) {
-        return undefined;
-    }
-
-    return results[1] || undefined;
-}
-
 jQuery(document).ready(function($){
 	 $('body').prepend('<a href="#0" class="back-to-top"></a>');
 
@@ -34,5 +20,27 @@ jQuery(document).ready(function($){
 		}, duration
 		);
 		return false;
-	})
+	});
+
+	Handlebars.registerHelper("NumberCommaFormat", function(number) {
+		return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	});
 });
+
+$.urlParam = function (name, url) {
+    if (!url) {
+        url = window.location.href;
+    }
+
+    var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(url);
+    
+    if (!results) {
+        return undefined;
+    }
+
+    return results[1] || undefined;
+}
+
+function NumberCommaFormat(number) {
+	return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}

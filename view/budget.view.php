@@ -158,9 +158,9 @@
                 </div>
               </td>
               {{#if IsCategoryNegativeFlg}}
-              <td class="remaining amount-red">${{CategoryActualVsBudget}}</td>
+              <td class="remaining amount-red">${{NumberCommaFormat CategoryActualVsBudget}}</td>
               {{else}}
-              <td class="remaining">${{CategoryActualVsBudget}}</td>
+              <td class="remaining">${{NumberCommaFormat CategoryActualVsBudget}}</td>
               {{/if}}
             </tr>
             {{/each}}
@@ -177,9 +177,9 @@
               </td>
               <td class="remaining">
                 {{#if IsTotalCategoryNegativeFlg}}
-                <h4 class="amount-red"><strong>${{TotalCategoryActualVsBudget}}</strong></h4> 
+                <h4 class="amount-red"><strong>${{NumberCommaFormat TotalCategoryActualVsBudget}}</strong></h4> 
                 {{else}}
-                <h4><strong>${{TotalCategoryActualVsBudget}}</strong></h4> 
+                <h4><strong>${{NumberCommaFormat TotalCategoryActualVsBudget}}</strong></h4> 
                 {{/if}}
               </td>
             </tr>
@@ -193,7 +193,7 @@
             {{#each BudgetFundSpotlight}}
             <tr>
               <td>{{FundName}}</td>
-              <td class="balance">${{FundSpentVsReceived}}</td>
+              <td class="balance">${{NumberCommaFormat FundSpentVsReceived}}</td>
             </tr>
             {{/each}}
           </tbody>
@@ -203,7 +203,7 @@
                 <h4><strong>TOTAL</strong></h4>
               </td>
               <td class="balance">
-                <h4><strong>${{TotalFundSpentVsReceived}}</strong></h4>
+                <h4><strong>${{NumberCommaFormat TotalFundSpentVsReceived}}</strong></h4>
               </td>
             </tr>
           </tfoot>

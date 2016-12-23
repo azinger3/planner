@@ -192,7 +192,12 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                            <div id="uxTransactionRecent"></div>
+                            <div id="uxTransactionRecent">
+                                <div class='text-center'>
+                                    <i class='fa fa-refresh fa-spin fa-2x fa-fw'></i>
+                                    <span class='loading'>Loading...</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -227,13 +232,13 @@
                         <td class="hidden-xs">{{TransactionNumber}}</td>
                         <td class="hidden-xs">{{Note}}</td>
                         {{#if IsExpenseFlg}}
-                        <td class="amount-red" title="Expense">${{Amount}}</td>
+                        <td class="amount-red" title="Expense">${{NumberCommaFormat Amount}}</td>
                         {{else if IsSavedFlg}}
-                        <td><span class="label label-success amount-fund" title="Saved">${{Amount}}</span></td>
+                        <td><span class="label label-success amount-fund" title="Saved">${{NumberCommaFormat Amount}}</span></td>
                         {{else if IsSpentFlg}}
-                        <td><span class="label label-danger amount-fund" title="Spent">${{Amount}}</span></td>
+                        <td><span class="label label-danger amount-fund" title="Spent">${{NumberCommaFormat Amount}}</span></td>
                         {{else}}
-                        <td title="Income">${{Amount}}</td>
+                        <td title="Income">${{NumberCommaFormat Amount}}</td>
                         {{/if}}
                         <td>
                             <div class="btn-group">
@@ -389,9 +394,6 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     async: true,
-                    beforeSend: function() {
-                        $("#uxTransactionRecent").html("<div class='text-center'><i class='fa fa-refresh fa-spin fa-2x fa-fw'></i><span class='loading'>Loading...</span></div>");
-                    },
                     success: function (msg) {
                         result = msg;
 
