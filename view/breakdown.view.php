@@ -57,7 +57,7 @@
                 <div class="breakdownContainer">
                     <div class="col-md-2">
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                         <canvas id="uxBudgetBreakdownChart"></canvas>
                     </div>
                     <div class="col-md-2">
