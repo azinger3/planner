@@ -98,7 +98,7 @@
                 Remaining Variable Funds
                 <div class="pull-right">
                   <a href="budget/breakdown" title="Breakdown" class="quickLink"><i class="fa fa-pie-chart"></i></a>
-                  <a href="budget/average" title="Averages" class="quickLink"><i class="fa fa-tachometer"></i></a>
+                  <a href="budget/average" title="Averages" class="quickLink"><i class="fa fa-area-chart"></i></a>
                   <a href="budget/transaction" title="Add Transaction" class="quickLink"><i class="fa fa-plus"></i></a>
                 </div>
               </div>
