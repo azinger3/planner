@@ -29,3 +29,9 @@ $app->get('/budget/breakdown', function ($request, $response, $args) {
 
     return $response;
 });
+
+$app->get('/budget/plan', function ($request, $response, $args) {
+    $response = $this->view->render($response, "plan.view.php");
+
+    return $response;
+});
