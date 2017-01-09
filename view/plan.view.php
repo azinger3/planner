@@ -51,9 +51,18 @@
                 margin: 7px;
             }
 
+            .label {
+                font-size: 89%;
+            }
+
+            .planDetail {
+                width: 9%;
+                white-space: nowrap;
+            }
+
             @media (max-width:414px) {
                 .budgetMonthHeader {
-                    font-size: 16px;
+                    font-size: 26px;
                     margin-bottom: 20px;
                     margin-top: -5px;
                 }
@@ -62,8 +71,12 @@
                     font-size: 12px;
                 }
 
+                .pager {
+                    margin: 5px 0;
+                }
+
                 .pager li > a, .pager li > span {
-                    margin-top: -2px !important;
+                    margin-top: 3px !important;
                 }
 
                 .planningContainer {
@@ -102,9 +115,19 @@
                     </div>
                     <div class="col-md-8">
                         <ul class="pager">
-                            <li class="previous"><a href="javascript:void(0);" class="budgetMonthNav">&larr;&nbsp;&nbsp;Aug 2017</a></li>
+                            <li class="previous">
+                                <a href="javascript:void(0);" class="budgetMonthNav">
+                                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                                    <span class="hidden-xs">&nbsp;&nbsp;Aug 2017</span>
+                                </a>
+                            </li>
                             <li class="budgetMonthHeader">September 2017</li>
-                            <li class="next"><a href="javascript:void(0);" class="budgetMonthNav">Oct 2017&nbsp;&nbsp;&rarr;</a></li>
+                            <li class="next">
+                                <a href="javascript:void(0);" class="budgetMonthNav">
+                                    <span class="hidden-xs">Oct 2017&nbsp;&nbsp;</span>
+                                    <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <div class="col-md-2">
@@ -133,53 +156,179 @@
         <!--Container END-->
 
         <section class="section-default">
-            <div class="text-center leftToBudget">
-                <div class="leftToBudget text">
-                    <strong>Left to Budget</strong>
+            <div class="container">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Income</th>
+                                <th class="text-center">Expenses</th>
+                                <th class="text-center">Leftover</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center">$1,000</td>
+                                <td class="text-center text-danger">$1,000</td>
+                                <td class="text-center"><span class="label label-success">$1,000</span></td>
+                            </tr>
+                        </tbody>
+                    </table> 
                 </div>
-                <div class="leftToBudget text">
-                    <strong>$1,000</strong>
-                </div>
+                <div class="col-md-4"></div>
             </div>
             <div class="panel panel-info">
                 <div class="panel-heading">
                     Income
                     <div class="pull-right">
-                        <a href="javascript:void(0);" title="Add Category" class="quickLink"><i class="fa fa-plus"></i></a>
+                        <a href="javascript:void(0);" title="Add Income" class="quickLink"><i class="fa fa-plus"></i></a>
                     </div>
                 </div>
                 <div class="panel-body">
-                    <table class="table table-striped table-hover">
+                    <table class="table table-striped table-hover table-condensed small">
                         <thead>
                             <tr>
-                                <th>Category</th>
-                                <th>Monthly</th>
-                                <th class="hidden-xs">Bi-Weekly</th>
-                                <th class="hidden-xs">Weekly</th>
-                                <th class="hidden-xs">Half-Year</th>
-                                <th class="hidden-xs">Year</th>
-                                <th>Average</th>
-                                <th class="hidden-xs text-center">Comment</th>
-                                <th class="hidden-xs text-center">Description</th>
-                                <th class="hidden-xs">Percentage</th>
-                                <th class="hidden-xs">Ranking</th>
-                                <th></th>
+                                <th class="planDetail">Name</th>
+                                <th class="planDetail text-center">Monthly</th>
+                                <th class="planDetail hidden-xs text-center">Bi-Weekly</th>
+                                <th class="planDetail hidden-xs text-center">Weekly</th>
+                                <th class="planDetail hidden-xs text-center">Half-Year</th>
+                                <th class="planDetail hidden-xs text-center">Year</th>
+                                <th class="planDetail text-center">Average</th>
+                                <th class="planDetail hidden-xs hidden-sm text-center">Percentage</th>
+                                <th class="planDetail hidden-xs hidden-sm text-center">Ranking</th>
+                                <th class="planDetail hidden-xs hidden-sm text-center">Comment</th>
+                                <th class="planDetail hidden-xs hidden-sm text-center">Description</th>
+                                <th class="planDetail"></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Income</td>
-                                <td>$1,000</td>
-                                <td class="hidden-xs">$1,000</td>
-                                <td class="hidden-xs">$1,000</td>
-                                <td class="hidden-xs">$1,000</td>
-                                <td class="hidden-xs">$1,000</td>
-                                <td>$1,000</td>
-                                <td class="hidden-xs text-center"><i class="fa fa-comment fa-lg" aria-hidden="true"></i></td>
-                                <td class="hidden-xs text-center"><i class="fa fa-sticky-note fa-lg" aria-hidden="true"></i></td>
-                                <td class="hidden-xs">40.61%</td>
-                                <td class="hidden-xs">#17</td>
-                                <td>
+                                <td class="planDetail">Income 1</td>
+                                <td class="planDetail text-center">$1,000</td>
+                                <td class="planDetail hidden-xs text-center">$1,000</td>
+                                <td class="planDetail hidden-xs text-center">$1,000</td>
+                                <td class="planDetail hidden-xs text-center">$1,000</td>
+                                <td class="planDetail hidden-xs text-center">$1,000</td>
+                                <td class="planDetail text-center">$1,000</td>
+                                <td class="planDetail hidden-xs hidden-sm text-center">40.61%</td>
+                                <td class="planDetail hidden-xs hidden-sm text-center">#17</td>
+                                <td class="planDetail hidden-xs hidden-sm text-center"><i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="" data-original-title="Variable expense, A guideline"></i></td>
+                                <td class="planDetail hidden-xs hidden-sm text-center"><i class="fa fa-sticky-note fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="" data-original-title="(1) Examples include clothes, hygiene, toiletries, home care, cleaning supplies, yard care, pet expenses, school supplies, office supplies, shipping, legal fees, and legal services"></i></td>
+                                <td class="planDetail text-right">
+                                    <div class="btn-group">
+                                        <a href="#" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li><a href="javascript:void(0);">Edit</a></li>
+                                            <li><a href="javascript:void(0);">Remove</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="planDetail">Income 2</td>
+                                <td class="planDetail text-center">$1,000</td>
+                                <td class="planDetail hidden-xs text-center">$1,000</td>
+                                <td class="planDetail hidden-xs text-center">$1,000</td>
+                                <td class="planDetail hidden-xs text-center">$1,000</td>
+                                <td class="planDetail hidden-xs text-center">$1,000</td>
+                                <td class="planDetail text-center">$1,000</td>
+                                <td class="planDetail hidden-xs hidden-sm text-center">40.61%</td>
+                                <td class="planDetail hidden-xs hidden-sm text-center">#17</td>
+                                <td class="planDetail hidden-xs hidden-sm text-center"><i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="" data-original-title="Variable expense, A guideline"></i></td>
+                                <td class="planDetail hidden-xs hidden-sm text-center"><i class="fa fa-sticky-note fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="" data-original-title="(1) Examples include clothes, hygiene, toiletries, home care, cleaning supplies, yard care, pet expenses, school supplies, office supplies, shipping, legal fees, and legal services"></i></td>
+                                <td class="planDetail text-right">
+                                    <div class="btn-group">
+                                        <a href="#" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li><a href="javascript:void(0);">Edit</a></li>
+                                            <li><a href="javascript:void(0);">Remove</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td class="planDetail"><h5><strong>TOTAL</strong></h5></td>
+                                <td class="planDetail text-center"><h5><strong>$1,000</strong></h5></td>
+                                <td class="planDetail hidden-xs text-center"><h5><strong>$1,000</strong></h5></td>
+                                <td class="planDetail hidden-xs text-center"><h5><strong>$1,000</strong></h5></td>
+                                <td class="planDetail hidden-xs text-center"><h5><strong>$1,000</strong></h5></td>
+                                <td class="planDetail hidden-xs text-center"><h5><strong>$1,000</strong></h5></td>
+                                <td class="planDetail text-center"><h5><strong>$1,000</strong></h5></td>
+                                <td class="planDetail hidden-xs hidden-sm text-center"><h5><strong>-</strong></h5></td>
+                                <td class="planDetail hidden-xs hidden-sm text-center">-</td>
+                                <td class="planDetail hidden-xs hidden-sm text-center">-</td>
+                                <td class="planDetail hidden-xs hidden-sm text-center">-</td>
+                                <td class="planDetail"></td>
+                            </tr>
+                        </tfoot>
+                    </table> 
+                </div>
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Strategic
+                    <div class="pull-right">
+                        <a href="javascript:void(0);" title="Add Expense" class="quickLink"><i class="fa fa-plus"></i></a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped table-hover table-condensed small">
+                        <thead>
+                            <tr>
+                                <th class="planDetail">Category</th>
+                                <th class="planDetail text-center">Monthly</th>
+                                <th class="planDetail hidden-xs text-center">Bi-Weekly</th>
+                                <th class="planDetail hidden-xs text-center">Weekly</th>
+                                <th class="planDetail hidden-xs text-center">Half-Year</th>
+                                <th class="planDetail hidden-xs text-center">Year</th>
+                                <th class="planDetail text-center">Average</th>
+                                <th class="planDetail hidden-xs hidden-sm text-center">Percentage</th>
+                                <th class="planDetail hidden-xs hidden-sm text-center">Ranking</th>
+                                <th class="planDetail hidden-xs hidden-sm text-center">Comment</th>
+                                <th class="planDetail hidden-xs hidden-sm text-center">Description</th>
+                                <th class="planDetail"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="planDetail">Giving</td>
+                                <td class="text-center">$1,000</td>
+                                <td class="hidden-xs text-center">$1,000</td>
+                                <td class="hidden-xs text-center">$1,000</td>
+                                <td class="hidden-xs text-center">$1,000</td>
+                                <td class="hidden-xs text-center">$1,000</td>
+                                <td class="text-center">$1,000</td>
+                                <td class="hidden-xs hidden-sm text-center">40.61%</td>
+                                <td class="hidden-xs hidden-sm text-center">#17</td>
+                                <td class="hidden-xs hidden-sm text-center"><i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="" data-original-title="Variable expense, A guideline"></i></td>
+                                <td class="hidden-xs hidden-sm text-center"><i class="fa fa-sticky-note fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="" data-original-title="(1) Examples include clothes, hygiene, toiletries, home care, cleaning supplies, yard care, pet expenses, school supplies, office supplies, shipping, legal fees, and legal services"></i></td>
+                                <td class="planDetail text-right">
+                                    <div class="btn-group">
+                                        <a href="#" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li><a href="javascript:void(0);">Edit</a></li>
+                                            <li><a href="javascript:void(0);">Remove</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="planDetail">Car Replacement</td>
+                                <td class="planDetail text-center">$1,000</td>
+                                <td class="planDetail hidden-xs text-center">$1,000</td>
+                                <td class="planDetail hidden-xs text-center">$1,000</td>
+                                <td class="planDetail hidden-xs text-center">$1,000</td>
+                                <td class="planDetail hidden-xs text-center">$1,000</td>
+                                <td class="planDetail text-center">$1,000</td>
+                                <td class="planDetail hidden-xs hidden-sm text-center">40.61%</td>
+                                <td class="planDetail hidden-xs hidden-sm text-center">#17</td>
+                                <td class="planDetail hidden-xs hidden-sm text-center"><i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="" data-original-title="Variable expense, A guideline"></i></td>
+                                <td class="planDetail hidden-xs hidden-sm text-center"><i class="fa fa-sticky-note fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="" data-original-title=""></i></td>
+                                <td class="planDetail text-right">
                                     <div class="btn-group">
                                         <a href="#" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
                                         <ul class="dropdown-menu dropdown-menu-right">
@@ -191,13 +340,6 @@
                             </tr>
                         </tbody>
                     </table> 
-                </div>
-            </div>
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Strategic</h3>
-                </div>
-                <div class="panel-body">
                 </div>
             </div>
         </section>
@@ -221,7 +363,8 @@
 
             $(document).ready(function() {
                 console.log("Ready!");
-
+                
+                $('[data-toggle="tooltip"]').tooltip(); 
                
             });
 
