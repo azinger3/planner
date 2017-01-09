@@ -371,8 +371,11 @@
                     },
                     onSelect: function (suggestion) {
                         $.map(objAutoFill.Transaction, function (transaction) {
-                            if (transaction.TransactionID == suggestion.data) {                       
-                                $("#uxAmount").val(transaction.Amount);
+                            if (transaction.TransactionID == suggestion.data) {   
+                                if ($("#uxAmount").val().length == 0) {
+                                    $("#uxAmount").val(transaction.Amount);
+                                }                    
+                                
                                 $("#uxBudgetCategory option[value='" + transaction.BudgetCategoryID + "']").prop("selected", true);
                             }
                         });
