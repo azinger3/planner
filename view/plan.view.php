@@ -45,8 +45,14 @@
                 margin: 5px;
             }
 
-            .quickLink {
+            .addCategoryLink {
                 color: #ffffff;
+                font-size: 16px;
+                margin: 7px;
+            }
+
+            .addGroupLink {
+                color: #2c3e50;
                 font-size: 16px;
                 margin: 7px;
             }
@@ -57,7 +63,14 @@
 
             .planDetail {
                 width: 9%;
-                white-space: nowrap;
+            }
+
+            .leftoverTable {
+                margin-bottom: 2px;
+            }
+
+            .page-header {
+                margin-bottom: 8px !important;
             }
 
             @media (max-width:414px) {
@@ -118,13 +131,13 @@
                             <li class="previous">
                                 <a href="javascript:void(0);" class="budgetMonthNav">
                                     <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                                    <span class="hidden-xs">&nbsp;&nbsp;Aug 2017</span>
+                                    <span class="custom-hidden-xs">&nbsp;&nbsp;Aug 2017</span>
                                 </a>
                             </li>
                             <li class="budgetMonthHeader">September 2017</li>
                             <li class="next">
                                 <a href="javascript:void(0);" class="budgetMonthNav">
-                                    <span class="hidden-xs">Oct 2017&nbsp;&nbsp;</span>
+                                    <span class="custom-hidden-xs">Oct 2017&nbsp;&nbsp;</span>
                                     <i class="fa fa-arrow-right" aria-hidden="true"></i>
                                 </a>
                             </li>
@@ -159,22 +172,24 @@
             <div class="container">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
-                    <table class="table table-striped table-hover">
-                        <thead>
-                            <tr>
-                                <th class="text-center">Income</th>
-                                <th class="text-center">Expenses</th>
-                                <th class="text-center">Leftover</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="text-center">$1,000</td>
-                                <td class="text-center text-danger">$1,000</td>
-                                <td class="text-center"><span class="label label-success">$1,000</span></td>
-                            </tr>
-                        </tbody>
-                    </table> 
+                    <div class="well well-sm">
+                        <table class="table leftoverTable">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Income</th>
+                                    <th class="text-center">Expenses</th>
+                                    <th class="text-center">Leftover</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center">$1,000</td>
+                                    <td class="text-center text-danger">$1,000</td>
+                                    <td class="text-center"><span class="label label-success">$1,000</span></td>
+                                </tr>
+                            </tbody>
+                        </table> 
+                    </div>
                 </div>
                 <div class="col-md-4"></div>
             </div>
@@ -182,7 +197,7 @@
                 <div class="panel-heading">
                     Income
                     <div class="pull-right">
-                        <a href="javascript:void(0);" title="Add Income" class="quickLink"><i class="fa fa-plus"></i></a>
+                        <a href="javascript:void(0);" title="Add Income" class="addCategoryLink"><i class="fa fa-plus"></i></a>
                     </div>
                 </div>
                 <div class="panel-body">
@@ -191,13 +206,13 @@
                             <tr>
                                 <th class="planDetail">Name</th>
                                 <th class="planDetail text-center">Monthly</th>
-                                <th class="planDetail hidden-xs text-center">Bi-Weekly</th>
-                                <th class="planDetail hidden-xs text-center">Weekly</th>
+                                <th class="planDetail custom-hidden-xs text-center">Bi-Weekly</th>
+                                <th class="planDetail custom-hidden-xs text-center">Weekly</th>
                                 <th class="planDetail hidden-xs text-center">Half-Year</th>
-                                <th class="planDetail hidden-xs text-center">Year</th>
+                                <th class="planDetail custom-hidden-xs text-center">Year</th>
                                 <th class="planDetail text-center">Average</th>
                                 <th class="planDetail hidden-xs hidden-sm text-center">Percentage</th>
-                                <th class="planDetail hidden-xs hidden-sm text-center">Ranking</th>
+                                <th class="planDetail custom-hidden-xs hidden-sm text-center">Ranking</th>
                                 <th class="planDetail hidden-xs hidden-sm text-center">Comment</th>
                                 <th class="planDetail hidden-xs hidden-sm text-center">Description</th>
                                 <th class="planDetail"></th>
@@ -207,15 +222,15 @@
                             <tr>
                                 <td class="planDetail">Income 1</td>
                                 <td class="planDetail text-center">$1,000</td>
+                                <td class="planDetail custom-hidden-xs text-center">$1,000</td>
+                                <td class="planDetail custom-hidden-xs text-center">$1,000</td>
                                 <td class="planDetail hidden-xs text-center">$1,000</td>
-                                <td class="planDetail hidden-xs text-center">$1,000</td>
-                                <td class="planDetail hidden-xs text-center">$1,000</td>
-                                <td class="planDetail hidden-xs text-center">$1,000</td>
+                                <td class="planDetail custom-hidden-xs text-center">$1,000</td>
                                 <td class="planDetail text-center">$1,000</td>
                                 <td class="planDetail hidden-xs hidden-sm text-center">40.61%</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">#17</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center"><i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="" data-original-title="Variable expense, A guideline"></i></td>
-                                <td class="planDetail hidden-xs hidden-sm text-center"><i class="fa fa-sticky-note fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="" data-original-title="(1) Examples include clothes, hygiene, toiletries, home care, cleaning supplies, yard care, pet expenses, school supplies, office supplies, shipping, legal fees, and legal services"></i></td>
+                                <td class="planDetail custom-hidden-xs hidden-sm text-center">#17</td>
+                                <td class="planDetail hidden-xs hidden-sm text-center"><i class="fa fa-comment fa-lg" aria-hidden="true" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Variable expense, A guideline" data-original-title="" title=""></i></td>
+                                <td class="planDetail hidden-xs hidden-sm text-center"><i class="fa fa-sticky-note fa-lg" aria-hidden="true" data-container="body" data-toggle="popover" data-placement="top" data-content="(1) Examples include clothes, hygiene, toiletries, home care, cleaning supplies, yard care, pet expenses, school supplies, office supplies, shipping, legal fees, and legal services" data-original-title="" title=""></i></td>
                                 <td class="planDetail text-right">
                                     <div class="btn-group">
                                         <a href="#" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
@@ -229,15 +244,15 @@
                             <tr>
                                 <td class="planDetail">Income 2</td>
                                 <td class="planDetail text-center">$1,000</td>
+                                <td class="planDetail custom-hidden-xs text-center">$1,000</td>
+                                <td class="planDetail custom-hidden-xs text-center">$1,000</td>
                                 <td class="planDetail hidden-xs text-center">$1,000</td>
-                                <td class="planDetail hidden-xs text-center">$1,000</td>
-                                <td class="planDetail hidden-xs text-center">$1,000</td>
-                                <td class="planDetail hidden-xs text-center">$1,000</td>
+                                <td class="planDetail custom-hidden-xs text-center">$1,000</td>
                                 <td class="planDetail text-center">$1,000</td>
                                 <td class="planDetail hidden-xs hidden-sm text-center">40.61%</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">#17</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center"><i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="" data-original-title="Variable expense, A guideline"></i></td>
-                                <td class="planDetail hidden-xs hidden-sm text-center"><i class="fa fa-sticky-note fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="" data-original-title="(1) Examples include clothes, hygiene, toiletries, home care, cleaning supplies, yard care, pet expenses, school supplies, office supplies, shipping, legal fees, and legal services"></i></td>
+                                <td class="planDetail custom-hidden-xs hidden-sm text-center">#17</td>
+                                <td class="planDetail hidden-xs hidden-sm text-center"><i class="fa fa-comment fa-lg" aria-hidden="true" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Variable expense, A guideline" data-original-title="" title=""></i></td>
+                                <td class="planDetail hidden-xs hidden-sm text-center"><i class="fa fa-sticky-note fa-lg" aria-hidden="true" data-container="body" data-toggle="popover" data-placement="top" data-content="(1) Examples include clothes, hygiene, toiletries, home care, cleaning supplies, yard care, pet expenses, school supplies, office supplies, shipping, legal fees, and legal services" data-original-title="" title=""></i></td>
                                 <td class="planDetail text-right">
                                     <div class="btn-group">
                                         <a href="#" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
@@ -253,13 +268,13 @@
                             <tr>
                                 <td class="planDetail"><h5><strong>TOTAL</strong></h5></td>
                                 <td class="planDetail text-center"><h5><strong>$1,000</strong></h5></td>
-                                <td class="planDetail hidden-xs text-center"><h5><strong>$1,000</strong></h5></td>
-                                <td class="planDetail hidden-xs text-center"><h5><strong>$1,000</strong></h5></td>
-                                <td class="planDetail hidden-xs text-center"><h5><strong>$1,000</strong></h5></td>
-                                <td class="planDetail hidden-xs text-center"><h5><strong>$1,000</strong></h5></td>
+                                <td class="planDetail custom-hidden-xs text-center"><h5><strong>$1,000</strong></h5></td>
+                                <td class="planDetail custom-hidden-xs text-center"><h5><strong>$1,000</strong></h5></td>
+                                <td class="planDetail custom-hidden-xs text-center"><h5><strong>$1,000</strong></h5></td>
+                                <td class="planDetail custom-hidden-xs text-center"><h5><strong>$1,000</strong></h5></td>
                                 <td class="planDetail text-center"><h5><strong>$1,000</strong></h5></td>
                                 <td class="planDetail hidden-xs hidden-sm text-center"><h5><strong>-</strong></h5></td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">-</td>
+                                <td class="planDetail custom-hidden-xs hidden-sm text-center">-</td>
                                 <td class="planDetail hidden-xs hidden-sm text-center">-</td>
                                 <td class="planDetail hidden-xs hidden-sm text-center">-</td>
                                 <td class="planDetail"></td>
@@ -272,7 +287,7 @@
                 <div class="panel-heading">
                     Strategic
                     <div class="pull-right">
-                        <a href="javascript:void(0);" title="Add Expense" class="quickLink"><i class="fa fa-plus"></i></a>
+                        <a href="javascript:void(0);" title="Add Category" class="addCategoryLink"><i class="fa fa-plus"></i></a>
                     </div>
                 </div>
                 <div class="panel-body">
@@ -281,31 +296,31 @@
                             <tr>
                                 <th class="planDetail">Category</th>
                                 <th class="planDetail text-center">Monthly</th>
-                                <th class="planDetail hidden-xs text-center">Bi-Weekly</th>
-                                <th class="planDetail hidden-xs text-center">Weekly</th>
+                                <th class="planDetail custom-hidden-xs text-center">Bi-Weekly</th>
+                                <th class="planDetail custom-hidden-xs text-center">Weekly</th>
                                 <th class="planDetail hidden-xs text-center">Half-Year</th>
-                                <th class="planDetail hidden-xs text-center">Year</th>
+                                <th class="planDetail custom-hidden-xs text-center">Year</th>
                                 <th class="planDetail text-center">Average</th>
                                 <th class="planDetail hidden-xs hidden-sm text-center">Percentage</th>
-                                <th class="planDetail hidden-xs hidden-sm text-center">Ranking</th>
+                                <th class="planDetail custom-hidden-xs hidden-sm text-center">Ranking</th>
                                 <th class="planDetail hidden-xs hidden-sm text-center">Comment</th>
                                 <th class="planDetail hidden-xs hidden-sm text-center">Description</th>
                                 <th class="planDetail"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+<tr>
                                 <td class="planDetail">Giving</td>
-                                <td class="text-center">$1,000</td>
-                                <td class="hidden-xs text-center">$1,000</td>
-                                <td class="hidden-xs text-center">$1,000</td>
-                                <td class="hidden-xs text-center">$1,000</td>
-                                <td class="hidden-xs text-center">$1,000</td>
-                                <td class="text-center">$1,000</td>
-                                <td class="hidden-xs hidden-sm text-center">40.61%</td>
-                                <td class="hidden-xs hidden-sm text-center">#17</td>
-                                <td class="hidden-xs hidden-sm text-center"><i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="" data-original-title="Variable expense, A guideline"></i></td>
-                                <td class="hidden-xs hidden-sm text-center"><i class="fa fa-sticky-note fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="" data-original-title="(1) Examples include clothes, hygiene, toiletries, home care, cleaning supplies, yard care, pet expenses, school supplies, office supplies, shipping, legal fees, and legal services"></i></td>
+                                <td class="planDetail text-center">$1,000</td>
+                                <td class="planDetail custom-hidden-xs text-center">$1,000</td>
+                                <td class="planDetail custom-hidden-xs text-center">$1,000</td>
+                                <td class="planDetail hidden-xs text-center">$1,000</td>
+                                <td class="planDetail custom-hidden-xs text-center">$1,000</td>
+                                <td class="planDetail text-center">$1,000</td>
+                                <td class="planDetail hidden-xs hidden-sm text-center">40.61%</td>
+                                <td class="planDetail custom-hidden-xs hidden-sm text-center">#17</td>
+                                <td class="planDetail hidden-xs hidden-sm text-center"><i class="fa fa-comment fa-lg" aria-hidden="true" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Variable expense, A guideline" data-original-title="" title=""></i></td>
+                                <td class="planDetail hidden-xs hidden-sm text-center"><i class="fa fa-sticky-note fa-lg" aria-hidden="true" data-container="body" data-toggle="popover" data-placement="top" data-content="(1) Examples include clothes, hygiene, toiletries, home care, cleaning supplies, yard care, pet expenses, school supplies, office supplies, shipping, legal fees, and legal services" data-original-title="" title=""></i></td>
                                 <td class="planDetail text-right">
                                     <div class="btn-group">
                                         <a href="#" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
@@ -319,15 +334,15 @@
                             <tr>
                                 <td class="planDetail">Car Replacement</td>
                                 <td class="planDetail text-center">$1,000</td>
+                                <td class="planDetail custom-hidden-xs text-center">$1,000</td>
+                                <td class="planDetail custom-hidden-xs text-center">$1,000</td>
                                 <td class="planDetail hidden-xs text-center">$1,000</td>
-                                <td class="planDetail hidden-xs text-center">$1,000</td>
-                                <td class="planDetail hidden-xs text-center">$1,000</td>
-                                <td class="planDetail hidden-xs text-center">$1,000</td>
+                                <td class="planDetail custom-hidden-xs text-center">$1,000</td>
                                 <td class="planDetail text-center">$1,000</td>
                                 <td class="planDetail hidden-xs hidden-sm text-center">40.61%</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">#17</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center"><i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="" data-original-title="Variable expense, A guideline"></i></td>
-                                <td class="planDetail hidden-xs hidden-sm text-center"><i class="fa fa-sticky-note fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="" data-original-title=""></i></td>
+                                <td class="planDetail custom-hidden-xs hidden-sm text-center">#17</td>
+                                <td class="planDetail hidden-xs hidden-sm text-center"><i class="fa fa-comment fa-lg" aria-hidden="true" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Variable expense, A guideline" data-original-title="" title=""></i></td>
+                                <td class="planDetail hidden-xs hidden-sm text-center"><i class="fa fa-sticky-note fa-lg" aria-hidden="true" data-container="body" data-toggle="popover" data-placement="top" data-content="(1) Examples include clothes, hygiene, toiletries, home care, cleaning supplies, yard care, pet expenses, school supplies, office supplies, shipping, legal fees, and legal services" data-original-title="" title=""></i></td>
                                 <td class="planDetail text-right">
                                     <div class="btn-group">
                                         <a href="#" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
@@ -340,6 +355,14 @@
                             </tr>
                         </tbody>
                     </table> 
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Add Group
+                    <div class="pull-right">
+                        <a href="javascript:void(0);" title="Add Category" class="addGroupLink"><i class="fa fa-plus"></i></a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -364,7 +387,7 @@
             $(document).ready(function() {
                 console.log("Ready!");
                 
-                $('[data-toggle="tooltip"]').tooltip(); 
+                $('[data-toggle="popover"]').popover(); 
                
             });
 
