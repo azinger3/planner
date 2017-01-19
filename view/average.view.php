@@ -79,7 +79,7 @@
                                     <tbody>
                                     {{#each Category}}
                                         <tr>
-                                            <td>{{BudgetCategory}}</td>
+                                            <td><a class="normalLink" href="javascript:GoToSection('{{BudgetCategoryID}}');">{{BudgetCategory}}</a></td>
                                         {{#if IsExpenseFlg}}
                                             <td class="custom-hidden-xs hidden-sm amount-red">${{NumberCommaFormat CategoryActual}}</td>
                                             <td class="amount-red">${{NumberCommaFormat CategoryAverage}}</td>
@@ -394,6 +394,15 @@
                             + "</select>";
 
                 $("#uxBudgetYearOption").html(dropdown);
+            }
+
+            function GoToSection(ElementID) {
+                var uxElement = document.getElementById(ElementID);
+                var topPosition = uxElement.offsetTop;
+
+                $("html,body").animate({
+                    scrollTop: topPosition + 1055
+                }, 400);
             }
         </script>
         <!--Javascript END-->

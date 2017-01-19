@@ -44,3 +44,4 @@ $.urlParam = function (name, url) {
 function NumberCommaFormat(number) {
 	return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+

@@ -80,3 +80,8 @@ a.back-to-top {
 #uxBudgetYear {
     width: 165px;
 }
+
+a.normalLink {
+    text-decoration: none !important; 
+    color: #2c3e50;
+}

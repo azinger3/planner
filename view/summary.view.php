@@ -84,7 +84,12 @@
                                     <tbody>
                                     {{#each Category}}
                                         <tr>
+                                        {{#if TransactionTypeID}}
+                                            <td><a class="normalLink" href="javascript:GoToSection('{{BudgetCategoryID}}');">{{BudgetCategory}}</a></td>
+                                        {{else}}
                                             <td>{{BudgetCategory}}</td>
+                                        {{/if}}
+
                                         {{#if IsExpenseFlg}}
                                             <td class="custom-hidden-xs hidden-sm amount-red">${{NumberCommaFormat CategoryActual}}</td>
                                             <td class="custom-hidden-xs hidden-sm amount-red">${{NumberCommaFormat CategoryBudget}}</td>
@@ -399,6 +404,15 @@
                             + "</select>";
 
                 $("#uxBudgetMonthOption").html(dropdown);
+            }
+
+            function GoToSection(ElementID) {
+                var uxElement = document.getElementById(ElementID);
+                var topPosition = uxElement.offsetTop;
+
+                $("html,body").animate({
+                    scrollTop: topPosition + 835
+                }, 400);
             }
         </script>
         <!--Javascript END-->
