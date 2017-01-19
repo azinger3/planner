@@ -55,12 +55,12 @@
             </div>
             <div class="row">
                 <div class="breakdownContainer">
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                     </div>
                     <div class="col-md-6">
                         <canvas id="uxBudgetBreakdownChart"></canvas>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                     </div>
                 </div>
             </div>
