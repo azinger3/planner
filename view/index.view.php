@@ -4,9 +4,11 @@
 <head>
 
 <?php
-  $pageTitle = 'Planner';
+    $pageTitle = 'Planner';
 
-  require_once('include/header.php');
+    require_once('include/header.php');
+
+    require_once('include/icon.index.php');
 ?>
 
 <style>
