@@ -152,9 +152,9 @@
                                         <tr>
                                             <th>Date</th>
                                             <th>Description</th>
-                                            <th class="hidden-xs hidden-sm">Transaction #</th>
+                                            <th class="custom-hidden-xs hidden-sm">Transaction #</th>
                                             <th>Amount</th>
-                                            <th class="hidden-xs hidden-sm">Note</th>
+                                            <th class="custom-hidden-xs hidden-sm">Note</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -162,13 +162,13 @@
                                         <tr>
                                             <td class="transactionDetail">{{TransactionDT}}</td>
                                             <td class="transactionDetail">{{Description}}</td>
-                                            <td class="hidden-xs hidden-sm transactionDetail">{{TransactionNumber}}</td>
+                                            <td class="custom-hidden-xs hidden-sm transactionDetail">{{TransactionNumber}}</td>
                                         {{#if IsExpenseFlg}}
                                             <td class="transactionDetail amount-red">${{NumberCommaFormat Amount}}</td>
                                         {{else}}
                                             <td class="transactionDetail">${{NumberCommaFormat Amount}}</td>
                                         {{/if}}
-                                            <td class="hidden-xs hidden-sm transactionDetail">{{Note}}</td>
+                                            <td class="custom-hidden-xs hidden-sm transactionDetail">{{Note}}</td>
                                         </tr>
                                     {{/each}}
                                     </tbody>
