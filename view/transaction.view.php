@@ -149,7 +149,7 @@
                                     <input type="text" id="uxDescription" class="form-control" placeholder="Description" />
                                 </div>
                                 <div class="form-group">
-                                    <input type="number" id="uxAmount" class="form-control" placeholder="Amount $" pattern="\d*" />
+                                    <input type="text" id="uxAmount" class="form-control" placeholder="Amount $" pattern="[0-9]*" />
                                 </div>
                                 <div class="form-group">
                                     <div id="uxBudgetCategoryOptionAdd">
