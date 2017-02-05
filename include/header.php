@@ -1,6 +1,6 @@
         <title><?php echo $pageTitle ?></title>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=, user-scalable=0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css">
