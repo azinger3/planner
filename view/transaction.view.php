@@ -97,6 +97,12 @@
             .amount-fund {
                 font-size: 12px;
             }
+
+            .quickLink {
+                color: #ffffff;
+                font-size: 16px;
+                margin: 7px;
+            }
         </style>
     </head>
     <body>
@@ -181,7 +187,12 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-md-10">
-                                    <div class="transaction-recent-heading">Recent Transactions</div>
+                                    <div class="transaction-recent-heading">
+                                        Recent Transactions
+                                        <div class="hidden-md hidden-lg pull-right">
+                                            <a href="/budget/summary" title="Summary" class="quickLink"><i class="fa fa-calendar"></i></a>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-2 hidden-xs hidden-sm">
                                     <div class="input-group">
