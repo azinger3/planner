@@ -50,13 +50,13 @@
             .addCategoryLink {
                 color: #ffffff;
                 font-size: 16px;
-                margin: 7px;
+                margin-left: 20px;
             }
 
             .addGroupLink {
                 color: #2c3e50;
                 font-size: 16px;
-                margin: 7px;
+                margin-left: 20px;
             }
 
             .label {
@@ -118,9 +118,13 @@
                 .page-header {
                     padding-bottom: 0;
                 }
+
+                .planDetail {
+                    width: 30%;
+                }
             }
 
-            @media (max-width: 667px){
+            @media (min-width: 414px) and (max-width: 667px) {
                 .planDetail {
                     width: 15%;
                 }
@@ -166,8 +170,8 @@
             <!--Page Header END-->
 
             <!--Content START-->
-            <div class="row">
-                <!--<div class="col-md-1">
+            <!--<div class="row">
+                <div class="col-md-1">
                 </div>
                 <div class="col-md-10 planningContainer">
                     <div class="jumbotron text-center">
@@ -176,8 +180,8 @@
                     </div>
                 </div>
                 <div class="col-md-1" >
-                </div>-->
-            </div>
+                </div>
+            </div>-->
             <!--Content END-->
 
             <!--**********************************************************Main Content END**********************************************************-->
@@ -222,15 +226,17 @@
                             <tr>
                                 <th class="planDetail">Name</th>
                                 <th class="planDetail text-center">Monthly</th>
-                                <th class="planDetail custom-hidden-xs text-center">Bi-Weekly</th>
+                                <th class="planDetail text-center">Bi-Weekly</th>
                                 <th class="planDetail custom-hidden-xs text-center">Weekly</th>
                                 <th class="planDetail custom-hidden-xs text-center">Half-Year</th>
-                                <th class="planDetail custom-hidden-xs text-center">Year</th>
-                                <th class="planDetail hidden-xs text-center">-</th>
-                                <th class="planDetail hidden-xs hidden-sm text-center">-</th>
-                                <th class="planDetail hidden-xs hidden-sm text-center">-</th>
-                                <th class="planDetail hidden-xs hidden-sm text-center">-</th>
-                                <th class="planDetail hidden-xs hidden-sm text-center">-</th>
+                                <th class="planDetail custom-hidden-xs text-center">Year (Net)</th>
+                                <th class="planDetail hidden-xs hidden-sm text-center">Year (Gross)</th>
+                                <th class="planDetail hidden-xs text-center">Hourly Rate</th>
+                                <th class="planDetail hidden-xs hidden-sm text-center">Year Deduct %</th>
+                                <th class="planDetail hidden-xs hidden-sm text-center">Planned Hours</th>
+                                <!--<th class="planDetail hidden-xs hidden-sm text-center">Take Home Actual</th>
+                                <th class="planDetail hidden-xs hidden-sm text-center">Pay Frequency</th>-->
+                                <th class="planDetail hidden-xs hidden-sm text-center">Type</th>
                                 <th class="planDetail"></th>
                             </tr>
                         </thead>
@@ -238,20 +244,20 @@
                             <tr>
                                 <td class="planDetail">Income 1</td>
                                 <td class="planDetail text-center">$1,000</td>
+                                <td class="planDetail text-center">$1,000</td>
                                 <td class="planDetail custom-hidden-xs text-center">$1,000</td>
                                 <td class="planDetail custom-hidden-xs text-center">$1,000</td>
                                 <td class="planDetail custom-hidden-xs text-center">$1,000</td>
-                                <td class="planDetail custom-hidden-xs text-center">$1,000</td>
-                                <td class="planDetail hidden-xs text-center">-</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">-</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">-</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">-</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">-</td>
+                                <td class="planDetail hidden-xs hidden-sm text-center">$85,035</td>
+                                <td class="planDetail hidden-xs text-center">$40.88</td>
+                                <td class="planDetail hidden-xs hidden-sm text-center">33.19%</td>
+                                <td class="planDetail hidden-xs hidden-sm text-center">40</td>
+                                <td class="planDetail hidden-xs hidden-sm text-center">Salary</td>
                                 <td class="planDetail text-right">
                                     <div class="btn-group">
                                         <a href="#" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
                                         <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="javascript:void(0);">Edit</a></li>
+                                            <li><a href="javascript:ModalOpen();">Edit</a></li>
                                             <li><a href="javascript:void(0);">Remove</a></li>
                                         </ul>
                                     </div>
@@ -260,20 +266,20 @@
                             <tr>
                                 <td class="planDetail">Income 1</td>
                                 <td class="planDetail text-center">$1,000</td>
+                                <td class="planDetail text-center">$1,000</td>
                                 <td class="planDetail custom-hidden-xs text-center">$1,000</td>
                                 <td class="planDetail custom-hidden-xs text-center">$1,000</td>
                                 <td class="planDetail custom-hidden-xs text-center">$1,000</td>
-                                <td class="planDetail custom-hidden-xs text-center">$1,000</td>
-                                <td class="planDetail hidden-xs text-center">-</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">-</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">-</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">-</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">-</td>
+                                <td class="planDetail hidden-xs hidden-sm text-center">$42,432</td>
+                                <td class="planDetail hidden-xs text-center">$24.00</td>
+                                <td class="planDetail hidden-xs hidden-sm text-center">31.00%</td>
+                                <td class="planDetail hidden-xs hidden-sm text-center">34</td>
+                                <td class="planDetail hidden-xs hidden-sm text-center">Hourly</td>
                                 <td class="planDetail text-right">
                                     <div class="btn-group">
                                         <a href="#" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
                                         <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="javascript:void(0);">Edit</a></li>
+                                            <li><a href="javascript:ModalOpen();">Edit</a></li>
                                             <li><a href="javascript:void(0);">Remove</a></li>
                                         </ul>
                                     </div>
@@ -284,15 +290,15 @@
                             <tr>
                                 <td class="planDetail"><h5><strong>TOTAL</strong></h5></td>
                                 <td class="planDetail text-center"><h5><strong>$1,000</strong></h5></td>
+                                <td class="planDetail text-center"><h5><strong>$1,000</strong></h5></td>
                                 <td class="planDetail custom-hidden-xs text-center"><h5><strong>$1,000</strong></h5></td>
                                 <td class="planDetail custom-hidden-xs text-center"><h5><strong>$1,000</strong></h5></td>
                                 <td class="planDetail custom-hidden-xs text-center"><h5><strong>$1,000</strong></h5></td>
-                                <td class="planDetail custom-hidden-xs text-center"><h5><strong>$1,000</strong></h5></td>
-                                <td class="planDetail hidden-xs text-center">-</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">-</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">-</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">-</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">-</td>
+                                <td class="planDetail hidden-xs hidden-sm text-center"><h5><strong>$127,467</strong></h5></td>
+                                <td class="planDetail hidden-xs text-center"></td>
+                                <td class="planDetail hidden-xs hidden-sm text-center"></td>
+                                <td class="planDetail hidden-xs hidden-sm text-center"></td>
+                                <td class="planDetail hidden-xs hidden-sm text-center"></td>
                                 <td class="planDetail"></td>
                             </tr>
                         </tfoot>
@@ -383,19 +389,50 @@
             </div>
         </section>
 
-        <!--Templates START-->
+        <!--Modals-->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Modal title</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>One fine body…</p>
+                                                            <div class="form-group">
+                                        <label for="email">Email address:</label>
+                                        <input type="email" class="form-control" id="email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pwd">Password:</label>
+                                        <input type="password" class="form-control" id="pwd">
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><input type="checkbox"> Remember me</label>
+                                    </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--END Modals-->
+
+        <!--Templates-->
         <script id="tmpl" type="text/x-handlebars-template">
 
         </script>
-        <!--Templates END-->
+        <!--END Templates-->
 
-        <!--Footer START-->
+        <!--Footer-->
         <?php 
-            require_once('include/footer.php'); 
+            require_once('include/footer.php');
         ?>
-        <!--Footer END-->
+        <!--END Footer-->
 
-        <!--Javascript START-->
+        <!--Javascript-->
         <script>
             var api = "http://api.jordanandrobert.com/budget";
             var data = new Object();
@@ -404,9 +441,12 @@
                 console.log("Ready!");
                 
                 $('[data-toggle="popover"]').popover(); 
-               
             });
+
+            function ModalOpen() {
+                $("#myModal").modal("toggle");
+            }
         </script>
-        <!--Javascript END-->
+        <!--END Javascript-->
     </body>
 </html>

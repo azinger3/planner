@@ -101,7 +101,7 @@
             .quickLink {
                 color: #ffffff;
                 font-size: 16px;
-                margin: 7px;
+                margin-left: 20px;
             }
         </style>
     </head>
@@ -143,13 +143,13 @@
                                     </div>  
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" id="uxTransactionDT" class="form-control input-datepicker" />
+                                    <input type="text" id="uxTransactionDT" class="form-control input-datepicker" readonly="true" />
                                 </div>
                                 <div class="form-group">
                                     <input type="text" id="uxDescription" class="form-control" placeholder="Description" />
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" id="uxAmount" class="form-control" placeholder="Amount $" />
+                                    <input type="text" id="uxAmount" class="form-control" placeholder="Amount $" pattern="[0-9]+([\.,][0-9]+)?" />
                                 </div>
                                 <div class="form-group">
                                     <div id="uxBudgetCategoryOptionAdd">

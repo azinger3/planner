@@ -55,7 +55,7 @@
       .quickLink {
         color: #ffffff;
         font-size: 16px;
-        margin: 7px;
+        margin-left: 16px;
       }
       
       .amount-red {
@@ -99,6 +99,7 @@
               <div class="panel-heading">
                 Remaining Variable Funds
                 <div class="pull-right">
+                  <a href="budget/summary" title="Summary" class="quickLink"><i class="fa fa-calendar"></i></a>
                   <a href="budget/breakdown" title="Breakdown" class="quickLink"><i class="fa fa-pie-chart"></i></a>
                   <a href="budget/average" title="Averages" class="quickLink"><i class="fa fa-area-chart"></i></a>
                   <a href="budget/transaction" title="Add Transaction" class="quickLink"><i class="fa fa-plus"></i></a>
