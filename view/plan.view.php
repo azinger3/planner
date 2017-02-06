@@ -234,8 +234,6 @@
                                 <th class="planDetail hidden-xs text-center">Hourly Rate</th>
                                 <th class="planDetail hidden-xs hidden-sm text-center">Year Deduct %</th>
                                 <th class="planDetail hidden-xs hidden-sm text-center">Planned Hours</th>
-                                <!--<th class="planDetail hidden-xs hidden-sm text-center">Take Home Actual</th>
-                                <th class="planDetail hidden-xs hidden-sm text-center">Pay Frequency</th>-->
                                 <th class="planDetail hidden-xs hidden-sm text-center">Type</th>
                                 <th class="planDetail"></th>
                             </tr>
@@ -341,8 +339,12 @@
                                 <td class="planDetail text-center">$1,000</td>
                                 <td class="planDetail custom-hidden-xs hidden-sm text-center">40.61%</td>
                                 <td class="planDetail custom-hidden-xs hidden-sm text-center">#17</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center"><i class="fa fa-comment fa-lg" aria-hidden="true" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Variable expense, A guideline" data-original-title="" title=""></i></td>
-                                <td class="planDetail custom-hidden-xs hidden-sm text-center"><i class="fa fa-sticky-note fa-lg" aria-hidden="true" data-container="body" data-toggle="popover" data-placement="top" data-content="(1) Examples include clothes, hygiene, toiletries, home care, cleaning supplies, yard care, pet expenses, school supplies, office supplies, shipping, legal fees, and legal services" data-original-title="" title=""></i></td>
+                                <td class="planDetail hidden-xs hidden-sm text-center">
+                                    <i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Variable expense, A guideline"></i>
+                                </td>
+                                <td class="planDetail custom-hidden-xs hidden-sm text-center">
+                                    <i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="(1) Examples include clothes, hygiene, toiletries, home care, cleaning supplies, yard care, pet expenses, school supplies, office supplies, shipping, legal fees, and legal services"></i>
+                                </td>
                                 <td class="planDetail text-right">
                                     <div class="btn-group">
                                         <a href="#" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
@@ -363,8 +365,12 @@
                                 <td class="planDetail text-center">$1,000</td>
                                 <td class="planDetail custom-hidden-xs hidden-sm text-center">40.61%</td>
                                 <td class="planDetail custom-hidden-xs hidden-sm text-center">#17</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center"><i class="fa fa-comment fa-lg" aria-hidden="true" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Variable expense, A guideline" data-original-title="" title=""></i></td>
-                                <td class="planDetail custom-hidden-xs hidden-sm text-center"><i class="fa fa-sticky-note fa-lg" aria-hidden="true" data-container="body" data-toggle="popover" data-placement="top" data-content="(1) Examples include clothes, hygiene, toiletries, home care, cleaning supplies, yard care, pet expenses, school supplies, office supplies, shipping, legal fees, and legal services" data-original-title="" title=""></i></td>
+                                <td class="planDetail hidden-xs hidden-sm text-center">
+                                    <i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Variable expense, A guideline"></i>
+                                </td>
+                                <td class="planDetail custom-hidden-xs hidden-sm text-center">
+                                    <i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="(1) Examples include clothes, hygiene, toiletries, home care, cleaning supplies, yard care, pet expenses, school supplies, office supplies, shipping, legal fees, and legal services"></i>
+                                </td>
                                 <td class="planDetail text-right">
                                     <div class="btn-group">
                                         <a href="#" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
@@ -391,29 +397,84 @@
 
         <!--Modals-->
         <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-md">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Modal title</h4>
+                        <h4 class="modal-title">Income Calculator</h4>
+                        <input type="hidden" id="hdnIncomeMethod" value="POST">
                     </div>
                     <div class="modal-body">
-                        <p>One fine body…</p>
-                                                            <div class="form-group">
-                                        <label for="email">Email address:</label>
-                                        <input type="email" class="form-control" id="email">
+                        <div class="form-horizontal">
+                            <!--constant-->
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="uxIncomeType">Type:</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" id="uxIncomeType">
+                                        <option value="Choice 1">Salary</option>
+                                        <option value="Choice 2">Hourly</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--constant-->
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="uxIncomePayCycle">Pay Cycle:</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" id="2">
+                                        <option value="Choice 1">Bi-Weekly</option>
+                                        <option value="Choice 2">Weekly</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--only Salary-->
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="uxSalary">Salary:</label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" id="uxSalary" placeholder="$">
+                                </div>
+                            </div>
+                            <!--both-->
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="uxPlannedHours">Planned Hours:</label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" id="uxPlannedHours" placeholder="">
+                                </div>
+                            </div>
+                            <!--only Hourly-->
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="uxYearDeduct">Year Deduct %:</label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" id="uxYearDeduct" placeholder="%">
+                                </div>
+                            </div>
+                            <!--only Hourly-->
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="uxHourlyRate">Hourly Rate:</label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" id="uxHourlyRate" placeholder="$">
+                                </div>
+                            </div>
+                            <!--only Salary-->
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="uxTakeHomePay">Take Home Pay:</label>
+                                <div class="col-sm-9">
+                                    <input type="number" class="form-control" id="uxTakeHomePay" placeholder="$">
+                                </div>
+                            </div>
+                            <br />
+                            <!--TOTAL-->
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <div class="alert alert-success text-center" id="uxIncomeTotal" style="margin-bottom: 0; font-size: 24px;">
+                                        <strong>$2,185</strong> every 2 weeks
                                     </div>
-                                    <div class="form-group">
-                                        <label for="pwd">Password:</label>
-                                        <input type="password" class="form-control" id="pwd">
-                                    </div>
-                                    <div class="checkbox">
-                                        <label><input type="checkbox"> Remember me</label>
-                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-info">Save</button>
                     </div>
                 </div>
             </div>
@@ -437,10 +498,10 @@
             var api = "http://api.jordanandrobert.com/budget";
             var data = new Object();
 
-            $(document).ready(function() {
+            $(document).ready(function () {
                 console.log("Ready!");
-                
-                $('[data-toggle="popover"]').popover(); 
+
+                $('[data-toggle="tooltip"]').tooltip();
             });
 
             function ModalOpen() {
