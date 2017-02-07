@@ -481,7 +481,7 @@
                         <div class="form-group">
                             <label for="uxIncomeTotal" class="small">Total:</label>
                             <div class="text-center small pull-right payCycle" id="uxPayCycleDescription">Every 2 Weeks</div>
-                            <input type="text" class="form-control" id="uxIncomeTotal" readonly="readonly" value="$2,185">
+                            <input type="text" class="form-control incomeTotal" id="uxIncomeTotal" readonly="readonly" value="$2,185">
                         </div>
                     </div>
                     <div class="modal-footer">
