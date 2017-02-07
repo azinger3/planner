@@ -84,14 +84,22 @@
             }
             
             .incomeTotal {
-                margin-bottom: 0; 
-                font-size: 24px;
+                text-align: center; 
+                font-size: 20px; 
+                font-weight: bold;
             }
 
             .plannedHours {
                 text-align: center;
             }
-                        
+            
+            .payCycle {
+                display: inline-block; 
+                font-weight: normal; 
+                font-size: 12px; 
+                margin-top: 3px;
+            }
+                                    
             @media (max-width:414px) {
                 .budgetMonthHeader {
                     font-size: 26px;
@@ -405,82 +413,80 @@
         </section>
 
         <!--Modals-->
+        <input type="hidden" id="hdnIncomeCalculatorEvent" value="1">
         <div class="modal fade" id="mdlIncomeCalculator" role="dialog">
-            <div class="modal-dialog modal-md">
+            <div class="modal-dialog modal-sm">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         <h4 class="modal-title">Income Calculator</h4>
-                        <input type="hidden" id="hdnIncomeMethod" value="POST">
                     </div>
                     <div class="modal-body">
-                        <!--constants-->
+                        <!--All-->
                         <div class="row">
                             <div class="col-xs-6">
                                 <div class="form-group">
-                                    <label for="uxIncomeType">Type:</label>
-                                    <select class="form-control" id="uxIncomeType">
-                                        <option value="Choice 1">Salary</option>
-                                        <option value="Choice 2">Hourly</option>
+                                    <label for="uxIncomeType" class="small">Type:</label>
+                                    <select class="form-control input-sm" id="uxIncomeType">
+                                        <option value="1">Salary</option>
+                                        <option value="2">Hourly</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-xs-6">
                                 <div class="form-group">
-                                    <label for="uxIncomePayCycle">Pay Cycle:</label>
-                                    <select class="form-control" id="2">
-                                        <option value="Choice 1">Bi-Weekly</option>
-                                        <option value="Choice 2">Weekly</option>
+                                    <label for="uxIncomePayCycle" class="small">Pay Cycle:</label>
+                                    <select class="form-control input-sm" id="2">
+                                        <option value="1">Bi-Weekly</option>
+                                        <option value="2">Weekly</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
-                        <!--both-->
                         <div class="form-group">
-                            <label for="uxPlannedHours">Planned Hours:</label>
-                            <input type="number" class="form-control" id="uxPlannedHours" placeholder="" style="text-align: center;">
+                            <label for="uxPlannedHours" class="small">Planned Hours:</label>
+                            <input type="number" class="form-control input-sm" id="uxPlannedHours" placeholder="" style="text-align: center;">
                         </div>
-                        <!--only Salary-->
+                        <!--Salary-->
                         <div class="row">
                             <div class="col-xs-6">
                                 <div class="form-group">
-                                    <label for="uxSalary">Salary:</label>
-                                    <input type="number" class="form-control" id="uxSalary" placeholder="$">
+                                    <label for="uxSalary" class="small">Salary:</label>
+                                    <input type="number" class="form-control input-sm" id="uxSalary" placeholder="$">
                                 </div>
                             </div>
                             <div class="col-xs-6">
                                 <div class="form-group">
-                                    <label for="uxTakeHomePay">Take Home Pay:</label>
-                                    <input type="number" class="form-control" id="uxTakeHomePay" placeholder="$">
+                                    <label for="uxTakeHomePay" class="small">Take Home Pay:</label>
+                                    <input type="number" class="form-control input-sm" id="uxTakeHomePay" placeholder="$">
                                 </div>
                             </div>
                         </div>
-                        <!--only Hourly-->
+                        <!--Hourly-->
                         <div class="row">
                             <div class="col-xs-6">
                                 <div class="form-group">
-                                    <label for="uxHourlyRate">Hourly Rate:</label>
-                                    <input type="number" class="form-control" id="uxHourlyRate" placeholder="$">
+                                    <label for="uxHourlyRate" class="small">Hourly Rate:</label>
+                                    <input type="number" class="form-control input-sm" id="uxHourlyRate" placeholder="$">
                                 </div>
                             </div>
                             <div class="col-xs-6">
                                 <div class="form-group">
-                                    <label for="uxYearDeduct">Year Deduct %:</label>
-                                    <input type="number" class="form-control" id="uxYearDeduct" placeholder="%">
+                                    <label for="uxYearDeduct" class="small">Year Deduct %:</label>
+                                    <input type="number" class="form-control input-sm" id="uxYearDeduct" placeholder="%">
                                 </div>
                             </div>
                         </div>
                         <!--TOTAL-->
-                        <br />
                         <div class="form-group">
-                            <div class="alert alert-success text-center incomeTotal" id="uxIncomeTotal">
-                                <strong>$2,185</strong> every 2 weeks
-                            </div>
+                            <label for="uxIncomeTotal" class="small">Total:</label>
+                            <div class="text-center small pull-right payCycle">Every 2 Weeks</div>
+                            <input type="text" class="form-control" id="uxIncomeTotal" readonly="readonly" value="$2,185">
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-info">Save</button>
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-info btn-sm">Save</button>
                     </div>
                 </div>
             </div>
