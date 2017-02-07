@@ -435,8 +435,8 @@
                             </div>
                             <div class="col-xs-6">
                                 <div class="form-group">
-                                    <label for="uxIncomePayCycle" class="small">Pay Cycle:</label>
-                                    <select class="form-control input-sm" id="2">
+                                    <label for="uxPayCycle" class="small">Pay Cycle:</label>
+                                    <select class="form-control input-sm" id="uxPayCycle">
                                         <option value="1">Bi-Weekly</option>
                                         <option value="2">Weekly</option>
                                     </select>
@@ -480,7 +480,7 @@
                         <!--TOTAL-->
                         <div class="form-group">
                             <label for="uxIncomeTotal" class="small">Total:</label>
-                            <div class="text-center small pull-right payCycle">Every 2 Weeks</div>
+                            <div class="text-center small pull-right payCycle" id="uxPayCycleDescription">Every 2 Weeks</div>
                             <input type="text" class="form-control" id="uxIncomeTotal" readonly="readonly" value="$2,185">
                         </div>
                     </div>
