@@ -171,7 +171,8 @@
                                     <span class="custom-hidden-xs">&nbsp;&nbsp;Aug 2017</span>
                                 </a>
                             </li>
-                            <li class="budgetMonthHeader">September 2017</li>
+                            <li class="budgetMonthHeader" style="cursor: pointer;" onclick="javascript:confirm('BudgetID remove?');">September 2017
+                            </li>
                             <li class="next">
                                 <a href="javascript:void(0);" class="budgetMonthNav">
                                     <span class="custom-hidden-xs">Oct 2017&nbsp;&nbsp;</span>
