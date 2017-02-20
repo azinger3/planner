@@ -187,7 +187,7 @@
             <!--Page Header END-->
 
             <!--Content START-->
-            <!--<div class="row">
+            <div class="row" id="uxStartPlanning" style="display: none;">
                 <div class="col-md-1">
                 </div>
                 <div class="col-md-10 planningContainer">
@@ -198,7 +198,7 @@
                 </div>
                 <div class="col-md-1" >
                 </div>
-            </div>-->
+            </div>
             <!--Content END-->
 
             <!--**********************************************************Main Content END**********************************************************-->
@@ -234,7 +234,7 @@
                 <div class="panel-heading">
                     Income
                     <div class="pull-right">
-                        <a href="javascript:void(0);" title="Add Income" class="addCategoryLink"><i class="fa fa-plus"></i></a>
+                        <a href="javascript:IncomeModalOpen();" title="Add Income" class="addCategoryLink"><i class="fa fa-plus"></i></a>
                     </div>
                 </div>
                 <div class="panel-body">
@@ -272,7 +272,7 @@
                                     <div class="btn-group">
                                         <a href="#" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
                                         <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="javascript:ModalOpen();">Edit</a></li>
+                                            <li><a href="javascript:IncomeModalOpen();">Edit</a></li>
                                             <li><a href="javascript:void(0);">Remove</a></li>
                                         </ul>
                                     </div>
@@ -294,7 +294,7 @@
                                     <div class="btn-group">
                                         <a href="#" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
                                         <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="javascript:ModalOpen();">Edit</a></li>
+                                            <li><a href="javascript:IncomeModalOpen();">Edit</a></li>
                                             <li><a href="javascript:void(0);">Remove</a></li>
                                         </ul>
                                     </div>
@@ -324,7 +324,7 @@
                 <div class="panel-heading">
                     Strategic
                     <div class="pull-right">
-                        <a href="javascript:void(0);" title="Add Category" class="addCategoryLink"><i class="fa fa-plus"></i></a>
+                        <a href="javascript:ExpenseModalOpen();" title="Add Category" class="addCategoryLink"><i class="fa fa-plus"></i></a>
                     </div>
                 </div>
                 <div class="panel-body">
@@ -340,8 +340,8 @@
                                 <th class="planDetail text-center">Average</th>
                                 <th class="planDetail custom-hidden-xs hidden-sm text-center">Percentage</th>
                                 <th class="planDetail custom-hidden-xs hidden-sm text-center">Ranking</th>
-                                <th class="planDetail hidden-xs hidden-sm text-center">Comment</th>
                                 <th class="planDetail custom-hidden-xs hidden-sm text-center">Description</th>
+                                <th class="planDetail hidden-xs hidden-sm text-center">Comment</th>
                                 <th class="planDetail"></th>
                             </tr>
                         </thead>
@@ -356,17 +356,17 @@
                                 <td class="planDetail text-center">$1,000</td>
                                 <td class="planDetail custom-hidden-xs hidden-sm text-center">40.61%</td>
                                 <td class="planDetail custom-hidden-xs hidden-sm text-center">#17</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">
-                                    <i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Variable expense, A guideline"></i>
-                                </td>
                                 <td class="planDetail custom-hidden-xs hidden-sm text-center">
                                     <i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="(1) Examples include clothes, hygiene, toiletries, home care, cleaning supplies, yard care, pet expenses, school supplies, office supplies, shipping, legal fees, and legal services"></i>
+                                </td>
+                                <td class="planDetail hidden-xs hidden-sm text-center">
+                                    <i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Variable expense, A guideline"></i>
                                 </td>
                                 <td class="planDetail text-right">
                                     <div class="btn-group">
                                         <a href="#" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
                                         <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="javascript:void(0);">Edit</a></li>
+                                            <li><a href="javascript:ExpenseModalOpen();">Edit</a></li>
                                             <li><a href="javascript:void(0);">Remove</a></li>
                                         </ul>
                                     </div>
@@ -382,17 +382,17 @@
                                 <td class="planDetail text-center">$1,000</td>
                                 <td class="planDetail custom-hidden-xs hidden-sm text-center">40.61%</td>
                                 <td class="planDetail custom-hidden-xs hidden-sm text-center">#17</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">
-                                    <i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Variable expense, A guideline"></i>
-                                </td>
                                 <td class="planDetail custom-hidden-xs hidden-sm text-center">
                                     <i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="(1) Examples include clothes, hygiene, toiletries, home care, cleaning supplies, yard care, pet expenses, school supplies, office supplies, shipping, legal fees, and legal services"></i>
+                                </td>
+                                <td class="planDetail hidden-xs hidden-sm text-center">
+                                    <i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Variable expense, A guideline"></i>
                                 </td>
                                 <td class="planDetail text-right">
                                     <div class="btn-group">
                                         <a href="#" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
                                         <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="javascript:void(0);">Edit</a></li>
+                                            <li><a href="javascript:ExpenseModalOpen();">Edit</a></li>
                                             <li><a href="javascript:void(0);">Remove</a></li>
                                         </ul>
                                     </div>
@@ -406,20 +406,22 @@
                 <div class="panel-heading">
                     Add Group
                     <div class="pull-right">
-                        <a href="javascript:void(0);" title="Add Category" class="addGroupLink"><i class="fa fa-plus"></i></a>
+                        <a href="javascript:ExpenseModalOpen();" title="Add Category" class="addGroupLink"><i class="fa fa-plus"></i></a>
                     </div>
                 </div>
             </div>
         </section>
 
         <!--Modals-->
+
+        <!--Income Modal-->
         <input type="hidden" id="hdnIncomeCalculatorEvent" value="1">
         <div class="modal fade" id="mdlIncomeCalculator" role="dialog">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">Income Calculator</h4>
+                        <h4 class="modal-title" id="uxIncomeModalTitle">Edit/Add Income</h4>
                     </div>
                     <div class="modal-body">
                         <!--All-->
@@ -481,7 +483,7 @@
                         <div class="form-group">
                             <label for="uxIncomeTotal" class="small">Total:</label>
                             <div class="text-center small pull-right payCycle" id="uxPayCycleDescription">Every 2 Weeks</div>
-                            <input type="text" class="form-control incomeTotal" id="uxIncomeTotal" readonly="readonly" value="$2,185">
+                            <input type="text" class="form-control incomeTotal" id="uxIncomeTotal" disabled value="$2,185">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -491,6 +493,62 @@
                 </div>
             </div>
         </div>
+        <!--END Income Modal-->
+
+        <!--Expense Modal-->
+        <input type="hidden" id="hdnExpenseEvent" value="1">
+        <div class="modal fade" id="mdlExpense" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="uxExpenseModalTitle">Edit/Add Expense</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="uxBudgetGroup" class="small">Group:</label>
+                                    <input type="text" class="form-control input-sm" id="uxBudgetGroup" data-group-id="1">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="uxCategory" class="small">Category:</label>
+                                    <input type="text" class="form-control input-sm" id="uxBudgetCategory" data-category-id="1">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="uxAmount" class="small">Amount:</label>
+                                    <input type="number" class="form-control input-sm" id="uxAmount" placeholder="$">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="uxDescription" class="small">Description:</label>
+                                    <textarea rows="3" class="form-control input-sm" id="uxDescription" style="resize: none;"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="uxComment" class="small">Comment:</label>
+                                    <textarea rows="3" class="form-control input-sm" id="uxComment" style="resize: none;"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-info btn-sm">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--END Expense Modal-->
+
         <!--END Modals-->
 
         <!--Templates-->
@@ -516,8 +574,12 @@
                 $('[data-toggle="tooltip"]').tooltip();
             });
 
-            function ModalOpen() {
+            function IncomeModalOpen() {
                 $("#mdlIncomeCalculator").modal("toggle");
+            }
+
+            function ExpenseModalOpen() {
+                $("#mdlExpense").modal("toggle");
             }
         </script>
         <!--END Javascript-->
