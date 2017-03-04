@@ -499,7 +499,7 @@
         <!--Expense Modal-->
         <input type="hidden" id="hdnExpenseEvent" value="1">
         <div class="modal fade" id="mdlExpense" role="dialog">
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -507,36 +507,81 @@
                     </div>
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="uxBudgetGroup" class="small">Group:</label>
+                                    <label for="uxBudgetGroup">Group:</label>
                                     <input type="text" class="form-control input-sm" id="uxBudgetGroup" data-group-id="1">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="uxCategory" class="small">Category:</label>
+                                    <label for="uxBudgetCategory">Category:</label>
                                     <input type="text" class="form-control input-sm" id="uxBudgetCategory" data-category-id="1">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="uxAmount" class="small">Amount:</label>
+                                    <label for="uxAmount">Amount:</label>
                                     <input type="number" class="form-control input-sm" id="uxAmount" placeholder="$">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="uxDescription" class="small">Description:</label>
-                                    <textarea rows="3" class="form-control input-sm" id="uxDescription" style="resize: none;"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="uxComment" class="small">Comment:</label>
-                                    <textarea rows="3" class="form-control input-sm" id="uxComment" style="resize: none;"></textarea>
+                            <div class="col-md-12">
+                                <label>More Options:</label>
+                                <div class="well">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="uxDescription" class="small">Description:</label>
+                                                <textarea rows="2" class="form-control input-sm" id="uxDescription" style="resize: none;"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="uxNote" class="small">Note:</label>
+                                                <textarea rows="2" class="form-control input-sm" id="uxNote" style="resize: none;"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="small">
+                                                    <input type="checkbox"> Variable Fund
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="small">
+                                                    <input type="checkbox"> Essential Expense
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6 col-sm-6 col-md-6">
+                                            <div class="form-group">
+                                                <label class="small"><input type="checkbox"> Savings Fund</label>
+                                                <input type="text" class="form-control input-sm" id="uxFundName" placeholder="Fund Name" data-fund-id="1">
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-6 col-md-6">
+                                            <div class="form-group">
+                                                <label for="uxStartingBalance" class="small">&nbsp;</label>
+                                                <input type="text" class="form-control input-sm" id="uxStartingBalance" placeholder="$">
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
