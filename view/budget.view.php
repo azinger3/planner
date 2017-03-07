@@ -174,7 +174,7 @@
                 <h4><strong>TOTAL</strong></h4>
               </td>
               <td>
-                <div class="progress progress-striped progress-lg">
+                <div class="progress progress-striped progress-lg" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{TotalCategoryPercentageSpent}}%">
                   <div class="progress-bar progress-bar-{{TotalCategoryProgressBarStyle}}" style="width: {{TotalCategoryPercentageSpent}}%"></div>
                 </div>
               </td>
@@ -267,7 +267,7 @@
               objBudget.BudgetCategorySpotlight = result;
 
               BudgetCategorySpotlightRender();
-              
+
               $('[data-toggle="tooltip"]').tooltip();
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
