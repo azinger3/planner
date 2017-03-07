@@ -156,7 +156,7 @@
             <tr>
               <td>{{BudgetCategory}}</td>
               <td>
-                <div class="progress progress-sm">
+                <div class="progress progress-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{CategoryPercentageSpent}}%">
                   <div class="progress-bar progress-bar-{{CategoryProgressBarStyle}}" style="width: {{CategoryPercentageSpent}}%"></div>
                 </div>
               </td>
@@ -241,6 +241,8 @@
           BudgetCategorySpotlightGet();
           BudgetFundSpotlightGet();
           BudgetSummarySpotlightGet();
+
+          $('[data-toggle="tooltip"]').tooltip();
         });
 
         function BudgetCategorySpotlightGet() {
