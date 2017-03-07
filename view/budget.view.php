@@ -241,8 +241,6 @@
           BudgetCategorySpotlightGet();
           BudgetFundSpotlightGet();
           BudgetSummarySpotlightGet();
-
-          $('[data-toggle="tooltip"]').tooltip();
         });
 
         function BudgetCategorySpotlightGet() {
@@ -269,6 +267,8 @@
               objBudget.BudgetCategorySpotlight = result;
 
               BudgetCategorySpotlightRender();
+              
+              $('[data-toggle="tooltip"]').tooltip();
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
               if (XMLHttpRequest.readyState < 4) {
