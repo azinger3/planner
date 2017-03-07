@@ -139,7 +139,7 @@
       <!--Templates START-->
       <script id="tmplBudgetCategorySpotlight" type="text/x-handlebars-template">
         <div class="currentMonth">
-          <a class="summaryLink" href="/budget/summary">
+          <a id="uxBudgetMonth" class="summaryLink" href="/budget/summary">
             <strong>{{BudgetMonth}}</strong>
           </a>
         </div>
@@ -267,6 +267,7 @@
               objBudget.BudgetCategorySpotlight = result;
 
               BudgetCategorySpotlightRender();
+              BudgetMonthPercentageSet();
 
               $('[data-toggle="tooltip"]').tooltip();
             },
@@ -339,6 +340,16 @@
               }
             }
           });
+        }
+
+        function BudgetMonthPercentageSet() {
+          var monthNumber = parseInt(Date.today().toString("M"));
+          var yearNumber = parseInt(Date.today().toString("yyyy"));
+          var dayNumber = parseInt(Date.today().toString("dd"));
+          var daysInMonth = parseInt(Date.getDaysInMonth(yearNumber, monthNumber)) + 1;
+          var percentThroughMonth = Math.round(dayNumber / daysInMonth * 100);
+
+          $("#uxBudgetMonth").attr("data-toggle", "tooltip").attr("data-placement", "top").attr("data-original-title", percentThroughMonth + "%");
         }
 
         function BudgetCategorySpotlightRender() {
