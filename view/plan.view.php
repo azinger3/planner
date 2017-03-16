@@ -146,9 +146,21 @@
                     width: 15%;
                 }
             }
+
+            .showMore {
+                color: #2c3e50;
+                font-size: 15px;
+            }
+
+            a.showMore:hover, a.showMore:focus {
+                color: #2c3e50 !important;
+                text-decoration: none !important;
+            }
         </style>
     </head>
     <body>
+        <input type="hidden" id="hdnBudgetMonth" value="" />
+        <input type="hidden" id="hdnBudgetNumber" value="" />
 
         <!--Navigation START-->
         <?php require_once('include/navigation.budget.php'); ?>
@@ -164,22 +176,7 @@
                     <div class="col-md-2">
                     </div>
                     <div class="col-md-8">
-                        <ul class="pager">
-                            <li class="previous">
-                                <a href="javascript:void(0);" class="budgetMonthNav">
-                                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                                    <span class="custom-hidden-xs">&nbsp;&nbsp;Aug 2017</span>
-                                </a>
-                            </li>
-                            <li class="budgetMonthHeader" style="cursor: pointer;" onclick="javascript:confirm('BudgetID remove?');">September 2017
-                            </li>
-                            <li class="next">
-                                <a href="javascript:void(0);" class="budgetMonthNav">
-                                    <span class="custom-hidden-xs">Oct 2017&nbsp;&nbsp;</span>
-                                    <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                                </a>
-                            </li>
-                        </ul>
+                        <div id="uxBudgetMonthNavigation"></div>
                     </div>
                     <div class="col-md-2">
                     </div>
@@ -188,231 +185,15 @@
             <!--Page Header END-->
 
             <!--Content START-->
-            <div class="row" id="uxStartPlanning" style="display: none;">
-                <div class="col-md-1">
-                </div>
-                <div class="col-md-10 planningContainer">
-                    <div class="jumbotron text-center">
-                        <h1>Start Planning for September</h1>
-                        <p><a href="#" class="btn btn-info btn-lg btn-block">Go</a></p>
-                    </div>
-                </div>
-                <div class="col-md-1" >
-                </div>
-            </div>
+            <div id="uxBudgetStart"></div>
             <!--Content END-->
 
             <!--**********************************************************Main Content END**********************************************************-->
         </div>
         <!--Container END-->
 
-        <section class="section-default">
-            <div class="container">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    <div class="well well-sm">
-                        <table class="table table-condensed leftoverTable">
-                            <thead>
-                                <tr>
-                                    <th class="text-center">Income</th>
-                                    <th class="text-center">Expenses</th>
-                                    <th class="text-center">Leftover</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="text-center">$1,000</td>
-                                    <td class="text-center text-danger">$1,000</td>
-                                    <td class="text-center"><span class="label label-info">$1,000</span></td>
-                                </tr>
-                            </tbody>
-                        </table> 
-                    </div>
-                </div>
-                <div class="col-md-4"></div>
-            </div>
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    Income
-                    <div class="pull-right">
-                        <a href="javascript:IncomeModalOpen();" title="Add Income" class="addCategoryLink"><i class="fa fa-plus"></i></a>
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <table class="table table-striped table-hover table-condensed small">
-                        <thead>
-                            <tr>
-                                <th class="planDetail">Name</th>
-                                <th class="planDetail text-center">Monthly</th>
-                                <th class="planDetail text-center">Bi-Weekly</th>
-                                <th class="planDetail custom-hidden-xs text-center">Weekly</th>
-                                <th class="planDetail custom-hidden-xs text-center">Half-Year</th>
-                                <th class="planDetail custom-hidden-xs text-center">Year (Net)</th>
-                                <th class="planDetail hidden-xs hidden-sm text-center">Year (Gross)</th>
-                                <th class="planDetail hidden-xs text-center">Hourly Rate</th>
-                                <th class="planDetail hidden-xs hidden-sm text-center">Year Deduct %</th>
-                                <th class="planDetail hidden-xs hidden-sm text-center">Planned Hours</th>
-                                <th class="planDetail hidden-xs hidden-sm text-center">Type</th>
-                                <th class="planDetail"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="planDetail">Income 1</td>
-                                <td class="planDetail text-center">$1,000</td>
-                                <td class="planDetail text-center">$1,000</td>
-                                <td class="planDetail custom-hidden-xs text-center">$1,000</td>
-                                <td class="planDetail custom-hidden-xs text-center">$1,000</td>
-                                <td class="planDetail custom-hidden-xs text-center">$1,000</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">$85,035</td>
-                                <td class="planDetail hidden-xs text-center">$40.88</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">33.19%</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">40</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">Salary</td>
-                                <td class="planDetail text-right">
-                                    <div class="btn-group">
-                                        <a href="#" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
-                                        <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="javascript:IncomeModalOpen();">Edit</a></li>
-                                            <li><a href="javascript:void(0);">Remove</a></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="planDetail">Income 1</td>
-                                <td class="planDetail text-center">$1,000</td>
-                                <td class="planDetail text-center">$1,000</td>
-                                <td class="planDetail custom-hidden-xs text-center">$1,000</td>
-                                <td class="planDetail custom-hidden-xs text-center">$1,000</td>
-                                <td class="planDetail custom-hidden-xs text-center">$1,000</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">$42,432</td>
-                                <td class="planDetail hidden-xs text-center">$24.00</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">31.00%</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">34</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">Hourly</td>
-                                <td class="planDetail text-right">
-                                    <div class="btn-group">
-                                        <a href="#" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
-                                        <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="javascript:IncomeModalOpen();">Edit</a></li>
-                                            <li><a href="javascript:void(0);">Remove</a></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td class="planDetail"><h5><strong>TOTAL</strong></h5></td>
-                                <td class="planDetail text-center"><h5><strong>$1,000</strong></h5></td>
-                                <td class="planDetail text-center"><h5><strong>$1,000</strong></h5></td>
-                                <td class="planDetail custom-hidden-xs text-center"><h5><strong>$1,000</strong></h5></td>
-                                <td class="planDetail custom-hidden-xs text-center"><h5><strong>$1,000</strong></h5></td>
-                                <td class="planDetail custom-hidden-xs text-center"><h5><strong>$1,000</strong></h5></td>
-                                <td class="planDetail hidden-xs hidden-sm text-center"><h5><strong>$127,467</strong></h5></td>
-                                <td class="planDetail hidden-xs text-center"></td>
-                                <td class="planDetail hidden-xs hidden-sm text-center"></td>
-                                <td class="planDetail hidden-xs hidden-sm text-center"></td>
-                                <td class="planDetail hidden-xs hidden-sm text-center"></td>
-                                <td class="planDetail"></td>
-                            </tr>
-                        </tfoot>
-                    </table> 
-                </div>
-            </div>
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    Strategic
-                    <div class="pull-right">
-                        <a href="javascript:ExpenseModalOpen();" title="Add Category" class="addCategoryLink"><i class="fa fa-plus"></i></a>
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <table class="table table-striped table-hover table-condensed small">
-                        <thead>
-                            <tr>
-                                <th class="planDetail">Category</th>
-                                <th class="planDetail text-center">Monthly</th>
-                                <th class="planDetail hidden-xs text-center">Bi-Weekly</th>
-                                <th class="planDetail hidden-xs text-center">Weekly</th>
-                                <th class="planDetail hidden-xs text-center">Half-Year</th>
-                                <th class="planDetail hidden-xs text-center">Year</th>
-                                <th class="planDetail text-center">Average</th>
-                                <th class="planDetail custom-hidden-xs hidden-sm text-center">Percentage</th>
-                                <th class="planDetail custom-hidden-xs hidden-sm text-center">Ranking</th>
-                                <th class="planDetail custom-hidden-xs hidden-sm text-center">Description</th>
-                                <th class="planDetail hidden-xs hidden-sm text-center">Comment</th>
-                                <th class="planDetail"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="planDetail">Giving</td>
-                                <td class="planDetail text-center">$1,000</td>
-                                <td class="planDetail hidden-xs text-center">$1,000</td>
-                                <td class="planDetail hidden-xs text-center">$1,000</td>
-                                <td class="planDetail hidden-xs text-center">$1,000</td>
-                                <td class="planDetail hidden-xs text-center">$1,000</td>
-                                <td class="planDetail text-center">$1,000</td>
-                                <td class="planDetail custom-hidden-xs hidden-sm text-center">40.61%</td>
-                                <td class="planDetail custom-hidden-xs hidden-sm text-center">#17</td>
-                                <td class="planDetail custom-hidden-xs hidden-sm text-center">
-                                    <i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="(1) Examples include clothes, hygiene, toiletries, home care, cleaning supplies, yard care, pet expenses, school supplies, office supplies, shipping, legal fees, and legal services"></i>
-                                </td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">
-                                    <i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Variable expense, A guideline"></i>
-                                </td>
-                                <td class="planDetail text-right">
-                                    <div class="btn-group">
-                                        <a href="#" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
-                                        <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="javascript:ExpenseModalOpen();">Edit</a></li>
-                                            <li><a href="javascript:void(0);">Remove</a></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="planDetail">Car Replacement</td>
-                                <td class="planDetail text-center">$1,000</td>
-                                <td class="planDetail hidden-xs text-center">$1,000</td>
-                                <td class="planDetail hidden-xs text-center">$1,000</td>
-                                <td class="planDetail hidden-xs text-center">$1,000</td>
-                                <td class="planDetail hidden-xs text-center">$1,000</td>
-                                <td class="planDetail text-center">$1,000</td>
-                                <td class="planDetail custom-hidden-xs hidden-sm text-center">40.61%</td>
-                                <td class="planDetail custom-hidden-xs hidden-sm text-center">#17</td>
-                                <td class="planDetail custom-hidden-xs hidden-sm text-center">
-                                    <i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="(1) Examples include clothes, hygiene, toiletries, home care, cleaning supplies, yard care, pet expenses, school supplies, office supplies, shipping, legal fees, and legal services"></i>
-                                </td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">
-                                    <i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Variable expense, A guideline"></i>
-                                </td>
-                                <td class="planDetail text-right">
-                                    <div class="btn-group">
-                                        <a href="#" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
-                                        <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="javascript:ExpenseModalOpen();">Edit</a></li>
-                                            <li><a href="javascript:void(0);">Remove</a></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table> 
-                </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Add Group
-                    <div class="pull-right">
-                        <a href="javascript:ExpenseModalOpen();" title="Add Category" class="addGroupLink"><i class="fa fa-plus"></i></a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
+        <div id="uxBudgetComponent"></div>
+        
         <!--Modals-->
 
         <!--Income Modal-->
@@ -532,8 +313,10 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <label>More Options:</label>
-                                <div class="well">
+                                <a href="javascript:void(0);" title="Show More" class="showMore" data-toggle="collapse" data-target="#MoreOptions">
+                                    <label><i class="fa fa-plus"></i> More Options</label>
+                                </a>
+                                <div class="well collapse" id="MoreOptions">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
@@ -598,8 +381,240 @@
         <!--END Modals-->
 
         <!--Templates-->
-        <script id="tmpl" type="text/x-handlebars-template">
+        <script id="tmplBudgetMonthNavigation" type="text/x-handlebars-template">
+            <ul class="pager">
+                <li class="previous">
+                    <a href="plan?BudgetMonth={{MonthPreviousDT}}" class="budgetMonthNav">
+                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                        <span class="custom-hidden-xs">&nbsp;&nbsp;{{MonthPrevious}}</span>
+                    </a>
+                </li>
+                <li class="budgetMonthHeader" id="uxBudgetMonthHeader" style="cursor: pointer;" onclick="javascript:BudgetByMonthDelete();">{{MonthCurrent}}
+                </li>
+                <li class="next">
+                    <a href="plan?BudgetMonth={{MonthNextDT}}" class="budgetMonthNav">
+                        <span class="custom-hidden-xs">{{MonthNext}}&nbsp;&nbsp;</span>
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </li>
+            </ul>
+        </script>
 
+        <script id="tmplBudgetStart" type="text/x-handlebars-template">
+            <div class="row">
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-10 planningContainer">
+                    <div class="jumbotron text-center">
+                        <h1>Start Planning for {{Month}}</h1>
+                        <p><a href="javascript:BudgetByMonthInsert();" class="btn btn-info btn-lg btn-block">Go</a></p>
+                    </div>
+                </div>
+                <div class="col-md-1" >
+                </div>
+            </div>
+        </script>
+
+         <script id="tmplBudgetComponent" type="text/x-handlebars-template">
+            <section class="section-default">
+                <div id="uxBudgetMonthSummary"></div>
+                <div id="uxBudgetIncomeByMonth"></div>
+                <div id="uxBudgetExpenseByMonth"></div>
+                
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Add Group
+                        <div class="pull-right">
+                            <a href="javascript:ExpenseModalOpen();" title="Add Group" class="addGroupLink"><i class="fa fa-plus"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </script>
+
+        <script id="tmplBudgetMonthSummary" type="text/x-handlebars-template">
+            <div class="container">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="well well-sm">
+                        <table class="table table-condensed leftoverTable">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Income</th>
+                                    <th class="text-center">Expenses</th>
+                                    <th class="text-center">Leftover</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center">$1,000</td>
+                                    <td class="text-center text-danger">$1,000</td>
+                                    <td class="text-center"><span class="label label-info">$1,000</span></td>
+                                </tr>
+                            </tbody>
+                        </table> 
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+        </script>
+
+        <script id="tmplBudgetIncomeByMonth" type="text/x-handlebars-template">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Income
+                    <div class="pull-right">
+                        <a href="javascript:IncomeModalOpen();" title="Add Income" class="addCategoryLink"><i class="fa fa-plus"></i></a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped table-hover table-condensed small">
+                        <thead>
+                            <tr>
+                                <th class="planDetail">Name</th>
+                                <th class="planDetail text-center">Monthly</th>
+                                <th class="planDetail text-center">Bi-Weekly</th>
+                                <th class="planDetail custom-hidden-xs text-center">Weekly</th>
+                                <th class="planDetail custom-hidden-xs text-center">6 Month</th>
+                                <th class="planDetail custom-hidden-xs text-center">Year (Net)</th>
+                                <th class="planDetail hidden-xs hidden-sm text-center">Year (Gross)</th>
+                                <th class="planDetail hidden-xs text-center">Hourly Rate</th>
+                                <th class="planDetail hidden-xs hidden-sm text-center">Year Deduct %</th>
+                                <th class="planDetail hidden-xs hidden-sm text-center">Planned Hours</th>
+                                <th class="planDetail hidden-xs hidden-sm text-center">Type</th>
+                                <th class="planDetail"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each Income}}
+                            <tr>
+                                <td class="planDetail">{{IncomeName}}</td>
+                                <td class="planDetail text-center">${{NumberCommaFormat IncomeMonthly}}</td>
+                                <td class="planDetail text-center">${{NumberCommaFormat IncomeBiWeekly}}</td>
+                                <td class="planDetail custom-hidden-xs text-center">${{NumberCommaFormat IncomeWeekly}}</td>
+                                <td class="planDetail custom-hidden-xs text-center">${{NumberCommaFormat IncomeBiYearly}}</td>
+                                <td class="planDetail custom-hidden-xs text-center">${{NumberCommaFormat IncomeYearly}}</td>
+                                <td class="planDetail hidden-xs hidden-sm text-center">${{NumberCommaFormat Salary}}</td>
+                                <td class="planDetail hidden-xs text-center">${{NumberCommaFormat HourlyRate}}</td>
+                                <td class="planDetail hidden-xs hidden-sm text-center">{{YearDeduct}}%</td>
+                                <td class="planDetail hidden-xs hidden-sm text-center">{{PlannedHours}}</td>
+                                <td class="planDetail hidden-xs hidden-sm text-center">{{IncomeType}}</td>
+                                <td class="planDetail text-right">
+                                    <div class="btn-group">
+                                        <a href="#" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li><a href="javascript:IncomeModalOpen();">Edit</a></li>
+                                            <li><a href="javascript:void(0);">Remove</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td class="planDetail"><h5><strong>TOTAL</strong></h5></td>
+                                <td class="planDetail text-center"><h5><strong>${{NumberCommaFormat TotalIncomeMonthly}}</strong></h5></td>
+                                <td class="planDetail text-center"><h5><strong>${{NumberCommaFormat TotalIncomeBiWeekly}}</strong></h5></td>
+                                <td class="planDetail custom-hidden-xs text-center"><h5><strong>${{NumberCommaFormat TotalIncomeWeekly}}</strong></h5></td>
+                                <td class="planDetail custom-hidden-xs text-center"><h5><strong>${{NumberCommaFormat TotalIncomeBiYearly}}</strong></h5></td>
+                                <td class="planDetail custom-hidden-xs text-center"><h5><strong>${{NumberCommaFormat TotalIncomeYearly}}</strong></h5></td>
+                                <td class="planDetail hidden-xs hidden-sm text-center"><h5><strong>${{NumberCommaFormat TotalIncomeYearlyGross}}</strong></h5></td>
+                                <td class="planDetail hidden-xs text-center"></td>
+                                <td class="planDetail hidden-xs hidden-sm text-center"></td>
+                                <td class="planDetail hidden-xs hidden-sm text-center"></td>
+                                <td class="planDetail hidden-xs hidden-sm text-center"></td>
+                                <td class="planDetail"></td>
+                            </tr>
+                        </tfoot>
+                    </table> 
+                </div>
+            </div>
+        </script>
+
+        <script id="tmplBudgetExpenseByMonth" type="text/x-handlebars-template">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Strategic
+                    <div class="pull-right">
+                        <a href="javascript:ExpenseModalOpen();" title="Add Category" class="addCategoryLink"><i class="fa fa-plus"></i></a>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped table-hover table-condensed small">
+                        <thead>
+                            <tr>
+                                <th class="planDetail">Category</th>
+                                <th class="planDetail text-center">Monthly</th>
+                                <th class="planDetail hidden-xs text-center">Bi-Weekly</th>
+                                <th class="planDetail hidden-xs text-center">Weekly</th>
+                                <th class="planDetail hidden-xs text-center">Half-Year</th>
+                                <th class="planDetail hidden-xs text-center">Year</th>
+                                <th class="planDetail text-center">Average</th>
+                                <th class="planDetail custom-hidden-xs hidden-sm text-center">Percentage</th>
+                                <th class="planDetail custom-hidden-xs hidden-sm text-center">Ranking</th>
+                                <th class="planDetail custom-hidden-xs hidden-sm text-center">Description</th>
+                                <th class="planDetail hidden-xs hidden-sm text-center">Comment</th>
+                                <th class="planDetail"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="planDetail">Giving</td>
+                                <td class="planDetail text-center">$1,000</td>
+                                <td class="planDetail hidden-xs text-center">$1,000</td>
+                                <td class="planDetail hidden-xs text-center">$1,000</td>
+                                <td class="planDetail hidden-xs text-center">$1,000</td>
+                                <td class="planDetail hidden-xs text-center">$1,000</td>
+                                <td class="planDetail text-center">$1,000</td>
+                                <td class="planDetail custom-hidden-xs hidden-sm text-center">40.61%</td>
+                                <td class="planDetail custom-hidden-xs hidden-sm text-center">#17</td>
+                                <td class="planDetail custom-hidden-xs hidden-sm text-center">
+                                    <i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="(1) Examples include clothes, hygiene, toiletries, home care, cleaning supplies, yard care, pet expenses, school supplies, office supplies, shipping, legal fees, and legal services"></i>
+                                </td>
+                                <td class="planDetail hidden-xs hidden-sm text-center">
+                                    <i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Variable expense, A guideline"></i>
+                                </td>
+                                <td class="planDetail text-right">
+                                    <div class="btn-group">
+                                        <a href="#" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li><a href="javascript:ExpenseModalOpen();">Edit</a></li>
+                                            <li><a href="javascript:void(0);">Remove</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="planDetail">Car Replacement</td>
+                                <td class="planDetail text-center">$1,000</td>
+                                <td class="planDetail hidden-xs text-center">$1,000</td>
+                                <td class="planDetail hidden-xs text-center">$1,000</td>
+                                <td class="planDetail hidden-xs text-center">$1,000</td>
+                                <td class="planDetail hidden-xs text-center">$1,000</td>
+                                <td class="planDetail text-center">$1,000</td>
+                                <td class="planDetail custom-hidden-xs hidden-sm text-center">40.61%</td>
+                                <td class="planDetail custom-hidden-xs hidden-sm text-center">#17</td>
+                                <td class="planDetail custom-hidden-xs hidden-sm text-center">
+                                    <i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="(1) Examples include clothes, hygiene, toiletries, home care, cleaning supplies, yard care, pet expenses, school supplies, office supplies, shipping, legal fees, and legal services"></i>
+                                </td>
+                                <td class="planDetail hidden-xs hidden-sm text-center">
+                                    <i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Variable expense, A guideline"></i>
+                                </td>
+                                <td class="planDetail text-right">
+                                    <div class="btn-group">
+                                        <a href="#" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li><a href="javascript:ExpenseModalOpen();">Edit</a></li>
+                                            <li><a href="javascript:void(0);">Remove</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table> 
+                </div>
+            </div>
         </script>
         <!--END Templates-->
 
@@ -614,8 +629,47 @@
             var api = "http://api.jordanandrobert.com/budget";
             var data = new Object();
 
+            var budgetMonth = "";
+
+            var objBudgetMonth = new Object();
+            objBudgetMonth.Month = "";
+            objBudgetMonth.MonthCurrent = "";
+            objBudgetMonth.MonthCurrentDT = "";
+            objBudgetMonth.MonthPreviousDT = "";
+            objBudgetMonth.MonthPrevious = "";
+            objBudgetMonth.MonthNextDT = "";
+            objBudgetMonth.MonthNext = "";          
+            
+            var objBudgetIncome = new Object();            
+            objBudgetIncome.TotalIncomeMonthly = "";
+            objBudgetIncome.TotalIncomeBiWeekly = "";
+            objBudgetIncome.TotalIncomeWeekly = "";
+            objBudgetIncome.TotalIncomeBiYearly = "";
+            objBudgetIncome.TotalIncomeYearly = "";
+            objBudgetIncome.TotalIncomeYearlyGross = "";
+            objBudgetIncome.Income = "";
+
+            var objBudgetExpense = new Object();
+
+            var objBudgetMonthSummary = new Object();
+
+
             $(document).ready(function () {
                 console.log("Ready!");
+
+                if ($.urlParam("BudgetMonth") != undefined) {
+                    budgetMonth = $.urlParam("BudgetMonth"); 
+                    data.BudgetMonth = $.urlParam("BudgetMonth"); 
+                }
+                else {
+                    budgetMonth = Date.today().toString("yyyy-MM-01"); 
+                    data.BudgetMonth = budgetMonth;
+                }
+
+                $("#hdnBudgetMonth").val(budgetMonth);
+                
+                BudgetMonthNavigationGet();
+                BudgetByMonthValidate();
 
                 $('[data-toggle="tooltip"]').tooltip();
             });
@@ -626,6 +680,181 @@
 
             function ExpenseModalOpen() {
                 $("#mdlExpense").modal("toggle");
+            }
+
+            function BudgetMonthNavigationGet() {
+                objBudgetMonth.Month = Date.parse(budgetMonth).toString("MMMM");
+                objBudgetMonth.MonthCurrent = Date.parse(budgetMonth).toString("MMMM yyyy");
+                objBudgetMonth.MonthCurrentDT = budgetMonth;
+                objBudgetMonth.MonthPreviousDT = Date.parse(budgetMonth).add(-1).month().toString("yyyy-MM-01");
+                objBudgetMonth.MonthNextDT = Date.parse(budgetMonth).add(1).month().toString("yyyy-MM-01");
+                objBudgetMonth.MonthPrevious = Date.parse(budgetMonth).add(-1).month().toString("MMM yyyy");
+                objBudgetMonth.MonthNext = Date.parse(budgetMonth).add(1).month().toString("MMM yyyy");
+
+                BudgetMonthNavigationRender();
+
+                console.log(JSON.stringify(objBudgetMonth));
+            }
+
+            function BudgetByMonthValidate() {
+                var result = {};
+
+                $.ajax({
+                    type: "GET",
+                    url: api + "/validate",
+                    cache: false,
+                    data: data,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: true,
+                    success: function (msg) {
+                        result = msg;
+
+                        console.log(JSON.stringify(result));
+
+                        if (result[0].HasBudgetFlg == "1") {
+                            BudgetComponentRender();
+                            
+                            BudgetIncomeByMonthGet();
+                            BudgetExpenseByMonthGet();
+                            BudgetMonthSummaryGet();
+
+                            $("#hdnBudgetNumber").val("201703");
+                        }
+                        else {
+                            BudgetStartRender();
+                            
+                            $("#uxBudgetMonthHeader").attr("style", "cursor: default;");
+                        }
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        if (XMLHttpRequest.readyState < 4) {
+                            return true;
+                        }
+                        else {
+                            alert('Error :' + XMLHttpRequest.responseText);
+                        }
+                    }
+                });
+            }
+
+            function BudgetIncomeByMonthGet() {
+                var result = {};
+
+                $.ajax({
+                    type: "GET",
+                    url: api + "/income",
+                    cache: false,
+                    data: data,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: true,
+                    success: function (msg) {
+                        result = msg;
+
+                        console.log(JSON.stringify(result));
+
+                        objBudgetIncome.TotalIncomeMonthly = result[0].TotalIncomeMonthly;
+                        objBudgetIncome.TotalIncomeBiWeekly = result[0].TotalIncomeBiWeekly;
+                        objBudgetIncome.TotalIncomeWeekly = result[0].TotalIncomeWeekly;
+                        objBudgetIncome.TotalIncomeBiYearly = result[0].TotalIncomeBiYearly;
+                        objBudgetIncome.TotalIncomeYearly = result[0].TotalIncomeYearly;
+                        objBudgetIncome.TotalIncomeYearlyGross = result[0].TotalIncomeYearlyGross;
+                        objBudgetIncome.Income = result;
+
+                        console.log(objBudgetIncome);
+
+                        BudgetIncomeByMonthRender();
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        if (XMLHttpRequest.readyState < 4) {
+                            return true;
+                        }
+                        else {
+                            alert('Error :' + XMLHttpRequest.responseText);
+                        }
+                    }
+                });
+            }
+
+            function BudgetExpenseByMonthGet() {
+
+                BudgetExpenseByMonthRender();
+            }
+
+            function BudgetMonthSummaryGet() {
+
+                BudgetMonthSummaryRender();
+            }
+
+            function BudgetByMonthInsert() {
+                console.log("insert! " + budgetMonth);
+            }
+
+            function BudgetByMonthDelete() {
+                if ($("#hdnBudgetNumber").val().length > 0) {
+                    console.log("delete! " + budgetMonth);
+                }
+            }
+
+            function BudgetMonthNavigationRender() {
+                var source = $("#tmplBudgetMonthNavigation").html();
+                var template = Handlebars.compile(source);
+
+                var context = objBudgetMonth;
+                var html = template(context);
+
+                $("#uxBudgetMonthNavigation").html(html);
+            }
+            
+            function BudgetStartRender() {
+                var source = $("#tmplBudgetStart").html();
+                var template = Handlebars.compile(source);
+
+                var context = objBudgetMonth;
+                var html = template(context);
+
+                $("#uxBudgetStart").html(html);
+            }
+
+            function BudgetComponentRender() {
+                var source = $("#tmplBudgetComponent").html();
+                var template = Handlebars.compile(source);
+
+                var context = "";
+                var html = template(context);
+
+                $("#uxBudgetComponent").html(html);
+            }
+
+            function BudgetIncomeByMonthRender() {
+                var source = $("#tmplBudgetIncomeByMonth").html();
+                var template = Handlebars.compile(source);
+
+                var context = objBudgetIncome;
+                var html = template(context);
+
+                $("#uxBudgetIncomeByMonth").html(html);
+            }
+
+            function BudgetExpenseByMonthRender() {
+                var source = $("#tmplBudgetExpenseByMonth").html();
+                var template = Handlebars.compile(source);
+
+                var context = "";
+                var html = template(context);
+
+                $("#uxBudgetExpenseByMonth").html(html);
+            }
+
+            function BudgetMonthSummaryRender() {
+                var source = $("#tmplBudgetMonthSummary").html();
+                var template = Handlebars.compile(source);
+
+                var context = "";
+                var html = template(context);
+
+                $("#uxBudgetMonthSummary").html(html);
             }
         </script>
         <!--END Javascript-->
