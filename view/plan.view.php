@@ -692,8 +692,6 @@
                 objBudgetMonth.MonthNext = Date.parse(budgetMonth).add(1).month().toString("MMM yyyy");
 
                 BudgetMonthNavigationRender();
-
-                console.log(JSON.stringify(objBudgetMonth));
             }
 
             function BudgetByMonthValidate() {
@@ -709,8 +707,6 @@
                     async: true,
                     success: function (msg) {
                         result = msg;
-
-                        console.log(JSON.stringify(result));
 
                         if (result[0].HasBudgetFlg == "1") {
                             BudgetComponentRender();
@@ -752,8 +748,6 @@
                     success: function (msg) {
                         result = msg;
 
-                        console.log(JSON.stringify(result));
-
                         objBudgetIncome.TotalIncomeMonthly = result[0].TotalIncomeMonthly;
                         objBudgetIncome.TotalIncomeBiWeekly = result[0].TotalIncomeBiWeekly;
                         objBudgetIncome.TotalIncomeWeekly = result[0].TotalIncomeWeekly;
@@ -761,8 +755,6 @@
                         objBudgetIncome.TotalIncomeYearly = result[0].TotalIncomeYearly;
                         objBudgetIncome.TotalIncomeYearlyGross = result[0].TotalIncomeYearlyGross;
                         objBudgetIncome.Income = result;
-
-                        console.log(objBudgetIncome);
 
                         BudgetIncomeByMonthRender();
                     },
