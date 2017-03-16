@@ -650,9 +650,33 @@
             objBudgetIncome.Income = "";
 
             var objBudgetExpense = new Object();
+            objBudgetExpense.Expense = "";
+
+            var objBudgetGroup = new Object();
+            objBudgetGroup.BudgetGroup = "";
+            objBudgetGroup.BudgetGroupID = "";
+            objBudgetGroup.BudgetItem = "";
+
+            var objBudgetItem = new Object();
+            objBudgetItem.BudgetItemID = "";
+            objBudgetItem.BudgetNumber = "";
+            objBudgetItem.BudgetCategoryID = "";
+            objBudgetItem.BudgetCategory = "";
+            objBudgetItem.AmountMonthly = "";
+            objBudgetItem.AmountBiWeekly = "";
+            objBudgetItem.AmountWeekly = "";
+            objBudgetItem.AmountBiYearly = "";
+            objBudgetItem.AmountYearly = "";
+            objBudgetItem.TransactionAverage = "";
+            objBudgetItem.Percentage = "";
+            objBudgetItem.RANK = "";
+            objBudgetItem.Description = "";
+            objBudgetItem.Note = "";
 
             var objBudgetMonthSummary = new Object();
-
+            objBudgetMonthSummary.TotalIncomeMontly = "";
+            objBudgetMonthSummary.TotalExpenseMontly = "";
+            objBudgetMonthSummary.BalanceMontly = "";
 
             $(document).ready(function () {
                 console.log("Ready!");
@@ -769,9 +793,38 @@
                 });
             }
 
-            function BudgetExpenseByMonthGet() {
+            function BudgetExpenseByMonthGet() {               
+                var result = {};
 
-                BudgetExpenseByMonthRender();
+                $.ajax({
+                    type: "GET",
+                    url: api + "/expense",
+                    cache: false,
+                    data: data,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: true,
+                    success: function (msg) {
+                        result = msg;
+
+                        console.log(JSON.stringify(result));
+
+                        //BudgetExpenseByMonthContextSet(result);
+                        BudgetExpenseByMonthRender();
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        if (XMLHttpRequest.readyState < 4) {
+                            return true;
+                        }
+                        else {
+                            alert('Error :' + XMLHttpRequest.responseText);
+                        }
+                    }
+                });
+            }
+
+            function BudgetExpenseByMonthContextSet(result) {
+
             }
 
             function BudgetMonthSummaryGet() {
