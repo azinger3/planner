@@ -880,6 +880,7 @@
                     dataType: "json",
                     async: true,
                     success: function (msg) {
+                        BudgetMonthNavigationGet();
                         BudgetByMonthValidate();
 
                         $("#uxBudgetStart").html("");
@@ -1029,7 +1030,10 @@
                             break;
                     }
 
-                    if (objIncome.IncomeTypeID == "1" && $("#uxPlannedHours").val().length > 0 && $("#uxSalary").val().length > 0 && $("#uxTakeHomePay").val().length > 0) {
+                    if (objIncome.IncomeTypeID == "1" 
+                            && $("#uxPlannedHours").val().length > 0 
+                            && $("#uxSalary").val().length > 0 
+                            && $("#uxTakeHomePay").val().length > 0) {
                         objIncome.HourlyRate = (objIncome.Salary / 52) / objIncome.PlannedHours;
                         objIncome.YearNet = objIncome.TakeHomePay * objIncome.PayCycle;
                         objIncome.YearDeduct = (1 - (objIncome.YearNet / objIncome.Salary)) * 100;
@@ -1041,7 +1045,10 @@
                         $("#uxIncomeTotal").val("$" + NumberCommaFormat(objIncome.IncomeTotal));
                     }
 
-                    if (objIncome.IncomeTypeID == "2" && $("#uxPlannedHours").val().length > 0 && $("#uxHourlyRate").val().length > 0 && $("#uxYearDeduct").val().length > 0) {
+                    if (objIncome.IncomeTypeID == "2" 
+                            && $("#uxPlannedHours").val().length > 0 
+                            && $("#uxHourlyRate").val().length > 0 
+                            && $("#uxYearDeduct").val().length > 0) {
                         objIncome.Salary = (objIncome.HourlyRate * objIncome.PlannedHours) * 52;
                         objIncome.YearNet = objIncome.Salary * (1 - (objIncome.YearDeduct / 100));
                         objIncome.TakeHomePay = Math.round(objIncome.YearNet / objIncome.PayCycle);

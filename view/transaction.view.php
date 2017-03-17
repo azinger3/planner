@@ -270,7 +270,7 @@
 
         <script id="tmplTransactionEdit" type="text/x-handlebars-template">
             <td>
-                <input type="text" class="form-control input-sm input-transaction-date-edit input-datepicker" id="uxTransactionDT_{{TransactionID}}" value="{{TransactionDT}}" />
+                <input type="text" class="form-control input-sm input-transaction-date-edit input-datepicker" readonly="true" id="uxTransactionDT_{{TransactionID}}" value="{{TransactionDT}}" />
             </td>
             <td>
                 <input type="text" class="form-control input-sm" id="uxDescription_{{TransactionID}}" value="{{Description}}" />
