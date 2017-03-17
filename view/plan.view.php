@@ -718,6 +718,22 @@
 
                     $("#uxPayCycleDescription").html(PayCycleDescription);
                 });
+
+                $("#uxSalary").focusout(function() {
+                    console.log("salary out!");
+                });
+
+                $("#uxTakeHomePay").focusout(function() {
+                    console.log("take out!");
+                });
+
+                $("#uxHourlyRate").focusout(function() {
+                    console.log("hoour out!");
+                });
+
+                $("#uxYearDeduct").focusout(function() {
+                    console.log("year out!");
+                });
             });
 
             function ExpenseModalOpen() {
