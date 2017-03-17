@@ -1031,24 +1031,27 @@
                     if (objIncome.IncomeTypeID == "1" && $("#uxPlannedHours").val().length > 0 && $("#uxSalary").val().length > 0 && $("#uxTakeHomePay").val().length > 0) {
                         objIncome.HourlyRate = (objIncome.Salary / 52) / objIncome.PlannedHours;
                         objIncome.YearNet = objIncome.TakeHomePay * objIncome.PayCycle;
-                        objIncome.YearDeduct = 1 - (objIncome.YearNet / objIncome.Salary);
+                        objIncome.YearDeduct = (1 - (objIncome.YearNet / objIncome.Salary)) * 100;
+                        
+                        objIncome.IncomeTotal = objIncome.TakeHomePay;
+
+                        $("#uxHourlyRate").val(objIncome.HourlyRate.toFixed(2));
+                        $("#uxYearDeduct").val(objIncome.YearDeduct.toFixed(2));
+                        $("#uxIncomeTotal").val("$" + NumberCommaFormat(objIncome.IncomeTotal));
                     }
 
                     if (objIncome.IncomeTypeID == "2" && $("#uxPlannedHours").val().length > 0 && $("#uxHourlyRate").val().length > 0 && $("#uxYearDeduct").val().length > 0) {
                         objIncome.Salary = (objIncome.HourlyRate * objIncome.PlannedHours) * 52;
                         objIncome.YearNet = objIncome.Salary * (1 - (objIncome.YearDeduct / 100));
-                        objIncome.TakeHomePay = objIncome.YearNet / objIncome.PayCycle;
+                        objIncome.TakeHomePay = Math.round(objIncome.YearNet / objIncome.PayCycle);
+                        
+                        objIncome.IncomeTotal = objIncome.TakeHomePay;
+
+                        $("#uxSalary").val(objIncome.Salary);
+                        $("#uxTakeHomePay").val(objIncome.TakeHomePay);
+                        $("#uxIncomeTotal").val("$" + NumberCommaFormat(objIncome.IncomeTotal));
                     }
-                }
-
-                objIncome.YearDeduct = objIncome.YearDeduct * 100;
-                objIncome.IncomeTotal = objIncome.TakeHomePay;
-
-                $("#uxSalary").val(objIncome.Salary);
-                $("#uxTakeHomePay").val(objIncome.TakeHomePay);
-                $("#uxHourlyRate").val(objIncome.HourlyRate.toFixed(2));
-                $("#uxYearDeduct").val(objIncome.YearDeduct.toFixed(2));
-                $("#uxIncomeTotal").val(objIncome.IncomeTotal);
+                }  
             }
 
             function BudgetExpenseByMonthContextSet(result) {
