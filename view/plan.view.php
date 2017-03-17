@@ -1012,45 +1012,40 @@
 
                 objIncome.IncomeTypeID = $("#uxIncomeType option:selected").val();
                 objIncome.PayCycleID = $("#uxPayCycle option:selected").val();
-                objIncome.PlannedHours = $("#uxPlannedHours").val();
-                objIncome.Salary = $("#uxSalary").val();
-                objIncome.TakeHomePay = $("#uxTakeHomePay").val();
-                objIncome.HourlyRate = $("#uxHourlyRate").val();
-                objIncome.YearDeduct = $("#uxYearDeduct").val();
+                objIncome.PlannedHours = parseInt($("#uxPlannedHours").val());
+                objIncome.Salary = parseInt($("#uxSalary").val());
+                objIncome.TakeHomePay = parseInt($("#uxTakeHomePay").val());
+                objIncome.HourlyRate = parseInt($("#uxHourlyRate").val());
+                objIncome.YearDeduct = parseInt($("#uxYearDeduct").val());
                 
                 if (objIncome.IncomeTypeID.length > 0 && objIncome.PayCycleID.length > 0) {
                     switch(objIncome.PayCycleID) {
                         case "1":
-                            objIncome.PayCycle = "26";
+                            objIncome.PayCycle = 26;
                             break;
                         case "2":
-                            objIncome.PayCycle = "52";
+                            objIncome.PayCycle = 52;
                             break;
                     }
 
                     switch(objIncome.IncomeTypeID) {
                         case "1":
-                            console.log(objIncome);
+                            objIncome.HourlyRate = (objIncome.Salary / 52) / objIncome.PlannedHours;
+                            objIncome.YearNet = objIncome.TakeHomePay * objIncome.PayCycle;
+                            objIncome.YearDeduct = 1 - (objIncome.YearNet / objIncome.Salary);
                             break;
                         case "2":
-                            console.log(objIncome);
+                            objIncome.Salary = (objIncome.HourlyRate * objIncome.PlannedHours) * 52;
+                            objIncome.YearNet = objIncome.Salary * (1 - (objIncome.YearDeduct / 100));
+                            objIncome.TakeHomePay = objIncome.YearNet / objIncome.PayCycle;
                             break;
                     }
                 }
 
-                //planhour = input
-                //salary = input
-                //takehome = input
-                //rate = (salary/52)/planhour
-                //@yearnet = takehome * paycycle
-                //yeardeduct = 1-(@yearnet/salary)
+                objIncome.YearDeduct = objIncome.YearDeduct * 100;
+                objIncome.Total = objIncome.TakeHomePay;
 
-                //planhour = input
-                //yeardeduct = input
-                //rate = input
-                //salary = (rate*planhour) * 52
-                //@yearnet = salary*(1-(yeardeduct/100))
-                //takehome = @yearnet/paycycle
+                console.log(objIncome);
             }
 
             function BudgetExpenseByMonthContextSet(result) {
