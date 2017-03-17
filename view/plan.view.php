@@ -786,6 +786,7 @@
                             BudgetStartRender();
                             
                             $("#uxBudgetMonthHeader").attr("style", "cursor: default;");
+                            $("#uxBudgetComponent").html("");
                         }
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
@@ -844,7 +845,7 @@
                     data: data,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
-                    async: false,
+                    async: true,
                     success: function (msg) {
                         result = msg;
 
