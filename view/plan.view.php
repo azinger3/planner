@@ -447,9 +447,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="text-center">$1,000</td>
-                                    <td class="text-center text-danger">$1,000</td>
-                                    <td class="text-center"><span class="label label-info">$1,000</span></td>
+                                    <td class="text-center text-success">${{NumberCommaFormat TotalIncomeMonthly}}</td>
+                                    <td class="text-center text-danger">${{NumberCommaFormat TotalExpenseMonthly}}</td>
+                                    <td class="text-center"><span class="label label-info">${{NumberCommaFormat BalanceMonthly}}</span></td>
                                 </tr>
                             </tbody>
                         </table> 
@@ -489,7 +489,7 @@
                             {{#each Income}}
                             <tr>
                                 <td class="planDetail">{{IncomeName}}</td>
-                                <td class="planDetail text-center">${{NumberCommaFormat IncomeMonthly}}</td>
+                                <td class="planDetail text-center text-success">${{NumberCommaFormat IncomeMonthly}}</td>
                                 <td class="planDetail text-center">${{NumberCommaFormat IncomeBiWeekly}}</td>
                                 <td class="planDetail custom-hidden-xs text-center">${{NumberCommaFormat IncomeWeekly}}</td>
                                 <td class="planDetail custom-hidden-xs text-center">${{NumberCommaFormat IncomeBiYearly}}</td>
@@ -514,7 +514,7 @@
                         <tfoot>
                             <tr>
                                 <td class="planDetail"><h5><strong>TOTAL</strong></h5></td>
-                                <td class="planDetail text-center"><h5><strong>${{NumberCommaFormat TotalIncomeMonthly}}</strong></h5></td>
+                                <td class="planDetail text-center text-success"><h5><strong>${{NumberCommaFormat TotalIncomeMonthly}}</strong></h5></td>
                                 <td class="planDetail text-center"><h5><strong>${{NumberCommaFormat TotalIncomeBiWeekly}}</strong></h5></td>
                                 <td class="planDetail custom-hidden-xs text-center"><h5><strong>${{NumberCommaFormat TotalIncomeWeekly}}</strong></h5></td>
                                 <td class="planDetail custom-hidden-xs text-center"><h5><strong>${{NumberCommaFormat TotalIncomeBiYearly}}</strong></h5></td>
@@ -533,9 +533,10 @@
         </script>
 
         <script id="tmplBudgetExpenseByMonth" type="text/x-handlebars-template">
+            {{#each Expense}}
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    Strategic
+                    {{BudgetGroup}}
                     <div class="pull-right">
                         <a href="javascript:ExpenseModalOpen();" title="Add Category" class="addCategoryLink"><i class="fa fa-plus"></i></a>
                     </div>
@@ -548,7 +549,7 @@
                                 <th class="planDetail text-center">Monthly</th>
                                 <th class="planDetail hidden-xs text-center">Bi-Weekly</th>
                                 <th class="planDetail hidden-xs text-center">Weekly</th>
-                                <th class="planDetail hidden-xs text-center">Half-Year</th>
+                                <th class="planDetail hidden-xs text-center">6 Month</th>
                                 <th class="planDetail hidden-xs text-center">Year</th>
                                 <th class="planDetail text-center">Average</th>
                                 <th class="planDetail custom-hidden-xs hidden-sm text-center">Percentage</th>
@@ -559,21 +560,30 @@
                             </tr>
                         </thead>
                         <tbody>
+                            {{#each BudgetItem}}
                             <tr>
-                                <td class="planDetail">Giving</td>
-                                <td class="planDetail text-center">$1,000</td>
-                                <td class="planDetail hidden-xs text-center">$1,000</td>
-                                <td class="planDetail hidden-xs text-center">$1,000</td>
-                                <td class="planDetail hidden-xs text-center">$1,000</td>
-                                <td class="planDetail hidden-xs text-center">$1,000</td>
-                                <td class="planDetail text-center">$1,000</td>
-                                <td class="planDetail custom-hidden-xs hidden-sm text-center">40.61%</td>
-                                <td class="planDetail custom-hidden-xs hidden-sm text-center">#17</td>
+                                <td class="planDetail">{{BudgetCategory}}</td>
+                                <td class="planDetail text-center text-danger">${{NumberCommaFormat AmountMonthly}}</td>
+                                <td class="planDetail hidden-xs text-center">${{NumberCommaFormat AmountBiWeekly}}</td>
+                                <td class="planDetail hidden-xs text-center">${{NumberCommaFormat AmountWeekly}}</td>
+                                <td class="planDetail hidden-xs text-center">${{NumberCommaFormat AmountBiYearly}}</td>
+                                <td class="planDetail hidden-xs text-center">${{NumberCommaFormat AmountYearly}}</td>
+                                <td class="planDetail text-center">${{NumberCommaFormat TransactionAverage}}</td>
+                                <td class="planDetail custom-hidden-xs hidden-sm text-center">{{Percentage}}%</td>
+                                <td class="planDetail custom-hidden-xs hidden-sm text-center">#{{RANK}}</td>
                                 <td class="planDetail custom-hidden-xs hidden-sm text-center">
-                                    <i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="(1) Examples include clothes, hygiene, toiletries, home care, cleaning supplies, yard care, pet expenses, school supplies, office supplies, shipping, legal fees, and legal services"></i>
+                                {{#if Description}}
+                                    <i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="{{Description}}"></i>
+                                {{else}}
+                                    <span>--</span>
+                                {{/if}}
                                 </td>
                                 <td class="planDetail hidden-xs hidden-sm text-center">
-                                    <i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Variable expense, A guideline"></i>
+                                {{#if Note}}
+                                    <i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="{{Note}}"></i>
+                                {{else}}
+                                    <span>--</span>
+                                {{/if}}
                                 </td>
                                 <td class="planDetail text-right">
                                     <div class="btn-group">
@@ -585,36 +595,12 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="planDetail">Car Replacement</td>
-                                <td class="planDetail text-center">$1,000</td>
-                                <td class="planDetail hidden-xs text-center">$1,000</td>
-                                <td class="planDetail hidden-xs text-center">$1,000</td>
-                                <td class="planDetail hidden-xs text-center">$1,000</td>
-                                <td class="planDetail hidden-xs text-center">$1,000</td>
-                                <td class="planDetail text-center">$1,000</td>
-                                <td class="planDetail custom-hidden-xs hidden-sm text-center">40.61%</td>
-                                <td class="planDetail custom-hidden-xs hidden-sm text-center">#17</td>
-                                <td class="planDetail custom-hidden-xs hidden-sm text-center">
-                                    <i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="(1) Examples include clothes, hygiene, toiletries, home care, cleaning supplies, yard care, pet expenses, school supplies, office supplies, shipping, legal fees, and legal services"></i>
-                                </td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">
-                                    <i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Variable expense, A guideline"></i>
-                                </td>
-                                <td class="planDetail text-right">
-                                    <div class="btn-group">
-                                        <a href="#" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
-                                        <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="javascript:ExpenseModalOpen();">Edit</a></li>
-                                            <li><a href="javascript:void(0);">Remove</a></li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
+                            {{/each}}
                         </tbody>
                     </table> 
                 </div>
             </div>
+            {{/each}}
         </script>
         <!--END Templates-->
 
@@ -653,8 +639,8 @@
             objBudgetExpense.Expense = "";
 
             var objBudgetGroup = new Object();
-            objBudgetGroup.BudgetGroup = "";
             objBudgetGroup.BudgetGroupID = "";
+            objBudgetGroup.BudgetGroup = "";
             objBudgetGroup.BudgetItem = "";
 
             var objBudgetItem = new Object();
@@ -674,9 +660,9 @@
             objBudgetItem.Note = "";
 
             var objBudgetMonthSummary = new Object();
-            objBudgetMonthSummary.TotalIncomeMontly = "";
-            objBudgetMonthSummary.TotalExpenseMontly = "";
-            objBudgetMonthSummary.BalanceMontly = "";
+            objBudgetMonthSummary.TotalIncomeMonthly = "";
+            objBudgetMonthSummary.TotalExpenseMonthly = "";
+            objBudgetMonthSummary.BalanceMonthly = "";
 
             $(document).ready(function () {
                 console.log("Ready!");
@@ -695,7 +681,7 @@
                 BudgetMonthNavigationGet();
                 BudgetByMonthValidate();
 
-                $('[data-toggle="tooltip"]').tooltip();
+                
             });
 
             function IncomeModalOpen() {
@@ -737,7 +723,6 @@
                             
                             BudgetIncomeByMonthGet();
                             BudgetExpenseByMonthGet();
-                            BudgetMonthSummaryGet();
 
                             $("#hdnBudgetNumber").val("201703");
                         }
@@ -806,11 +791,14 @@
                     async: true,
                     success: function (msg) {
                         result = msg;
-
-                        console.log(JSON.stringify(result));
-
-                        //BudgetExpenseByMonthContextSet(result);
+                        
+                        BudgetExpenseByMonthContextSet(result);
                         BudgetExpenseByMonthRender();
+                        
+                        objBudgetMonthSummary.TotalIncomeMonthly = result[0].TotalIncomeMonthly;
+                        objBudgetMonthSummary.TotalExpenseMonthly = result[0].TotalExpenseMonthly;
+                        objBudgetMonthSummary.BalanceMonthly = result[0].BalanceMonthly;
+                        BudgetMonthSummaryRender();
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
                         if (XMLHttpRequest.readyState < 4) {
@@ -823,15 +811,6 @@
                 });
             }
 
-            function BudgetExpenseByMonthContextSet(result) {
-
-            }
-
-            function BudgetMonthSummaryGet() {
-
-                BudgetMonthSummaryRender();
-            }
-
             function BudgetByMonthInsert() {
                 console.log("insert! " + budgetMonth);
             }
@@ -840,6 +819,56 @@
                 if ($("#hdnBudgetNumber").val().length > 0) {
                     console.log("delete! " + budgetMonth);
                 }
+            }
+
+            function BudgetExpenseByMonthContextSet(result) {
+                objBudgetExpense = {};
+
+                var tmpBudgetGroup = $.map(result, function (item) {
+                    return {
+                        BudgetGroupID: item.BudgetGroupID,
+                        BudgetGroup: item.BudgetGroup,
+                    };
+                });
+
+                var uniqBudgetGroup = _.uniqWith(tmpBudgetGroup, _.isEqual);
+                
+                var arrBudgetGroup = [];
+
+                $.map(uniqBudgetGroup, function (group) {
+                    var arrBudgetItem = [];
+
+                    $.map(result, function (budgetItem) {
+                        if (group.BudgetGroupID == budgetItem.BudgetGroupID) {
+                            objBudgetItem = {};
+                            objBudgetItem.BudgetItemID = budgetItem.BudgetItemID;
+                            objBudgetItem.BudgetNumber = budgetItem.BudgetNumber;
+                            objBudgetItem.BudgetCategoryID = budgetItem.BudgetCategoryID;
+                            objBudgetItem.BudgetCategory = budgetItem.BudgetCategory;
+                            objBudgetItem.AmountMonthly = budgetItem.AmountMonthly;
+                            objBudgetItem.AmountBiWeekly = budgetItem.AmountBiWeekly;
+                            objBudgetItem.AmountWeekly = budgetItem.AmountWeekly;
+                            objBudgetItem.AmountBiYearly = budgetItem.AmountBiYearly;
+                            objBudgetItem.AmountYearly = budgetItem.AmountYearly;
+                            objBudgetItem.TransactionAverage = budgetItem.TransactionAverage;
+                            objBudgetItem.Percentage = budgetItem.Percentage;
+                            objBudgetItem.RANK = budgetItem.RANK;
+                            objBudgetItem.Description = budgetItem.Description;
+                            objBudgetItem.Note = budgetItem.Note;
+
+                            arrBudgetItem.push(objBudgetItem);
+                        }
+                    });
+
+                    objBudgetGroup = {};
+                    objBudgetGroup.BudgetGroupID = group.BudgetGroupID;
+                    objBudgetGroup.BudgetGroup = group.BudgetGroup;
+                    objBudgetGroup.BudgetItem = arrBudgetItem;
+                    
+                    arrBudgetGroup.push(objBudgetGroup);
+                });
+
+                objBudgetExpense.Expense = arrBudgetGroup;
             }
 
             function BudgetMonthNavigationRender() {
@@ -886,17 +915,19 @@
                 var source = $("#tmplBudgetExpenseByMonth").html();
                 var template = Handlebars.compile(source);
 
-                var context = "";
+                var context = objBudgetExpense;
                 var html = template(context);
 
                 $("#uxBudgetExpenseByMonth").html(html);
+
+                $('[data-toggle="tooltip"]').tooltip();
             }
 
             function BudgetMonthSummaryRender() {
                 var source = $("#tmplBudgetMonthSummary").html();
                 var template = Handlebars.compile(source);
 
-                var context = "";
+                var context = objBudgetMonthSummary;
                 var html = template(context);
 
                 $("#uxBudgetMonthSummary").html(html);
