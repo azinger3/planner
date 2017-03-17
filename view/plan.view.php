@@ -719,6 +719,10 @@
                     $("#uxPayCycleDescription").html(PayCycleDescription);
                 });
 
+                $("#uxPlannedHours").focusout(function() {
+                    console.log("planned hour out!");
+                });
+
                 $("#uxSalary").focusout(function() {
                     console.log("salary out!");
                 });
