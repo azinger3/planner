@@ -192,7 +192,12 @@
         </div>
         <!--Container END-->
 
-        <div id="uxBudgetComponent"></div>
+        <div id="uxBudgetComponent">
+            <div class="text-center">
+                <i class="fa fa-refresh fa-spin fa-2x fa-fw"></i>
+                <span class="loading">Loading...</span>
+            </div>
+        </div>
         
         <!--Modals-->
 
