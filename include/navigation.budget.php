@@ -26,7 +26,7 @@
                   <a href="/budget/breakdown">Breakdown</a>
                 </li>
                 <li>
-                  <a href="http://jordanandrobert.com/budget/BudgetPlan.pdf" target="_blank">Planning</a>
+                  <a href="/budget/plan">Planning</a>
                 </li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
