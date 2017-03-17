@@ -176,7 +176,8 @@
                     <div class="col-md-2">
                     </div>
                     <div class="col-md-8">
-                        <div id="uxBudgetMonthNavigation"></div>
+                        <div id="uxBudgetMonthNavigation">
+                        </div>
                     </div>
                     <div class="col-md-2">
                     </div>
@@ -185,7 +186,8 @@
             <!--Page Header END-->
 
             <!--Content START-->
-            <div id="uxBudgetStart"></div>
+            <div id="uxBudgetStart">
+            </div>
             <!--Content END-->
 
             <!--**********************************************************Main Content END**********************************************************-->
@@ -193,10 +195,6 @@
         <!--Container END-->
 
         <div id="uxBudgetComponent">
-            <div class="text-center">
-                <i class="fa fa-refresh fa-spin fa-2x fa-fw"></i>
-                <span class="loading">Loading...</span>
-            </div>
         </div>
         
         <!--Modals-->
@@ -208,7 +206,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="uxIncomeModalTitle">Edit/Add Income</h4>
+                        <h4 class="modal-title" id="uxIncomeModalTitle"></h4>
                     </div>
                     <div class="modal-body">
                         <!--All-->
@@ -217,6 +215,7 @@
                                 <div class="form-group">
                                     <label for="uxIncomeType" class="small">Type:</label>
                                     <select class="form-control input-sm" id="uxIncomeType">
+                                        <option value="">Select One...</option>
                                         <option value="1">Salary</option>
                                         <option value="2">Hourly</option>
                                     </select>
@@ -226,6 +225,7 @@
                                 <div class="form-group">
                                     <label for="uxPayCycle" class="small">Pay Cycle:</label>
                                     <select class="form-control input-sm" id="uxPayCycle">
+                                        <option value="">Select One...</option>
                                         <option value="1">Bi-Weekly</option>
                                         <option value="2">Weekly</option>
                                     </select>
@@ -269,13 +269,13 @@
                         <!--TOTAL-->
                         <div class="form-group">
                             <label for="uxIncomeTotal" class="small">Total:</label>
-                            <div class="text-center small pull-right payCycle" id="uxPayCycleDescription">Every 2 Weeks</div>
+                            <div class="text-center small pull-right payCycle" id="uxPayCycleDescription"></div>
                             <input type="text" class="form-control incomeTotal" id="uxIncomeTotal" disabled value="$2,185">
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-info btn-sm">Save</button>
+                        <button type="button" class="btn btn-info btn-sm" id="uxIncomeSave" data-budget-income-id="">Save</button>
                     </div>
                 </div>
             </div>
@@ -469,7 +469,7 @@
                 <div class="panel-heading">
                     Income
                     <div class="pull-right">
-                        <a href="javascript:IncomeModalOpen();" title="Add Income" class="addCategoryLink"><i class="fa fa-plus"></i></a>
+                        <a href="javascript:BudgetIncomeDetailModalShow(0);" title="Add Income" class="addCategoryLink"><i class="fa fa-plus"></i></a>
                     </div>
                 </div>
                 <div class="panel-body">
@@ -508,8 +508,8 @@
                                     <div class="btn-group">
                                         <a href="#" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
                                         <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="javascript:IncomeModalOpen();">Edit</a></li>
-                                            <li><a href="javascript:void(0);">Remove</a></li>
+                                            <li><a href="javascript:BudgetIncomeDetailModalShow({{BudgetIncomeID}});">Edit</a></li>
+                                            <li><a href="javascript:BudgetIncomeDelete({{BudgetIncomeID}});">Remove</a></li>
                                         </ul>
                                     </div>
                                 </td>
@@ -686,12 +686,39 @@
                 BudgetMonthNavigationGet();
                 BudgetByMonthValidate();
 
-                
-            });
+                $("#uxIncomeSave").click(function (event) {
+                    var budgetIncomeID = $(this).data("budget-income-id");
+                    
+                    if (budgetIncomeID > 0) {
+                        console.log('update income');
+                    }
+                    else {
+                        console.log('insert income');
+                    }
+                });
 
-            function IncomeModalOpen() {
-                $("#mdlIncomeCalculator").modal("toggle");
-            }
+                $("#uxIncomeType").change(function() {
+                    var IncomeTypeID = $("#uxIncomeType option:selected").val();
+
+                    BudgetIncomeDetailModalTextboxSet(IncomeTypeID);
+                });
+
+                $("#uxPayCycle").change(function() {
+                    var PayCycleDescription = "";
+                    var PayCycleID = $("#uxPayCycle option:selected").val();
+
+                    switch(PayCycleID) {
+                        case "1":
+                            PayCycleDescription = "Every 2 Weeks";
+                            break;
+                        case "2":
+                            PayCycleDescription = "Every Week";
+                            break;
+                    }
+
+                    $("#uxPayCycleDescription").html(PayCycleDescription);
+                });
+            });
 
             function ExpenseModalOpen() {
                 $("#mdlExpense").modal("toggle");
@@ -728,8 +755,6 @@
                             
                             BudgetIncomeByMonthGet();
                             BudgetExpenseByMonthGet();
-
-                            $("#hdnBudgetNumber").val("201703");
                         }
                         else {
                             BudgetStartRender();
@@ -796,6 +821,8 @@
                     async: true,
                     success: function (msg) {
                         result = msg;
+
+                        $("#hdnBudgetNumber").val(result[0].BudgetNumber);
                         
                         BudgetExpenseByMonthContextSet(result);
                         BudgetExpenseByMonthRender();
@@ -817,12 +844,140 @@
             }
 
             function BudgetByMonthInsert() {
-                console.log("insert! " + budgetMonth);
+                $.ajax({
+                    type: "POST",
+                    url: api,
+                    cache: false,
+                    data: JSON.stringify(data),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: true,
+                    success: function (msg) {
+                        BudgetByMonthValidate();
+
+                        $("#uxBudgetStart").html("");
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        if (XMLHttpRequest.readyState < 4) {
+                            return true;
+                        }
+                        else {
+                            alert('Error :' + XMLHttpRequest.responseText);
+                        }
+                    }
+                });
             }
 
             function BudgetByMonthDelete() {
                 if ($("#hdnBudgetNumber").val().length > 0) {
-                    console.log("delete! " + budgetMonth);
+                    if (confirm("Delete this month? Are you sure?")) {
+                        $.ajax({
+                            type: "DELETE",
+                            url: api + "/" + $("#hdnBudgetNumber").val(),
+                            cache: false,
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            async: true,
+                            success: function (msg) {
+                                BudgetByMonthValidate();
+                            },
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                if (XMLHttpRequest.readyState < 4) {
+                                    return true;
+                                }
+                                else {
+                                    alert('Error :' + XMLHttpRequest.responseText);
+                                }
+                            }
+                        }); 
+                    }
+                }
+            }
+
+            function BudgetIncomeDetailGet(BudgetIncomeID) {              
+                var result = {};
+
+                $.ajax({
+                    type: "GET",
+                    url: api + "/income/" + BudgetIncomeID,
+                    cache: false,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: true,
+                    success: function (msg) {
+                        result = msg;
+                        
+                        $("#uxIncomeType option[value='"+ result[0].IncomeTypeID + "']").prop("selected", true);
+                        $("#uxPayCycle option[value='"+ result[0].PayCycleID + "']").prop("selected", true);
+                        $("#uxPlannedHours").val(result[0].PlannedHours);
+                        $("#uxSalary").val(result[0].Salary);
+                        $("#uxTakeHomePay").val(result[0].TakeHomePay);
+                        $("#uxHourlyRate").val(result[0].HourlyRate);
+                        $("#uxYearDeduct").val(result[0].YearDeduct);
+                        $("#uxPayCycleDescription").html(result[0].PayCycleDescription);
+                        $("#uxIncomeTotal").val("$" + NumberCommaFormat(result[0].TakeHomePay));
+                        
+                        BudgetIncomeDetailModalTextboxSet(result[0].IncomeTypeID);
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        if (XMLHttpRequest.readyState < 4) {
+                            return true;
+                        }
+                        else {
+                            alert('Error :' + XMLHttpRequest.responseText);
+                        }
+                    }
+                });
+            }
+
+            function BudgetIncomeDetailModalShow(BudgetIncomeID) {
+                BudgetIncomeDetailModalReset();
+
+                $("#uxIncomeSave").data("budget-income-id", BudgetIncomeID);
+                
+                if (BudgetIncomeID > 0) {
+                    $("#uxIncomeModalTitle").html("Edit Income");
+                    
+                    BudgetIncomeDetailGet(BudgetIncomeID);
+                }
+                else {
+                    $("#uxIncomeModalTitle").html("Add Income");
+                }
+
+                $("#mdlIncomeCalculator").modal("toggle");
+            }
+
+            function BudgetIncomeDetailModalReset() {
+                $("#uxIncomeType option[value='']").prop("selected", true);
+                $("#uxPayCycle option[value='']").prop("selected", true);
+                $("#uxPlannedHours").val("");
+                $("#uxSalary").val("");
+                $("#uxTakeHomePay").val("");
+                $("#uxHourlyRate").val("");
+                $("#uxYearDeduct").val("");
+                $("#uxPayCycleDescription").html("");
+                $("#uxIncomeTotal").val("");
+                
+                $("#uxSalary").prop("disabled", false);
+                $("#uxTakeHomePay").prop("disabled", false);
+                $("#uxHourlyRate").prop("disabled", false);
+                $("#uxYearDeduct").prop("disabled", false);
+            }
+
+            function BudgetIncomeDetailModalTextboxSet(IncomeTypeID) {
+                switch(IncomeTypeID) {
+                    case "1":
+                        $("#uxSalary").prop("disabled", false);
+                        $("#uxTakeHomePay").prop("disabled", false);
+                        $("#uxHourlyRate").prop("disabled", true);
+                        $("#uxYearDeduct").prop("disabled", true);
+                        break;
+                    case "2":
+                        $("#uxSalary").prop("disabled", true);
+                        $("#uxTakeHomePay").prop("disabled", true);
+                        $("#uxHourlyRate").prop("disabled", false);
+                        $("#uxYearDeduct").prop("disabled", false);
+                        break;
                 }
             }
 
