@@ -717,26 +717,32 @@
                     }
 
                     $("#uxPayCycleDescription").html(PayCycleDescription);
+                    BudgetIncomeCalculate();
                 });
 
                 $("#uxPlannedHours").focusout(function() {
                     console.log("planned hour out!");
+                    BudgetIncomeCalculate();
                 });
 
                 $("#uxSalary").focusout(function() {
                     console.log("salary out!");
+                    BudgetIncomeCalculate();
                 });
 
                 $("#uxTakeHomePay").focusout(function() {
                     console.log("take out!");
+                    BudgetIncomeCalculate();
                 });
 
                 $("#uxHourlyRate").focusout(function() {
                     console.log("hoour out!");
+                    BudgetIncomeCalculate();
                 });
 
                 $("#uxYearDeduct").focusout(function() {
                     console.log("year out!");
+                    BudgetIncomeCalculate();
                 });
             });
 
@@ -999,6 +1005,52 @@
                         $("#uxYearDeduct").prop("disabled", false);
                         break;
                 }
+            }
+
+            function BudgetIncomeCalculate() {
+                var objIncome = new Object();
+
+                objIncome.IncomeTypeID = $("#uxIncomeType option:selected").val();
+                objIncome.PayCycleID = $("#uxPayCycle option:selected").val();
+                objIncome.PlannedHours = $("#uxPlannedHours").val();
+                objIncome.Salary = $("#uxSalary").val();
+                objIncome.TakeHomePay = $("#uxTakeHomePay").val();
+                objIncome.HourlyRate = $("#uxHourlyRate").val();
+                objIncome.YearDeduct = $("#uxYearDeduct").val();
+                
+                if (objIncome.IncomeTypeID.length > 0 && objIncome.PayCycleID.length > 0) {
+                    switch(objIncome.PayCycleID) {
+                        case "1":
+                            objIncome.PayCycle = "26";
+                            break;
+                        case "2":
+                            objIncome.PayCycle = "52";
+                            break;
+                    }
+
+                    switch(objIncome.IncomeTypeID) {
+                        case "1":
+                            console.log(objIncome);
+                            break;
+                        case "2":
+                            console.log(objIncome);
+                            break;
+                    }
+                }
+
+                //planhour = input
+                //salary = input
+                //takehome = input
+                //rate = (salary/52)/planhour
+                //@yearnet = takehome * paycycle
+                //yeardeduct = 1-(@yearnet/salary)
+
+                //planhour = input
+                //yeardeduct = input
+                //rate = input
+                //salary = (rate*planhour) * 52
+                //@yearnet = salary*(1-(yeardeduct/100))
+                //takehome = @yearnet/paycycle
             }
 
             function BudgetExpenseByMonthContextSet(result) {
