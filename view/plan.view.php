@@ -844,7 +844,7 @@
                     data: data,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
-                    async: true,
+                    async: false,
                     success: function (msg) {
                         result = msg;
 
