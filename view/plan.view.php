@@ -209,6 +209,10 @@
                     </div>
                     <div class="modal-body">
                         <!--All-->
+                        <div class="form-group">
+                            <label for="uxIncomeName" class="small">Name:</label>
+                            <input type="text" class="form-control input-sm" id="uxIncomeName" placeholder="" style="text-align: center;">
+                        </div>
                         <div class="row">
                             <div id="IncomeHardErrorMessage"></div>
                             <div class="col-xs-6">
@@ -230,10 +234,6 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="uxIncomeName" class="small">Name:</label>
-                            <input type="text" class="form-control input-sm" id="uxIncomeName" placeholder="" style="text-align: center;">
                         </div>
                         <div class="form-group">
                             <label for="uxPlannedHours" class="small">Planned Hours:</label>
@@ -295,10 +295,11 @@
                     </div>
                     <div class="modal-body">
                         <div class="row">
+                            <div id="ExpenseHardErrorMessage"></div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="uxBudgetGroup">Group:</label>
-                                    <input type="text" class="form-control input-sm" id="uxBudgetGroup" data-group-id="1">
+                                    <input type="text" class="form-control input-sm" id="uxBudgetGroup" data-group-id="0">
                                 </div>
                             </div>
                         </div>
@@ -306,14 +307,14 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="uxBudgetCategory">Category:</label>
-                                    <input type="text" class="form-control input-sm" id="uxBudgetCategory" data-category-id="1">
+                                    <input type="text" class="form-control input-sm" id="uxBudgetCategory" data-category-id="0">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="uxAmount">Amount:</label>
+                                    <label for="uxAmount">Amount $:</label>
                                     <input type="number" class="form-control input-sm" id="uxAmount" placeholder="$">
                                 </div>
                             </div>
@@ -362,13 +363,13 @@
                                         <div class="col-xs-6 col-sm-6 col-md-6">
                                             <div class="form-group">
                                                 <label class="small"><input type="checkbox" id="uxHasFundFlg"> Savings Fund</label>
-                                                <input type="text" class="form-control input-sm" id="uxFundName" placeholder="Fund Name" data-fund-id="1">
+                                                <input type="text" class="form-control input-sm" id="uxFundName" placeholder="Fund Name" data-fund-id="0">
                                             </div>
                                         </div>
                                         <div class="col-xs-6 col-sm-6 col-md-6">
                                             <div class="form-group">
-                                                <label for="uxStartingBalance" class="small">&nbsp;</label>
-                                                <input type="text" class="form-control input-sm" id="uxStartingBalance" placeholder="$">
+                                                <label for="uxStartingBalance" class="small">Starting Balance:</label>
+                                                <input type="number" class="form-control input-sm" id="uxStartingBalance" placeholder="$">
                                             </div>
                                         </div>
                                     </div>
@@ -541,7 +542,7 @@
                 <div class="panel-heading">
                     {{BudgetGroup}}
                     <div class="pull-right">
-                        <a href="javascript:BudgetExpenseDetailModalShow(0);" title="Add Expense" class="addCategoryLink"><i class="fa fa-plus"></i></a>
+                        <a href="javascript:BudgetExpenseGroupModalShow({{BudgetGroupID}}, '{{BudgetGroup}}');" title="Add Expense" class="addCategoryLink"><i class="fa fa-plus"></i></a>
                     </div>
                 </div>
                 <div class="panel-body">
@@ -611,7 +612,7 @@
                 <div class="panel-heading">
                     Add Group
                     <div class="pull-right">
-                        <a href="javascript:ExpenseModalOpen();" title="Add Group" class="addGroupLink"><i class="fa fa-plus"></i></a>
+                        <a href="javascript:BudgetExpenseDetailModalShow(0);" title="Add Group" class="addGroupLink"><i class="fa fa-plus"></i></a>
                     </div>
                 </div>
             </div>
@@ -650,6 +651,21 @@
             objBudgetIncome.Income = "";
 
             var objBudgetExpense = new Object();
+            objBudgetExpense.BudgetItemID = "";
+            objBudgetExpense.BudgetNumber = "";
+            objBudgetExpense.BudgetGroup = "";
+            objBudgetExpense.BudgetGroupID = "";
+            objBudgetExpense.BudgetCategory = "";
+            objBudgetExpense.BudgetCategoryID = "";
+            objBudgetExpense.Amount = "";
+            objBudgetExpense.Description = "";
+            objBudgetExpense.Note = "";
+            objBudgetExpense.HasSpotlight = "";
+            objBudgetExpense.IsEssential = "";
+            objBudgetExpense.HasFundFlg = "";
+            objBudgetExpense.FundName = "";
+            objBudgetExpense.FundID = "";
+            objBudgetExpense.StartingBalance = "";
             objBudgetExpense.Expense = "";
 
             var objBudgetGroup = new Object();
@@ -677,6 +693,10 @@
             objBudgetMonthSummary.TotalIncomeMonthly = "";
             objBudgetMonthSummary.TotalExpenseMonthly = "";
             objBudgetMonthSummary.BalanceMonthly = "";
+
+            var objAutoComplete = new Object();
+
+            var objAutoFill = new Object();
 
             $(document).ready(function () {
                 console.log("Ready!");
@@ -716,7 +736,6 @@
                             BudgetIncomeUpdate();
                         }
                         else {
-                            console.log(objBudgetIncome);
                             BudgetIncomeInsert();
                         }
 
@@ -742,11 +761,233 @@
                 $(".incomeCalculator").focusout(function() {
                     BudgetIncomeCalculate();
                 });
-            });
 
-            function ExpenseModalOpen() {
-                $("#mdlExpense").modal("toggle");
-            }
+                $("#uxExpenseSave").click(function (event) {
+                    var budgetItemID = $(this).data("budget-item-id");
+
+                    objBudgetExpense.BudgetItemID = budgetItemID;
+                    objBudgetExpense.BudgetNumber = $("#hdnBudgetNumber").val();
+                    objBudgetExpense.BudgetGroup = $("#uxBudgetGroup").val();
+                    objBudgetExpense.BudgetGroupID = $("#uxBudgetGroup").data("group-id");
+                    objBudgetExpense.BudgetCategory = $("#uxBudgetCategory").val();
+                    objBudgetExpense.BudgetCategoryID = $("#uxBudgetCategory").data("category-id");
+                    objBudgetExpense.Amount = $("#uxAmount").val();
+                    objBudgetExpense.Description = $("#uxDescription").val();
+                    objBudgetExpense.Note = $("#uxNote").val();
+
+                    if ($("#uxHasSpotlight").prop("checked")) {
+                        objBudgetExpense.HasSpotlight = "1";
+                    }
+                    else {
+                        objBudgetExpense.HasSpotlight = "0";
+                    }
+
+                    if ($("#uxIsEssential").prop("checked")) {
+                        objBudgetExpense.IsEssential = "1";
+                    }
+                    else {
+                        objBudgetExpense.IsEssential = "0";
+                    }
+                    
+                    if ($("#uxHasFundFlg").prop("checked")) {
+                        objBudgetExpense.HasFundFlg = "1";
+                        objBudgetExpense.FundName = $("#uxFundName").val();
+                        objBudgetExpense.FundID = $("#uxFundName").data("fund-id");
+                        objBudgetExpense.StartingBalance = $("#uxStartingBalance").val();
+                    }
+                    else {
+                        objBudgetExpense.HasFundFlg = "0";
+                        objBudgetExpense.FundName = "";
+                        objBudgetExpense.FundID = "";
+                        objBudgetExpense.StartingBalance = "";
+                    }
+
+                    if (ValidateExpense()) {
+                        console.log(objBudgetExpense);
+
+                        BudgetExpenseUpdate();
+                        
+                        $("#mdlExpense").modal("toggle");
+
+                    }
+                });
+
+                $('#uxBudgetGroup').autocomplete({
+                    minChars: 1,
+                    noCache: true,
+                    lookup: function (query, done) {
+                        objAutoComplete.Keyword = query;
+
+                        var result = {};
+
+                        $.ajax({
+                            type: "GET",
+                            url: api + "/group/description",
+                            cache: false,
+                            data: objAutoComplete,
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            async: true,
+                            success: function (msg) {
+                                var Group = $.map(msg, function (item) {
+                                    return { BudgetGroupID: item.BudgetGroupID,
+                                            BudgetGroup: item.BudgetGroup };
+                                });
+                                
+                                objAutoFill.Group = Group;
+                                
+                                var suggestions = $.map(msg, function (item) {
+                                    return { value: item.BudgetGroup, data: item.BudgetGroupID };
+                                });
+
+                                result.suggestions = suggestions;
+                                
+                                if (result.suggestions.length == 0) {
+                                    $("#uxBudgetGroup").data("group-id", "0");
+                                    console.log("no results " + $("#uxBudgetGroup").data("group-id")); 
+                                }
+
+                                done(result);
+                            },
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                if (XMLHttpRequest.readyState < 4) {
+                                    return true;
+                                }
+                                else {
+                                    alert('Error :' + XMLHttpRequest.responseText);
+                                }
+                            }
+                        });
+                    },
+                    onSelect: function (suggestion) {
+                        $.map(objAutoFill.Group, function (group) {
+                            if (group.BudgetGroupID == suggestion.data) {   
+                                $("#uxBudgetGroup").data("group-id", group.BudgetGroupID); 
+                                console.log("set id " + $("#uxBudgetGroup").data("group-id"));                 
+                            }
+                        });
+                    }
+                });
+
+                $('#uxBudgetCategory').autocomplete({
+                    minChars: 1,
+                    noCache: true,
+                    lookup: function (query, done) {
+                        objAutoComplete.Keyword = query;
+
+                        var result = {};
+
+                        $.ajax({
+                            type: "GET",
+                            url: api + "/category/description",
+                            cache: false,
+                            data: objAutoComplete,
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            async: true,
+                            success: function (msg) {
+                                var Category = $.map(msg, function (item) {
+                                    return { BudgetCategoryID: item.BudgetCategoryID,
+                                            BudgetCategory: item.BudgetCategory };
+                                });
+                                
+                                objAutoFill.Category = Category;
+                                
+                                var suggestions = $.map(msg, function (item) {
+                                    return { value: item.BudgetCategory, data: item.BudgetCategoryID };
+                                });
+
+                                result.suggestions = suggestions;
+                                
+                                if (result.suggestions.length == 0) {
+                                    $("#uxBudgetCategory").data("category-id", "0");
+                                    console.log("no cat results " + $("#uxBudgetCategory").data("category-id")); 
+                                }
+
+                                done(result);
+                            },
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                if (XMLHttpRequest.readyState < 4) {
+                                    return true;
+                                }
+                                else {
+                                    alert('Error :' + XMLHttpRequest.responseText);
+                                }
+                            }
+                        });
+                    },
+                    onSelect: function (suggestion) {
+                        $.map(objAutoFill.Category, function (category) {
+                            if (category.BudgetCategoryID == suggestion.data) {   
+                                $("#uxBudgetCategory").data("category-id", category.BudgetCategoryID); 
+                                console.log("set cat id " + $("#uxBudgetCategory").data("category-id"));                 
+                            }
+                        });
+                    }
+                });
+
+                $('#uxFundName').autocomplete({
+                    minChars: 1,
+                    noCache: true,
+                    lookup: function (query, done) {
+                        objAutoComplete.Keyword = query;
+
+                        var result = {};
+
+                        $.ajax({
+                            type: "GET",
+                            url: api + "/fund/description",
+                            cache: false,
+                            data: objAutoComplete,
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            async: true,
+                            success: function (msg) {
+                                var Fund = $.map(msg, function (item) {
+                                    return { FundID: item.FundID,
+                                            FundName: item.FundName,
+                                            StartingBalance: item.StartingBalance };
+                                });
+                                
+                                objAutoFill.Fund = Fund;
+                                
+                                var suggestions = $.map(msg, function (item) {
+                                    return { value: item.FundName, data: item.FundID };
+                                });
+
+                                result.suggestions = suggestions;
+                                
+                                if (result.suggestions.length == 0) {
+                                    $("#uxFundName").data("fund-id", "0");
+                                    console.log("no fund results " + $("#uxFundName").data("fund-id")); 
+                                }
+
+                                done(result);
+                            },
+                            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                                if (XMLHttpRequest.readyState < 4) {
+                                    return true;
+                                }
+                                else {
+                                    alert('Error :' + XMLHttpRequest.responseText);
+                                }
+                            }
+                        });
+                    },
+                    onSelect: function (suggestion) {
+                        $.map(objAutoFill.Fund, function (fund) {
+                            if (fund.FundID == suggestion.data) {   
+                                $("#uxFundName").data("fund-id", fund.FundID); 
+                                $("#uxStartingBalance").val(fund.StartingBalance);
+                                console.log("set fund id " + $("#uxFundName").data("fund-id"));
+                                console.log("set start bal " + $("#uxStartingBalance").val());                 
+                            }
+                        });
+                    }
+                });
+
+                $(".back-to-top").remove();
+            });
 
             function BudgetMonthNavigationGet() {
                 objBudgetMonth.Month = Date.parse(budgetMonth).toString("MMMM");
@@ -1039,15 +1280,14 @@
                     async: true,
                     success: function (msg) {
                         result = msg;
-                         console.log(result);
                         
                         $("#uxBudgetGroup").val(result[0].BudgetGroup);
                         $("#uxBudgetGroup").data("group-id", result[0].BudgetGroupID);
                         $("#uxBudgetCategory").val(result[0].BudgetCategory);
                         $("#uxBudgetCategory").data("category-id", result[0].BudgetCategoryID);
                         $("#uxAmount").val(result[0].Amount);
-                        $("#uxDescription").text(result[0].Description);
-                        $("#uxNote").text(result[0].Note);
+                        $("#uxDescription").val(result[0].Description);
+                        $("#uxNote").val(result[0].Note);
                         
                         if (result[0].HasSpotlight == "1") {
                             $("#uxHasSpotlight").prop("checked", true);
@@ -1073,6 +1313,29 @@
                         $("#uxFundName").val(result[0].FundName);
                         $("#uxFundName").data("fund-id", result[0].FundID);
                         $("#uxStartingBalance").val(result[0].StartingBalance);
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        if (XMLHttpRequest.readyState < 4) {
+                            return true;
+                        }
+                        else {
+                            alert('Error :' + XMLHttpRequest.responseText);
+                        }
+                    }
+                });
+            }
+
+            function BudgetExpenseUpdate() {
+                $.ajax({
+                    type: "PUT",
+                    url: api + "/expense",
+                    cache: false,
+                    data: JSON.stringify(objBudgetExpense),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: true,
+                    success: function (msg) {
+                        BudgetByMonthValidate();
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
                         if (XMLHttpRequest.readyState < 4) {
@@ -1210,8 +1473,36 @@
                 $("#mdlExpense").modal("toggle");
             }
 
+            function BudgetExpenseGroupModalShow(BudgetGroupID, BudgetGroup) {
+                BudgetExpenseDetailModalReset();
+
+                $("#uxExpenseSave").data("budget-item-id", "0");
+                $("#uxBudgetGroup").val(BudgetGroup);
+                $("#uxBudgetGroup").data("group-id", BudgetGroupID);
+                
+                $("#uxExpenseModalTitle").html("Add Expense");
+
+                $("#mdlExpense").modal("toggle");
+            }
+
             function BudgetExpenseDetailModalReset() {
-                console.log('reset');
+                $("#uxBudgetGroup").val("");
+                $("#uxBudgetGroup").data("group-id", "0");
+                $("#uxBudgetCategory").val("");
+                $("#uxBudgetCategory").data("category-id", "0");
+                $("#uxAmount").val("");
+                $("#uxDescription").val("");
+                $("#uxNote").val("");
+                $("#uxHasSpotlight").prop("checked", false) ;
+                $("#uxIsEssential").prop("checked", false);
+                $("#uxHasFundFlg").prop("checked", false);
+                $("#uxFundName").val("");
+                $("#uxFundName").data("fund-id", "0");
+                $("#uxStartingBalance").val("");
+
+                $("#ExpenseHardErrorMessage").html("");
+
+                $("#MoreOptions").collapse("hide");
             }
 
             function BudgetExpenseByMonthContextSet(result) {
@@ -1367,6 +1658,27 @@
                     error = "<div class=\"alert alert-danger\" role=\"alert\"><ul>" + error + "</ul></div>";
                     
                     $("#IncomeHardErrorMessage").html(error);
+                    
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+
+            function ValidateExpense() {
+                var error = "";
+                var numRegEx = /^-{0,1}\d*\.{0,1}\d+$/;
+
+                if ($("#uxBudgetGroup").val().length == 0) { error += "<li>Group is required.</li>"; }
+                if ($("#uxBudgetCategory").val().length == 0) { error += "<li>Category is required.</li>"; }
+                if ($("#uxAmount").val().length == 0) { error += "<li>Amount is required.</li>"; }
+                if ($("#uxAmount").val().length > 0) { if (!numRegEx.test($("#uxAmount").val())) { error += "<li>Amount must be numeric.</li>"; } }
+
+                if (error.length > 0) {
+                    error = "<div class=\"alert alert-danger\" role=\"alert\"><ul>" + error + "</ul></div>";
+                    
+                    $("#ExpenseHardErrorMessage").html(error);
                     
                     return false;
                 }
