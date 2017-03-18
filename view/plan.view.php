@@ -709,11 +709,11 @@
 
                     if (ValidateIncome()) {
                         if (budgetIncomeID > 0) {
-                            console.log(objBudgetIncome);
                             BudgetIncomeUpdate();
                         }
                         else {
-                            console.log('insert income');
+                            console.log(objBudgetIncome);
+                            BudgetIncomeInsert();
                         }
 
                         $("#mdlIncomeCalculator").modal("toggle");
@@ -965,6 +965,29 @@
                 $.ajax({
                     type: "PUT",
                     url: api + "/income/" + objBudgetIncome.BudgetIncomeID,
+                    cache: false,
+                    data: JSON.stringify(objBudgetIncome),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: true,
+                    success: function (msg) {
+                        BudgetByMonthValidate();
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        if (XMLHttpRequest.readyState < 4) {
+                            return true;
+                        }
+                        else {
+                            alert('Error :' + XMLHttpRequest.responseText);
+                        }
+                    }
+                });
+            }
+
+            function BudgetIncomeInsert() {
+                $.ajax({
+                    type: "POST",
+                    url: api + "/income",
                     cache: false,
                     data: JSON.stringify(objBudgetIncome),
                     contentType: "application/json; charset=utf-8",
