@@ -228,7 +228,6 @@
                                     <select class="form-control input-sm" id="uxPayCycle">
                                         <option value="">Select One...</option>
                                         <option value="1">Bi-Weekly</option>
-                                        <option value="2">Weekly</option>
                                     </select>
                                 </div>
                             </div>
@@ -427,17 +426,13 @@
 
          <script id="tmplBudgetComponent" type="text/x-handlebars-template">
             <section class="section-default">
-                <div id="uxBudgetMonthSummary"></div>
-                <div id="uxBudgetIncomeByMonth"></div>
-                <div id="uxBudgetExpenseByMonth"></div>
-                
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        Add Group
-                        <div class="pull-right">
-                            <a href="javascript:ExpenseModalOpen();" title="Add Group" class="addGroupLink"><i class="fa fa-plus"></i></a>
-                        </div>
-                    </div>
+                <div id="uxBudgetMonthSummary">
+                </div>
+                <div id="uxBudgetIncomeByMonth">
+                </div>
+                <div id="uxBudgetExpenseByMonth">
+                </div>
+                <div id="uxBudgetGroupAdd">
                 </div>
             </section>
         </script>
@@ -514,7 +509,7 @@
                                         <a href="#" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
                                         <ul class="dropdown-menu dropdown-menu-right">
                                             <li><a href="javascript:BudgetIncomeDetailModalShow({{BudgetIncomeID}});">Edit</a></li>
-                                            <li><a href="javascript:BudgetIncomeDelete({{BudgetIncomeID}});">Remove</a></li>
+                                            <li><a href="javascript:BudgetIncomeRemove({{BudgetIncomeID}});">Remove</a></li>
                                         </ul>
                                     </div>
                                 </td>
@@ -611,6 +606,17 @@
                 </div>
             </div>
             {{/each}}
+        </script>
+
+        <script id="tmplBudgetGroupAdd" type="text/x-handlebars-template">   
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Add Group
+                    <div class="pull-right">
+                        <a href="javascript:ExpenseModalOpen();" title="Add Group" class="addGroupLink"><i class="fa fa-plus"></i></a>
+                    </div>
+                </div>
+            </div>
         </script>
         <!--END Templates-->
 
@@ -727,19 +733,11 @@
                 });
 
                 $("#uxPayCycle").change(function() {
-                    var PayCycleDescription = "";
+                    var PayCycleDescription = "Every 2 Weeks";
                     var PayCycleID = $("#uxPayCycle option:selected").val();
 
-                    switch(PayCycleID) {
-                        case "1":
-                            PayCycleDescription = "Every 2 Weeks";
-                            break;
-                        case "2":
-                            PayCycleDescription = "Every Week";
-                            break;
-                    }
-
                     $("#uxPayCycleDescription").html(PayCycleDescription);
+
                     BudgetIncomeCalculate();
                 });
 
@@ -852,14 +850,16 @@
                         result = msg;
 
                         $("#hdnBudgetNumber").val(result[0].BudgetNumber);
-                        
-                        BudgetExpenseByMonthContextSet(result);
-                        BudgetExpenseByMonthRender();
-                        
+                                                
                         objBudgetMonthSummary.TotalIncomeMonthly = result[0].TotalIncomeMonthly;
                         objBudgetMonthSummary.TotalExpenseMonthly = result[0].TotalExpenseMonthly;
                         objBudgetMonthSummary.BalanceMonthly = result[0].BalanceMonthly;
                         BudgetMonthSummaryRender();
+
+                        BudgetExpenseByMonthContextSet(result);
+                        BudgetExpenseByMonthRender();
+                        
+                        BudgetGroupAddRender();
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
                         if (XMLHttpRequest.readyState < 4) {
@@ -1007,6 +1007,36 @@
                 });
             }
 
+            function BudgetIncomeDelete() {
+                $.ajax({
+                    type: "DELETE",
+                    url: api + "/income/" + objBudgetIncome.BudgetIncomeID,
+                    cache: false,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: true,
+                    success: function (msg) {
+                        BudgetByMonthValidate();
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        if (XMLHttpRequest.readyState < 4) {
+                            return true;
+                        }
+                        else {
+                            alert('Error :' + XMLHttpRequest.responseText);
+                        }
+                    }
+                });
+            }
+
+            function BudgetIncomeRemove(BudgetIncomeID) {  
+                if(ConfirmAction()) {
+                    objBudgetIncome.BudgetIncomeID = BudgetIncomeID
+
+                    BudgetIncomeDelete();
+                }
+            }
+
             function BudgetIncomeDetailModalShow(BudgetIncomeID) {
                 BudgetIncomeDetailModalReset();
 
@@ -1073,14 +1103,7 @@
                 objIncome.YearDeduct = parseInt($("#uxYearDeduct").val());
                 
                 if (objIncome.IncomeTypeID.length > 0 && objIncome.PayCycleID.length > 0 ) {
-                    switch(objIncome.PayCycleID) {
-                        case "1":
-                            objIncome.PayCycle = 26;
-                            break;
-                        case "2":
-                            objIncome.PayCycle = 52;
-                            break;
-                    }
+                    objIncome.PayCycle = 26;
 
                     if (objIncome.IncomeTypeID == "1" 
                             && $("#uxPlannedHours").val().length > 0 
@@ -1224,6 +1247,25 @@
                 var html = template(context);
 
                 $("#uxBudgetMonthSummary").html(html);
+            }
+
+            function BudgetGroupAddRender() {
+                var source = $("#tmplBudgetGroupAdd").html();
+                var template = Handlebars.compile(source);
+
+                var context = "";
+                var html = template(context);
+
+                $("#uxBudgetGroupAdd").html(html);
+            }
+
+            function ConfirmAction() {
+                if (confirm("Are you sure?")) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
             }
 
             function ValidateIncome() {
