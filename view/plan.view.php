@@ -200,7 +200,6 @@
         <!--Modals-->
 
         <!--Income Modal-->
-        <input type="hidden" id="hdnIncomeCalculatorEvent" value="1">
         <div class="modal fade" id="mdlIncomeCalculator" role="dialog">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
@@ -287,13 +286,12 @@
         <!--END Income Modal-->
 
         <!--Expense Modal-->
-        <input type="hidden" id="hdnExpenseEvent" value="1">
         <div class="modal fade" id="mdlExpense" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="uxExpenseModalTitle">Edit/Add Expense</h4>
+                        <h4 class="modal-title" id="uxExpenseModalTitle"></h4>
                     </div>
                     <div class="modal-body">
                         <div class="row">
@@ -346,7 +344,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="small">
-                                                    <input type="checkbox"> Variable Fund
+                                                    <input type="checkbox" id="uxHasSpotlight"> Variable Fund
                                                 </label>
                                             </div>
                                         </div>
@@ -355,7 +353,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="small">
-                                                    <input type="checkbox"> Essential Expense
+                                                    <input type="checkbox" id="uxIsEssential"> Essential Expense
                                                 </label>
                                             </div>
                                         </div>
@@ -363,7 +361,7 @@
                                     <div class="row">
                                         <div class="col-xs-6 col-sm-6 col-md-6">
                                             <div class="form-group">
-                                                <label class="small"><input type="checkbox"> Savings Fund</label>
+                                                <label class="small"><input type="checkbox" id="uxHasFundFlg"> Savings Fund</label>
                                                 <input type="text" class="form-control input-sm" id="uxFundName" placeholder="Fund Name" data-fund-id="1">
                                             </div>
                                         </div>
@@ -380,7 +378,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-info btn-sm">Save</button>
+                        <button type="button" class="btn btn-info btn-sm" id="uxExpenseSave" data-budget-item-id="">Save</button>
                     </div>
                 </div>
             </div>
@@ -543,7 +541,7 @@
                 <div class="panel-heading">
                     {{BudgetGroup}}
                     <div class="pull-right">
-                        <a href="javascript:ExpenseModalOpen();" title="Add Category" class="addCategoryLink"><i class="fa fa-plus"></i></a>
+                        <a href="javascript:BudgetExpenseDetailModalShow(0);" title="Add Expense" class="addCategoryLink"><i class="fa fa-plus"></i></a>
                     </div>
                 </div>
                 <div class="panel-body">
@@ -594,8 +592,8 @@
                                     <div class="btn-group">
                                         <a href="#" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
                                         <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="javascript:ExpenseModalOpen();">Edit</a></li>
-                                            <li><a href="javascript:void(0);">Remove</a></li>
+                                            <li><a href="javascript:BudgetExpenseDetailModalShow({{BudgetItemID}});">Edit</a></li>
+                                            <li><a href="javascript:BudgetExpenseRemove({{BudgetItemID}});">Remove</a></li>
                                         </ul>
                                     </div>
                                 </td>
@@ -1029,6 +1027,64 @@
                 });
             }
 
+            function BudgetExpenseDetailGet(BudgetItemID) {              
+                var result = {};
+
+                $.ajax({
+                    type: "GET",
+                    url: api + "/expense/" + BudgetItemID,
+                    cache: false,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: true,
+                    success: function (msg) {
+                        result = msg;
+                         console.log(result);
+                        
+                        $("#uxBudgetGroup").val(result[0].BudgetGroup);
+                        $("#uxBudgetGroup").data("group-id", result[0].BudgetGroupID);
+                        $("#uxBudgetCategory").val(result[0].BudgetCategory);
+                        $("#uxBudgetCategory").data("category-id", result[0].BudgetCategoryID);
+                        $("#uxAmount").val(result[0].Amount);
+                        $("#uxDescription").text(result[0].Description);
+                        $("#uxNote").text(result[0].Note);
+                        
+                        if (result[0].HasSpotlight == "1") {
+                            $("#uxHasSpotlight").prop("checked", true);
+                        }
+                        else {
+                            $("#uxHasSpotlight").prop("checked", false);
+                        }
+
+                        if (result[0].IsEssential == "1") {
+                            $("#uxIsEssential").prop("checked", true);
+                        }
+                        else {
+                            $("#uxIsEssential").prop("checked", false);
+                        }
+
+                        if (result[0].HasFundFlg == "1") {
+                            $("#uxHasFundFlg").prop("checked", true);
+                        }
+                        else {
+                            $("#uxHasFundFlg").prop("checked", false);
+                        }
+
+                        $("#uxFundName").val(result[0].FundName);
+                        $("#uxFundName").data("fund-id", result[0].FundID);
+                        $("#uxStartingBalance").val(result[0].StartingBalance);
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        if (XMLHttpRequest.readyState < 4) {
+                            return true;
+                        }
+                        else {
+                            alert('Error :' + XMLHttpRequest.responseText);
+                        }
+                    }
+                });
+            }
+
             function BudgetIncomeRemove(BudgetIncomeID) {  
                 if(ConfirmAction()) {
                     objBudgetIncome.BudgetIncomeID = BudgetIncomeID
@@ -1135,6 +1191,27 @@
                         $("#uxIncomeTotal").val("$" + NumberCommaFormat(objIncome.IncomeTotal));
                     }
                 }  
+            }
+
+            function BudgetExpenseDetailModalShow(BudgetItemID) {
+                BudgetExpenseDetailModalReset();
+
+                $("#uxExpenseSave").data("budget-item-id", BudgetItemID);
+                
+                if (BudgetItemID > 0) {
+                    $("#uxExpenseModalTitle").html("Edit Expense");
+                    
+                    BudgetExpenseDetailGet(BudgetItemID);
+                }
+                else {
+                    $("#uxExpenseModalTitle").html("Add Expense");
+                }
+
+                $("#mdlExpense").modal("toggle");
+            }
+
+            function BudgetExpenseDetailModalReset() {
+                console.log('reset');
             }
 
             function BudgetExpenseByMonthContextSet(result) {
