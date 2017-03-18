@@ -211,6 +211,7 @@
                     <div class="modal-body">
                         <!--All-->
                         <div class="row">
+                            <div id="IncomeHardErrorMessage"></div>
                             <div class="col-xs-6">
                                 <div class="form-group">
                                     <label for="uxIncomeType" class="small">Type:</label>
@@ -233,21 +234,25 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="uxIncomeName" class="small">Name:</label>
+                            <input type="text" class="form-control input-sm" id="uxIncomeName" placeholder="" style="text-align: center;">
+                        </div>
+                        <div class="form-group">
                             <label for="uxPlannedHours" class="small">Planned Hours:</label>
-                            <input type="number" class="form-control input-sm" id="uxPlannedHours" placeholder="" style="text-align: center;">
+                            <input type="number" class="form-control input-sm incomeCalculator" id="uxPlannedHours" placeholder="" style="text-align: center;">
                         </div>
                         <!--Salary-->
                         <div class="row">
                             <div class="col-xs-6">
                                 <div class="form-group">
-                                    <label for="uxSalary" class="small">Salary:</label>
-                                    <input type="number" class="form-control input-sm" id="uxSalary" placeholder="$">
+                                    <label for="uxSalary" class="small">Salary $:</label>
+                                    <input type="number" class="form-control input-sm incomeCalculator" id="uxSalary" placeholder="$">
                                 </div>
                             </div>
                             <div class="col-xs-6">
                                 <div class="form-group">
-                                    <label for="uxTakeHomePay" class="small">Take Home Pay:</label>
-                                    <input type="number" class="form-control input-sm" id="uxTakeHomePay" placeholder="$">
+                                    <label for="uxTakeHomePay" class="small">Take Home Pay $:</label>
+                                    <input type="number" class="form-control input-sm incomeCalculator" id="uxTakeHomePay" placeholder="$">
                                 </div>
                             </div>
                         </div>
@@ -255,14 +260,14 @@
                         <div class="row">
                             <div class="col-xs-6">
                                 <div class="form-group">
-                                    <label for="uxHourlyRate" class="small">Hourly Rate:</label>
-                                    <input type="number" class="form-control input-sm" id="uxHourlyRate" placeholder="$">
+                                    <label for="uxHourlyRate" class="small">Hourly Rate $:</label>
+                                    <input type="number" class="form-control input-sm incomeCalculator" id="uxHourlyRate" placeholder="$">
                                 </div>
                             </div>
                             <div class="col-xs-6">
                                 <div class="form-group">
                                     <label for="uxYearDeduct" class="small">Year Deduct %:</label>
-                                    <input type="number" class="form-control input-sm" id="uxYearDeduct" placeholder="%">
+                                    <input type="number" class="form-control input-sm incomeCalculator" id="uxYearDeduct" placeholder="%">
                                 </div>
                             </div>
                         </div>
@@ -688,12 +693,30 @@
 
                 $("#uxIncomeSave").click(function (event) {
                     var budgetIncomeID = $(this).data("budget-income-id");
-                    
-                    if (budgetIncomeID > 0) {
-                        console.log('update income');
-                    }
-                    else {
-                        console.log('insert income');
+
+                    objBudgetIncome.BudgetIncomeID = budgetIncomeID;
+                    objBudgetIncome.BudgetNumber = $("#hdnBudgetNumber").val();
+                    objBudgetIncome.IncomeName = $("#uxIncomeName").val();
+                    objBudgetIncome.IncomeTypeID = $("#uxIncomeType option:selected").val();
+                    objBudgetIncome.IncomeType = $("#uxIncomeType option:selected").text();
+                    objBudgetIncome.PayCycleID = $("#uxPayCycle option:selected").val();
+                    objBudgetIncome.PayCycle = $("#uxPayCycle option:selected").text();
+                    objBudgetIncome.TakeHomePay = $("#uxTakeHomePay").val();
+                    objBudgetIncome.HourlyRate = $("#uxHourlyRate").val();
+                    objBudgetIncome.PlannedHours = $("#uxPlannedHours").val();
+                    objBudgetIncome.Salary = $("#uxSalary").val();
+                    objBudgetIncome.YearDeduct = $("#uxYearDeduct").val();
+
+                    if (ValidateIncome()) {
+                        if (budgetIncomeID > 0) {
+                            console.log(objBudgetIncome);
+                            BudgetIncomeUpdate();
+                        }
+                        else {
+                            console.log('insert income');
+                        }
+
+                        $("#mdlIncomeCalculator").modal("toggle");
                     }
                 });
 
@@ -720,28 +743,7 @@
                     BudgetIncomeCalculate();
                 });
 
-                $("#uxPlannedHours").focusout(function() {
-                    console.log("planned hour out!");
-                    BudgetIncomeCalculate();
-                });
-
-                $("#uxSalary").focusout(function() {
-                    console.log("salary out!");
-                    BudgetIncomeCalculate();
-                });
-
-                $("#uxTakeHomePay").focusout(function() {
-                    console.log("take out!");
-                    BudgetIncomeCalculate();
-                });
-
-                $("#uxHourlyRate").focusout(function() {
-                    console.log("hoour out!");
-                    BudgetIncomeCalculate();
-                });
-
-                $("#uxYearDeduct").focusout(function() {
-                    console.log("year out!");
+                $(".incomeCalculator").focusout(function() {
                     BudgetIncomeCalculate();
                 });
             });
@@ -937,6 +939,7 @@
                         
                         $("#uxIncomeType option[value='"+ result[0].IncomeTypeID + "']").prop("selected", true);
                         $("#uxPayCycle option[value='"+ result[0].PayCycleID + "']").prop("selected", true);
+                        $("#uxIncomeName").val(result[0].IncomeName);
                         $("#uxPlannedHours").val(result[0].PlannedHours);
                         $("#uxSalary").val(result[0].Salary);
                         $("#uxTakeHomePay").val(result[0].TakeHomePay);
@@ -946,6 +949,29 @@
                         $("#uxIncomeTotal").val("$" + NumberCommaFormat(result[0].TakeHomePay));
                         
                         BudgetIncomeDetailModalTextboxSet(result[0].IncomeTypeID);
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        if (XMLHttpRequest.readyState < 4) {
+                            return true;
+                        }
+                        else {
+                            alert('Error :' + XMLHttpRequest.responseText);
+                        }
+                    }
+                });
+            }
+
+            function BudgetIncomeUpdate() {
+                $.ajax({
+                    type: "PUT",
+                    url: api + "/income/" + objBudgetIncome.BudgetIncomeID,
+                    cache: false,
+                    data: JSON.stringify(objBudgetIncome),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: true,
+                    success: function (msg) {
+                        BudgetByMonthValidate();
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
                         if (XMLHttpRequest.readyState < 4) {
@@ -978,6 +1004,7 @@
             function BudgetIncomeDetailModalReset() {
                 $("#uxIncomeType option[value='']").prop("selected", true);
                 $("#uxPayCycle option[value='']").prop("selected", true);
+                $("#uxIncomeName").val("");
                 $("#uxPlannedHours").val("");
                 $("#uxSalary").val("");
                 $("#uxTakeHomePay").val("");
@@ -990,6 +1017,8 @@
                 $("#uxTakeHomePay").prop("disabled", false);
                 $("#uxHourlyRate").prop("disabled", false);
                 $("#uxYearDeduct").prop("disabled", false);
+
+                $("#IncomeHardErrorMessage").html("");
             }
 
             function BudgetIncomeDetailModalTextboxSet(IncomeTypeID) {
@@ -1172,6 +1201,36 @@
                 var html = template(context);
 
                 $("#uxBudgetMonthSummary").html(html);
+            }
+
+            function ValidateIncome() {
+                var error = "";
+                var numRegEx = /^-{0,1}\d*\.{0,1}\d+$/;
+
+                if ($("#uxIncomeType option:selected").val().length == 0) { error += "<li>Income Type is required.</li>"; }
+                if ($("#uxPayCycle option:selected").val().length == 0) { error += "<li>Pay Cycle is required.</li>"; }
+                if ($("#uxIncomeName").val().length == 0) { error += "<li>Name is required.</li>"; }
+                if ($("#uxPlannedHours").val().length == 0) { error += "<li>Planned Hours is required.</li>"; }
+                if ($("#uxPlannedHours").val().length > 0) { if (!numRegEx.test($("#uxPlannedHours").val())) { error += "<li>Planned Hours must be numeric.</li>"; } }
+                if ($("#uxSalary").val().length == 0) { error += "<li>Salary is required.</li>"; }
+                if ($("#uxSalary").val().length > 0) { if (!numRegEx.test($("#uxSalary").val())) { error += "<li>Salary must be numeric.</li>"; } }
+                if ($("#uxTakeHomePay").val().length == 0) { error += "<li>Take Home Pay is required.</li>"; }
+                if ($("#uxTakeHomePay").val().length > 0) { if (!numRegEx.test($("#uxTakeHomePay").val())) { error += "<li>Take Home Pay must be numeric.</li>"; } }
+                if ($("#uxHourlyRate").val().length == 0) { error += "<li>Hourly Rate is required.</li>"; }
+                if ($("#uxHourlyRate").val().length > 0) { if (!numRegEx.test($("#uxHourlyRate").val())) { error += "<li>Hourly Rate must be numeric.</li>"; } }
+                if ($("#uxYearDeduct").val().length == 0) { error += "<li>Year Deduct is required.</li>"; }
+                if ($("#uxYearDeduct").val().length > 0) { if (!numRegEx.test($("#uxYearDeduct").val())) { error += "<li>Year Deduct must be numeric.</li>"; } }
+
+                if (error.length > 0) {
+                    error = "<div class=\"alert alert-danger\" role=\"alert\"><ul>" + error + "</ul></div>";
+                    
+                    $("#IncomeHardErrorMessage").html(error);
+                    
+                    return false;
+                }
+                else {
+                    return true;
+                }
             }
         </script>
         <!--END Javascript-->
