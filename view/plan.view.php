@@ -156,6 +156,23 @@
                 color: #2c3e50 !important;
                 text-decoration: none !important;
             }
+
+            .budgetMonthSummaryScroll {
+                position: fixed;
+                top: 65px;
+                display: none;
+                left: 0;
+                right: 0;
+                text-align: center;
+            }
+
+            #uxBudgetMonthScroll {
+                margin-top: 4px;
+            }
+
+            .summaryExpense.pad {
+                padding-left: 19px;
+            }
         </style>
     </head>
     <body>
@@ -345,7 +362,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="small">
-                                                    <input type="checkbox" id="uxHasSpotlight"> Variable Fund
+                                                    <input type="checkbox" id="uxIsEssential"> Essential Expense
                                                 </label>
                                             </div>
                                         </div>
@@ -354,7 +371,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="small">
-                                                    <input type="checkbox" id="uxIsEssential"> Essential Expense
+                                                    <input type="checkbox" id="uxHasSpotlight"> Variable Fund
                                                 </label>
                                             </div>
                                         </div>
@@ -437,6 +454,9 @@
         </script>
 
         <script id="tmplBudgetMonthSummary" type="text/x-handlebars-template">
+            <p id="uxBudgetMonthScroll" style="display: none;">
+                <span class="label label-success">{{MonthCurrent}}</span>
+            </p>
             <div class="container">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
@@ -445,15 +465,19 @@
                             <thead>
                                 <tr>
                                     <th class="text-center">Income</th>
-                                    <th class="text-center">Expenses</th>
+                                    <th class="text-center summaryExpense">Expenses</th>
                                     <th class="text-center">Leftover</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td class="text-center text-success">${{NumberCommaFormat TotalIncomeMonthly}}</td>
-                                    <td class="text-center text-danger">${{NumberCommaFormat TotalExpenseMonthly}}</td>
-                                    <td class="text-center"><span class="label label-info">${{NumberCommaFormat BalanceMonthly}}</span></td>
+                                    <td class="text-center text-danger summaryExpense">${{NumberCommaFormat TotalExpenseMonthly}}</td>
+                                {{#if IsBalanceMonthlyNegative}}
+                                    <td class="text-center"><span class="label label-danger">${{NumberCommaFormat BalanceMonthly}}</span></td>
+                                {{else}}
+                                    <td class="text-center"><span class="label label-success">${{NumberCommaFormat BalanceMonthly}}</span></td>
+                                {{/if}}
                                 </tr>
                             </tbody>
                         </table> 
@@ -693,6 +717,7 @@
             objBudgetMonthSummary.TotalIncomeMonthly = "";
             objBudgetMonthSummary.TotalExpenseMonthly = "";
             objBudgetMonthSummary.BalanceMonthly = "";
+            objBudgetMonthSummary.IsBalanceMonthlyNegative = "";
 
             var objAutoComplete = new Object();
 
@@ -803,12 +828,9 @@
                     }
 
                     if (ValidateExpense()) {
-                        console.log(objBudgetExpense);
-
                         BudgetExpenseUpdate();
                         
                         $("#mdlExpense").modal("toggle");
-
                     }
                 });
 
@@ -844,7 +866,6 @@
                                 
                                 if (result.suggestions.length == 0) {
                                     $("#uxBudgetGroup").data("group-id", "0");
-                                    console.log("no results " + $("#uxBudgetGroup").data("group-id")); 
                                 }
 
                                 done(result);
@@ -862,8 +883,7 @@
                     onSelect: function (suggestion) {
                         $.map(objAutoFill.Group, function (group) {
                             if (group.BudgetGroupID == suggestion.data) {   
-                                $("#uxBudgetGroup").data("group-id", group.BudgetGroupID); 
-                                console.log("set id " + $("#uxBudgetGroup").data("group-id"));                 
+                                $("#uxBudgetGroup").data("group-id", group.BudgetGroupID);                
                             }
                         });
                     }
@@ -901,7 +921,6 @@
                                 
                                 if (result.suggestions.length == 0) {
                                     $("#uxBudgetCategory").data("category-id", "0");
-                                    console.log("no cat results " + $("#uxBudgetCategory").data("category-id")); 
                                 }
 
                                 done(result);
@@ -919,8 +938,7 @@
                     onSelect: function (suggestion) {
                         $.map(objAutoFill.Category, function (category) {
                             if (category.BudgetCategoryID == suggestion.data) {   
-                                $("#uxBudgetCategory").data("category-id", category.BudgetCategoryID); 
-                                console.log("set cat id " + $("#uxBudgetCategory").data("category-id"));                 
+                                $("#uxBudgetCategory").data("category-id", category.BudgetCategoryID);                
                             }
                         });
                     }
@@ -959,7 +977,6 @@
                                 
                                 if (result.suggestions.length == 0) {
                                     $("#uxFundName").data("fund-id", "0");
-                                    console.log("no fund results " + $("#uxFundName").data("fund-id")); 
                                 }
 
                                 done(result);
@@ -978,9 +995,7 @@
                         $.map(objAutoFill.Fund, function (fund) {
                             if (fund.FundID == suggestion.data) {   
                                 $("#uxFundName").data("fund-id", fund.FundID); 
-                                $("#uxStartingBalance").val(fund.StartingBalance);
-                                console.log("set fund id " + $("#uxFundName").data("fund-id"));
-                                console.log("set start bal " + $("#uxStartingBalance").val());                 
+                                $("#uxStartingBalance").val(fund.StartingBalance);                
                             }
                         });
                     }
@@ -1001,6 +1016,15 @@
                 BudgetMonthNavigationRender();
             }
 
+            // $$$$$$\  $$$$$$$\ $$$$$$\        $$$$$$\   $$$$$$\  $$\       $$\       
+            //$$  __$$\ $$  __$$\\_$$  _|      $$  __$$\ $$  __$$\ $$ |      $$ |      
+            //$$ /  $$ |$$ |  $$ | $$ |        $$ /  \__|$$ /  $$ |$$ |      $$ |      
+            //$$$$$$$$ |$$$$$$$  | $$ |        $$ |      $$$$$$$$ |$$ |      $$ |      
+            //$$  __$$ |$$  ____/  $$ |        $$ |      $$  __$$ |$$ |      $$ |      
+            //$$ |  $$ |$$ |       $$ |        $$ |  $$\ $$ |  $$ |$$ |      $$ |      
+            //$$ |  $$ |$$ |     $$$$$$\       \$$$$$$  |$$ |  $$ |$$$$$$$$\ $$$$$$$$\ 
+            //\__|  \__|\__|     \______|       \______/ \__|  \__|\________|\________|
+                                                                         
             function BudgetByMonthValidate() {
                 var result = {};
 
@@ -1027,78 +1051,6 @@
                             $("#uxBudgetMonthHeader").attr("style", "cursor: default;");
                             $("#uxBudgetComponent").html("");
                         }
-                    },
-                    error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        if (XMLHttpRequest.readyState < 4) {
-                            return true;
-                        }
-                        else {
-                            alert('Error :' + XMLHttpRequest.responseText);
-                        }
-                    }
-                });
-            }
-
-            function BudgetIncomeByMonthGet() {
-                var result = {};
-
-                $.ajax({
-                    type: "GET",
-                    url: api + "/income",
-                    cache: false,
-                    data: data,
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    async: true,
-                    success: function (msg) {
-                        result = msg;
-
-                        objBudgetIncome.TotalIncomeMonthly = result[0].TotalIncomeMonthly;
-                        objBudgetIncome.TotalIncomeBiWeekly = result[0].TotalIncomeBiWeekly;
-                        objBudgetIncome.TotalIncomeWeekly = result[0].TotalIncomeWeekly;
-                        objBudgetIncome.TotalIncomeBiYearly = result[0].TotalIncomeBiYearly;
-                        objBudgetIncome.TotalIncomeYearly = result[0].TotalIncomeYearly;
-                        objBudgetIncome.TotalIncomeYearlyGross = result[0].TotalIncomeYearlyGross;
-                        objBudgetIncome.Income = result;
-
-                        BudgetIncomeByMonthRender();
-                    },
-                    error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        if (XMLHttpRequest.readyState < 4) {
-                            return true;
-                        }
-                        else {
-                            alert('Error :' + XMLHttpRequest.responseText);
-                        }
-                    }
-                });
-            }
-
-            function BudgetExpenseByMonthGet() {               
-                var result = {};
-
-                $.ajax({
-                    type: "GET",
-                    url: api + "/expense",
-                    cache: false,
-                    data: data,
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    async: true,
-                    success: function (msg) {
-                        result = msg;
-
-                        $("#hdnBudgetNumber").val(result[0].BudgetNumber);
-                                                
-                        objBudgetMonthSummary.TotalIncomeMonthly = result[0].TotalIncomeMonthly;
-                        objBudgetMonthSummary.TotalExpenseMonthly = result[0].TotalExpenseMonthly;
-                        objBudgetMonthSummary.BalanceMonthly = result[0].BalanceMonthly;
-                        BudgetMonthSummaryRender();
-
-                        BudgetExpenseByMonthContextSet(result);
-                        BudgetExpenseByMonthRender();
-                        
-                        BudgetGroupAddRender();
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
                         if (XMLHttpRequest.readyState < 4) {
@@ -1163,6 +1115,41 @@
                 }
             }
 
+            function BudgetIncomeByMonthGet() {
+                var result = {};
+
+                $.ajax({
+                    type: "GET",
+                    url: api + "/income",
+                    cache: false,
+                    data: data,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: true,
+                    success: function (msg) {
+                        result = msg;
+
+                        objBudgetIncome.TotalIncomeMonthly = result[0].TotalIncomeMonthly;
+                        objBudgetIncome.TotalIncomeBiWeekly = result[0].TotalIncomeBiWeekly;
+                        objBudgetIncome.TotalIncomeWeekly = result[0].TotalIncomeWeekly;
+                        objBudgetIncome.TotalIncomeBiYearly = result[0].TotalIncomeBiYearly;
+                        objBudgetIncome.TotalIncomeYearly = result[0].TotalIncomeYearly;
+                        objBudgetIncome.TotalIncomeYearlyGross = result[0].TotalIncomeYearlyGross;
+                        objBudgetIncome.Income = result;
+
+                        BudgetIncomeByMonthRender();
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        if (XMLHttpRequest.readyState < 4) {
+                            return true;
+                        }
+                        else {
+                            alert('Error :' + XMLHttpRequest.responseText);
+                        }
+                    }
+                });
+            }
+
             function BudgetIncomeDetailGet(BudgetIncomeID) {              
                 var result = {};
 
@@ -1210,7 +1197,8 @@
                     dataType: "json",
                     async: true,
                     success: function (msg) {
-                        BudgetByMonthValidate();
+                        BudgetIncomeByMonthGet();
+                        BudgetExpenseByMonthGet();
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
                         if (XMLHttpRequest.readyState < 4) {
@@ -1233,7 +1221,8 @@
                     dataType: "json",
                     async: true,
                     success: function (msg) {
-                        BudgetByMonthValidate();
+                        BudgetIncomeByMonthGet();
+                        BudgetExpenseByMonthGet();
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
                         if (XMLHttpRequest.readyState < 4) {
@@ -1255,7 +1244,47 @@
                     dataType: "json",
                     async: true,
                     success: function (msg) {
-                        BudgetByMonthValidate();
+                        BudgetIncomeByMonthGet();
+                        BudgetExpenseByMonthGet();
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        if (XMLHttpRequest.readyState < 4) {
+                            return true;
+                        }
+                        else {
+                            alert('Error :' + XMLHttpRequest.responseText);
+                        }
+                    }
+                });
+            }
+
+            function BudgetExpenseByMonthGet() {               
+                var result = {};
+
+                $.ajax({
+                    type: "GET",
+                    url: api + "/expense",
+                    cache: false,
+                    data: data,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: true,
+                    success: function (msg) {
+                        result = msg;
+
+                        $("#hdnBudgetNumber").val(result[0].BudgetNumber);
+                                               
+                        objBudgetMonthSummary.TotalIncomeMonthly = result[0].TotalIncomeMonthly;
+                        objBudgetMonthSummary.TotalExpenseMonthly = result[0].TotalExpenseMonthly;
+                        objBudgetMonthSummary.BalanceMonthly = result[0].BalanceMonthly;
+                        objBudgetMonthSummary.IsBalanceMonthlyNegative = result[0].IsBalanceMonthlyNegative;
+                        objBudgetMonthSummary.MonthCurrent = objBudgetMonth.MonthCurrent;
+                        BudgetMonthSummaryRender();
+
+                        BudgetExpenseByMonthContextSet(result);
+                        BudgetExpenseByMonthRender();
+                        
+                        BudgetGroupAddRender();
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
                         if (XMLHttpRequest.readyState < 4) {
@@ -1335,7 +1364,8 @@
                     dataType: "json",
                     async: true,
                     success: function (msg) {
-                        BudgetByMonthValidate();
+                        BudgetIncomeByMonthGet();
+                        BudgetExpenseByMonthGet();
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
                         if (XMLHttpRequest.readyState < 4) {
@@ -1348,14 +1378,38 @@
                 });
             }
 
-            function BudgetIncomeRemove(BudgetIncomeID) {  
-                if(ConfirmAction()) {
-                    objBudgetIncome.BudgetIncomeID = BudgetIncomeID
-
-                    BudgetIncomeDelete();
-                }
+            function BudgetExpenseDelete() {
+                $.ajax({
+                    type: "DELETE",
+                    url: api + "/expense/" + objBudgetItem.BudgetItemID,
+                    cache: false,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    async: true,
+                    success: function (msg) {
+                        BudgetIncomeByMonthGet();
+                        BudgetExpenseByMonthGet();
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        if (XMLHttpRequest.readyState < 4) {
+                            return true;
+                        }
+                        else {
+                            alert('Error :' + XMLHttpRequest.responseText);
+                        }
+                    }
+                });
             }
 
+            //$$$$$$$$\ $$\    $$\ $$$$$$$$\ $$\   $$\ $$$$$$$$\  $$$$$$\  
+            //$$  _____|$$ |   $$ |$$  _____|$$$\  $$ |\__$$  __|$$  __$$\ 
+            //$$ |      $$ |   $$ |$$ |      $$$$\ $$ |   $$ |   $$ /  \__|
+            //$$$$$\    \$$\  $$  |$$$$$\    $$ $$\$$ |   $$ |   \$$$$$$\  
+            //$$  __|    \$$\$$  / $$  __|   $$ \$$$$ |   $$ |    \____$$\ 
+            //$$ |        \$$$  /  $$ |      $$ |\$$$ |   $$ |   $$\   $$ |
+            //$$$$$$$$\    \$  /   $$$$$$$$\ $$ | \$$ |   $$ |   \$$$$$$  |
+            //\________|    \_/    \________|\__|  \__|   \__|    \______/ 
+             
             function BudgetIncomeDetailModalShow(BudgetIncomeID) {
                 BudgetIncomeDetailModalReset();
 
@@ -1456,6 +1510,14 @@
                 }  
             }
 
+            function BudgetIncomeRemove(BudgetIncomeID) {  
+                if(ConfirmAction()) {
+                    objBudgetIncome.BudgetIncomeID = BudgetIncomeID
+
+                    BudgetIncomeDelete();
+                }
+            }
+
             function BudgetExpenseDetailModalShow(BudgetItemID) {
                 BudgetExpenseDetailModalReset();
 
@@ -1503,6 +1565,14 @@
                 $("#ExpenseHardErrorMessage").html("");
 
                 $("#MoreOptions").collapse("hide");
+            }
+
+            function BudgetExpenseRemove(BudgetItemID) {  
+                if(ConfirmAction()) {
+                    objBudgetItem.BudgetItemID = BudgetItemID
+                    
+                    BudgetExpenseDelete();
+                }
             }
 
             function BudgetExpenseByMonthContextSet(result) {
@@ -1555,6 +1625,15 @@
                 objBudgetExpense.Expense = arrBudgetGroup;
             }
 
+            //$$$$$$$\  $$$$$$$$\ $$\   $$\ $$$$$$$\  $$$$$$$$\ $$$$$$$\  
+            //$$  __$$\ $$  _____|$$$\  $$ |$$  __$$\ $$  _____|$$  __$$\ 
+            //$$ |  $$ |$$ |      $$$$\ $$ |$$ |  $$ |$$ |      $$ |  $$ |
+            //$$$$$$$  |$$$$$\    $$ $$\$$ |$$ |  $$ |$$$$$\    $$$$$$$  |
+            //$$  __$$< $$  __|   $$ \$$$$ |$$ |  $$ |$$  __|   $$  __$$< 
+            //$$ |  $$ |$$ |      $$ |\$$$ |$$ |  $$ |$$ |      $$ |  $$ |
+            //$$ |  $$ |$$$$$$$$\ $$ | \$$ |$$$$$$$  |$$$$$$$$\ $$ |  $$ |
+            //\__|  \__|\________|\__|  \__|\_______/ \________|\__|  \__|
+                                                           
             function BudgetMonthNavigationRender() {
                 var source = $("#tmplBudgetMonthNavigation").html();
                 var template = Handlebars.compile(source);
@@ -1686,6 +1765,23 @@
                     return true;
                 }
             }
+
+            $(window).scroll(function() {
+                var budgetMonthSummary = $("#uxBudgetMonthSummary");
+                var budgetMonthSummaryScroll = "budgetMonthSummaryScroll";
+                var elementHeight = $("#uxBudgetMonthSummary").height();
+
+                if ($(this).scrollTop() > elementHeight) {
+                    budgetMonthSummary.addClass(budgetMonthSummaryScroll).fadeIn("slow");
+                    $("#uxBudgetMonthScroll").show();
+                    $(".summaryExpense").addClass("pad");
+                }
+                else if ($(this).scrollTop() == 0) {
+                    budgetMonthSummary.removeClass(budgetMonthSummaryScroll).removeAttr("style");
+                    $("#uxBudgetMonthScroll").hide();
+                    $(".summaryExpense").removeClass("pad");
+                }
+            });
         </script>
         <!--END Javascript-->
     </body>
