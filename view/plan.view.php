@@ -456,7 +456,7 @@
 
         <script id="tmplBudgetMonthSummary" type="text/x-handlebars-template">
             <p id="uxBudgetMonthScroll" style="display: none;">
-                <span class="label label-success">{{MonthCurrent}}</span>
+                <span class="label label-info">{{MonthCurrent}}</span>
             </p>
             <div class="container">
                 <div class="col-md-4"></div>
