@@ -501,16 +501,16 @@
                         <thead>
                             <tr>
                                 <th class="planDetail">Name</th>
-                                <th class="planDetail text-center">Monthly</th>
-                                <th class="planDetail text-center">Bi-Weekly</th>
-                                <th class="planDetail custom-hidden-xs text-center">Weekly</th>
-                                <th class="planDetail custom-hidden-xs text-center">6 Month</th>
-                                <th class="planDetail custom-hidden-xs text-center">Year (Net)</th>
-                                <th class="planDetail hidden-xs hidden-sm text-center">Year (Gross)</th>
-                                <th class="planDetail hidden-xs text-center">Hourly Rate</th>
-                                <th class="planDetail hidden-xs hidden-sm text-center">Year Deduct %</th>
-                                <th class="planDetail hidden-xs hidden-sm text-center">Planned Hours</th>
-                                <th class="planDetail hidden-xs hidden-sm text-center">Type</th>
+                                <th class="planDetail text-right">Monthly</th>
+                                <th class="planDetail text-right">Bi-Weekly</th>
+                                <th class="planDetail custom-hidden-xs text-right">Weekly</th>
+                                <th class="planDetail custom-hidden-xs text-right">6 Month</th>
+                                <th class="planDetail custom-hidden-xs text-right">Year (Net)</th>
+                                <th class="planDetail hidden-xs hidden-sm text-right">Year (Gross)</th>
+                                <th class="planDetail hidden-xs text-right">Hourly Rate</th>
+                                <th class="planDetail hidden-xs hidden-sm text-right">Year Deduct %</th>
+                                <th class="planDetail hidden-xs hidden-sm text-right">Planned Hours</th>
+                                <th class="planDetail hidden-xs hidden-sm text-right">Type</th>
                                 <th class="planDetail"></th>
                             </tr>
                         </thead>
@@ -518,16 +518,16 @@
                             {{#each Income}}
                             <tr>
                                 <td class="planDetail">{{IncomeName}}</td>
-                                <td class="planDetail text-center text-success">${{NumberCommaFormat IncomeMonthly}}</td>
-                                <td class="planDetail text-center">${{NumberCommaFormat IncomeBiWeekly}}</td>
-                                <td class="planDetail custom-hidden-xs text-center">${{NumberCommaFormat IncomeWeekly}}</td>
-                                <td class="planDetail custom-hidden-xs text-center">${{NumberCommaFormat IncomeBiYearly}}</td>
-                                <td class="planDetail custom-hidden-xs text-center">${{NumberCommaFormat IncomeYearly}}</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">${{NumberCommaFormat Salary}}</td>
-                                <td class="planDetail hidden-xs text-center">${{NumberCommaFormat HourlyRate}}</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">{{YearDeduct}}%</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">{{PlannedHours}}</td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">{{IncomeType}}</td>
+                                <td class="planDetail text-right text-success">${{NumberCommaFormat IncomeMonthly}}</td>
+                                <td class="planDetail text-right">${{NumberCommaFormat IncomeBiWeekly}}</td>
+                                <td class="planDetail custom-hidden-xs text-right">${{NumberCommaFormat IncomeWeekly}}</td>
+                                <td class="planDetail custom-hidden-xs text-right">${{NumberCommaFormat IncomeBiYearly}}</td>
+                                <td class="planDetail custom-hidden-xs text-right">${{NumberCommaFormat IncomeYearly}}</td>
+                                <td class="planDetail hidden-xs hidden-sm text-right">${{NumberCommaFormat Salary}}</td>
+                                <td class="planDetail hidden-xs text-right">${{NumberCommaFormat HourlyRate}}</td>
+                                <td class="planDetail hidden-xs hidden-sm text-right">{{YearDeduct}}%</td>
+                                <td class="planDetail hidden-xs hidden-sm text-right">{{PlannedHours}}</td>
+                                <td class="planDetail hidden-xs hidden-sm text-right">{{IncomeType}}</td>
                                 <td class="planDetail text-right">
                                     <div class="btn-group">
                                         <a href="#" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
@@ -543,16 +543,16 @@
                         <tfoot>
                             <tr>
                                 <td class="planDetail"><h5><strong>TOTAL</strong></h5></td>
-                                <td class="planDetail text-center text-success"><h5><strong>${{NumberCommaFormat TotalIncomeMonthly}}</strong></h5></td>
-                                <td class="planDetail text-center"><h5><strong>${{NumberCommaFormat TotalIncomeBiWeekly}}</strong></h5></td>
-                                <td class="planDetail custom-hidden-xs text-center"><h5><strong>${{NumberCommaFormat TotalIncomeWeekly}}</strong></h5></td>
-                                <td class="planDetail custom-hidden-xs text-center"><h5><strong>${{NumberCommaFormat TotalIncomeBiYearly}}</strong></h5></td>
-                                <td class="planDetail custom-hidden-xs text-center"><h5><strong>${{NumberCommaFormat TotalIncomeYearly}}</strong></h5></td>
-                                <td class="planDetail hidden-xs hidden-sm text-center"><h5><strong>${{NumberCommaFormat TotalIncomeYearlyGross}}</strong></h5></td>
-                                <td class="planDetail hidden-xs text-center"></td>
-                                <td class="planDetail hidden-xs hidden-sm text-center"></td>
-                                <td class="planDetail hidden-xs hidden-sm text-center"></td>
-                                <td class="planDetail hidden-xs hidden-sm text-center"></td>
+                                <td class="planDetail text-right text-success"><h5><strong>${{NumberCommaFormat TotalIncomeMonthly}}</strong></h5></td>
+                                <td class="planDetail text-right"><h5><strong>${{NumberCommaFormat TotalIncomeBiWeekly}}</strong></h5></td>
+                                <td class="planDetail custom-hidden-xs text-right"><h5><strong>${{NumberCommaFormat TotalIncomeWeekly}}</strong></h5></td>
+                                <td class="planDetail custom-hidden-xs text-right"><h5><strong>${{NumberCommaFormat TotalIncomeBiYearly}}</strong></h5></td>
+                                <td class="planDetail custom-hidden-xs text-right"><h5><strong>${{NumberCommaFormat TotalIncomeYearly}}</strong></h5></td>
+                                <td class="planDetail hidden-xs hidden-sm text-right"><h5><strong>${{NumberCommaFormat TotalIncomeYearlyGross}}</strong></h5></td>
+                                <td class="planDetail hidden-xs text-right"></td>
+                                <td class="planDetail hidden-xs hidden-sm text-right"></td>
+                                <td class="planDetail hidden-xs hidden-sm text-right"></td>
+                                <td class="planDetail hidden-xs hidden-sm text-right"></td>
                                 <td class="planDetail"></td>
                             </tr>
                         </tfoot>
@@ -575,16 +575,16 @@
                         <thead>
                             <tr>
                                 <th class="planDetail">Category</th>
-                                <th class="planDetail text-center">Monthly</th>
-                                <th class="planDetail hidden-xs text-center">Bi-Weekly</th>
-                                <th class="planDetail hidden-xs text-center">Weekly</th>
-                                <th class="planDetail hidden-xs text-center">6 Month</th>
-                                <th class="planDetail hidden-xs text-center">Year</th>
-                                <th class="planDetail text-center">Average</th>
-                                <th class="planDetail custom-hidden-xs hidden-sm text-center">Percentage</th>
-                                <th class="planDetail custom-hidden-xs hidden-sm text-center">Ranking</th>
-                                <th class="planDetail custom-hidden-xs hidden-sm text-center">Description</th>
-                                <th class="planDetail hidden-xs hidden-sm text-center">Comment</th>
+                                <th class="planDetail text-right">Monthly</th>
+                                <th class="planDetail hidden-xs text-right">Bi-Weekly</th>
+                                <th class="planDetail hidden-xs text-right">Weekly</th>
+                                <th class="planDetail hidden-xs text-right">6 Month</th>
+                                <th class="planDetail hidden-xs text-right">Year</th>
+                                <th class="planDetail text-right">Average</th>
+                                <th class="planDetail custom-hidden-xs hidden-sm text-right">Percentage</th>
+                                <th class="planDetail custom-hidden-xs hidden-sm text-right">Ranking</th>
+                                <th class="planDetail custom-hidden-xs hidden-sm text-right">Description</th>
+                                <th class="planDetail hidden-xs hidden-sm text-right">Comment</th>
                                 <th class="planDetail"></th>
                             </tr>
                         </thead>
@@ -592,22 +592,22 @@
                             {{#each BudgetItem}}
                             <tr>
                                 <td class="planDetail">{{BudgetCategory}}</td>
-                                <td class="planDetail text-center text-danger">${{NumberCommaFormat AmountMonthly}}</td>
-                                <td class="planDetail hidden-xs text-center">${{NumberCommaFormat AmountBiWeekly}}</td>
-                                <td class="planDetail hidden-xs text-center">${{NumberCommaFormat AmountWeekly}}</td>
-                                <td class="planDetail hidden-xs text-center">${{NumberCommaFormat AmountBiYearly}}</td>
-                                <td class="planDetail hidden-xs text-center">${{NumberCommaFormat AmountYearly}}</td>
-                                <td class="planDetail text-center">${{NumberCommaFormat TransactionAverage}}</td>
-                                <td class="planDetail custom-hidden-xs hidden-sm text-center">{{Percentage}}%</td>
-                                <td class="planDetail custom-hidden-xs hidden-sm text-center">#{{RANK}}</td>
-                                <td class="planDetail custom-hidden-xs hidden-sm text-center">
+                                <td class="planDetail text-right text-danger">${{NumberCommaFormat AmountMonthly}}</td>
+                                <td class="planDetail hidden-xs text-right">${{NumberCommaFormat AmountBiWeekly}}</td>
+                                <td class="planDetail hidden-xs text-right">${{NumberCommaFormat AmountWeekly}}</td>
+                                <td class="planDetail hidden-xs text-right">${{NumberCommaFormat AmountBiYearly}}</td>
+                                <td class="planDetail hidden-xs text-right">${{NumberCommaFormat AmountYearly}}</td>
+                                <td class="planDetail text-right">${{NumberCommaFormat TransactionAverage}}</td>
+                                <td class="planDetail custom-hidden-xs hidden-sm text-right">{{Percentage}}%</td>
+                                <td class="planDetail custom-hidden-xs hidden-sm text-right">#{{RANK}}</td>
+                                <td class="planDetail custom-hidden-xs hidden-sm text-right">
                                 {{#if Description}}
                                     <i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="{{Description}}"></i>
                                 {{else}}
                                     <span>--</span>
                                 {{/if}}
                                 </td>
-                                <td class="planDetail hidden-xs hidden-sm text-center">
+                                <td class="planDetail hidden-xs hidden-sm text-right">
                                 {{#if Note}}
                                     <i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="{{Note}}"></i>
                                 {{else}}
@@ -909,7 +909,15 @@
                             success: function (msg) {
                                 var Category = $.map(msg, function (item) {
                                     return { BudgetCategoryID: item.BudgetCategoryID,
-                                            BudgetCategory: item.BudgetCategory };
+                                            BudgetCategory: item.BudgetCategory,
+                                            Description: item.Description,
+                                            Note: item.Note,
+                                            IsEssential: item.IsEssential,
+                                            HasSpotlight: item.HasSpotlight,
+                                            HasFundFlg: item.HasFundFlg,
+                                            FundID: item.FundID,
+                                            FundName: item.FundName,
+                                            StartingBalance: item.StartingBalance };
                                 });
                                 
                                 objAutoFill.Category = Category;
@@ -939,7 +947,34 @@
                     onSelect: function (suggestion) {
                         $.map(objAutoFill.Category, function (category) {
                             if (category.BudgetCategoryID == suggestion.data) {   
-                                $("#uxBudgetCategory").data("category-id", category.BudgetCategoryID);                
+                                $("#uxBudgetCategory").data("category-id", category.BudgetCategoryID);
+                                $("#uxDescription").val(category.Description);
+                                $("#uxNote").val(category.Note);
+                                                                
+                                if (category.HasSpotlight == "1") {
+                                    $("#uxHasSpotlight").prop("checked", true);
+                                }
+                                else {
+                                    $("#uxHasSpotlight").prop("checked", false);
+                                }
+
+                                if (category.IsEssential == "1") {
+                                    $("#uxIsEssential").prop("checked", true);
+                                }
+                                else {
+                                    $("#uxIsEssential").prop("checked", false);
+                                }
+
+                                if (category.HasFundFlg == "1") {
+                                    $("#uxHasFundFlg").prop("checked", true);
+                                }
+                                else {
+                                    $("#uxHasFundFlg").prop("checked", false);
+                                }
+
+                                $("#uxFundName").val(category.FundName); 
+                                $("#uxFundName").data("fund-id", category.FundID);
+                                $("#uxStartingBalance").val(category.StartingBalance); 
                             }
                         });
                     }
@@ -1005,6 +1040,15 @@
                 $(".back-to-top").remove();
             });
 
+            // $$$$$$\  $$$$$$$\ $$$$$$\        $$$$$$\   $$$$$$\  $$\       $$\       
+            //$$  __$$\ $$  __$$\\_$$  _|      $$  __$$\ $$  __$$\ $$ |      $$ |      
+            //$$ /  $$ |$$ |  $$ | $$ |        $$ /  \__|$$ /  $$ |$$ |      $$ |      
+            //$$$$$$$$ |$$$$$$$  | $$ |        $$ |      $$$$$$$$ |$$ |      $$ |      
+            //$$  __$$ |$$  ____/  $$ |        $$ |      $$  __$$ |$$ |      $$ |      
+            //$$ |  $$ |$$ |       $$ |        $$ |  $$\ $$ |  $$ |$$ |      $$ |      
+            //$$ |  $$ |$$ |     $$$$$$\       \$$$$$$  |$$ |  $$ |$$$$$$$$\ $$$$$$$$\ 
+            //\__|  \__|\__|     \______|       \______/ \__|  \__|\________|\________|
+
             function BudgetMonthNavigationGet() {
                 objBudgetMonth.Month = Date.parse(budgetMonth).toString("MMMM");
                 objBudgetMonth.MonthCurrent = Date.parse(budgetMonth).toString("MMMM yyyy");
@@ -1017,15 +1061,6 @@
                 BudgetMonthNavigationRender();
             }
 
-            // $$$$$$\  $$$$$$$\ $$$$$$\        $$$$$$\   $$$$$$\  $$\       $$\       
-            //$$  __$$\ $$  __$$\\_$$  _|      $$  __$$\ $$  __$$\ $$ |      $$ |      
-            //$$ /  $$ |$$ |  $$ | $$ |        $$ /  \__|$$ /  $$ |$$ |      $$ |      
-            //$$$$$$$$ |$$$$$$$  | $$ |        $$ |      $$$$$$$$ |$$ |      $$ |      
-            //$$  __$$ |$$  ____/  $$ |        $$ |      $$  __$$ |$$ |      $$ |      
-            //$$ |  $$ |$$ |       $$ |        $$ |  $$\ $$ |  $$ |$$ |      $$ |      
-            //$$ |  $$ |$$ |     $$$$$$\       \$$$$$$  |$$ |  $$ |$$$$$$$$\ $$$$$$$$\ 
-            //\__|  \__|\__|     \______|       \______/ \__|  \__|\________|\________|
-                                                                         
             function BudgetByMonthValidate() {
                 var result = {};
 
@@ -1402,6 +1437,56 @@
                 });
             }
 
+            function BudgetExpenseByMonthContextSet(result) {
+                objBudgetExpense = {};
+
+                var tmpBudgetGroup = $.map(result, function (item) {
+                    return {
+                        BudgetGroupID: item.BudgetGroupID,
+                        BudgetGroup: item.BudgetGroup,
+                    };
+                });
+
+                var uniqBudgetGroup = _.uniqWith(tmpBudgetGroup, _.isEqual);
+                
+                var arrBudgetGroup = [];
+
+                $.map(uniqBudgetGroup, function (group) {
+                    var arrBudgetItem = [];
+
+                    $.map(result, function (budgetItem) {
+                        if (group.BudgetGroupID == budgetItem.BudgetGroupID) {
+                            objBudgetItem = {};
+                            objBudgetItem.BudgetItemID = budgetItem.BudgetItemID;
+                            objBudgetItem.BudgetNumber = budgetItem.BudgetNumber;
+                            objBudgetItem.BudgetCategoryID = budgetItem.BudgetCategoryID;
+                            objBudgetItem.BudgetCategory = budgetItem.BudgetCategory;
+                            objBudgetItem.AmountMonthly = budgetItem.AmountMonthly;
+                            objBudgetItem.AmountBiWeekly = budgetItem.AmountBiWeekly;
+                            objBudgetItem.AmountWeekly = budgetItem.AmountWeekly;
+                            objBudgetItem.AmountBiYearly = budgetItem.AmountBiYearly;
+                            objBudgetItem.AmountYearly = budgetItem.AmountYearly;
+                            objBudgetItem.TransactionAverage = budgetItem.TransactionAverage;
+                            objBudgetItem.Percentage = budgetItem.Percentage;
+                            objBudgetItem.RANK = budgetItem.RANK;
+                            objBudgetItem.Description = budgetItem.Description;
+                            objBudgetItem.Note = budgetItem.Note;
+
+                            arrBudgetItem.push(objBudgetItem);
+                        }
+                    });
+
+                    objBudgetGroup = {};
+                    objBudgetGroup.BudgetGroupID = group.BudgetGroupID;
+                    objBudgetGroup.BudgetGroup = group.BudgetGroup;
+                    objBudgetGroup.BudgetItem = arrBudgetItem;
+                    
+                    arrBudgetGroup.push(objBudgetGroup);
+                });
+
+                objBudgetExpense.Expense = arrBudgetGroup;
+            }
+
             //$$$$$$$$\ $$\    $$\ $$$$$$$$\ $$\   $$\ $$$$$$$$\  $$$$$$\  
             //$$  _____|$$ |   $$ |$$  _____|$$$\  $$ |\__$$  __|$$  __$$\ 
             //$$ |      $$ |   $$ |$$ |      $$$$\ $$ |   $$ |   $$ /  \__|
@@ -1576,55 +1661,82 @@
                 }
             }
 
-            function BudgetExpenseByMonthContextSet(result) {
-                objBudgetExpense = {};
-
-                var tmpBudgetGroup = $.map(result, function (item) {
-                    return {
-                        BudgetGroupID: item.BudgetGroupID,
-                        BudgetGroup: item.BudgetGroup,
-                    };
-                });
-
-                var uniqBudgetGroup = _.uniqWith(tmpBudgetGroup, _.isEqual);
-                
-                var arrBudgetGroup = [];
-
-                $.map(uniqBudgetGroup, function (group) {
-                    var arrBudgetItem = [];
-
-                    $.map(result, function (budgetItem) {
-                        if (group.BudgetGroupID == budgetItem.BudgetGroupID) {
-                            objBudgetItem = {};
-                            objBudgetItem.BudgetItemID = budgetItem.BudgetItemID;
-                            objBudgetItem.BudgetNumber = budgetItem.BudgetNumber;
-                            objBudgetItem.BudgetCategoryID = budgetItem.BudgetCategoryID;
-                            objBudgetItem.BudgetCategory = budgetItem.BudgetCategory;
-                            objBudgetItem.AmountMonthly = budgetItem.AmountMonthly;
-                            objBudgetItem.AmountBiWeekly = budgetItem.AmountBiWeekly;
-                            objBudgetItem.AmountWeekly = budgetItem.AmountWeekly;
-                            objBudgetItem.AmountBiYearly = budgetItem.AmountBiYearly;
-                            objBudgetItem.AmountYearly = budgetItem.AmountYearly;
-                            objBudgetItem.TransactionAverage = budgetItem.TransactionAverage;
-                            objBudgetItem.Percentage = budgetItem.Percentage;
-                            objBudgetItem.RANK = budgetItem.RANK;
-                            objBudgetItem.Description = budgetItem.Description;
-                            objBudgetItem.Note = budgetItem.Note;
-
-                            arrBudgetItem.push(objBudgetItem);
-                        }
-                    });
-
-                    objBudgetGroup = {};
-                    objBudgetGroup.BudgetGroupID = group.BudgetGroupID;
-                    objBudgetGroup.BudgetGroup = group.BudgetGroup;
-                    objBudgetGroup.BudgetItem = arrBudgetItem;
-                    
-                    arrBudgetGroup.push(objBudgetGroup);
-                });
-
-                objBudgetExpense.Expense = arrBudgetGroup;
+                        function ConfirmAction() {
+                if (confirm("Are you sure?")) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
             }
+
+            function ValidateIncome() {
+                var error = "";
+                var numRegEx = /^-{0,1}\d*\.{0,1}\d+$/;
+
+                if ($("#uxIncomeType option:selected").val().length == 0) { error += "<li>Income Type is required.</li>"; }
+                if ($("#uxPayCycle option:selected").val().length == 0) { error += "<li>Pay Cycle is required.</li>"; }
+                if ($("#uxIncomeName").val().length == 0) { error += "<li>Name is required.</li>"; }
+                if ($("#uxPlannedHours").val().length == 0) { error += "<li>Planned Hours is required.</li>"; }
+                if ($("#uxPlannedHours").val().length > 0) { if (!numRegEx.test($("#uxPlannedHours").val())) { error += "<li>Planned Hours must be numeric.</li>"; } }
+                if ($("#uxSalary").val().length == 0) { error += "<li>Salary is required.</li>"; }
+                if ($("#uxSalary").val().length > 0) { if (!numRegEx.test($("#uxSalary").val())) { error += "<li>Salary must be numeric.</li>"; } }
+                if ($("#uxTakeHomePay").val().length == 0) { error += "<li>Take Home Pay is required.</li>"; }
+                if ($("#uxTakeHomePay").val().length > 0) { if (!numRegEx.test($("#uxTakeHomePay").val())) { error += "<li>Take Home Pay must be numeric.</li>"; } }
+                if ($("#uxHourlyRate").val().length == 0) { error += "<li>Hourly Rate is required.</li>"; }
+                if ($("#uxHourlyRate").val().length > 0) { if (!numRegEx.test($("#uxHourlyRate").val())) { error += "<li>Hourly Rate must be numeric.</li>"; } }
+                if ($("#uxYearDeduct").val().length == 0) { error += "<li>Year Deduct is required.</li>"; }
+                if ($("#uxYearDeduct").val().length > 0) { if (!numRegEx.test($("#uxYearDeduct").val())) { error += "<li>Year Deduct must be numeric.</li>"; } }
+
+                if (error.length > 0) {
+                    error = "<div class=\"alert alert-danger\" role=\"alert\"><ul>" + error + "</ul></div>";
+                    
+                    $("#IncomeHardErrorMessage").html(error);
+                    
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+
+            function ValidateExpense() {
+                var error = "";
+                var numRegEx = /^-{0,1}\d*\.{0,1}\d+$/;
+
+                if ($("#uxBudgetGroup").val().length == 0) { error += "<li>Group is required.</li>"; }
+                if ($("#uxBudgetCategory").val().length == 0) { error += "<li>Category is required.</li>"; }
+                if ($("#uxAmount").val().length == 0) { error += "<li>Amount is required.</li>"; }
+                if ($("#uxAmount").val().length > 0) { if (!numRegEx.test($("#uxAmount").val())) { error += "<li>Amount must be numeric.</li>"; } }
+
+                if (error.length > 0) {
+                    error = "<div class=\"alert alert-danger\" role=\"alert\"><ul>" + error + "</ul></div>";
+                    
+                    $("#ExpenseHardErrorMessage").html(error);
+                    
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+
+            $(window).scroll(function() {
+                var budgetMonthSummary = $("#uxBudgetMonthSummary");
+                var budgetMonthSummaryScroll = "budgetMonthSummaryScroll";
+                var elementHeight = $("#uxBudgetMonthSummary").height();
+
+                if ($(this).scrollTop() > elementHeight) {
+                    budgetMonthSummary.addClass(budgetMonthSummaryScroll).fadeIn("slow");
+                    $("#uxBudgetMonthScroll").show();
+                    $(".summaryExpense").addClass("pad");
+                }
+                else if ($(this).scrollTop() == 0) {
+                    budgetMonthSummary.removeClass(budgetMonthSummaryScroll).removeAttr("style");
+                    $("#uxBudgetMonthScroll").hide();
+                    $(".summaryExpense").removeClass("pad");
+                }
+            });
 
             //$$$$$$$\  $$$$$$$$\ $$\   $$\ $$$$$$$\  $$$$$$$$\ $$$$$$$\  
             //$$  __$$\ $$  _____|$$$\  $$ |$$  __$$\ $$  _____|$$  __$$\ 
@@ -1706,83 +1818,6 @@
 
                 $("#uxBudgetGroupAdd").html(html);
             }
-
-            function ConfirmAction() {
-                if (confirm("Are you sure?")) {
-                    return true;
-                }
-                else {
-                    return false;
-                }
-            }
-
-            function ValidateIncome() {
-                var error = "";
-                var numRegEx = /^-{0,1}\d*\.{0,1}\d+$/;
-
-                if ($("#uxIncomeType option:selected").val().length == 0) { error += "<li>Income Type is required.</li>"; }
-                if ($("#uxPayCycle option:selected").val().length == 0) { error += "<li>Pay Cycle is required.</li>"; }
-                if ($("#uxIncomeName").val().length == 0) { error += "<li>Name is required.</li>"; }
-                if ($("#uxPlannedHours").val().length == 0) { error += "<li>Planned Hours is required.</li>"; }
-                if ($("#uxPlannedHours").val().length > 0) { if (!numRegEx.test($("#uxPlannedHours").val())) { error += "<li>Planned Hours must be numeric.</li>"; } }
-                if ($("#uxSalary").val().length == 0) { error += "<li>Salary is required.</li>"; }
-                if ($("#uxSalary").val().length > 0) { if (!numRegEx.test($("#uxSalary").val())) { error += "<li>Salary must be numeric.</li>"; } }
-                if ($("#uxTakeHomePay").val().length == 0) { error += "<li>Take Home Pay is required.</li>"; }
-                if ($("#uxTakeHomePay").val().length > 0) { if (!numRegEx.test($("#uxTakeHomePay").val())) { error += "<li>Take Home Pay must be numeric.</li>"; } }
-                if ($("#uxHourlyRate").val().length == 0) { error += "<li>Hourly Rate is required.</li>"; }
-                if ($("#uxHourlyRate").val().length > 0) { if (!numRegEx.test($("#uxHourlyRate").val())) { error += "<li>Hourly Rate must be numeric.</li>"; } }
-                if ($("#uxYearDeduct").val().length == 0) { error += "<li>Year Deduct is required.</li>"; }
-                if ($("#uxYearDeduct").val().length > 0) { if (!numRegEx.test($("#uxYearDeduct").val())) { error += "<li>Year Deduct must be numeric.</li>"; } }
-
-                if (error.length > 0) {
-                    error = "<div class=\"alert alert-danger\" role=\"alert\"><ul>" + error + "</ul></div>";
-                    
-                    $("#IncomeHardErrorMessage").html(error);
-                    
-                    return false;
-                }
-                else {
-                    return true;
-                }
-            }
-
-            function ValidateExpense() {
-                var error = "";
-                var numRegEx = /^-{0,1}\d*\.{0,1}\d+$/;
-
-                if ($("#uxBudgetGroup").val().length == 0) { error += "<li>Group is required.</li>"; }
-                if ($("#uxBudgetCategory").val().length == 0) { error += "<li>Category is required.</li>"; }
-                if ($("#uxAmount").val().length == 0) { error += "<li>Amount is required.</li>"; }
-                if ($("#uxAmount").val().length > 0) { if (!numRegEx.test($("#uxAmount").val())) { error += "<li>Amount must be numeric.</li>"; } }
-
-                if (error.length > 0) {
-                    error = "<div class=\"alert alert-danger\" role=\"alert\"><ul>" + error + "</ul></div>";
-                    
-                    $("#ExpenseHardErrorMessage").html(error);
-                    
-                    return false;
-                }
-                else {
-                    return true;
-                }
-            }
-
-            $(window).scroll(function() {
-                var budgetMonthSummary = $("#uxBudgetMonthSummary");
-                var budgetMonthSummaryScroll = "budgetMonthSummaryScroll";
-                var elementHeight = $("#uxBudgetMonthSummary").height();
-
-                if ($(this).scrollTop() > elementHeight) {
-                    budgetMonthSummary.addClass(budgetMonthSummaryScroll).fadeIn("slow");
-                    $("#uxBudgetMonthScroll").show();
-                    $(".summaryExpense").addClass("pad");
-                }
-                else if ($(this).scrollTop() == 0) {
-                    budgetMonthSummary.removeClass(budgetMonthSummaryScroll).removeAttr("style");
-                    $("#uxBudgetMonthScroll").hide();
-                    $(".summaryExpense").removeClass("pad");
-                }
-            });
         </script>
         <!--END Javascript-->
     </body>
