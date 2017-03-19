@@ -237,20 +237,21 @@
                         labels: chartLabel,
                         datasets: [
                             {
-                                backgroundColor: [
-                                    "#e74c3c",
-                                    "#3498db",
-                                    "#34495e",
-                                    "#76FF03",
-                                    "#0f3cf1",
-                                    "#2ecc71",
-                                    "#cc712e",
-                                    "#f1c40f",
-                                    "#2eccc0",
-                                    "#795548",
-                                    "#9b59b6",
-                                    "#95a5a6"
-                                ],
+                                backgroundColor: chartBackgroundColor,
+                                //[
+                                //    "#e74c3c",
+                                //    "#3498db",
+                                //    "#34495e",
+                                //    "#76FF03",
+                                //    "#0f3cf1",
+                                //    "#2ecc71",
+                                //    "#cc712e",
+                                //    "#f1c40f",
+                                //    "#2eccc0",
+                                //    "#795548",
+                                //    "#9b59b6",
+                                //    "#95a5a6"
+                                //],
                                 data: chartData
                             }
                         ]
