@@ -139,7 +139,7 @@
       <!--Templates START-->
       <script id="tmplBudgetCategorySpotlight" type="text/x-handlebars-template">
         <div class="currentMonth">
-          <a id="uxBudgetMonth" class="summaryLink" href="/budget/summary">
+          <a id="uxBudgetMonth" class="summaryLink" href="/budget/plan">
             <strong>{{BudgetMonth}}</strong>
           </a>
         </div>
