@@ -1721,22 +1721,22 @@
                 }
             }
 
-            $(window).scroll(function() {
-                var budgetMonthSummary = $("#uxBudgetMonthSummary");
-                var budgetMonthSummaryScroll = "budgetMonthSummaryScroll";
-                var elementHeight = $("#uxBudgetMonthSummary").height();
-
-                if ($(this).scrollTop() > elementHeight) {
-                    budgetMonthSummary.addClass(budgetMonthSummaryScroll).fadeIn("slow");
-                    $("#uxBudgetMonthScroll").show();
-                    $(".summaryExpense").addClass("pad");
-                }
-                else if ($(this).scrollTop() == 0) {
-                    budgetMonthSummary.removeClass(budgetMonthSummaryScroll).removeAttr("style");
-                    $("#uxBudgetMonthScroll").hide();
-                    $(".summaryExpense").removeClass("pad");
-                }
-            });
+            //$(window).scroll(function() {
+            //    var budgetMonthSummary = $("#uxBudgetMonthSummary");
+            //    var budgetMonthSummaryScroll = "budgetMonthSummaryScroll";
+            //    var elementHeight = $("#uxBudgetMonthSummary").height();
+            //
+            //    if ($(this).scrollTop() > elementHeight) {
+            //        budgetMonthSummary.addClass(budgetMonthSummaryScroll).fadeIn("slow");
+            //        $("#uxBudgetMonthScroll").show();
+            //        $(".summaryExpense").addClass("pad");
+            //    }
+            //    else if ($(this).scrollTop() == 0) {
+            //        budgetMonthSummary.removeClass(budgetMonthSummaryScroll).removeAttr("style");
+            //        $("#uxBudgetMonthScroll").hide();
+            //        $(".summaryExpense").removeClass("pad");
+            //    }
+            //});
 
             //$$$$$$$\  $$$$$$$$\ $$\   $$\ $$$$$$$\  $$$$$$$$\ $$$$$$$\  
             //$$  __$$\ $$  _____|$$$\  $$ |$$  __$$\ $$  _____|$$  __$$\ 
