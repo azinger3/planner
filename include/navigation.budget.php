@@ -28,6 +28,9 @@
                 <li>
                   <a href="/budget/plan">Planning</a>
                 </li>
+                <li>
+                  <a href="https://login.microsoftonline.com" target="_blank"><i class="fa fa-file-excel-o" aria-hidden="true"></i></a>
+                </li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li>
