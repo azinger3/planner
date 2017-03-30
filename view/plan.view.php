@@ -372,7 +372,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="small">
-                                                    <input type="checkbox" id="uxHasSpotlight"> Variable Fund
+                                                    <input type="checkbox" id="uxHasSpotlight"> Show on Home Page
                                                 </label>
                                             </div>
                                         </div>
@@ -579,10 +579,10 @@
                                 <th class="planDetail hidden-xs text-right">Bi-Weekly</th>
                                 <th class="planDetail hidden-xs text-right">Weekly</th>
                                 <th class="planDetail hidden-xs text-right">6 Month</th>
-                                <th class="planDetail hidden-xs text-right">Year</th>
+                                <th class="planDetail custom-hidden-xs text-right">Year</th>
                                 <th class="planDetail text-right">Average</th>
                                 <th class="planDetail custom-hidden-xs hidden-sm text-right">Percentage</th>
-                                <th class="planDetail custom-hidden-xs hidden-sm text-right">Ranking</th>
+                                <th class="planDetail hidden-xs hidden-sm text-right">Ranking</th>
                                 <th class="planDetail custom-hidden-xs hidden-sm text-right">Description</th>
                                 <th class="planDetail hidden-xs hidden-sm text-right">Comment</th>
                                 <th class="planDetail"></th>
@@ -596,10 +596,10 @@
                                 <td class="planDetail hidden-xs text-right">${{NumberCommaFormat AmountBiWeekly}}</td>
                                 <td class="planDetail hidden-xs text-right">${{NumberCommaFormat AmountWeekly}}</td>
                                 <td class="planDetail hidden-xs text-right">${{NumberCommaFormat AmountBiYearly}}</td>
-                                <td class="planDetail hidden-xs text-right">${{NumberCommaFormat AmountYearly}}</td>
+                                <td class="planDetail custom-hidden-xs text-right">${{NumberCommaFormat AmountYearly}}</td>
                                 <td class="planDetail text-right">${{NumberCommaFormat TransactionAverage}}</td>
                                 <td class="planDetail custom-hidden-xs hidden-sm text-right">{{Percentage}}%</td>
-                                <td class="planDetail custom-hidden-xs hidden-sm text-right">#{{RANK}}</td>
+                                <td class="planDetail hidden-xs hidden-sm text-right">#{{RANK}}</td>
                                 <td class="planDetail custom-hidden-xs hidden-sm text-right">
                                 {{#if Description}}
                                     <i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="{{Description}}"></i>
