@@ -347,7 +347,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="uxDescription" class="small">Description:</label>
-                                                <textarea rows="2" class="form-control input-sm" id="uxDescription" style="resize: none;"></textarea>
+                                                <textarea rows="5" class="form-control input-sm" id="uxDescription" style="resize: none;"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -355,7 +355,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="uxNote" class="small">Note:</label>
-                                                <textarea rows="2" class="form-control input-sm" id="uxNote" style="resize: none;"></textarea>
+                                                <textarea rows="5" class="form-control input-sm" id="uxNote" style="resize: none;"></textarea>
                                             </div>
                                         </div>
                                     </div>
