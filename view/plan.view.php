@@ -363,7 +363,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="small">
-                                                    <input type="checkbox" id="uxIsEssential"> Essential Expense
+                                                    <input type="checkbox" id="uxHasSpotlight"> Show on Home Page
                                                 </label>
                                             </div>
                                         </div>
@@ -372,7 +372,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label class="small">
-                                                    <input type="checkbox" id="uxHasSpotlight"> Show on Home Page
+                                                    <input type="checkbox" id="uxIsEssential"> Essential Expense
                                                 </label>
                                             </div>
                                         </div>
