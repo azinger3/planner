@@ -197,7 +197,7 @@
                             data.StartDT = res[0];
                             data.EndDT = res[1];
 
-                            window.location.href = "average?StartDT=" + data.StartDT + "&EndDT=" + data.EndDT;
+                            window.location.href = "breakdown?StartDT=" + data.StartDT + "&EndDT=" + data.EndDT;
                         });
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
