@@ -597,7 +597,7 @@
                                 <td class="planDetail hidden-xs text-right">${{NumberCommaFormat AmountWeekly}}</td>
                                 <td class="planDetail hidden-xs text-right">${{NumberCommaFormat AmountBiYearly}}</td>
                                 <td class="planDetail custom-hidden-xs text-right">${{NumberCommaFormat AmountYearly}}</td>
-                                <td class="planDetail text-right">${{NumberCommaFormat TransactionAverage}}</td>
+                                <td class="planDetail text-right text-warning">${{NumberCommaFormat TransactionAverage}}</td>
                                 <td class="planDetail custom-hidden-xs hidden-sm text-right">{{Percentage}}%</td>
                                 <td class="planDetail hidden-xs hidden-sm text-right">#{{RANK}}</td>
                                 <td class="planDetail custom-hidden-xs hidden-sm text-right">
