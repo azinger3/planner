@@ -1040,15 +1040,6 @@
                 $(".back-to-top").remove();
             });
 
-            // $$$$$$\  $$$$$$$\ $$$$$$\        $$$$$$\   $$$$$$\  $$\       $$\       
-            //$$  __$$\ $$  __$$\\_$$  _|      $$  __$$\ $$  __$$\ $$ |      $$ |      
-            //$$ /  $$ |$$ |  $$ | $$ |        $$ /  \__|$$ /  $$ |$$ |      $$ |      
-            //$$$$$$$$ |$$$$$$$  | $$ |        $$ |      $$$$$$$$ |$$ |      $$ |      
-            //$$  __$$ |$$  ____/  $$ |        $$ |      $$  __$$ |$$ |      $$ |      
-            //$$ |  $$ |$$ |       $$ |        $$ |  $$\ $$ |  $$ |$$ |      $$ |      
-            //$$ |  $$ |$$ |     $$$$$$\       \$$$$$$  |$$ |  $$ |$$$$$$$$\ $$$$$$$$\ 
-            //\__|  \__|\__|     \______|       \______/ \__|  \__|\________|\________|
-
             function BudgetMonthNavigationGet() {
                 objBudgetMonth.Month = Date.parse(budgetMonth).toString("MMMM");
                 objBudgetMonth.MonthCurrent = Date.parse(budgetMonth).toString("MMMM yyyy");
@@ -1486,15 +1477,6 @@
 
                 objBudgetExpense.Expense = arrBudgetGroup;
             }
-
-            //$$$$$$$$\ $$\    $$\ $$$$$$$$\ $$\   $$\ $$$$$$$$\  $$$$$$\  
-            //$$  _____|$$ |   $$ |$$  _____|$$$\  $$ |\__$$  __|$$  __$$\ 
-            //$$ |      $$ |   $$ |$$ |      $$$$\ $$ |   $$ |   $$ /  \__|
-            //$$$$$\    \$$\  $$  |$$$$$\    $$ $$\$$ |   $$ |   \$$$$$$\  
-            //$$  __|    \$$\$$  / $$  __|   $$ \$$$$ |   $$ |    \____$$\ 
-            //$$ |        \$$$  /  $$ |      $$ |\$$$ |   $$ |   $$\   $$ |
-            //$$$$$$$$\    \$  /   $$$$$$$$\ $$ | \$$ |   $$ |   \$$$$$$  |
-            //\________|    \_/    \________|\__|  \__|   \__|    \______/ 
              
             function BudgetIncomeDetailModalShow(BudgetIncomeID) {
                 BudgetIncomeDetailModalReset();
@@ -1720,32 +1702,6 @@
                     return true;
                 }
             }
-
-            //$(window).scroll(function() {
-            //    var budgetMonthSummary = $("#uxBudgetMonthSummary");
-            //    var budgetMonthSummaryScroll = "budgetMonthSummaryScroll";
-            //    var elementHeight = $("#uxBudgetMonthSummary").height();
-            //
-            //    if ($(this).scrollTop() > elementHeight) {
-            //        budgetMonthSummary.addClass(budgetMonthSummaryScroll).fadeIn("slow");
-            //        $("#uxBudgetMonthScroll").show();
-            //        $(".summaryExpense").addClass("pad");
-            //    }
-            //    else if ($(this).scrollTop() == 0) {
-            //        budgetMonthSummary.removeClass(budgetMonthSummaryScroll).removeAttr("style");
-            //        $("#uxBudgetMonthScroll").hide();
-            //        $(".summaryExpense").removeClass("pad");
-            //    }
-            //});
-
-            //$$$$$$$\  $$$$$$$$\ $$\   $$\ $$$$$$$\  $$$$$$$$\ $$$$$$$\  
-            //$$  __$$\ $$  _____|$$$\  $$ |$$  __$$\ $$  _____|$$  __$$\ 
-            //$$ |  $$ |$$ |      $$$$\ $$ |$$ |  $$ |$$ |      $$ |  $$ |
-            //$$$$$$$  |$$$$$\    $$ $$\$$ |$$ |  $$ |$$$$$\    $$$$$$$  |
-            //$$  __$$< $$  __|   $$ \$$$$ |$$ |  $$ |$$  __|   $$  __$$< 
-            //$$ |  $$ |$$ |      $$ |\$$$ |$$ |  $$ |$$ |      $$ |  $$ |
-            //$$ |  $$ |$$$$$$$$\ $$ | \$$ |$$$$$$$  |$$$$$$$$\ $$ |  $$ |
-            //\__|  \__|\________|\__|  \__|\_______/ \________|\__|  \__|
                                                            
             function BudgetMonthNavigationRender() {
                 var source = $("#tmplBudgetMonthNavigation").html();

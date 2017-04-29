@@ -346,7 +346,7 @@
           var monthNumber = parseInt(Date.today().toString("M"));
           var yearNumber = parseInt(Date.today().toString("yyyy"));
           var dayNumber = parseInt(Date.today().toString("dd"));
-          var daysInMonth = parseInt(Date.getDaysInMonth(yearNumber, monthNumber)) + 1;
+          var daysInMonth = parseInt(Date.getDaysInMonth(yearNumber, monthNumber)) - 1;
           var percentThroughMonth = Math.round(dayNumber / daysInMonth * 100);
 
           $("#uxBudgetMonth").attr("data-toggle", "tooltip").attr("data-placement", "top").attr("data-original-title", percentThroughMonth + "%");
