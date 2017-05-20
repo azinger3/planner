@@ -576,11 +576,11 @@
                             <tr>
                                 <th class="planDetail">Category</th>
                                 <th class="planDetail text-right">Monthly</th>
+                                <th class="planDetail text-right">Average</th>
                                 <th class="planDetail hidden-xs text-right">Bi-Weekly</th>
                                 <th class="planDetail hidden-xs text-right">Weekly</th>
                                 <th class="planDetail hidden-xs text-right">6 Month</th>
                                 <th class="planDetail custom-hidden-xs text-right">Year</th>
-                                <th class="planDetail text-right">Average</th>
                                 <th class="planDetail custom-hidden-xs hidden-sm text-right">Percentage</th>
                                 <th class="planDetail hidden-xs hidden-sm text-right">Ranking</th>
                                 <th class="planDetail custom-hidden-xs hidden-sm text-right">Description</th>
@@ -593,11 +593,11 @@
                             <tr>
                                 <td class="planDetail">{{BudgetCategory}}</td>
                                 <td class="planDetail text-right text-danger">${{NumberCommaFormat AmountMonthly}}</td>
+                                <td class="planDetail text-right text-warning">${{NumberCommaFormat TransactionAverage}}</td>
                                 <td class="planDetail hidden-xs text-right">${{NumberCommaFormat AmountBiWeekly}}</td>
                                 <td class="planDetail hidden-xs text-right">${{NumberCommaFormat AmountWeekly}}</td>
                                 <td class="planDetail hidden-xs text-right">${{NumberCommaFormat AmountBiYearly}}</td>
                                 <td class="planDetail custom-hidden-xs text-right">${{NumberCommaFormat AmountYearly}}</td>
-                                <td class="planDetail text-right text-warning">${{NumberCommaFormat TransactionAverage}}</td>
                                 <td class="planDetail custom-hidden-xs hidden-sm text-right">{{Percentage}}%</td>
                                 <td class="planDetail hidden-xs hidden-sm text-right">#{{RANK}}</td>
                                 <td class="planDetail custom-hidden-xs hidden-sm text-right">
