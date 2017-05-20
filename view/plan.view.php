@@ -180,15 +180,9 @@
         <input type="hidden" id="hdnBudgetMonth" value="" />
         <input type="hidden" id="hdnBudgetNumber" value="" />
 
-        <!--Navigation START-->
         <?php require_once('include/navigation.budget.php'); ?>
-        <!--Navigation END-->
 
-        <!--Container START-->
         <div class="container">
-            <!--**********************************************************Main Content START**********************************************************-->
-            
-            <!--Page Header START-->
             <div class="page-header">
                 <div class="row text-center">
                     <div class="col-md-2">
@@ -201,22 +195,12 @@
                     </div>
                 </div>
             </div>
-            <!--Page Header END-->
-
-            <!--Content START-->
             <div id="uxBudgetStart">
             </div>
-            <!--Content END-->
-
-            <!--**********************************************************Main Content END**********************************************************-->
         </div>
-        <!--Container END-->
-
         <div id="uxBudgetComponent">
         </div>
         
-        <!--Modals-->
-
         <!--Income Modal-->
         <div class="modal fade" id="mdlIncomeCalculator" role="dialog">
             <div class="modal-dialog">
@@ -404,9 +388,6 @@
         </div>
         <!--END Expense Modal-->
 
-        <!--END Modals-->
-
-        <!--Templates-->
         <script id="tmplBudgetMonthNavigation" type="text/x-handlebars-template">
             <ul class="pager">
                 <li class="previous">
@@ -502,6 +483,7 @@
                             <tr>
                                 <th class="planDetail">Name</th>
                                 <th class="planDetail text-right">Monthly</th>
+                                <th class="planDetail hidden-xs hidden-sm text-right">Planned Hours</th>
                                 <th class="planDetail text-right">Bi-Weekly</th>
                                 <th class="planDetail custom-hidden-xs text-right">Weekly</th>
                                 <th class="planDetail custom-hidden-xs text-right">6 Month</th>
@@ -509,7 +491,6 @@
                                 <th class="planDetail hidden-xs hidden-sm text-right">Year (Gross)</th>
                                 <th class="planDetail hidden-xs text-right">Hourly Rate</th>
                                 <th class="planDetail hidden-xs hidden-sm text-right">Year Deduct %</th>
-                                <th class="planDetail hidden-xs hidden-sm text-right">Planned Hours</th>
                                 <th class="planDetail hidden-xs hidden-sm text-right">Type</th>
                                 <th class="planDetail"></th>
                             </tr>
@@ -519,6 +500,7 @@
                             <tr>
                                 <td class="planDetail">{{IncomeName}}</td>
                                 <td class="planDetail text-right text-success">${{NumberCommaFormat IncomeMonthly}}</td>
+                                <td class="planDetail hidden-xs hidden-sm text-right">{{PlannedHours}}</td>
                                 <td class="planDetail text-right">${{NumberCommaFormat IncomeBiWeekly}}</td>
                                 <td class="planDetail custom-hidden-xs text-right">${{NumberCommaFormat IncomeWeekly}}</td>
                                 <td class="planDetail custom-hidden-xs text-right">${{NumberCommaFormat IncomeBiYearly}}</td>
@@ -526,7 +508,6 @@
                                 <td class="planDetail hidden-xs hidden-sm text-right">${{NumberCommaFormat Salary}}</td>
                                 <td class="planDetail hidden-xs text-right">${{NumberCommaFormat HourlyRate}}</td>
                                 <td class="planDetail hidden-xs hidden-sm text-right">{{YearDeduct}}%</td>
-                                <td class="planDetail hidden-xs hidden-sm text-right">{{PlannedHours}}</td>
                                 <td class="planDetail hidden-xs hidden-sm text-right">{{IncomeType}}</td>
                                 <td class="planDetail text-right">
                                     <div class="btn-group">
@@ -544,13 +525,13 @@
                             <tr>
                                 <td class="planDetail"><h5><strong>TOTAL</strong></h5></td>
                                 <td class="planDetail text-right text-success"><h5><strong>${{NumberCommaFormat TotalIncomeMonthly}}</strong></h5></td>
+                                <td class="planDetail hidden-xs hidden-sm text-right"></td>
                                 <td class="planDetail text-right"><h5><strong>${{NumberCommaFormat TotalIncomeBiWeekly}}</strong></h5></td>
                                 <td class="planDetail custom-hidden-xs text-right"><h5><strong>${{NumberCommaFormat TotalIncomeWeekly}}</strong></h5></td>
                                 <td class="planDetail custom-hidden-xs text-right"><h5><strong>${{NumberCommaFormat TotalIncomeBiYearly}}</strong></h5></td>
                                 <td class="planDetail custom-hidden-xs text-right"><h5><strong>${{NumberCommaFormat TotalIncomeYearly}}</strong></h5></td>
                                 <td class="planDetail hidden-xs hidden-sm text-right"><h5><strong>${{NumberCommaFormat TotalIncomeYearlyGross}}</strong></h5></td>
                                 <td class="planDetail hidden-xs text-right"></td>
-                                <td class="planDetail hidden-xs hidden-sm text-right"></td>
                                 <td class="planDetail hidden-xs hidden-sm text-right"></td>
                                 <td class="planDetail hidden-xs hidden-sm text-right"></td>
                                 <td class="planDetail"></td>
@@ -642,15 +623,11 @@
                 </div>
             </div>
         </script>
-        <!--END Templates-->
 
-        <!--Footer-->
         <?php 
             require_once('include/footer.php');
         ?>
-        <!--END Footer-->
 
-        <!--Javascript-->
         <script>
             var api = "http://api.jordanandrobert.com/budget";
             var data = new Object();
@@ -1775,6 +1752,5 @@
                 $("#uxBudgetGroupAdd").html(html);
             }
         </script>
-        <!--END Javascript-->
     </body>
 </html>
