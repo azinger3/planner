@@ -317,13 +317,14 @@
         }
 
         function BudgetMonthPercentageSet() {
-          var monthNumber = parseInt(Date.today().toString("M"));
-          var yearNumber = parseInt(Date.today().toString("yyyy"));
-          var dayNumber = parseInt(Date.today().toString("dd"));
-          var daysInMonth = parseInt(Date.getDaysInMonth(yearNumber, monthNumber)) - 1;
-          var percentThroughMonth = Math.round(dayNumber / daysInMonth * 100);
+          var objBudgetMonthPercentage = {};
+          objBudgetMonthPercentage.monthNumber = parseInt(Date.today().toString("M")) - 1;
+          objBudgetMonthPercentage.yearNumber = parseInt(Date.today().toString("yyyy"));
+          objBudgetMonthPercentage.dayNumber = parseInt(Date.today().toString("dd"));
+          objBudgetMonthPercentage.daysInMonth = parseInt(Date.getDaysInMonth(objBudgetMonthPercentage.yearNumber, objBudgetMonthPercentage.monthNumber));
+          objBudgetMonthPercentage.percentThroughMonth = Math.round(objBudgetMonthPercentage.dayNumber / objBudgetMonthPercentage.daysInMonth * 100);
 
-          $("#uxBudgetMonth").attr("data-toggle", "tooltip").attr("data-placement", "top").attr("data-original-title", percentThroughMonth + "%");
+          $("#uxBudgetMonth").attr("data-toggle", "tooltip").attr("data-placement", "top").attr("data-original-title", objBudgetMonthPercentage.percentThroughMonth + "%");
         }
 
         function BudgetCategorySpotlightRender() {
