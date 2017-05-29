@@ -34,23 +34,13 @@
         </style>
     </head>
     <body>
-
-        <!--Navigation START-->
         <?php require_once('include/navigation.budget.php'); ?>
-        <!--Navigation END-->
 
-        <!--Container START-->
         <div class="container">
-            <!--**********************************************************Main Content START**********************************************************-->
-            
-            <!--Page Header START-->
             <div class="page-header">
                 <div class="row">
                 </div>
             </div>
-            <!--Page Header END-->
-
-            <!--Content START-->
             <div class="row">
                 <div class="col-xs-6 col-sm-6 col-md-6">
                     <div class="summaryHeader">Summary</div>
@@ -61,13 +51,8 @@
             </div>
             <div id="uxBudgetSummary">
             </div>
-            <!--Content END-->
-
-            <!--**********************************************************Main Content END**********************************************************-->
         </div>
-        <!--Container END-->
-
-        <!--Templates START-->
+        
         <script id="tmplBudgetSummary" type="text/x-handlebars-template">
             <div class="row">
                 <div class="col-md-12">
@@ -187,15 +172,9 @@
                 <option value="{{BudgetMonthSummaryUrl}}">{{BudgetMonthSummary}}</option>
             {{/each}}
         </script>
-        <!--Templates END-->
 
-        <!--Footer START-->
-        <?php 
-            require_once('include/footer.php'); 
-        ?>
-        <!--Footer END-->
-
-        <!--Javascript START-->
+        <?php require_once('include/footer.php'); ?>
+       
         <script>
             var api = "http://api.jordanandrobert.com/budget";
             var data = new Object();
@@ -417,6 +396,5 @@
                 }, 400);
             }
         </script>
-        <!--Javascript END-->
     </body>
 </html>

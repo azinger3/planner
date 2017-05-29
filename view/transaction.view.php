@@ -77,23 +77,13 @@
         </style>
     </head>
     <body>
-
-        <!--Navigation START-->
         <?php require_once('include/navigation.budget.php'); ?>
-        <!--Navigation END-->
 
-        <!--Container START-->
         <section class="section-default">
-            <!--**********************************************************Main Content START**********************************************************-->
-
-            <!--Page Header START-->
             <div class="page-header">
                 <div class="row">
                 </div>
             </div>
-            <!--Page Header END-->
-            
-            <!--Content START-->
             <div class="row">
                 <div class="col-md-4">
                     <div class="well">
@@ -186,13 +176,8 @@
                     </div>
                 </div>
             </div>
-            <!--Content END-->
-
-            <!--**********************************************************Main Content END**********************************************************-->
         </section>
-        <!--Container END-->
 
-        <!--Templates START-->
         <script id="tmplTransactionRecent" type="text/x-handlebars-template">
             <div id="HardErrorMessageEdit"></div>
             <table class="table table-striped table-hover table-condensed small" id="TransactionRecentTable">
@@ -274,13 +259,9 @@
                 <option value="{{BudgetCategoryID}}">{{BudgetCategory}}</option>
             {{/each}}
         </script>
-        <!--Templates END-->
 
-        <!--Footer START-->
         <?php require_once('include/footer.php'); ?>
-        <!--Footer END-->
 
-        <!--Javascript START-->
         <script>
             var api = "http://api.jordanandrobert.com/budget";
 
@@ -702,7 +683,5 @@
                 }
             }
         </script>
-        <!--Javascript END-->
-
     </body>
 </html>

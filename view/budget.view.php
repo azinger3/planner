@@ -74,27 +74,15 @@
     </style>
   </head>
   <body>
-      <!--Navigation START-->
-
       <?php require_once('include/navigation.budget.php'); ?>
       
-      <!--Navigation END-->
-
-      <!--Container START-->
       <div class="container">
-        <!--**********************************************************Main Content START**********************************************************-->
-
-        <!--Page Header START-->
         <div class="page-header">
           <div class="row">
           </div>
         </div>
-        <!--Page Header END-->
-
-        <!--Content START-->
         <div class="row">
           <div class="col-md-8">
-            <!--Remaining Variable Funds START-->
             <div class="panel panel-primary">
               <div class="panel-heading">
                 Remaining Variable Funds
@@ -109,34 +97,24 @@
                 <div id="uxBudgetCategorySpotlight"></div>
               </div>
             </div>
-            <!--Remaining Variable Funds END-->
-            <!--Savings Breakdown START-->
             <div class="panel panel-primary">
               <div class="panel-heading">Savings Breakdown</div>
               <div class="panel-body">
                 <div id="uxBudgetFundSpotlight"></div>
               </div>
             </div>
-            <!--Savings Breakdown END-->
           </div>
           <div class="col-md-4">
-            <!--Budget Summaries START-->
             <div class="panel panel-primary">
               <div class="panel-heading">Budget Summaries</div>
               <div class="panel-body">
                 <div id="uxBudgetSummarySpotlight"></div>
               </div>
             </div>
-            <!--Budget Summaries END-->
           </div>
         </div>
-        <!--Content END-->
-
-        <!--**********************************************************Main Content END**********************************************************-->
       </div>
-      <!--Container END-->
 
-      <!--Templates START-->
       <script id="tmplBudgetCategorySpotlight" type="text/x-handlebars-template">
         <div class="currentMonth">
           <a id="uxBudgetMonth" class="summaryLink" href="/budget/plan">
@@ -220,13 +198,9 @@
           {{/each}}
         </div>
       </script>
-      <!--Templates END-->
 
-      <!--Footer START-->
       <?php require_once('include/footer.php'); ?>
-      <!--Footer END-->
 
-      <!--Javascript START-->
       <script>
         var api = "http://api.jordanandrobert.com/budget";
 
@@ -379,6 +353,5 @@
           $("#uxBudgetSummarySpotlight").html(html);
         }
       </script>
-      <!--Javascript END-->
   </body>
 </html>

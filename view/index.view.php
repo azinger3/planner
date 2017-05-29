@@ -37,28 +37,13 @@
 
 </head>
 <body>
-
-  <!--Navigation START-->
-
   <?php require_once('include/navigation.index.php'); ?>
 
-  <!--Navigation END-->
-
-  <!--Container START-->
-
   <div class="container">
-
-      <!--Page Header START-->
-
       <div class="page-header">
           <div class="row">
           </div>
       </div>
-
-      <!--Page Header END-->
-
-      <!--**********************************************************Main Content START**********************************************************-->
-
       <div class="row text-center">
          <div class="col-md-6">
             <a href="/budget" class="plannerButton" title="Budget"><span class="fa fa-usd"></span></a>
@@ -75,12 +60,7 @@
             <a href="#" class="plannerButton" title="Wish List"><span class="fa fa-magic"></span></a>
          </div>
       </div>
-
-      <!--**********************************************************Main Content END**********************************************************-->
-
   </div>
-
-  <!--Container END-->
 
   <?php require_once('include/footer.php'); ?>
 
