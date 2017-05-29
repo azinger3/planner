@@ -322,9 +322,9 @@
           objBudgetMonthPercentage.yearNumber = parseInt(Date.today().toString("yyyy"));
           objBudgetMonthPercentage.dayNumber = parseInt(Date.today().toString("dd"));
           objBudgetMonthPercentage.daysInMonth = parseInt(Date.getDaysInMonth(objBudgetMonthPercentage.yearNumber, objBudgetMonthPercentage.monthNumber));
-          objBudgetMonthPercentage.percentThroughMonth = Math.round(objBudgetMonthPercentage.dayNumber / objBudgetMonthPercentage.daysInMonth * 100);
+          objBudgetMonthPercentage.monthPercentThrough = Math.round(objBudgetMonthPercentage.dayNumber / objBudgetMonthPercentage.daysInMonth * 100);
 
-          $("#uxBudgetMonth").attr("data-toggle", "tooltip").attr("data-placement", "top").attr("data-original-title", objBudgetMonthPercentage.percentThroughMonth + "%");
+          $("#uxBudgetMonth").attr("data-toggle", "tooltip").attr("data-placement", "top").attr("data-original-title", objBudgetMonthPercentage.monthPercentThrough + "%");
         }
 
         function BudgetCategorySpotlightRender() {
