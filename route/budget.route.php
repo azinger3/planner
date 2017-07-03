@@ -35,3 +35,9 @@ $app->get('/budget/plan', function ($request, $response, $args) {
 
     return $response;
 });
+
+$app->get('/budget/fund', function ($request, $response, $args) {
+    $response = $this->view->render($response, "fund.view.php");
+
+    return $response;
+});

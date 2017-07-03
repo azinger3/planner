@@ -173,7 +173,7 @@
           <tbody>
             {{#each BudgetFundSpotlight}}
             <tr>
-              <td>{{FundName}}</td>
+              <td><a class="normalLink" href="/budget/fund?FundID={{FundID}}">{{FundName}}</a></td>
               <td class="balance">${{NumberCommaFormat FundSpentVsReceived}}</td>
             </tr>
             {{/each}}

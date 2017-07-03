@@ -25,6 +25,22 @@ jQuery(document).ready(function($){
 	Handlebars.registerHelper("NumberCommaFormat", function(number) {
 		return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	});
+
+	Handlebars.registerHelper('ifequal', function(value, criteria, option) {
+		if (value == criteria) {
+			return option.fn(this);
+		} else {
+			return option.inverse(this);
+		}
+	});
+
+	Handlebars.registerHelper('ifgreaterthan', function(value, criteria, option) {
+		if (value > criteria) {
+			return option.fn(this);
+		} else {
+			return option.inverse(this);
+		}
+	});
 });
 
 $.urlParam = function (name, url) {
