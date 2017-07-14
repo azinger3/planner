@@ -64,11 +64,6 @@
 
   <?php require_once('include/footer.php'); ?>
 
-  <script>
-    $(document).ready(function() {
-      console.log("Ready!");
-    });
-  </script>
-
+  <script type="text/javascript" src="../../../controller/index.controller.js"></script>
 </body>
 </html>

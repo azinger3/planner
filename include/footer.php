@@ -8,5 +8,3 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.2.27/jquery.autocomplete.min.js"></script>
         <script type="text/javascript" src="../../../js/main.js"></script>
-        <script type="text/javascript" src="../../../js/filter.js"></script>
-  

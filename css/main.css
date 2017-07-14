@@ -60,6 +60,7 @@ table span.highlight {
 }
 
 a.back-to-top {
+    border-radius: 20px;
     display: none;
     width: 60px;
     height: 60px;
