@@ -107,10 +107,10 @@
                                     <input type="text" id="uxTransactionDT" class="form-control input-datepicker" readonly="true" />
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" id="uxDescription" class="form-control" placeholder="Description" />
+                                    <input type="number" id="uxAmount" class="form-control" placeholder="Amount $" />
                                 </div>
                                 <div class="form-group">
-                                    <input type="number" id="uxAmount" class="form-control" placeholder="Amount $" />
+                                    <input type="text" id="uxDescription" class="form-control" placeholder="Description" />
                                 </div>
                                 <div class="form-group">
                                     <div id="uxBudgetCategoryOptionAdd">

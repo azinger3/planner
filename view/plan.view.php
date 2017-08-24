@@ -626,6 +626,6 @@
 
         <?php require_once('include/footer.php'); ?>
 
-        <script type="text/javascript" src="../../../controller/plan.controller.js"></script>>
+        <script type="text/javascript" src="../../../controller/plan.controller.js"></script>
     </body>
 </html>
