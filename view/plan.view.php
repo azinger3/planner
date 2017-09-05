@@ -565,7 +565,7 @@
                                 <th class="planDetail custom-hidden-xs hidden-sm text-right">Percentage</th>
                                 <th class="planDetail hidden-xs hidden-sm text-right">Ranking</th>
                                 <th class="planDetail custom-hidden-xs hidden-sm text-right">Description</th>
-                                <th class="planDetail hidden-xs hidden-sm text-right">Comment</th>
+                                <th class="planDetail hidden-xs hidden-sm text-right">Note</th>
                                 <th class="planDetail"></th>
                             </tr>
                         </thead>
