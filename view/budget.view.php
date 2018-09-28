@@ -85,7 +85,7 @@
           <div class="col-md-8">
             <div class="panel panel-primary">
               <div class="panel-heading">
-                Remaining Variable Funds
+                Remaining Flexible Funds
                 <div class="pull-right">
                   <a href="budget/breakdown" title="Breakdown" class="quickLink"><i class="fa fa-pie-chart"></i></a>
                   <a href="budget/average" title="Averages" class="quickLink"><i class="fa fa-area-chart"></i></a>
