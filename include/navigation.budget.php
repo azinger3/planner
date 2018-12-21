@@ -37,7 +37,7 @@
               </ul>
               <ul class="nav navbar-nav navbar-right">
                 <li>
-                  <a href="/"><small>The Planner</small>&nbsp;&nbsp;<i class="fa fa-caret-right plannerBackArrow" aria-hidden="true"></i></a>
+                  <a href="/"><small>Planner</small>&nbsp;&nbsp;<i class="fa fa-caret-right plannerBackArrow" aria-hidden="true"></i></a>
                 </li>
               </ul>
             </div>
