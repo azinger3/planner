@@ -7,7 +7,7 @@ objBudget.BudgetSummarySpotlight = "";
 
 $(document).ready(function() {
     console.log("Ready!");
-    console.log(location.protocol + "//" + location.host);
+    console.log($.apiUrl());
 
     BudgetCategorySpotlightGet();
     BudgetFundSpotlightGet();

@@ -57,6 +57,13 @@ $.urlParam = function (name, url) {
     return results[1] || undefined;
 }
 
+$.apiUrl = function () {
+    var apiUrl = location.protocol + "//" + location.host;
+
+    console.log("apiUrl: " + apiUrl);
+    return apiUrl;
+}
+
 function NumberCommaFormat(number) {
 	return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
