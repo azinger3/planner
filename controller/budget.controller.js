@@ -1,4 +1,4 @@
-var api = "http://api.jordanandrobert.com/budget";
+var api = $.apiUrl() + "/budget";
 
 var objBudget = new Object();
 objBudget.BudgetCategorySpotlight = "";
@@ -7,7 +7,6 @@ objBudget.BudgetSummarySpotlight = "";
 
 $(document).ready(function() {
     console.log("Ready!");
-    console.log("api: " + $.apiUrl());
 
     BudgetCategorySpotlightGet();
     BudgetFundSpotlightGet();

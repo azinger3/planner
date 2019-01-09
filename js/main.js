@@ -70,7 +70,6 @@ $.apiUrl = function () {
         result = clientUrl.replace("8080", "8081"); // Development
     }
 
-    console.log("clientUrl: " + clientUrl);
     return result;
 }
 

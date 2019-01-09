@@ -1,4 +1,4 @@
-var api = "http://api.jordanandrobert.com/budget/fund";
+var api = $.apiUrl() + "/budget/fund";
 var data = new Object();
 
 var fundID = "";

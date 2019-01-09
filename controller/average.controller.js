@@ -1,4 +1,4 @@
-var api = "http://api.jordanandrobert.com/budget";
+var api = $.apiUrl() + "/budget";
 var data = new Object();
 
 var budgetYear = "";
