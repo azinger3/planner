@@ -58,10 +58,20 @@ $.urlParam = function (name, url) {
 }
 
 $.apiUrl = function () {
-    var apiUrl = location.protocol + "//" + location.host;
+    var result = "";
+    var clientUrl = location.protocol + "//" + location.host;
 
-    console.log("apiUrl: " + apiUrl);
-    return apiUrl;
+    var production = clientUrl.includes("planner");
+
+    if (production) {
+        result = clientUrl.replace("planner", "api"); // Production
+    }
+    else {
+        result = clientUrl.replace("8080", "8081"); // Development
+    }
+
+    console.log("clientUrl: " + clientUrl);
+    return result;
 }
 
 function NumberCommaFormat(number) {
