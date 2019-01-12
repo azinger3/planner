@@ -47,6 +47,14 @@
                 font-size: 10px !important;
             }
 
+            .transaction-date {
+                padding-right: 5px;
+            }
+
+            .amount {
+                padding-left: 5px;
+            }
+
             .transaction-recent-heading {
                 font-size: 16px;
             }
@@ -62,7 +70,7 @@
             }
 
             .moreOption {
-                font-size: 18px;
+                font-size: 12px;
             }
 
             .amount-fund {
@@ -104,36 +112,56 @@
                                     </div>  
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" id="uxTransactionDT" class="form-control input-datepicker" readonly="true" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="number" id="uxAmount" class="form-control" placeholder="Amount $" />
+                                    <div class="row">
+                                        <div class="col-md-4 col-xs-5 transaction-date">
+                                            <input type="text" id="uxTransactionDT" class="form-control input-datepicker" readonly="true" />
+                                        </div>
+                                        <div class="col-md-8 col-xs-7 amount">
+                                            <input type="number" id="uxAmount" class="form-control" placeholder="Amount $" />
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" id="uxDescription" class="form-control" placeholder="Description" />
                                 </div>
                                 <div class="form-group">
-                                    <div id="uxBudgetCategoryOptionAdd">
-                                        <select class="form-control placeholder" id="uxBudgetCategory">
-                                            <option value="" selected="selected" class="optionHide">Select a Category...</option>
-                                        </select>
+                                    <div class="row">
+                                        <div class="col-md-10 col-xs-8 transaction-date">
+                                            <div id="uxBudgetCategoryOptionAdd">
+                                            <select class="form-control placeholder" id="uxBudgetCategory">
+                                                <option value="" selected="selected" class="optionHide">Select a Category...</option>
+                                            </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-xs-4 amount">
+                                            <a href="javascript:void(0);" title="Show More" class="showMore pull-right" data-toggle="collapse" data-target="#MoreInfo">
+                                                <span class="moreOption">
+                                                    Add a Split
+                                                    <i class="fa fa-plus"></i>
+                                                </span>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <a href="javascript:void(0);" title="Show More" class="showMore" data-toggle="collapse" data-target="#MoreInfo">
-                                        <span class="moreOption">
-                                            <i class="fa fa-plus"></i>
-                                            More Options
-                                        </span>
-                                    </a>
+                                    <div class="row">
+                                        <div class="col-md-10 col-xs-8 transaction-date">
+                                            <div id="uxBudgetCategoryOptionAdd">
+                                                <select class="form-control placeholder input-sm" id="uxBudgetCategory">
+                                                    <option value="" selected="selected" class="optionHide">Select a Category...</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-xs-4 amount">
+                                            <input type="number" id="uxAmount" class="form-control input-sm" placeholder="Amount $" />
+                                        </div>
+                                    </div>
                                 </div>
-                                <div id="MoreInfo" class="collapse">
-                                    <div class="form-group">
-                                        <input type="text" id="uxTransactionNumber" class="form-control" placeholder="Transaction #" />
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" id="uxNote" class="form-control" placeholder="Note" />
-                                    </div>
+                                <div class="form-group">
+                                    <input type="text" id="uxTransactionNumber" class="form-control" placeholder="Transaction #" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" id="uxNote" class="form-control" placeholder="Note" />
                                 </div>
                                 <div class="form-group pull-right">
                                     <button type="button" class="btn btn-default" id="uxClear" onclick="TransactionClear()">Clear</button>
