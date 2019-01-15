@@ -117,43 +117,73 @@
                                             <input type="text" id="uxTransactionDT" class="form-control input-datepicker" readonly="true" />
                                         </div>
                                         <div class="col-md-8 col-xs-7 amount">
-                                            <input type="number" id="uxAmount" class="form-control" placeholder="Amount $" />
+                                            <input type="number" id="uxAmount" class="form-control text-center" placeholder="Amount $" />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" id="uxDescription" class="form-control" placeholder="Description" />
                                 </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-10 col-xs-8 transaction-date">
-                                            <div id="uxBudgetCategoryOptionAdd">
+                                <div id="uxTransactionSplit">
+                                    <div class="form-group">
+                                        <div id="uxBudgetCategoryOptionAdd">
                                             <select class="form-control placeholder" id="uxBudgetCategory">
                                                 <option value="" selected="selected" class="optionHide">Select a Category...</option>
                                             </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2 col-xs-4 amount">
-                                            <a href="javascript:void(0);" title="Show More" class="showMore pull-right" data-toggle="collapse" data-target="#MoreInfo">
-                                                <span class="moreOption">
-                                                    Add a Split
-                                                    <i class="fa fa-plus"></i>
-                                                </span>
-                                            </a>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-10 col-xs-8 transaction-date">
-                                            <div id="uxBudgetCategoryOptionAdd">
-                                                <select class="form-control placeholder input-sm" id="uxBudgetCategory">
-                                                    <option value="" selected="selected" class="optionHide">Select a Category...</option>
-                                                </select>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-10 col-xs-8 transaction-date">
+                                                <div id="uxBudgetCategoryOptionAdd">
+                                                    <select class="form-control placeholder input-sm" id="uxBudgetCategory">
+                                                        <option value="" selected="selected" class="optionHide">Select a Category...</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-xs-4 amount">
+                                                <input type="number" id="uxAmount" class="form-control input-sm" placeholder="Amount $" />
                                             </div>
                                         </div>
-                                        <div class="col-md-2 col-xs-4 amount">
-                                            <input type="number" id="uxAmount" class="form-control input-sm" placeholder="Amount $" />
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-10 col-xs-8 transaction-date">
+                                                <div id="uxBudgetCategoryOptionAdd">
+                                                    <select class="form-control placeholder input-sm" id="uxBudgetCategory">
+                                                        <option value="" selected="selected" class="optionHide">Select a Category...</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-xs-4 amount">
+                                                <input type="number" id="uxAmount" class="form-control input-sm" placeholder="Amount $" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-10 col-xs-8 transaction-date">
+                                                <div id="uxBudgetCategoryOptionAdd">
+                                                    <select class="form-control placeholder input-sm" id="uxBudgetCategory">
+                                                        <option value="" selected="selected" class="optionHide">Select a Category...</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 col-xs-4 amount">
+                                                <input type="number" id="uxAmount" class="form-control input-sm" placeholder="Amount $" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-4 hidden-xs">
+                                            </div>
+                                            <div class="col-md-4 col-xs-6">
+                                                <p class="control-label text-center">Add a Split <i class="fa fa-plus" aria-hidden="true"></i></p>
+                                            </div>
+                                            <div class="col-md-4 col-xs-6">
+                                                <p class="control-label text-right small">Remaining: $100</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
