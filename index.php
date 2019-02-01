@@ -1,6 +1,6 @@
 <?php
 
-require 'function/log.function.php';
+//require 'function/log.function.php';
 
 require 'vendor/autoload.php';
 
