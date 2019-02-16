@@ -51,6 +51,12 @@
                 padding-right: 5px;
             }
 
+            @media (max-width: 1337px){
+                .transaction-date-input {
+                    font-size: 11px;
+                }
+            }
+
             .amount {
                 padding-left: 5px;
             }
@@ -114,7 +120,7 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-4 col-xs-5 transaction-date">
-                                            <input type="text" id="uxTransactionDT" class="form-control input-datepicker" readonly="true" />
+                                            <input type="text" id="uxTransactionDT" class="form-control input-datepicker text-center transaction-date-input" readonly="true" />
                                         </div>
                                         <div class="col-md-8 col-xs-7 amount">
                                             <input type="number" id="uxAmount" class="form-control text-center" placeholder="Amount $" />
