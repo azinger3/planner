@@ -51,6 +51,10 @@
                 padding-right: 5px;
             }
 
+            .transaction-split-line {
+                padding-right: 5px;
+            }
+
             @media (max-width: 1337px){
                 .transaction-date-input {
                     font-size: 11px;
@@ -140,7 +144,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
-                                            <div class="col-md-10 col-xs-8 transaction-date">
+                                            <div class="col-md-10 col-xs-8 transaction-split-line">
                                                 <div id="uxBudgetCategoryOptionAdd">
                                                     <select class="form-control placeholder input-sm" id="uxBudgetCategory">
                                                         <option value="" selected="selected" class="optionHide">Select a Category...</option>
@@ -154,7 +158,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
-                                            <div class="col-md-10 col-xs-8 transaction-date">
+                                            <div class="col-md-10 col-xs-8 transaction-split-line">
                                                 <div id="uxBudgetCategoryOptionAdd">
                                                     <select class="form-control placeholder input-sm" id="uxBudgetCategory">
                                                         <option value="" selected="selected" class="optionHide">Select a Category...</option>
@@ -168,7 +172,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
-                                            <div class="col-md-10 col-xs-8 transaction-date">
+                                            <div class="col-md-10 col-xs-8 transaction-split-line">
                                                 <div id="uxBudgetCategoryOptionAdd">
                                                     <select class="form-control placeholder input-sm" id="uxBudgetCategory">
                                                         <option value="" selected="selected" class="optionHide">Select a Category...</option>
@@ -180,7 +184,8 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                </div>
+                                <div class="form-group">
                                         <div class="row">
                                             <div class="col-md-4 hidden-xs">
                                             </div>
@@ -188,11 +193,10 @@
                                                 <p class="control-label text-center">Add a Split <i class="fa fa-plus" aria-hidden="true"></i></p>
                                             </div>
                                             <div class="col-md-4 col-xs-6">
-                                                <p class="control-label text-right small">Remaining: $100</p>
+                                                <p id="uxTransactionSplitRemaining" class="control-label text-right small">Remaining: $100</p>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
                                 <div class="form-group">
                                     <input type="text" id="uxTransactionNumber" class="form-control" placeholder="Transaction #" />
                                 </div>
@@ -316,6 +320,14 @@
                     <i class="fa fa-times" aria-hidden="true"></i>
                 </a>
             </td>
+        </script>
+
+        <script id="tmplBudgetCategoryAdd" type="text/x-handlebars-template">
+            
+        </script>
+
+        <script id="tmplBudgetCategorySplit" type="text/x-handlebars-template">
+            
         </script>
 
         <script id="tmplBudgetCategoryOption" type="text/x-handlebars-template">
