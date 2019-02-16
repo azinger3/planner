@@ -234,6 +234,7 @@ function TransactionTypeSet() {
 }
 
 function TransactionClear() {
+    $("#uxTransactionDT").val(Date.today().moveToLastDayOfMonth().toString("MM/dd/yyyy"));
     $("#uxDescription").val("");
     $("#uxAmount").val("");
     $("#uxBudgetCategory option[value='']").prop("selected", true);
