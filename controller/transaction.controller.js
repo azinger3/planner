@@ -1,7 +1,7 @@
 var api = $.apiUrl() + "/budget";
 
 var objTransaction = new Object();
-objTransaction.TransactionID = ""
+objTransaction.TransactionID = "";
 objTransaction.TransactionTypeID = "";
 objTransaction.TransactionDT = "";
 objTransaction.Description = "";
@@ -9,6 +9,9 @@ objTransaction.Amount = "";
 objTransaction.BudgetCategoryID = "";
 objTransaction.TransactionNumber = "";
 objTransaction.Note = "";
+
+var objTransactionSplit = new Object();
+objTransactionSplit.Transaction = "";
 
 var objBudgetCategory = new Object();
 objBudgetCategory.Category = "";
@@ -22,7 +25,7 @@ objAutoFill.Transaction = "";
 $(document).ready(function() {
     console.log("Ready!");
 
-    $("#uxExpense").click();
+    $("#uxExpense").click(); // Loads Budget Category
 
     $("#uxTransactionDT").val(Date.today().moveToLastDayOfMonth().toString("MM/dd/yyyy"));
 
@@ -82,7 +85,6 @@ $(document).ready(function() {
         }
     });
 
-    BudgetCategoryGet(1);
     DatePickerSet();
     TransactionRecentGet();
 });
@@ -314,6 +316,26 @@ function TransactionSave(TransactionID) {
     }
 }
 
+function TransactionSplitAdd() {
+    console.log("TransactionSplitAdd");
+}
+
+function TransactionSplitRemove() {
+    console.log("TransactionSplitRemove");
+}
+
+function TransactionSplitCalculate() {
+    console.log("TransactionSplitCalculate");
+}
+
+function TransactionSplitDataBind() {
+    console.log("TransactionSplitDataBind");
+}
+
+function TransactionSplitRender() {
+    console.log("TransactionSplitRender");
+}
+
 function TransactionRecentRender() {
     var source = $("#tmplTransactionRecent").html();
     var template = Handlebars.compile(source);
@@ -340,6 +362,10 @@ function BudgetCategoryOptionAddRender() {
                 + "</select>";
 
     $("#uxBudgetCategoryOptionAdd").html(dropdown);
+
+    // $(".clsBudgetCategoryOptionAdd").each(function () {
+    //     $(this).html(dropdown);
+    // });
 }
 
 function BudgetCategoryOptionEditRender(TransactionID, BudgetCategoryID, BudgetCategory) {

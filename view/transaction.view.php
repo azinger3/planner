@@ -57,7 +57,7 @@
 
             @media (max-width: 1337px){
                 .transaction-date-input {
-                    font-size: 11px;
+                    font-size: 14px;
                 }
             }
 
@@ -91,6 +91,32 @@
                 color: #ffffff;
                 font-size: 16px;
                 margin-left: 20px;
+            }
+
+            .addSplit {
+                margin-left: 3px;
+                cursor: pointer;
+            }
+
+            .remainingSplit {
+                margin-right: 3px;
+            }
+
+            .removeSplit {
+                margin-top: 2px;
+                cursor: pointer;
+            }
+
+            @media (min-width: 1337px){
+                .removeSplit {
+                    margin-top: 2px;
+                    margin-right: -15px;
+                    margin-left: 15px;
+                }
+            }
+
+            .removeSplit .removeIcon {
+                vertical-align: -webkit-baseline-middle;
             }
         </style>
     </head>
@@ -135,6 +161,9 @@
                                     <input type="text" id="uxDescription" class="form-control" placeholder="Description" />
                                 </div>
                                 <div id="uxTransactionSplit">
+                                    
+                                </div>
+                                <div id="uxTransactionSplit1">
                                     <div class="form-group">
                                         <div id="uxBudgetCategoryOptionAdd">
                                             <select class="form-control placeholder" id="uxBudgetCategory">
@@ -144,43 +173,52 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
-                                            <div class="col-md-10 col-xs-8 transaction-split-line">
-                                                <div id="uxBudgetCategoryOptionAdd">
-                                                    <select class="form-control placeholder input-sm" id="uxBudgetCategory">
+                                            <div class="col-md-1 col-xs-1 removeSplit">
+                                                <i class="fa fa-minus-circle text-danger removeIcon" data-split-id="1" aria-hidden="true" onclick="TransactionSplitRemove()"></i>
+                                            </div>
+                                            <div class="col-md-9 col-xs-7 transaction-split-line">
+                                                <div class="clsBudgetCategoryOptionAddSplit">
+                                                    <select class="form-control placeholder input-sm" id="uxBudgetCategory_1">
                                                         <option value="" selected="selected" class="optionHide">Select a Category...</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-2 col-xs-4 amount">
-                                                <input type="number" id="uxAmount" class="form-control input-sm" placeholder="Amount $" />
+                                                <input type="number" id="uxAmount_1" class="form-control input-sm" placeholder="Amount $" />
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
-                                            <div class="col-md-10 col-xs-8 transaction-split-line">
-                                                <div id="uxBudgetCategoryOptionAdd">
-                                                    <select class="form-control placeholder input-sm" id="uxBudgetCategory">
+                                            <div class="col-md-1 col-xs-1 removeSplit">
+                                                <i class="fa fa-minus-circle text-danger removeIcon" data-split-id="1" aria-hidden="true" onclick="TransactionSplitRemove()"></i>
+                                            </div>
+                                            <div class="col-md-9 col-xs-7 transaction-split-line">
+                                                <div class="clsBudgetCategoryOptionAddSplit">
+                                                    <select class="form-control placeholder input-sm" id="uxBudgetCategory_1">
                                                         <option value="" selected="selected" class="optionHide">Select a Category...</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-2 col-xs-4 amount">
-                                                <input type="number" id="uxAmount" class="form-control input-sm" placeholder="Amount $" />
+                                                <input type="number" id="uxAmount_1" class="form-control input-sm" placeholder="Amount $" />
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
-                                            <div class="col-md-10 col-xs-8 transaction-split-line">
-                                                <div id="uxBudgetCategoryOptionAdd">
-                                                    <select class="form-control placeholder input-sm" id="uxBudgetCategory">
+                                            <div class="col-md-1 col-xs-1 removeSplit">
+                                                <i class="fa fa-minus-circle text-danger removeIcon" data-split-id="1" aria-hidden="true" onclick="TransactionSplitRemove()"></i>
+                                            </div>
+                                            <div class="col-md-9 col-xs-7 transaction-split-line">
+                                                <div class="clsBudgetCategoryOptionAddSplit">
+                                                    <select class="form-control placeholder input-sm" id="uxBudgetCategory_1">
                                                         <option value="" selected="selected" class="optionHide">Select a Category...</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-md-2 col-xs-4 amount">
-                                                <input type="number" id="uxAmount" class="form-control input-sm" placeholder="Amount $" />
+                                                <input type="number" id="uxAmount_1" class="form-control input-sm" placeholder="Amount $" />
                                             </div>
                                         </div>
                                     </div>
@@ -190,10 +228,10 @@
                                             <div class="col-md-4 hidden-xs">
                                             </div>
                                             <div class="col-md-4 col-xs-6">
-                                                <p class="control-label text-center">Add a Split <i class="fa fa-plus" aria-hidden="true"></i></p>
+                                                <p class="control-label addSplit" onclick="TransactionSplitAdd()">Add a Split <i class="fa fa-plus" aria-hidden="true"></i></p>
                                             </div>
                                             <div class="col-md-4 col-xs-6">
-                                                <p id="uxTransactionSplitRemaining" class="control-label text-right small">Remaining: $100</p>
+                                                <p id="uxTransactionSplitRemaining" class="control-label text-right small remainingSplit">Remaining: $100</p>
                                             </div>
                                         </div>
                                     </div>
@@ -323,11 +361,35 @@
         </script>
 
         <script id="tmplBudgetCategoryAdd" type="text/x-handlebars-template">
-            
+            <div class="form-group">
+                <div id="uxBudgetCategoryOptionAdd">
+                    <select class="form-control placeholder" id="uxBudgetCategory">
+                        <option value="" selected="selected" class="optionHide">Select a Category...</option>
+                    </select>
+                </div>
+            </div>
         </script>
 
         <script id="tmplBudgetCategorySplit" type="text/x-handlebars-template">
-            
+            {{#each Transaction}}
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-1 col-xs-1 removeSplit">
+                        <i class="fa fa-minus-circle text-danger removeIcon" data-split-id="{{SplitID}}" aria-hidden="true"></i>
+                        </div>
+                        <div class="col-md-9 col-xs-7 transaction-split-line">
+                            <div class="clsBudgetCategoryOptionAddSplit">
+                                <select class="form-control placeholder input-sm" id="uxBudgetCategory_{{SplitID}}">
+                                    <option value="" selected="selected" class="optionHide">Select a Category...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-2 col-xs-4 amount">
+                            <input type="number" id="uxAmount_{{SplitID}}" class="form-control input-sm" placeholder="Amount $" />
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
         </script>
 
         <script id="tmplBudgetCategoryOption" type="text/x-handlebars-template">
