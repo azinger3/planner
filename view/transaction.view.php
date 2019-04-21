@@ -161,9 +161,8 @@
                                     <input type="text" id="uxDescription" class="form-control" placeholder="Description" />
                                 </div>
                                 <div id="uxTransactionSplit">
-                                    
                                 </div>
-                                <div id="uxTransactionSplit1">
+                                <!-- <div id="uxTransactionSplit1">
                                     <div class="form-group">
                                         <div id="uxBudgetCategoryOptionAdd">
                                             <select class="form-control placeholder" id="uxBudgetCategory">
@@ -222,19 +221,19 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="form-group">
-                                        <div class="row">
-                                            <div class="col-md-4 hidden-xs">
-                                            </div>
-                                            <div class="col-md-4 col-xs-6">
-                                                <p class="control-label addSplit" onclick="TransactionSplitAdd()">Add a Split <i class="fa fa-plus" aria-hidden="true"></i></p>
-                                            </div>
-                                            <div class="col-md-4 col-xs-6">
-                                                <p id="uxTransactionSplitRemaining" class="control-label text-right small remainingSplit">Remaining: $100</p>
-                                            </div>
+                                    <div class="row">
+                                        <div class="col-md-4 hidden-xs">
+                                        </div>
+                                        <div class="col-md-4 col-xs-6">
+                                            <p class="control-label addSplit" onclick="TransactionSplitAdd()">Add a Split <i class="fa fa-plus" aria-hidden="true"></i></p>
+                                        </div>
+                                        <div class="col-md-4 col-xs-6">
+                                            <p id="uxTransactionSplitRemaining" class="control-label text-right small remainingSplit">Remaining: $100</p>
                                         </div>
                                     </div>
+                                </div>
                                 <div class="form-group">
                                     <input type="text" id="uxTransactionNumber" class="form-control" placeholder="Transaction #" />
                                 </div>

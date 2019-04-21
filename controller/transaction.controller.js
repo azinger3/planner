@@ -1,4 +1,5 @@
 var api = $.apiUrl() + "/budget";
+var splitID = 0;
 
 var objTransaction = new Object();
 objTransaction.TransactionID = "";
@@ -11,7 +12,7 @@ objTransaction.TransactionNumber = "";
 objTransaction.Note = "";
 
 var objTransactionSplit = new Object();
-objTransactionSplit.Transaction = "";
+objTransactionSplit.Transaction = [];
 
 var objBudgetCategory = new Object();
 objBudgetCategory.Category = "";
@@ -24,6 +25,8 @@ objAutoFill.Transaction = "";
 
 $(document).ready(function() {
     console.log("Ready!");
+
+    TransactionSplitGet(1);
 
     $("#uxExpense").click(); // Loads Budget Category
 
@@ -316,8 +319,23 @@ function TransactionSave(TransactionID) {
     }
 }
 
+function TransactionSplitGet(renderType) {
+    if (renderType == "1") {
+        TransactionSplitRenderOff();
+    } else if (renderType == "2") {
+        TransactionSplitRenderOn();
+    }
+}
+
 function TransactionSplitAdd() {
-    console.log("TransactionSplitAdd");
+    splitID++;
+
+    objTransactionSplit.Transaction.push({SplitID: splitID})
+
+    console.log(objTransactionSplit);
+    console.log(splitID);
+
+    TransactionSplitGet(2);
 }
 
 function TransactionSplitRemove() {
@@ -332,8 +350,27 @@ function TransactionSplitDataBind() {
     console.log("TransactionSplitDataBind");
 }
 
-function TransactionSplitRender() {
-    console.log("TransactionSplitRender");
+function TransactionSplitRenderOff() {
+    console.log("TransactionSplitRenderOff");
+
+    var source = $("#tmplBudgetCategoryAdd").html();
+    var template = Handlebars.compile(source);
+    var context = objTransactionSplit;
+    var html = template(context);
+
+    $("#uxTransactionSplit").html(html);
+    $("#uxTransactionSplitRemaining").html("");
+}
+
+function TransactionSplitRenderOn() {
+    console.log("TransactionSplitRenderOn");
+
+    var source = $("#tmplBudgetCategorySplit").html();
+    var template = Handlebars.compile(source);
+    var context = objTransactionSplit;
+    var html = template(context);
+
+    $("#uxTransactionSplit").html(html);
 }
 
 function TransactionRecentRender() {
@@ -362,10 +399,22 @@ function BudgetCategoryOptionAddRender() {
                 + "</select>";
 
     $("#uxBudgetCategoryOptionAdd").html(dropdown);
+}
 
-    // $(".clsBudgetCategoryOptionAdd").each(function () {
-    //     $(this).html(dropdown);
-    // });
+function BudgetCategoryOptionSplitRender() {
+    var source = $("#tmplBudgetCategoryOption").html();
+    var template = Handlebars.compile(source);
+    var context = objBudgetCategory;
+    var html = template(context);
+
+    var dropdown = "<select class='form-control placeholder' id='uxBudgetCategory'>" 
+                + "<option value='' selected='selected' class='optionHide'>Select a Category...</option>"
+                + html 
+                + "</select>";
+
+    $(".clsBudgetCategoryOptionAddSplit").each(function () {
+        $(this).html(dropdown);
+    });
 }
 
 function BudgetCategoryOptionEditRender(TransactionID, BudgetCategoryID, BudgetCategory) {
