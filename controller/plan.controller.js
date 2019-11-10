@@ -989,7 +989,7 @@ function BudgetExpenseRemove(BudgetItemID) {
     }
 }
 
-            function ConfirmAction() {
+function ConfirmAction() {
     if (confirm("Are you sure?")) {
         return true;
     }
