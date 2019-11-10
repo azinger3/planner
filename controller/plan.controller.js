@@ -56,7 +56,7 @@ objBudgetItem.AmountBiYearly = "";
 objBudgetItem.AmountYearly = "";
 objBudgetItem.TransactionAverage = "";
 objBudgetItem.Percentage = "";
-objBudgetItem.RANK = "";
+objBudgetItem.RankID = "";
 objBudgetItem.Description = "";
 objBudgetItem.Note = "";
 
@@ -805,7 +805,7 @@ function BudgetExpenseByMonthContextSet(result) {
                 objBudgetItem.AmountYearly = budgetItem.AmountYearly;
                 objBudgetItem.TransactionAverage = budgetItem.TransactionAverage;
                 objBudgetItem.Percentage = budgetItem.Percentage;
-                objBudgetItem.RANK = budgetItem.RANK;
+                objBudgetItem.RankID = budgetItem.RankID;
                 objBudgetItem.Description = budgetItem.Description;
                 objBudgetItem.Note = budgetItem.Note;
 
