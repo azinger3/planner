@@ -1,206 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
 
-    <?php
-      $pageTitle = 'Budget';
+<head>
+	<?php
+		$pageTitle = 'Budget';
 
-      require_once('include/header.php');
-      
-      require_once('include/icon.budget.php');
-    ?>
+		require_once('include/header.php');
 
-    <style>
-      .progress {
-        margin-bottom: 10px;
-      }
-      
-      .remaining {
-        text-align: right;
-      }
-      
-      .balance {
-        text-align: right;
-      }
-      
-      .total {
-        background-color: #f2f2f2;
-      }
-      
-      .categoryWidth {
-        width: 15%;
-      }
-      
-      .progressWidth {
-        width: 70%;
-      }
-      
-      .remainingWidth {
-        width: 15%;
-      }
-      
-      .progress-sm {
-        margin-top: 5px !important;
-        margin-bottom: 5px !important;
-      }
-      
-      .progress-lg {
-        margin-top: 15px !important;
-      }
-      
-      .currentMonth {
-        text-align: center;
-      }
-      
-      .quickLink {
-        color: #ffffff;
-        font-size: 16px;
-        margin-left: 16px;
-      }
-      
-      .amount-red {
-        color: red;
-      }
+		require_once('include/icon.budget.php');
+	?>
 
-      a.summaryLink {
-        text-decoration: none; 
-        color: #2c3e50;
-      }
+	<style>
+		.progress {
+			margin-bottom: 10px;
+		}
 
-      .loading {
-        vertical-align: super; 
-        margin: 5px;
-      }
-    </style>
-  </head>
-  <body>
-      <?php require_once('include/navigation.budget.php'); ?>
-      
-      <div class="container">
-        <div class="page-header">
-          <div class="row">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-8">
-            <div class="panel panel-primary">
-              <div class="panel-heading">
-                Remaining Flexible Funds
-                <div class="pull-right">
-                  <a href="budget/breakdown" title="Breakdown" class="quickLink"><i class="fa fa-pie-chart"></i></a>
-                  <a href="budget/average" title="Averages" class="quickLink"><i class="fa fa-area-chart"></i></a>
-                  <a href="budget/summary" title="Summary" class="quickLink"><i class="fa fa-calendar"></i></a>
-                  <a href="budget/transaction" title="Add Transaction" class="quickLink"><i class="fa fa-plus"></i></a>
-                </div>
-              </div>
-              <div class="panel-body">
-                <div id="uxBudgetCategorySpotlight"></div>
-              </div>
-            </div>
-            <div class="panel panel-primary">
-              <div class="panel-heading">Savings Breakdown</div>
-              <div class="panel-body">
-                <div id="uxBudgetFundSpotlight"></div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="panel panel-primary">
-              <div class="panel-heading">Budget Summaries</div>
-              <div class="panel-body">
-                <div id="uxBudgetSummarySpotlight"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+		.remaining {
+			text-align: right;
+		}
 
-      <script id="tmplBudgetCategorySpotlight" type="text/x-handlebars-template">
-        <div class="currentMonth">
-          <a id="uxBudgetMonth" class="summaryLink" href="/budget/plan">
-            <strong>{{BudgetMonth}}</strong>
-          </a>
-        </div>
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th class="categoryWidth"></th>
-              <th class="progressWidth"></th>
-              <th class="remainingWidth"></th>
-            </tr>
-          </thead>
-          <tbody>
-            {{#each BudgetCategorySpotlight}}
-            <tr>
-              <td>{{BudgetCategory}}</td>
-              <td>
-                <div class="progress progress-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{CategoryPercentageSpent}}%">
-                  <div class="progress-bar progress-bar-{{CategoryProgressBarStyle}}" style="width: {{CategoryPercentageSpent}}%"></div>
-                </div>
-              </td>
-              {{#if IsCategoryNegativeFlg}}
-              <td class="remaining amount-red">${{NumberCommaFormat CategoryActualVsBudget}}</td>
-              {{else}}
-              <td class="remaining">${{NumberCommaFormat CategoryActualVsBudget}}</td>
-              {{/if}}
-            </tr>
-            {{/each}}
-          </tbody>
-          <tfoot>
-            <tr>
-              <td>
-                <h4><strong>TOTAL</strong></h4>
-              </td>
-              <td>
-                <div class="progress progress-striped progress-lg" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{TotalCategoryPercentageSpent}}%">
-                  <div class="progress-bar progress-bar-{{TotalCategoryProgressBarStyle}}" style="width: {{TotalCategoryPercentageSpent}}%"></div>
-                </div>
-              </td>
-              <td class="remaining">
-                {{#if IsTotalCategoryNegativeFlg}}
-                <h4 class="amount-red"><strong>${{NumberCommaFormat TotalCategoryActualVsBudget}}</strong></h4> 
-                {{else}}
-                <h4><strong>${{NumberCommaFormat TotalCategoryActualVsBudget}}</strong></h4> 
-                {{/if}}
-              </td>
-            </tr>
-          </tfoot>
-        </table>
-      </script>
+		.balance {
+			text-align: right;
+		}
 
-      <script id="tmplBudgetFundSpotlight" type="text/x-handlebars-template">
-        <table class="table table-hover table-striped">
-          <tbody>
-            {{#each BudgetFundSpotlight}}
-            <tr>
-              <td><a class="normalLink" href="/budget/fund?FundID={{FundID}}">{{FundName}}</a></td>
-              <td class="balance">${{NumberCommaFormat FundSpentVsReceived}}</td>
-            </tr>
-            {{/each}}
-          </tbody>
-          <tfoot>
-            <tr>
-              <td>
-                <h4><strong>TOTAL</strong></h4>
-              </td>
-              <td class="balance">
-                <h4><strong>${{NumberCommaFormat TotalFundSpentVsReceived}}</strong></h4>
-              </td>
-            </tr>
-          </tfoot>
-        </table>
-      </script>
+		.total {
+			background-color: #f2f2f2;
+		}
 
-      <script id="tmplBudgetSummarySpotlight" type="text/x-handlebars-template">
-        <div class="list-group text-center">
-          {{#each BudgetSummarySpotlight}}
-          <a class="list-group-item" href="/budget/summary?BudgetMonth={{BudgetMonthSummaryUrl}}">{{BudgetMonthSummary}}</a>
-          {{/each}}
-        </div>
-      </script>
+		.categoryWidth {
+			width: 15%;
+		}
 
-      <?php require_once('include/footer.php'); ?>
+		.progressWidth {
+			width: 70%;
+		}
 
-      <script type="text/javascript" src="../../../controller/budget.controller.js"></script>
-  </body>
+		.remainingWidth {
+			width: 15%;
+		}
+
+		.progress-sm {
+			margin-top: 5px !important;
+			margin-bottom: 5px !important;
+		}
+
+		.progress-lg {
+			margin-top: 15px !important;
+		}
+
+		.currentMonth {
+			text-align: center;
+		}
+
+		.quickLink {
+			color: #ffffff;
+			font-size: 16px;
+			margin-left: 16px;
+		}
+
+		.amount-red {
+			color: red;
+		}
+
+		a.summaryLink {
+			text-decoration: none;
+			color: #2c3e50;
+		}
+
+		.loading {
+			vertical-align: super;
+			margin: 5px;
+		}
+
+		.section-default {
+			padding: 1px 20px 10px 20px;
+		}
+	</style>
+</head>
+
+<body>
+	<?php require_once('include/navigation.budget.php'); ?>
+
+	<section class="section-default">
+		<div class="page-header">
+			<div class="row">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-5">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						Remaining Flexible Funds
+						<div class="pull-right">
+							<a href="budget/breakdown" title="Breakdown" class="quickLink"><i class="fa fa-pie-chart"></i></a>
+							<a href="budget/average" title="Averages" class="quickLink"><i class="fa fa-area-chart"></i></a>
+							<a href="budget/summary" title="Summary" class="quickLink"><i class="fa fa-calendar"></i></a>
+							<a href="budget/transaction" title="Add Transaction" class="quickLink"><i class="fa fa-plus"></i></a>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div id="uxBudgetCategorySpotlight"></div>
+					</div>
+				</div>
+				<div class="panel panel-primary">
+					<div class="panel-heading">Savings Breakdown</div>
+					<div class="panel-body">
+						<div id="uxBudgetFundSpotlight"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-5">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						Transaction Analysis
+						<div class="pull-right">
+							Last 3 Months
+						</div>
+					</div>
+					<div class="panel-body">
+						<div id="uxTransactionSpotlight"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<div class="panel panel-primary">
+					<div class="panel-heading">Budget Summaries</div>
+					<div class="panel-body">
+						<div id="uxBudgetSummarySpotlight"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div id="tmplBudgetCategorySpotlight" type="text/x-handlebars-template">
+		<div class="currentMonth">
+			<a id="uxBudgetMonth" class="summaryLink" href="/budget/plan">
+				<strong>{{BudgetMonth}}</strong>
+			</a>
+		</div>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th class="categoryWidth"></th>
+					<th class="progressWidth"></th>
+					<th class="remainingWidth"></th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each BudgetCategorySpotlight}}
+					<tr>
+						<td>{{BudgetCategory}}</td>
+						<td>
+							<div class="progress progress-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{CategoryPercentageSpent}}%">
+								<div class="progress-bar progress-bar-{{CategoryProgressBarStyle}}" style="width: {{CategoryPercentageSpent}}%"></div>
+							</div>
+						</td>
+						{{#if IsCategoryNegativeFlg}}
+							<td class="remaining amount-red">${{NumberCommaFormat CategoryActualVsBudget}}</td>
+						{{else}}
+							<td class="remaining">${{NumberCommaFormat CategoryActualVsBudget}}</td>
+						{{/if}}
+					</tr>
+				{{/each}}
+			</tbody>
+			<tfoot>
+				<tr>
+					<td>
+						<h4><strong>TOTAL</strong></h4>
+					</td>
+					<td>
+						<div class="progress progress-striped progress-lg" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{TotalCategoryPercentageSpent}}%">
+							<div class="progress-bar progress-bar-{{TotalCategoryProgressBarStyle}}" style="width: {{TotalCategoryPercentageSpent}}%"></div>
+						</div>
+					</td>
+					<td class="remaining">
+						{{#if IsTotalCategoryNegativeFlg}}
+							<h4 class="amount-red"><strong>${{NumberCommaFormat TotalCategoryActualVsBudget}}</strong></h4>
+						{{else}}
+							<h4><strong>${{NumberCommaFormat TotalCategoryActualVsBudget}}</strong></h4>
+						{{/if}}
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+
+	<div id="tmplBudgetFundSpotlight" type="text/x-handlebars-template">
+		<table class="table table-hover table-striped">
+			<tbody>
+				{{#each BudgetFundSpotlight}}
+					<tr>
+						<td><a class="normalLink" href="/budget/fund?FundID={{FundID}}">{{FundName}}</a></td>
+						<td class="balance">${{NumberCommaFormat FundSpentVsReceived}}</td>
+					</tr>
+				{{/each}}
+			</tbody>
+			<tfoot>
+				<tr>
+					<td>
+						<h4><strong>TOTAL</strong></h4>
+					</td>
+					<td class="balance">
+						<h4><strong>${{NumberCommaFormat TotalFundSpentVsReceived}}</strong></h4>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+
+	<div id="tmplBudgetSummarySpotlight" type="text/x-handlebars-template">
+		<div class="list-group text-center">
+			{{#each BudgetSummarySpotlight}}
+				<a class="list-group-item" href="/budget/summary?BudgetMonth={{BudgetMonthSummaryUrl}}">{{BudgetMonthSummary}}</a>
+			{{/each}}
+		</div>
+	</div>
+
+	<script id="tmplTransactionSpotlight" type="text/x-handlebars-template">
+		<div class="currentMonth">
+			<a id="uxBudgetMonth" class="summaryLink" href="/budget/plan">
+				<strong>{{BudgetMonth}}</strong>
+			</a>
+		</div>
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th class="categoryWidth"></th>
+					<th class="progressWidth"></th>
+					<th class="remainingWidth"></th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each BudgetCategorySpotlight}}
+					<tr>
+						<td>{{BudgetCategory}}</td>
+						<td>
+							<div class="progress progress-sm" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{CategoryPercentageSpent}}%">
+								<div class="progress-bar progress-bar-{{CategoryProgressBarStyle}}" style="width: {{CategoryPercentageSpent}}%"></div>
+							</div>
+						</td>
+						{{#if IsCategoryNegativeFlg}}
+							<td class="remaining amount-red">${{NumberCommaFormat CategoryActualVsBudget}}</td>
+						{{else}}
+							<td class="remaining">${{NumberCommaFormat CategoryActualVsBudget}}</td>
+						{{/if}}
+					</tr>
+				{{/each}}
+			</tbody>
+			<tfoot>
+				<tr>
+					<td>
+						<h4><strong>TOTAL</strong></h4>
+					</td>
+					<td>
+						<div class="progress progress-striped progress-lg" data-toggle="tooltip" data-placement="top" title="" data-original-title="{{TotalCategoryPercentageSpent}}%">
+							<div class="progress-bar progress-bar-{{TotalCategoryProgressBarStyle}}" style="width: {{TotalCategoryPercentageSpent}}%"></div>
+						</div>
+					</td>
+					<td class="remaining">
+						{{#if IsTotalCategoryNegativeFlg}}
+							<h4 class="amount-red"><strong>${{NumberCommaFormat TotalCategoryActualVsBudget}}</strong></h4>
+						{{else}}
+							<h4><strong>${{NumberCommaFormat TotalCategoryActualVsBudget}}</strong></h4>
+						{{/if}}
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+
+	<?php require_once('include/footer.php'); ?>
+
+	<script type="text/javascript" src="../../../controller/budget.controller.js"></script>
+</body>
+
 </html>
