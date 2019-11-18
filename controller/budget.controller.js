@@ -188,50 +188,38 @@ function TransactionSpotlightRender() {
 function TransactionSpotlightWeeklyChartRender() {
 	var ctx = document.getElementById("uxTransactionSpotlightWeeklyChart").getContext('2d');
 
+	var gradient = ctx.createLinearGradient(0, 0, 0, 400);
+	gradient.addColorStop(0, 'rgba(250,189,9,1)');
+	gradient.addColorStop(1, 'rgba(250,189,9,0)');
+
 	var myChart = new Chart(ctx, {
 		type: 'line',
 		data: {
 			labels: [
-				"Aug 11 - 17",
-				"Aug 18 - 24",
 				"Aug 25 - 31",
 				"Sep 1 - 7",
 				"Sep 8 - 14",
 				"Sep 15 - 21",
 				"Sep 22 - 28",
 				"Sep 29 - Oct 5",
-				"Oct 6 - 12",
-				"Oct 13 - 19",
-				"Oct 20 - 26",
-				"Oct 27 - Nov 2",
-				"Nov 3 - 9",
-				"Nov 10 - 16",
-				"Nov 17 - 23"
+				"Oct 6 - 12"
 			],
 			datasets: [{
 				data: [
-					2345,
-					2745,
 					2183,
 					2865,
 					2834,
 					2234,
 					2187,
 					2738,
-					2965,
-					2345,
-					2884,
-					3055,
-					3156,
-					2234,
-					2533
+					2965
 				],
 				fill: "start",
-				backgroundColor: "#f4c247",
+				backgroundColor: gradient,
 				borderColor: "#f4c247",
 				pointBorderColor: "#000000",
 				pointBackgroundColor: "#ffffff",
-				pointBorderWidth: 3,
+				pointBorderWidth: 2,
 				pointRadius: 8,
 				pointHoverRadius: 8
 			}]
@@ -247,6 +235,9 @@ function TransactionSpotlightWeeklyChartRender() {
 			},
 			tooltips: {
 				enabled: true,
+				titleFontFamily: "Lato",
+				titleFontStyle: "normal",
+				titleFontSize: 16,
 				bodyFontFamily: "Lato",
 				bodyFontStyle: "bold",
 				bodyFontSize: 16,
@@ -256,9 +247,6 @@ function TransactionSpotlightWeeklyChartRender() {
 						var weekTotal = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
 
 						return "$" + NumberCommaFormat(weekTotal);
-					},
-					title: function (tooltipItem, data) {
-						return "";
 					}
 				}
 			},
@@ -282,8 +270,8 @@ function TransactionSpotlightWeeklyChartRender() {
 						fontStyle: "bold",
 						fontSize: 14,
 						autoSkip: true,
-						maxRotation: 60,
-						minRotation: 60,
+						maxRotation: 0,
+						minRotation: 0,
 						display: "auto"
 					},
 					gridLines: {
