@@ -217,22 +217,38 @@
 	</script>
 
 	<script id="tmplTransactionSpotlight" type="text/x-handlebars-template">
-		<table>
-			<thead>
-				<th>KeyID</th>
-				<th>TransactionID</th>
-				<th>DateRangeWeekBegin</th>
-				<th>DateRangeWeekEnd</th>
-				<th>TransactionCountWeekly</th>
-			</thead>
-			<tbody>
-				<td>{{KeyID}}</td>
-				<td>{{TransactionID}}</td>
-				<td>{{DateRangeWeekBegin}}</td>
-				<td>{{DateRangeWeekEnd}}</td>
-				<td>{{TransactionCountWeekly}}</td>
-			</tbody>
-		</table>
+		<div class="center-me">
+			<ul class="nav nav-pills">
+				<li class="active"><a data-toggle="pill" href="#Weekly">Weekly</a></li>
+				<li class=""><a data-toggle="pill" href="#Daily">Daily</a></li>
+			</ul>
+		</div>
+		<div class="tab-content">
+			<div id="Weekly" class="tab-pane fade in active">
+				<canvas id="uxTransactionSpotlightWeeklyChart"></canvas>
+
+				<table>
+					<thead>
+						<th>KeyID</th>
+						<th>TransactionID</th>
+						<th>DateRangeWeekBegin</th>
+						<th>DateRangeWeekEnd</th>
+						<th>TransactionCountWeekly</th>
+					</thead>
+					<tbody>
+						<td>{{KeyID}}</td>
+						<td>{{TransactionID}}</td>
+						<td>{{DateRangeWeekBegin}}</td>
+						<td>{{DateRangeWeekEnd}}</td>
+						<td>{{TransactionCountWeekly}}</td>
+					</tbody>
+				</table>
+			</div>
+			<div id="Daily" class="tab-pane fade">
+				<h3>Menu 1</h3>
+				<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+			</div>
+		</div>
 	</script>
 
 	<?php require_once('include/footer.php'); ?>
