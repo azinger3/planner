@@ -145,8 +145,6 @@ function BudgetSummarySpotlightRender() {
 }
 
 function TransactionSpotlightGet() {
-	var result = {};
-
 	$.ajax({
 		type: "GET",
 		url: api + "/transaction/spotlight",
@@ -158,10 +156,8 @@ function TransactionSpotlightGet() {
 		beforeSend: function () {
 			$("#uxTransactionSpotlight").html("<div class='text-center'><i class='fa fa-refresh fa-spin fa-2x fa-fw'></i><span class='loading'>Loading...</span></div>");
 		},
-		success: function (msg) {
-			result = msg;
-
-			objBudget.TransactionSpotlight = result[0];
+		success: function (response) {
+			objBudget.TransactionSpotlight = response;
 
 			TransactionSpotlightRender();
 			TransactionSpotlightWeeklyChartRender();
@@ -179,7 +175,7 @@ function TransactionSpotlightGet() {
 function TransactionSpotlightRender() {
 	var source = $("#tmplTransactionSpotlight").html();
 	var template = Handlebars.compile(source);
-	var context = objBudget.TransactionSpotlight;
+	var context = objBudget;
 	var html = template(context);
 
 	$("#uxTransactionSpotlight").html(html);

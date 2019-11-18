@@ -112,6 +112,10 @@
 					</div>
 					<div class="panel-body">
 						<div id="uxTransactionSpotlight"></div>
+
+						Top 3 Transactions (Sep 15 - 21)
+
+						transaction1		$123
 					</div>
 				</div>
 			</div>
@@ -227,23 +231,6 @@
 			<div id="Weekly" class="tab-pane fade in active">
 				<br />
 				<canvas id="uxTransactionSpotlightWeeklyChart"></canvas>
-
-				<table>
-					<thead>
-						<th>KeyID</th>
-						<th>TransactionID</th>
-						<th>DateRangeWeekBegin</th>
-						<th>DateRangeWeekEnd</th>
-						<th>TransactionCountWeekly</th>
-					</thead>
-					<tbody>
-						<td>{{KeyID}}</td>
-						<td>{{TransactionID}}</td>
-						<td>{{DateRangeWeekBegin}}</td>
-						<td>{{DateRangeWeekEnd}}</td>
-						<td>{{TransactionCountWeekly}}</td>
-					</tbody>
-				</table>
 			</div>
 			<div id="Daily" class="tab-pane fade">
 				<h3>Menu 1</h3>
