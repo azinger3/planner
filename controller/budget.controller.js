@@ -191,39 +191,106 @@ function TransactionSpotlightWeeklyChartRender() {
 	var myChart = new Chart(ctx, {
 		type: 'line',
 		data: {
-			labels: [1500, 1600, 1700, 1750, 1800, 1850, 1900, 1950, 1999, 2050],
+			labels: [
+				"Aug 11 - 17",
+				"Aug 18 - 24",
+				"Aug 25 - 31",
+				"Sep 1 - 7",
+				"Sep 8 - 14",
+				"Sep 15 - 21",
+				"Sep 22 - 28",
+				"Sep 29 - Oct 5",
+				"Oct 6 - 12",
+				"Oct 13 - 19",
+				"Oct 20 - 26",
+				"Oct 27 - Nov 2",
+				"Nov 3 - 9",
+				"Nov 10 - 16",
+				"Nov 17 - 23"
+			],
 			datasets: [{
-				data: [86, 114, 106, 106, 107, 111, 133, 221, 783, 2478],
-				label: "Africa",
-				borderColor: "#3e95cd",
-				fill: false
-			}, {
-				data: [282, 350, 411, 502, 635, 809, 947, 1402, 3700, 5267],
-				label: "Asia",
-				borderColor: "#8e5ea2",
-				fill: false
-			}, {
-				data: [168, 170, 178, 190, 203, 276, 408, 547, 675, 734],
-				label: "Europe",
-				borderColor: "#3cba9f",
-				fill: false
-			}, {
-				data: [40, 20, 10, 16, 24, 38, 74, 167, 508, 784],
-				label: "Latin America",
-				borderColor: "#e8c3b9",
-				fill: false
-			}, {
-				data: [6, 3, 2, 2, 7, 26, 82, 172, 312, 433],
-				label: "North America",
-				borderColor: "#c45850",
-				fill: false
-			}
-			]
+				data: [
+					2345,
+					2745,
+					2183,
+					2865,
+					2834,
+					2234,
+					2187,
+					2738,
+					2965,
+					2345,
+					2884,
+					3055,
+					3156,
+					2234,
+					2533
+				],
+				fill: "start",
+				backgroundColor: "#f4c247",
+				borderColor: "#f4c247",
+				pointBorderColor: "#000000",
+				pointBackgroundColor: "#ffffff",
+				pointBorderWidth: 3,
+				pointRadius: 8,
+				pointHoverRadius: 8
+			}]
 		},
 		options: {
-			title: {
-				display: true,
-				text: 'World population per region (in millions)'
+			elements: {
+				line: {
+					tension: 0.000001
+				}
+			},
+			legend: {
+				display: false
+			},
+			tooltips: {
+				enabled: true,
+				bodyFontFamily: "Lato",
+				bodyFontStyle: "bold",
+				bodyFontSize: 16,
+				displayColors: false,
+				callbacks: {
+					label: function (tooltipItem, data) {
+						var weekTotal = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+
+						return "$" + NumberCommaFormat(weekTotal);
+					},
+					title: function (tooltipItem, data) {
+						return "";
+					}
+				}
+			},
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: true,
+						callback: function (value, index, values) {
+							return '';
+						}
+					},
+					gridLines: {
+						display: false,
+						drawBorder: false
+					},
+				}],
+				xAxes: [{
+					ticks: {
+						beginAtZero: false,
+						fontFamily: "Lato",
+						fontStyle: "bold",
+						fontSize: 14,
+						autoSkip: true,
+						maxRotation: 60,
+						minRotation: 60,
+						display: "auto"
+					},
+					gridLines: {
+						display: false,
+						drawBorder: false
+					}
+				}]
 			}
 		}
 	});

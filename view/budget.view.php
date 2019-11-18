@@ -225,6 +225,7 @@
 		</div>
 		<div class="tab-content">
 			<div id="Weekly" class="tab-pane fade in active">
+				<br />
 				<canvas id="uxTransactionSpotlightWeeklyChart"></canvas>
 
 				<table>

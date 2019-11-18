@@ -140,6 +140,14 @@ function BudgetBreakdownChartDataSet(result) {
 }
 
 function BudgetBreakdownChartRender() {
+console.log("chartLabel!!!");
+console.log(chartLabel);
+console.log("chartBackgroundColor!!!");
+console.log(chartBackgroundColor);
+console.log("chartData!!!");
+console.log(chartData);
+
+
     var ctx = document.getElementById("uxBudgetBreakdownChart").getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'pie',
