@@ -268,7 +268,7 @@ function TransactionSpotlightWeeklyChartRender() {
 					ticks: {
 						beginAtZero: true,
 						callback: function (value, index, values) {
-							return '';
+							return "";
 						}
 					},
 					gridLines: {
