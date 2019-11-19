@@ -1,127 +1,126 @@
 body {
-    padding-top: 30px;
+	padding-top: 30px;
 }
 
-    body > .navbar {
-        -webkit-transition: background-color .3s ease-in;
-        transition: background-color .3s ease-in;
-    }
+body>.navbar {
+	-webkit-transition: background-color .3s ease-in;
+	transition: background-color .3s ease-in;
+}
 
 @media (min-width:768px) {
-    body > .navbar-transparent {
-        background-color: transparent;
-    }
-
-        body > .navbar-transparent .navbar-nav > .open > a {
-            background-color: transparent !important;
-        }
+	body>.navbar-transparent {
+		background-color: transparent;
+	}
+	body>.navbar-transparent .navbar-nav>.open>a {
+		background-color: transparent !important;
+	}
 }
 
-@media (max-width: 666px){
-    .custom-hidden-xs {
-        display: none !important;
-    }
+@media (max-width: 666px) {
+	.custom-hidden-xs {
+		display: none !important;
+	}
 }
 
 .page-header {
-    margin-bottom: 0px;
+	margin-bottom: 0px;
 }
 
-    .page-header h1 {
-        font-size: 1.5em;
-    }
+.page-header h1 {
+	font-size: 1.5em;
+}
 
 .nav-tabs {
-    margin-bottom: 15px;
+	margin-bottom: 15px;
 }
 
 .dropdown-menu {
-    min-width: 0;
+	min-width: 0;
 }
 
 .fa-1 {
-    font-size: 1.25em;
+	font-size: 1.25em;
 }
 
 .fa-2 {
-    font-size: 2em;
+	font-size: 2em;
 }
 
 .plannerBackArrow {
-    font-size: 16px;
+	font-size: 16px;
 }
 
 input[type="search"]::-webkit-search-cancel-button {
-    -webkit-appearance: searchfield-cancel-button;
+	-webkit-appearance: searchfield-cancel-button;
 }
 
 table span.highlight {
-    background-color: #FFFF88;
+	background-color: #FFFF88;
 }
 
 a.back-to-top {
-    border-radius: 20px;
-    display: none;
-    width: 60px;
-    height: 60px;
-    text-indent: -9999px;
-    position: fixed;
-    z-index: 999;
-    right: 20px;
-    bottom: 20px;
-    opacity: 0.6;
-    background: url(../image/backtotop.png) no-repeat center 43%;
+	border-radius: 20px;
+	display: none;
+	width: 60px;
+	height: 60px;
+	text-indent: -9999px;
+	position: fixed;
+	z-index: 999;
+	right: 20px;
+	bottom: 20px;
+	opacity: 0.6;
+	background: url(../image/backtotop.png) no-repeat center 43%;
 }
 
 .loading {
-    vertical-align: super; 
-    margin: 5px;
+	vertical-align: super;
+	margin: 5px;
 }
 
 #uxBudgetYear {
-    width: 165px;
+	width: 165px;
 }
 
 a.normalLink {
-    text-decoration: none !important; 
-    color: #2c3e50;
+	text-decoration: none !important;
+	color: #2c3e50;
 }
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
 }
 
 input[type=number] {
-    -moz-appearance: textfield;
+	-moz-appearance: textfield;
 }
 
-.autocomplete-suggestions { 
-    border: 1px solid #999; 
-    background: #FFF; 
-    overflow: auto; 
+.autocomplete-suggestions {
+	border: 1px solid #999;
+	background: #FFF;
+	overflow: auto;
 }
 
-.autocomplete-suggestion { 
-    padding: 2px 5px; 
-    white-space: nowrap; 
-    overflow: hidden; 
+.autocomplete-suggestion {
+	padding: 2px 5px;
+	white-space: nowrap;
+	overflow: hidden;
 }
 
-.autocomplete-selected { 
-    background: #F0F0F0; 
-}
-.autocomplete-suggestions strong { 
-    font-weight: normal; 
-    color: #3399FF; 
+.autocomplete-selected {
+	background: #F0F0F0;
 }
 
-.autocomplete-group { 
-    padding: 2px 5px; 
+.autocomplete-suggestions strong {
+	font-weight: normal;
+	color: #3399FF;
 }
 
-.autocomplete-group strong { 
-    display: block; 
-    border-bottom: 1px solid #000; 
+.autocomplete-group {
+	padding: 2px 5px;
+}
+
+.autocomplete-group strong {
+	display: block;
+	border-bottom: 1px solid #000;
 }

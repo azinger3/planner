@@ -580,7 +580,7 @@
                                 <td class="planDetail hidden-xs text-right">${{NumberCommaFormat AmountBiYearly}}</td>
                                 <td class="planDetail custom-hidden-xs text-right">${{NumberCommaFormat AmountYearly}}</td>
                                 <td class="planDetail custom-hidden-xs hidden-sm text-right">{{Percentage}}%</td>
-                                <td class="planDetail hidden-xs hidden-sm text-right">#{{RANK}}</td>
+                                <td class="planDetail hidden-xs hidden-sm text-right">#{{RankID}}</td>
                                 <td class="planDetail custom-hidden-xs hidden-sm text-right">
                                 {{#if Description}}
                                     <i class="fa fa-comment fa-lg" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="{{Description}}"></i>
