@@ -91,20 +91,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-12">
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						Transaction Trends
-						<div class="pull-right">
-							<sub><i>Last 3 Months</i><sub>
-						</div>
-					</div>
-					<div class="panel-body">
-						<div id="uxTransactionSpotlight"></div>
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-6">
+			<div class="col-sm-4">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						Remaining Flexible Funds
@@ -120,7 +107,22 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-3">
+			<div class="col-sm-8">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						Transaction Trends
+						<div class="pull-right">
+							<sub><i>Last 3 Months</i><sub>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div id="uxTransactionSpotlight"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6">
 				<div class="panel panel-primary">
 					<div class="panel-heading">Savings Breakdown</div>
 					<div class="panel-body">
@@ -128,7 +130,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-3">
+			<div class="col-sm-6">
 				<div class="panel panel-primary">
 					<div class="panel-heading">Budget Summaries</div>
 					<div class="panel-body">
@@ -136,7 +138,6 @@
 					</div>
 				</div>
 			</div>
-			
 		</div>
 	</section>
 
@@ -234,10 +235,9 @@
 		<div class="tab-content">
 			<div id="Weekly" class="tab-pane fade in active">
 				<br />
-				<div style="height: 300px;">
+				<div style="height: 312px;">
 					<canvas id="uxTransactionSpotlightWeeklyChart"></canvas>
 				</div>
-				
 			</div>
 			<div id="Daily" class="tab-pane fade">
 				<h3>Menu 1</h3>
