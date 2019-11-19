@@ -75,20 +75,36 @@
 		sub {
 			bottom: 0;
 		}
+
+		.section-default {
+			padding: 1px 20px 10px 20px;
+		}
 	</style>
 </head>
 
 <body>
 	<?php require_once('include/navigation.budget.php'); ?>
 
-	<div class="container">
+	<section class="section-default">
 		<div class="page-header">
 			<div class="row">
 			</div>
 		</div>
-
 		<div class="row">
-			<div class="col-md-8">
+			<div class="col-sm-12">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						Transaction Trends
+						<div class="pull-right">
+							<sub><i>Last 3 Months</i><sub>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div id="uxTransactionSpotlight"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						Remaining Flexible Funds
@@ -103,29 +119,16 @@
 						<div id="uxBudgetCategorySpotlight"></div>
 					</div>
 				</div>
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						Transaction Trends
-						<div class="pull-right">
-							<sub><i>Last 3 Months</i><sub>
-						</div>
-					</div>
-					<div class="panel-body">
-						<div id="uxTransactionSpotlight"></div>
-
-						Top 3 Transactions (Sep 15 - 21)
-
-						transaction1		$123
-					</div>
-				</div>
 			</div>
-			<div class="col-md-4">
+			<div class="col-sm-3">
 				<div class="panel panel-primary">
 					<div class="panel-heading">Savings Breakdown</div>
 					<div class="panel-body">
 						<div id="uxBudgetFundSpotlight"></div>
 					</div>
 				</div>
+			</div>
+			<div class="col-sm-3">
 				<div class="panel panel-primary">
 					<div class="panel-heading">Budget Summaries</div>
 					<div class="panel-body">
@@ -133,8 +136,9 @@
 					</div>
 				</div>
 			</div>
+			
 		</div>
-	</div>
+	</section>
 
 	<script id="tmplBudgetCategorySpotlight" type="text/x-handlebars-template">
 		<div class="currentMonth">
@@ -230,7 +234,10 @@
 		<div class="tab-content">
 			<div id="Weekly" class="tab-pane fade in active">
 				<br />
-				<canvas id="uxTransactionSpotlightWeeklyChart"></canvas>
+				<div style="height: 300px;">
+					<canvas id="uxTransactionSpotlightWeeklyChart"></canvas>
+				</div>
+				
 			</div>
 			<div id="Daily" class="tab-pane fade">
 				<h3>Menu 1</h3>
