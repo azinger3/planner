@@ -89,6 +89,12 @@
 				height: 150px;
 			}
 		}
+
+		@media (min-width:415px) and (max-width:736px) {
+			.transaction-week-chart {
+				height: 185px;
+			}
+		}
 	</style>
 </head>
 
