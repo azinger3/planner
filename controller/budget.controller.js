@@ -198,7 +198,7 @@ function TransactionSpotlightWeeklyChartRender() {
 				"Sep 15 - 21",
 				"Sep 22 - 28",
 				"Sep 29 - Oct 5",
-				"Oct 6 - 12"
+				"Oct 13 - 19"
 			],
 			datasets: [{
 				data: [
@@ -237,12 +237,29 @@ function TransactionSpotlightWeeklyChartRender() {
 				bodyFontFamily: "Lato",
 				bodyFontStyle: "bold",
 				bodyFontSize: 16,
+				footerFontFamily: "Lato",
+				footerFontStyle: "italic",
+				footerFontSize: 12,
 				displayColors: false,
 				callbacks: {
 					label: function (tooltipItem, data) {
 						var weekTotal = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
 
 						return "$" + NumberCommaFormat(weekTotal);
+					},
+					footer: function (tooltipItem, data) {
+						var transactionCountWeekly = 0;
+						var dateRangeWeek = tooltipItem[0].xLabel;
+
+						$.each(objBudget.TransactionSpotlight, function (index, value) {
+							if (value.DateRangeWeek == dateRangeWeek) {
+								transactionCountWeekly = value.TransactionCountWeekly;
+
+								return false;
+							}
+						});
+
+						return "(" + transactionCountWeekly + ") Transactions";
 					}
 				}
 			},
