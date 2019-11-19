@@ -79,6 +79,16 @@
 		.section-default {
 			padding: 1px 20px 10px 20px;
 		}
+
+		.transaction-week-chart {
+			height: 312px;
+		}
+
+		@media (max-width:414px) {
+			.transaction-week-chart {
+				height: 150px;
+			}
+		}
 	</style>
 </head>
 
@@ -235,7 +245,7 @@
 		<div class="tab-content">
 			<div id="Weekly" class="tab-pane fade in active">
 				<br />
-				<div style="height: 312px;">
+				<div class="transaction-week-chart">
 					<canvas id="uxTransactionSpotlightWeeklyChart"></canvas>
 				</div>
 			</div>
