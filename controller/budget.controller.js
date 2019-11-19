@@ -7,6 +7,13 @@ objBudget.BudgetFundSpotlight = "";
 objBudget.BudgetSummarySpotlight = "";
 objBudget.TransactionSpotlight = "";
 
+var objTransactionSpotlightChart = {};
+objTransactionSpotlightChart.Weekly = {
+	chartLabel: [],
+	chartData: []
+};
+objTransactionSpotlightChart.Daily = {};
+
 $(document).ready(function () {
 	console.log("Ready!");
 
@@ -156,9 +163,11 @@ function TransactionSpotlightGet() {
 		beforeSend: function () {
 			$("#uxTransactionSpotlight").html("<div class='text-center'><i class='fa fa-refresh fa-spin fa-2x fa-fw'></i><span class='loading'>Loading...</span></div>");
 		},
-		success: function (response) {
-			objBudget.TransactionSpotlight = response;
+		success: function (result) {
+			objBudget.TransactionSpotlight = result;
 
+			TransactionSpotlightChartLabelSet(result);
+			TransactionSpotlightChartDataSet(result);
 			TransactionSpotlightRender();
 			TransactionSpotlightWeeklyChartRender();
 		},
@@ -169,6 +178,50 @@ function TransactionSpotlightGet() {
 				alert('Error :' + XMLHttpRequest.responseText);
 			}
 		}
+	});
+}
+
+function TransactionSpotlightChartLabelSet(result) {
+	var tmpTransactionWeek = $.map(result, function (item) {
+		return {
+			TransactionWeek: item.TransactionWeek,
+			CalendarWeekID: item.CalendarWeekID,
+			CalendarWeekBegin: item.CalendarWeekBegin,
+			CalendarWeekEnd: item.CalendarWeekEnd,
+			AmountWeekly: item.AmountWeekly,
+			DateRangeWeekBegin: item.ateRangeWeekBegin,
+			DateRangeWeekEnd: item.DateRangeWeekEnd,
+			DateRangeWeek: item.DateRangeWeek,
+			TransactionCountWeekly: item.TransactionCountWeekly
+		};
+	});
+
+	var uniqTransactionWeek = _.uniqWith(tmpTransactionWeek, _.isEqual);
+
+	$.each(uniqTransactionWeek, function (index, value) {
+		objTransactionSpotlightChart.Weekly.chartLabel.push(value.DateRangeWeek);
+	});
+}
+
+function TransactionSpotlightChartDataSet(result) {
+	var tmpTransactionWeek = $.map(result, function (item) {
+		return {
+			TransactionWeek: item.TransactionWeek,
+			CalendarWeekID: item.CalendarWeekID,
+			CalendarWeekBegin: item.CalendarWeekBegin,
+			CalendarWeekEnd: item.CalendarWeekEnd,
+			AmountWeekly: item.AmountWeekly,
+			DateRangeWeekBegin: item.ateRangeWeekBegin,
+			DateRangeWeekEnd: item.DateRangeWeekEnd,
+			DateRangeWeek: item.DateRangeWeek,
+			TransactionCountWeekly: item.TransactionCountWeekly
+		};
+	});
+
+	var uniqTransactionWeek = _.uniqWith(tmpTransactionWeek, _.isEqual);
+
+	$.each(uniqTransactionWeek, function (index, value) {
+		objTransactionSpotlightChart.Weekly.chartData.push(value.AmountWeekly);
 	});
 }
 
@@ -191,25 +244,9 @@ function TransactionSpotlightWeeklyChartRender() {
 	var myChart = new Chart(ctx, {
 		type: 'line',
 		data: {
-			labels: [
-				"Aug 25 - 31",
-				"Sep 1 - 7",
-				"Sep 8 - 14",
-				"Sep 15 - 21",
-				"Sep 22 - 28",
-				"Sep 29 - Oct 5",
-				"Oct 13 - 19"
-			],
+			labels: objTransactionSpotlightChart.Weekly.chartLabel,
 			datasets: [{
-				data: [
-					2183,
-					2865,
-					2834,
-					2234,
-					2187,
-					2738,
-					2965
-				],
+				data: objTransactionSpotlightChart.Weekly.chartData,
 				fill: "start",
 				backgroundColor: gradient,
 				borderColor: "#f4c247",
