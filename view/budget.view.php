@@ -138,7 +138,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-6">
+			<div class="col-sm-4">
 				<div class="panel panel-primary">
 					<div class="panel-heading">Savings Breakdown</div>
 					<div class="panel-body">
@@ -146,7 +146,20 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-6">
+			<div class="col-sm-5">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						Top 10 Transactions
+						<div class="pull-right">
+							<sub><i>Past Month</i><sub>
+						</div>
+					</div>
+					<div class="panel-body">
+						<div id="uxTransactionLeaderboard"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-3">
 				<div class="panel panel-primary">
 					<div class="panel-heading">Budget Summaries</div>
 					<div class="panel-body">
@@ -260,6 +273,31 @@
 				<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 			</div>
 		</div>
+	</script>
+
+	<script id="tmplTransactionLeaderboard" type="text/x-handlebars-template">
+		<table class="table table-striped table-hover table-condensed small">
+			<thead>
+				<tr>
+					<th scope="col"></th>
+					<th scope="col">Date</th>
+					<th scope="col">Description</th>
+					<th scope="col">Note</th>
+					<th scope="col">Amount</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each TransactionLeaderboard}}
+				<tr>
+					<th scope="row">#{{RankID}}</th>
+					<th scope="row">{{TransactionDTMask}}</th>
+					<td>{{Description}} ({{BudgetCategory}})</td>
+					<td>{{Note}}</td>
+					<td>${{NumberCommaFormat Amount}}</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
 	</script>
 
 	<?php require_once('include/footer.php'); ?>

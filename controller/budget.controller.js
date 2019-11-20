@@ -6,6 +6,7 @@ objBudget.BudgetCategorySpotlight = "";
 objBudget.BudgetFundSpotlight = "";
 objBudget.BudgetSummarySpotlight = "";
 objBudget.TransactionSpotlight = "";
+objBudget.TransactionLeaderboard = "";
 
 var objTransactionSpotlightChart = {};
 objTransactionSpotlightChart.Weekly = {
@@ -23,6 +24,7 @@ $(document).ready(function () {
 	BudgetFundSpotlightGet();
 	BudgetSummarySpotlightGet();
 	TransactionSpotlightGet();
+	TransactionLeaderboardGet();
 });
 
 function BudgetCategorySpotlightGet() {
@@ -334,6 +336,42 @@ function TransactionSpotlightWeeklyChartRender() {
 			}
 		}
 	});
+}
+
+function TransactionLeaderboardGet() {
+	$.ajax({
+		type: "GET",
+		url: api + "/transaction/leaderboard",
+		cache: false,
+		data: data,
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		async: true,
+		beforeSend: function () {
+			$("#uxTransactionLeaderboard").html("<div class='text-center'><i class='fa fa-refresh fa-spin fa-2x fa-fw'></i><span class='loading'>Loading...</span></div>");
+		},
+		success: function (result) {
+			objBudget.TransactionLeaderboard = result;
+
+			TransactionLeaderboardRender();
+		},
+		error: function (XMLHttpRequest, textStatus, errorThrown) {
+			if (XMLHttpRequest.readyState < 4) {
+				return true;
+			} else {
+				alert('Error :' + XMLHttpRequest.responseText);
+			}
+		}
+	});
+}
+
+function TransactionLeaderboardRender() {
+	var source = $("#tmplTransactionLeaderboard").html();
+	var template = Handlebars.compile(source);
+	var context = objBudget;
+	var html = template(context);
+
+	$("#uxTransactionLeaderboard").html(html);
 }
 
 function BudgetMonthPercentageSet() {
