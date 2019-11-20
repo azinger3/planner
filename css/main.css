@@ -124,3 +124,9 @@ input[type=number] {
 	display: block;
 	border-bottom: 1px solid #000;
 }
+
+@media (min-width: 768px) {
+	.container {
+		width: 970px;
+	}
+}

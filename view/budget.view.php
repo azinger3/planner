@@ -81,7 +81,7 @@
 		}
 
 		.transaction-week-chart {
-			height: 312px;
+			height: 333px;
 		}
 
 		@media (max-width:414px) {
@@ -90,7 +90,7 @@
 			}
 		}
 
-		@media (min-width:415px) and (max-width:736px) {
+		@media (min-width:415px) and (max-width:812px) {
 			.transaction-week-chart {
 				height: 185px;
 			}
@@ -107,7 +107,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-4">
+			<div class="col-md-4">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						Remaining Flexible Funds
@@ -123,7 +123,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-8">
+			<div class="col-md-8">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						Transaction Trends
@@ -138,7 +138,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-sm-4">
+			<div class="col-md-4">
 				<div class="panel panel-primary">
 					<div class="panel-heading">Savings Breakdown</div>
 					<div class="panel-body">
@@ -146,7 +146,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-5">
+			<div class="col-md-5">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						Top 10 Transactions
@@ -159,7 +159,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-3">
+			<div class="col-md-3">
 				<div class="panel panel-primary">
 					<div class="panel-heading">Budget Summaries</div>
 					<div class="panel-body">
@@ -263,7 +263,6 @@
 		</div>
 		<div class="tab-content">
 			<div id="Weekly" class="tab-pane fade in active">
-				<br />
 				<div class="transaction-week-chart">
 					<canvas id="uxTransactionSpotlightWeeklyChart"></canvas>
 				</div>
@@ -279,7 +278,7 @@
 		<table class="table table-striped table-hover table-condensed small">
 			<thead>
 				<tr>
-					<th scope="col"></th>
+					<th scope="col">Rank</th>
 					<th scope="col">Date</th>
 					<th scope="col">Description</th>
 					<th scope="col">Note</th>
