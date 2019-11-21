@@ -8,12 +8,16 @@ objBudget.BudgetSummarySpotlight = "";
 objBudget.TransactionSpotlight = "";
 objBudget.TransactionLeaderboard = "";
 
-var objTransactionSpotlightChart = {};
-objTransactionSpotlightChart.Weekly = {
-	chartLabel: [],
-	chartData: []
+var objTransactionSpotlightChart = {
+	Weekly: {
+		chartLabel: [],
+		chartData: []
+	},
+	Daily: {
+		chartLabel: [],
+		chartData: []
+	}
 };
-objTransactionSpotlightChart.Daily = {};
 
 $(document).ready(function () {
 	console.log("Ready!");
@@ -168,10 +172,15 @@ function TransactionSpotlightGet() {
 		success: function (result) {
 			objBudget.TransactionSpotlight = result;
 
-			TransactionSpotlightChartLabelSet(result);
-			TransactionSpotlightChartDataSet(result);
+			TransactionSpotlightWeeklyChartLabelSet(result);
+			TransactionSpotlightWeeklyChartDataSet(result);
+			TransactionSpotlightDailyChartLabelSet(result);
+			TransactionSpotlightDailyChartDataSet(result);
+
 			TransactionSpotlightRender();
+
 			TransactionSpotlightWeeklyChartRender();
+			TransactionSpotlightDailyChartRender();
 		},
 		error: function (XMLHttpRequest, textStatus, errorThrown) {
 			if (XMLHttpRequest.readyState < 4) {
@@ -183,7 +192,7 @@ function TransactionSpotlightGet() {
 	});
 }
 
-function TransactionSpotlightChartLabelSet(result) {
+function TransactionSpotlightWeeklyChartLabelSet(result) {
 	var tmpTransactionWeek = $.map(result, function (item) {
 		return {
 			TransactionWeek: item.TransactionWeek,
@@ -205,7 +214,7 @@ function TransactionSpotlightChartLabelSet(result) {
 	});
 }
 
-function TransactionSpotlightChartDataSet(result) {
+function TransactionSpotlightWeeklyChartDataSet(result) {
 	var tmpTransactionWeek = $.map(result, function (item) {
 		return {
 			TransactionWeek: item.TransactionWeek,
@@ -224,6 +233,55 @@ function TransactionSpotlightChartDataSet(result) {
 
 	$.each(uniqTransactionWeek, function (index, value) {
 		objTransactionSpotlightChart.Weekly.chartData.push(value.AmountWeekly);
+	});
+}
+
+function TransactionSpotlightDailyChartLabelSet(result) {
+	var tmpTransactionDay = $.map(result, function (item) {
+		return {
+			TransactionMonth: item.TransactionMonth,
+			TransactionDay: item.TransactionDay,
+			CalendarDayName: item.CalendarDayName,
+			AmountDaily: item.AmountDaily,
+			DateRangeDaily: item.DateRangeDaily,
+			TransactionCountDaily: item.TransactionCountDaily
+		};
+	});
+
+	var uniqTransactionDay = _.uniqWith(tmpTransactionDay, _.isEqual);
+
+	$.each(uniqTransactionDay, function (index, value) {
+		var dateRangeStart = (uniqTransactionDay.length - 7);
+		var dateRangeDaily = (value.DateRangeDaily + " " + value.TransactionMonth + "/" + value.TransactionDay);
+
+		// Last 7 Days
+		if (index > dateRangeStart) {
+			objTransactionSpotlightChart.Daily.chartLabel.push(dateRangeDaily);
+		}
+	});
+}
+
+function TransactionSpotlightDailyChartDataSet(result) {
+	var tmpTransactionDay = $.map(result, function (item) {
+		return {
+			TransactionMonth: item.TransactionMonth,
+			TransactionDay: item.TransactionDay,
+			CalendarDayName: item.CalendarDayName,
+			AmountDaily: item.AmountDaily,
+			DateRangeDaily: item.DateRangeDaily,
+			TransactionCountDaily: item.TransactionCountDaily
+		};
+	});
+
+	var uniqTransactionDay = _.uniqWith(tmpTransactionDay, _.isEqual);
+
+	$.each(uniqTransactionDay, function (index, value) {
+		var dateRangeStart = (uniqTransactionDay.length - 7);
+
+		// Last 7 Days
+		if (index > dateRangeStart) {
+			objTransactionSpotlightChart.Daily.chartData.push(value.AmountDaily);
+		}
 	});
 }
 
@@ -301,6 +359,108 @@ function TransactionSpotlightWeeklyChartRender() {
 						});
 
 						return "(" + transactionCountWeekly + ") Transactions";
+					}
+				}
+			},
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: true,
+						callback: function (value, index, values) {
+							return "";
+						}
+					},
+					gridLines: {
+						display: false,
+						drawBorder: false
+					},
+				}],
+				xAxes: [{
+					ticks: {
+						beginAtZero: false,
+						fontFamily: "Lato",
+						fontStyle: "bold",
+						fontSize: 14,
+						autoSkip: true,
+						maxRotation: 0,
+						minRotation: 0,
+						display: "auto"
+					},
+					gridLines: {
+						display: false,
+						drawBorder: false
+					}
+				}]
+			}
+		}
+	});
+}
+
+function TransactionSpotlightDailyChartRender() {
+	var ctx = document.getElementById("uxTransactionSpotlightDailyChart").getContext('2d');
+
+	var gradient = ctx.createLinearGradient(0, 0, 0, 400);
+	gradient.addColorStop(0, 'rgba(250,189,9,1)');
+	gradient.addColorStop(1, 'rgba(250,189,9,0)');
+
+	var myChart = new Chart(ctx, {
+		type: 'line',
+		data: {
+			labels: objTransactionSpotlightChart.Daily.chartLabel,
+			datasets: [{
+				data: objTransactionSpotlightChart.Daily.chartData,
+				fill: "start",
+				backgroundColor: gradient,
+				borderColor: "#f4c247",
+				pointBorderColor: "#000000",
+				pointBackgroundColor: "#ffffff",
+				pointBorderWidth: 2,
+				pointRadius: 8,
+				pointHoverRadius: 8
+			}]
+		},
+		options: {
+			responsive: true,
+			maintainAspectRatio: false,
+			elements: {
+				line: {
+					tension: 0.000001
+				}
+			},
+			legend: {
+				display: false
+			},
+			tooltips: {
+				enabled: true,
+				titleFontFamily: "Lato",
+				titleFontStyle: "normal",
+				titleFontSize: 16,
+				bodyFontFamily: "Lato",
+				bodyFontStyle: "bold",
+				bodyFontSize: 16,
+				footerFontFamily: "Lato",
+				footerFontStyle: "italic",
+				footerFontSize: 12,
+				displayColors: false,
+				callbacks: {
+					label: function (tooltipItem, data) {
+						var dayTotal = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+
+						return "$" + NumberCommaFormat(dayTotal);
+					},
+					footer: function (tooltipItem, data) {
+						var transactionCountDaily = 0;
+						var amountDaily = tooltipItem[0].yLabel;
+
+						$.each(objBudget.TransactionSpotlight, function (index, value) {
+							if (value.AmountDaily == amountDaily) {
+								transactionCountDaily = value.TransactionCountDaily;
+
+								return false;
+							}
+						});
+
+						return "(" + transactionCountDaily + ") Transactions";
 					}
 				}
 			},

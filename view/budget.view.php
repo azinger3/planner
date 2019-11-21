@@ -95,6 +95,22 @@
 				height: 185px;
 			}
 		}
+
+		.transaction-day-chart {
+			height: 333px;
+		}
+
+		@media (max-width:414px) {
+			.transaction-day-chart {
+				height: 150px;
+			}
+		}
+
+		@media (min-width:415px) and (max-width:812px) {
+			.transaction-day-chart {
+				height: 185px;
+			}
+		}
 	</style>
 </head>
 
@@ -172,9 +188,9 @@
 
 	<script id="tmplBudgetCategorySpotlight" type="text/x-handlebars-template">
 		<div class="currentMonth">
-			<a id="uxBudgetMonth" class="summaryLink" href="/budget/plan">
+			<div id="uxBudgetMonth" class="summaryLink">
 				<strong>{{BudgetMonth}}</strong>
-			</a>
+			</div>
 		</div>
 		<table class="table table-hover">
 			<thead>
@@ -268,8 +284,9 @@
 				</div>
 			</div>
 			<div id="Daily" class="tab-pane fade">
-				<h3>Menu 1</h3>
-				<p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+				<div class="transaction-day-chart">
+					<canvas id="uxTransactionSpotlightDailyChart"></canvas>
+				</div>
 			</div>
 		</div>
 	</script>
@@ -278,20 +295,20 @@
 		<table class="table table-striped table-hover table-condensed small">
 			<thead>
 				<tr>
-					<th scope="col">Rank</th>
+					<th scope="col" class="hidden-xs">Rank</th>
 					<th scope="col">Date</th>
 					<th scope="col">Description</th>
-					<th scope="col">Note</th>
+					<th scope="col" class="hidden-xs">Note</th>
 					<th scope="col">Amount</th>
 				</tr>
 			</thead>
 			<tbody>
 				{{#each TransactionLeaderboard}}
 				<tr>
-					<th scope="row">#{{RankID}}</th>
+					<th scope="row" class="hidden-xs">#{{RankID}}</th>
 					<th scope="row">{{TransactionDTMask}}</th>
 					<td>{{Description}} ({{BudgetCategory}})</td>
-					<td>{{Note}}</td>
+					<td class="hidden-xs">{{Note}}</td>
 					<td>${{NumberCommaFormat Amount}}</td>
 				</tr>
 				{{/each}}
