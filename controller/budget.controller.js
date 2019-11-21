@@ -251,7 +251,7 @@ function TransactionSpotlightDailyChartLabelSet(result) {
 	var uniqTransactionDay = _.uniqWith(tmpTransactionDay, _.isEqual);
 
 	$.each(uniqTransactionDay, function (index, value) {
-		var dateRangeStart = (uniqTransactionDay.length - 7);
+		var dateRangeStart = (uniqTransactionDay.length - 14);
 		var dateRangeDaily = (value.DateRangeDaily + " " + value.TransactionMonth + "/" + value.TransactionDay);
 
 		// Last 7 Days
@@ -276,7 +276,7 @@ function TransactionSpotlightDailyChartDataSet(result) {
 	var uniqTransactionDay = _.uniqWith(tmpTransactionDay, _.isEqual);
 
 	$.each(uniqTransactionDay, function (index, value) {
-		var dateRangeStart = (uniqTransactionDay.length - 7);
+		var dateRangeStart = (uniqTransactionDay.length - 14);
 
 		// Last 7 Days
 		if (index > dateRangeStart) {
