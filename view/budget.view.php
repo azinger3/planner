@@ -90,6 +90,8 @@
 			}
 		}
 
+
+
 		@media (min-width:415px) and (max-width:812px) {
 			.transaction-week-chart {
 				height: 185px;
@@ -110,6 +112,10 @@
 			.transaction-day-chart {
 				height: 185px;
 			}
+		}
+
+		.transaction-pills {
+			display: inline-block;
 		}
 	</style>
 </head>
@@ -271,8 +277,8 @@
 	</script>
 
 	<script id="tmplTransactionSpotlight" type="text/x-handlebars-template">
-		<div class="center-me">
-			<ul class="nav nav-pills">
+		<div class="text-center">
+			<ul class="nav nav-pills transaction-pills">
 				<li class="active"><a data-toggle="pill" href="#Weekly">Weekly</a></li>
 				<li class=""><a data-toggle="pill" href="#Daily">Daily</a></li>
 			</ul>
