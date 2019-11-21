@@ -149,9 +149,6 @@
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						Transaction Trends
-						<div class="pull-right">
-							<sub><i>Last 3 Months</i><sub>
-						</div>
 					</div>
 					<div class="panel-body">
 						<div id="uxTransactionSpotlight"></div>
@@ -285,11 +282,19 @@
 		</div>
 		<div class="tab-content">
 			<div id="Weekly" class="tab-pane fade in active">
+				<div class="text-center">
+					<br />
+					<i><strong>Last 3 Months</strong></i>
+				</div>
 				<div class="transaction-week-chart">
 					<canvas id="uxTransactionSpotlightWeeklyChart"></canvas>
 				</div>
 			</div>
 			<div id="Daily" class="tab-pane fade">
+				<div class="text-center">
+					<br />
+					<i><strong>Last 2 Weeks</strong></i>
+				</div>
 				<div class="transaction-day-chart">
 					<canvas id="uxTransactionSpotlightDailyChart"></canvas>
 				</div>
