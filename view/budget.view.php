@@ -81,7 +81,7 @@
 		}
 
 		.transaction-week-chart {
-			height: 333px;
+			height: 286px;
 		}
 
 		@media (max-width:414px) {
@@ -99,7 +99,7 @@
 		}
 
 		.transaction-day-chart {
-			height: 333px;
+			height: 286px;
 		}
 
 		@media (max-width:414px) {
