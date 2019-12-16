@@ -326,6 +326,8 @@ function TransactionRecentRender() {
         inputElement: "#TransactionRecentFilter",
         tableElement: "#TransactionRecentTable"
     });
+
+	$("#TransactionRecentFilter").keyup(); // Maintain Filter
 }
 
 function BudgetCategoryOptionAddRender() {

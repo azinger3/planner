@@ -2,5 +2,5 @@
 # New devs, run this once to enable this script: chmod +x ./start
 # To start the app run: ./start
 
-# Spin up a PHP web server on a project directory
+# Spin up a PHP web server on a project directory ***NEED TO CLONE API FIRST! UPDATE THE DIRECTORY BELOW TO POINT TO IT!***
 php -S localhost:8081 -t ~/Desktop/Development/api;
