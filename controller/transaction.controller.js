@@ -82,6 +82,8 @@ $(document).ready(function() {
         }
     });
 
+	$("#MoreInfo").collapse("show");
+
     BudgetCategoryGet(1);
     DatePickerSet();
     TransactionRecentGet();
