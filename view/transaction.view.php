@@ -132,7 +132,7 @@
                                         <input type="text" id="uxTransactionNumber" class="form-control" placeholder="Transaction #" />
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" id="uxNote" class="form-control" placeholder="Note" />
+                                        <input type="text" id="uxNote" class="form-control" placeholder="Note" value="CC" />
                                     </div>
                                 </div>
                                 <div class="form-group pull-right">
