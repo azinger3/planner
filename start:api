@@ -3,4 +3,4 @@
 # To start the app run: ./start
 
 # Spin up a PHP web server on a project directory ***NEED TO CLONE API FIRST! UPDATE THE DIRECTORY BELOW TO POINT TO IT!***
-php -S localhost:8081 -t ~/Desktop/Development/api;
+php -S localhost:8081 -t ~/Desktop/Code/api;

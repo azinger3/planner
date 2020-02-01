@@ -1,5 +1,5 @@
 <div class="navbar navbar-default navbar-fixed-top">
-          <div class="container">
+          <div class="nav-container">
             <div class="navbar-header">
               <a href="/budget" class="navbar-brand">Budget</a>
               <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
@@ -32,7 +32,7 @@
                   <a href="/budget/fund">Funds</a>
                 </li>
                 <li>
-                  <a href="https://login.microsoftonline.com" target="_blank"><i class="fa fa-file-excel-o" aria-hidden="true"></i></a>
+                  <a href="https://drive.google.com" target="_blank"><i class="fa fa-file-excel-o" aria-hidden="true"></i></a>
                 </li>
               </ul>
               <ul class="nav navbar-nav navbar-right">
