@@ -28,7 +28,7 @@
 		}
 
 		.categoryWidth {
-			width: 15%;
+			width: 20%;
 		}
 
 		.progressWidth {
