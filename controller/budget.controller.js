@@ -2,11 +2,19 @@ var api = $.apiUrl() + "/budget";
 var data = {};
 
 var objBudget = {};
+objBudget.BudgetSpotlight = "";
 objBudget.BudgetCategorySpotlight = "";
 objBudget.BudgetFundSpotlight = "";
 objBudget.BudgetSummarySpotlight = "";
 objBudget.TransactionSpotlight = "";
 objBudget.TransactionLeaderboard = "";
+
+var objBudgetSpotlightChart = {
+	Monthly: {
+		chartLabel: [],
+		chartData: []
+	}
+};
 
 var objTransactionSpotlightChart = {
 	Weekly: {
@@ -24,12 +32,190 @@ $(document).ready(function () {
 
 	data.EffectiveDT = Date.today().toString("yyyy-MM-dd");
 
+	BudgetSpotlightGet();
 	BudgetCategorySpotlightGet();
 	BudgetFundSpotlightGet();
 	BudgetSummarySpotlightGet();
 	TransactionSpotlightGet();
 	TransactionLeaderboardGet();
+
+	console.log("State!");
+	console.log(objBudget);
+
+	console.log("Budget Trend");
+	console.log(objBudgetSpotlightChart);
+
+	console.log("Transaction Trend");
+	console.log(objTransactionSpotlightChart);
 });
+
+// Budget
+
+function BudgetSpotlightGet() {
+	BudgetSpotlightRender();
+	BudgetAverageMonthlySpotlightGet();
+}
+
+function BudgetSpotlightRender() {
+	$("#uxBudgetSpotlight").html("<div class='text-center'><i class='fa fa-refresh fa-spin fa-2x fa-fw'></i><span class='loading'>Loading...</span></div>");
+
+	var source = $("#tmplBudgetSpotlight").html();
+	var template = Handlebars.compile(source);
+	var context = objBudget;
+	var html = template(context);
+
+	$("#uxBudgetSpotlight").html(html);
+}
+
+function BudgetAverageMonthlySpotlightGet() {
+	$.ajax({
+		type: "GET",
+		url: api + "/average/snapshot",
+		cache: false,
+		data: null,
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		async: true,
+		beforeSend: function () {
+			$("#uxBudgetAverageMonthlySpotlightChart").html("<div class='text-center'><i class='fa fa-refresh fa-spin fa-2x fa-fw'></i><span class='loading'>Loading...</span></div>");
+		},
+		success: function (result) {
+			objBudget.BudgetSpotlight = result;
+
+			BudgetAverageMonthlySpotlightChartLabelSet(result);
+			BudgetAverageMonthlySpotlightChartDataSet(result);
+
+			BudgetAverageMonthlySpotlightChartRender();
+			
+			console.log("Surplus/Shortage!");
+			console.log(objBudget.BudgetSpotlight[(result.length - 1)].TotalIncomeVsExpenseActual);
+		},
+		error: function (XMLHttpRequest, textStatus, errorThrown) {
+			if (XMLHttpRequest.readyState < 4) {
+				return true;
+			} else {
+				alert("Error :" + XMLHttpRequest.responseText);
+			}
+		}
+	});
+}
+
+function BudgetAverageMonthlySpotlightChartLabelSet(result) {
+	$.each(result, function (index, value) {
+		objBudgetSpotlightChart.Monthly.chartLabel.push(value.BudgetMonth);
+	});
+}
+
+function BudgetAverageMonthlySpotlightChartDataSet(result) {
+	$.each(result, function (index, value) {
+		objBudgetSpotlightChart.Monthly.chartData.push(value.TotalIncomeVsExpenseActual);
+	});
+}
+
+function BudgetAverageMonthlySpotlightChartRender() {
+	var ctx = document.getElementById("uxBudgetAverageMonthlySpotlightChart").getContext('2d');
+
+	var ctxBudgetAverageMonthlySpotlightChart = new Chart(ctx, {
+		type: 'line',
+		data: {
+			labels: objBudgetSpotlightChart.Monthly.chartLabel,
+			datasets: [
+				{
+					fill: "origin",
+					data: objBudgetSpotlightChart.Monthly.chartData,
+				}
+			]
+		},
+		options: {
+			responsive: true,
+			maintainAspectRatio: false,
+			elements: {
+				line: {
+					tension: 0.000001
+				}
+			},
+			legend: {
+				display: false
+			},
+			tooltips: {
+				enabled: true,
+				titleFontFamily: "Lato",
+				titleFontStyle: "normal",
+				titleFontSize: 14,
+				bodyFontFamily: "Lato",
+				bodyFontStyle: "bold",
+				bodyFontSize: 16,
+				displayColors: false,
+				callbacks: {
+					label: function (tooltipItem, data) {
+						var totalIncomeVsExpenseActual = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+
+						return "$" + NumberCommaFormat(totalIncomeVsExpenseActual);
+					}
+				}
+			},
+			scales: {
+				yAxes: [
+					{
+						ticks: {
+							beginAtZero: false,
+							fontFamily: "Lato",
+							fontStyle: "bold",
+							fontSize: 12,
+							callback: function (value, index, values) {
+								return "$" + NumberCommaFormat(value);
+							}
+						},
+						gridLines: {
+							display: true,
+							drawBorder: false
+						}
+					}
+				],
+				xAxes: [
+					{
+						ticks: {
+							beginAtZero: false,
+							fontFamily: "Lato",
+							fontStyle: "bold",
+							fontSize: 12,
+							autoSkip: true,
+							maxRotation: 0,
+							minRotation: 0,
+							display: "auto"
+						},
+						gridLines: {
+							display: false,
+							drawBorder: false
+						}
+					}
+				]
+			}
+		},
+		plugins: [
+			{
+				beforeRender: function (x, options) {
+					var c = x.chart;
+					var dataset = x.data.datasets[0];
+					var yScale = x.scales["y-axis-0"];
+					var yPos = yScale.getPixelForValue(0);
+
+					var gradientFill = c.ctx.createLinearGradient(0, 0, 0, c.height);
+					gradientFill.addColorStop(0, "#18bc9c");
+					gradientFill.addColorStop(yPos / c.height - 0.01, "#18bc9c");
+					gradientFill.addColorStop(yPos / c.height + 0.01, "#e74c3c");
+					gradientFill.addColorStop(1, "#e74c3c");
+
+					var model = x.data.datasets[0]._meta[Object.keys(dataset._meta)[0]].dataset._model;
+					model.backgroundColor = gradientFill;
+					model.borderColor = gradientFill;
+				}
+			}
+		]
+	})
+}
+
+// Budget Category
 
 function BudgetCategorySpotlightGet() {
 	var result = {};
@@ -55,7 +241,7 @@ function BudgetCategorySpotlightGet() {
 			objBudget.BudgetCategorySpotlight = result;
 
 			BudgetCategorySpotlightRender();
-			BudgetMonthPercentageSet();
+			BudgetCategoryPercentageSet();
 
 			$('[data-toggle="tooltip"]').tooltip();
 		},
@@ -77,6 +263,19 @@ function BudgetCategorySpotlightRender() {
 
 	$("#uxBudgetCategorySpotlight").html(html);
 }
+
+function BudgetCategoryPercentageSet() {
+	var objBudgetMonthPercentage = {};
+	objBudgetMonthPercentage.monthNumber = parseInt(Date.today().toString("M")) - 1;
+	objBudgetMonthPercentage.yearNumber = parseInt(Date.today().toString("yyyy"));
+	objBudgetMonthPercentage.dayNumber = parseInt(Date.today().toString("dd"));
+	objBudgetMonthPercentage.daysInMonth = parseInt(Date.getDaysInMonth(objBudgetMonthPercentage.yearNumber, objBudgetMonthPercentage.monthNumber));
+	objBudgetMonthPercentage.monthPercentThrough = Math.round(objBudgetMonthPercentage.dayNumber / objBudgetMonthPercentage.daysInMonth * 100);
+
+	$("#uxBudgetMonth").attr("data-toggle", "tooltip").attr("data-placement", "top").attr("data-original-title", objBudgetMonthPercentage.monthPercentThrough + "%");
+}
+
+// Budget Fund
 
 function BudgetFundSpotlightGet() {
 	var result = {};
@@ -118,6 +317,8 @@ function BudgetFundSpotlightRender() {
 	$("#uxBudgetFundSpotlight").html(html);
 }
 
+// Budget Summary
+
 function BudgetSummarySpotlightGet() {
 	var result = {};
 
@@ -156,6 +357,8 @@ function BudgetSummarySpotlightRender() {
 
 	$("#uxBudgetSummarySpotlight").html(html);
 }
+
+// Transaction
 
 function TransactionSpotlightGet() {
 	$.ajax({
@@ -301,21 +504,23 @@ function TransactionSpotlightWeeklyChartRender() {
 	gradient.addColorStop(0, 'rgba(250,189,9,1)');
 	gradient.addColorStop(1, 'rgba(250,189,9,0)');
 
-	var myChart = new Chart(ctx, {
+	var ctxTransactionSpotlightWeeklyChart = new Chart(ctx, {
 		type: 'line',
 		data: {
 			labels: objTransactionSpotlightChart.Weekly.chartLabel,
-			datasets: [{
-				data: objTransactionSpotlightChart.Weekly.chartData,
-				fill: "start",
-				backgroundColor: gradient,
-				borderColor: "#f4c247",
-				pointBorderColor: "#000000",
-				pointBackgroundColor: "#ffffff",
-				pointBorderWidth: 2,
-				pointRadius: 8,
-				pointHoverRadius: 8
-			}]
+			datasets: [
+				{
+					data: objTransactionSpotlightChart.Weekly.chartData,
+					fill: "start",
+					backgroundColor: gradient,
+					borderColor: "#f4c247",
+					pointBorderColor: "#000000",
+					pointBackgroundColor: "#ffffff",
+					pointBorderWidth: 2,
+					pointRadius: 8,
+					pointHoverRadius: 8
+				}
+			]
 		},
 		options: {
 			responsive: true,
@@ -403,7 +608,7 @@ function TransactionSpotlightDailyChartRender() {
 	gradient.addColorStop(0, 'rgba(250,189,9,1)');
 	gradient.addColorStop(1, 'rgba(250,189,9,0)');
 
-	var myChart = new Chart(ctx, {
+	var ctxTransactionSpotlightDailyChart = new Chart(ctx, {
 		type: 'line',
 		data: {
 			labels: objTransactionSpotlightChart.Daily.chartLabel,
@@ -498,6 +703,8 @@ function TransactionSpotlightDailyChartRender() {
 	});
 }
 
+// Transaction Leaderboard
+
 function TransactionLeaderboardGet() {
 	$.ajax({
 		type: "GET",
@@ -534,13 +741,8 @@ function TransactionLeaderboardRender() {
 	$("#uxTransactionLeaderboard").html(html);
 }
 
-function BudgetMonthPercentageSet() {
-	var objBudgetMonthPercentage = {};
-	objBudgetMonthPercentage.monthNumber = parseInt(Date.today().toString("M")) - 1;
-	objBudgetMonthPercentage.yearNumber = parseInt(Date.today().toString("yyyy"));
-	objBudgetMonthPercentage.dayNumber = parseInt(Date.today().toString("dd"));
-	objBudgetMonthPercentage.daysInMonth = parseInt(Date.getDaysInMonth(objBudgetMonthPercentage.yearNumber, objBudgetMonthPercentage.monthNumber));
-	objBudgetMonthPercentage.monthPercentThrough = Math.round(objBudgetMonthPercentage.dayNumber / objBudgetMonthPercentage.daysInMonth * 100);
 
-	$("#uxBudgetMonth").attr("data-toggle", "tooltip").attr("data-placement", "top").attr("data-original-title", objBudgetMonthPercentage.monthPercentThrough + "%");
-}
+
+
+
+

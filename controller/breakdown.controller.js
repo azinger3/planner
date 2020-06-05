@@ -141,7 +141,8 @@ function BudgetBreakdownChartDataSet(result) {
 
 function BudgetBreakdownChartRender() {
 	var ctx = document.getElementById("uxBudgetBreakdownChart").getContext('2d');
-	var myChart = new Chart(ctx, {
+
+	var ctxBudgetBreakdownChart = new Chart(ctx, {
 		type: 'pie',
 		data: {
 			labels: chartLabel,

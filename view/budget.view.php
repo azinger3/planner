@@ -80,6 +80,22 @@
 			padding: 1px 20px 10px 20px;
 		}
 
+		.budget-monthly-chart {
+			height: 375px;
+		}
+
+		@media (max-width:414px) {
+			.budget-monthly-chart {
+				height: 150px;
+			}
+		}
+
+		@media (min-width:415px) and (max-width:812px) {
+			.budget-monthly-chart {
+				height: 185px;
+			}
+		}
+
 		.transaction-week-chart {
 			height: 286px;
 		}
@@ -89,8 +105,6 @@
 				height: 150px;
 			}
 		}
-
-
 
 		@media (min-width:415px) and (max-width:812px) {
 			.transaction-week-chart {
@@ -148,10 +162,13 @@
 			<div class="col-md-8">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						Transaction Trends
+						Budget Trend
+						<div class="pull-right">
+							<sub><i>Since Inception</i><sub>
+						</div>
 					</div>
 					<div class="panel-body">
-						<div id="uxTransactionSpotlight"></div>
+						<div id="uxBudgetSpotlight"></div>
 					</div>
 				</div>
 			</div>
@@ -165,7 +182,27 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-5">
+			<div class="col-md-8">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						Transaction Trend
+					</div>
+					<div class="panel-body">
+						<div id="uxTransactionSpotlight"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="panel panel-primary">
+					<div class="panel-heading">Budget Summaries</div>
+					<div class="panel-body">
+						<div id="uxBudgetSummarySpotlight"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-8">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						Top 10 Transactions
@@ -178,16 +215,14 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-md-3">
-				<div class="panel panel-primary">
-					<div class="panel-heading">Budget Summaries</div>
-					<div class="panel-body">
-						<div id="uxBudgetSummarySpotlight"></div>
-					</div>
-				</div>
-			</div>
 		</div>
 	</section>
+
+	<script id="tmplBudgetSpotlight" type="text/x-handlebars-template">
+		<div class="budget-monthly-chart">
+			<canvas id="uxBudgetAverageMonthlySpotlightChart"></canvas>
+		</div>
+	</script>
 
 	<script id="tmplBudgetCategorySpotlight" type="text/x-handlebars-template">
 		<div class="currentMonth">
