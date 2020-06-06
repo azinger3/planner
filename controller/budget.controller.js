@@ -84,7 +84,7 @@ function BudgetBalanceMetricSet(result) {
 		$("#uxBudgetBalance").addClass("text-success");
 
 		budgetBalance = "$" + NumberCommaFormat(budgetBalance);
-	} 
+	}
 	else {
 		$("#uxBudgetBalance").addClass("text-danger");
 
@@ -149,6 +149,9 @@ function BudgetAverageMonthlySpotlightChartRender() {
 				{
 					fill: "origin",
 					data: objBudgetSpotlightChart.Monthly.chartData,
+					pointBorderWidth: 2,
+					pointRadius: 5,
+					pointHoverRadius: 8
 				}
 			]
 		},
