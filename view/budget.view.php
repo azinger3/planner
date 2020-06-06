@@ -92,12 +92,12 @@
 
 		@media (min-width:415px) and (max-width:812px) {
 			.budget-monthly-chart {
-				display: none;
+				display: inherit;
 			}
 		}
 
 		.budget-balance-metric {
-			display: none;
+			display: inherit;
 		}
 
 		@media (max-width:414px) {
@@ -114,12 +114,18 @@
 
 		@media (min-width:415px) and (max-width:812px) {
 			.budget-balance-metric {
-				display: inherit;
+				display: none;
 				font-size: 24px;
 				font-weight: bolder;
 			}
 
 			.budget-spotlight-as-of {
+				display: none;
+			}
+		}
+
+		@media (min-width:813px) {
+			.budget-balance-metric {
 				display: none;
 			}
 		}
