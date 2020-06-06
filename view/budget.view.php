@@ -209,44 +209,50 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-4">
-				<div class="panel panel-primary">
-					<div class="panel-heading">Savings Breakdown</div>
-					<div class="panel-body">
-						<div id="uxBudgetFundSpotlight"></div>
-					</div>
-				</div>
-			</div>
 			<div class="col-md-8">
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						Transaction Trend
-					</div>
-					<div class="panel-body">
-						<div id="uxTransactionSpotlight"></div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-4">
-				<div class="panel panel-primary">
-					<div class="panel-heading">Budget Summaries</div>
-					<div class="panel-body">
-						<div id="uxBudgetSummarySpotlight"></div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-8">
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-						Top 10 Transactions
-						<div class="pull-right">
-							<sub><i>Past Month</i><sub>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								Transaction Trend
+							</div>
+							<div class="panel-body">
+								<div id="uxTransactionSpotlight"></div>
+							</div>
 						</div>
 					</div>
-					<div class="panel-body">
-						<div id="uxTransactionLeaderboard"></div>
+					<div class="col-md-12">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								Top 10 Transactions
+								<div class="pull-right">
+									<sub><i>Past Month</i><sub>
+								</div>
+							</div>
+							<div class="panel-body">
+								<div id="uxTransactionLeaderboard"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-primary">
+							<div class="panel-heading">Savings Breakdown</div>
+							<div class="panel-body">
+								<div id="uxBudgetFundSpotlight"></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="panel panel-primary">
+							<div class="panel-heading">Budget Summaries</div>
+							<div class="panel-body">
+								<div id="uxBudgetSummarySpotlight"></div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
