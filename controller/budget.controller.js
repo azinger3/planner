@@ -78,11 +78,7 @@ function BudgetBalanceMetricRender() {
 }
 
 function BudgetBalanceMetricSet(result) {
-	//var budgetBalance = result[(result.length - 1)].TotalIncomeVsExpenseActual;
-	var budgetBalance = result[43].TotalIncomeVsExpenseActual;
-
-	console.log("Surplus/Shortage!");
-	console.log(budgetBalance);
+	var budgetBalance = result[(result.length - 1)].TotalIncomeVsExpenseActual;
 
 	if (budgetBalance > 0) {
 		$("#uxBudgetBalance").addClass("text-success");
