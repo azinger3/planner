@@ -103,7 +103,7 @@
 		@media (max-width:414px) {
 			.budget-balance-metric {
 				display: inherit;
-				font-size: 24px;
+				font-size: 44px;
 				font-weight: bolder;
 			}
 
@@ -115,7 +115,7 @@
 		@media (min-width:415px) and (max-width:812px) {
 			.budget-balance-metric {
 				display: none;
-				font-size: 24px;
+				font-size: 44px;
 				font-weight: bolder;
 			}
 
