@@ -53,6 +53,7 @@ $(document).ready(function () {
 
 function BudgetSpotlightGet() {
 	BudgetSpotlightRender();
+	BudgetBalanceMetricRender();
 	BudgetAverageMonthlySpotlightGet();
 }
 
@@ -65,6 +66,36 @@ function BudgetSpotlightRender() {
 	var html = template(context);
 
 	$("#uxBudgetSpotlight").html(html);
+}
+
+function BudgetBalanceMetricRender() {
+	var source = $("#tmplBudgetBalanceMetric").html();
+	var template = Handlebars.compile(source);
+	var context = objBudget;
+	var html = template(context);
+
+	$("#uxBudgetBalanceMetric").html(html);
+}
+
+function BudgetBalanceMetricSet(result) {
+	//var budgetBalance = result[(result.length - 1)].TotalIncomeVsExpenseActual;
+	var budgetBalance = result[43].TotalIncomeVsExpenseActual;
+
+	console.log("Surplus/Shortage!");
+	console.log(budgetBalance);
+
+	if (budgetBalance > 0) {
+		$("#uxBudgetBalance").addClass("text-success");
+
+		budgetBalance = "$" + NumberCommaFormat(budgetBalance);
+	} 
+	else {
+		$("#uxBudgetBalance").addClass("text-danger");
+
+		budgetBalance = "$" + NumberCommaFormat(budgetBalance)
+	}
+
+	$("#uxBudgetBalance").html(budgetBalance);
 }
 
 function BudgetAverageMonthlySpotlightGet() {
@@ -82,13 +113,12 @@ function BudgetAverageMonthlySpotlightGet() {
 		success: function (result) {
 			objBudget.BudgetSpotlight = result;
 
+			BudgetBalanceMetricSet(result);
+
 			BudgetAverageMonthlySpotlightChartLabelSet(result);
 			BudgetAverageMonthlySpotlightChartDataSet(result);
 
 			BudgetAverageMonthlySpotlightChartRender();
-			
-			console.log("Surplus/Shortage!");
-			console.log(objBudget.BudgetSpotlight[(result.length - 1)].TotalIncomeVsExpenseActual);
 		},
 		error: function (XMLHttpRequest, textStatus, errorThrown) {
 			if (XMLHttpRequest.readyState < 4) {
@@ -200,15 +230,17 @@ function BudgetAverageMonthlySpotlightChartRender() {
 					var yScale = x.scales["y-axis-0"];
 					var yPos = yScale.getPixelForValue(0);
 
-					var gradientFill = c.ctx.createLinearGradient(0, 0, 0, c.height);
-					gradientFill.addColorStop(0, "#18bc9c");
-					gradientFill.addColorStop(yPos / c.height - 0.01, "#18bc9c");
-					gradientFill.addColorStop(yPos / c.height + 0.01, "#e74c3c");
-					gradientFill.addColorStop(1, "#e74c3c");
+					if (yPos) {
+						var gradientFill = c.ctx.createLinearGradient(0, 0, 0, c.height);
+						gradientFill.addColorStop(0, "#18bc9c");
+						gradientFill.addColorStop(yPos / c.height - 0.01, "#18bc9c");
+						gradientFill.addColorStop(yPos / c.height + 0.01, "#e74c3c");
+						gradientFill.addColorStop(1, "#e74c3c");
 
-					var model = x.data.datasets[0]._meta[Object.keys(dataset._meta)[0]].dataset._model;
-					model.backgroundColor = gradientFill;
-					model.borderColor = gradientFill;
+						var model = x.data.datasets[0]._meta[Object.keys(dataset._meta)[0]].dataset._model;
+						model.backgroundColor = gradientFill;
+						model.borderColor = gradientFill;
+					}
 				}
 			}
 		]
@@ -243,7 +275,7 @@ function BudgetCategorySpotlightGet() {
 			BudgetCategorySpotlightRender();
 			BudgetCategoryPercentageSet();
 
-			$('[data-toggle="tooltip"]').tooltip();
+			$("[data-toggle='tooltip']").tooltip();
 		},
 		error: function (XMLHttpRequest, textStatus, errorThrown) {
 			if (XMLHttpRequest.readyState < 4) {
@@ -265,14 +297,14 @@ function BudgetCategorySpotlightRender() {
 }
 
 function BudgetCategoryPercentageSet() {
-	var objBudgetMonthPercentage = {};
-	objBudgetMonthPercentage.monthNumber = parseInt(Date.today().toString("M")) - 1;
-	objBudgetMonthPercentage.yearNumber = parseInt(Date.today().toString("yyyy"));
-	objBudgetMonthPercentage.dayNumber = parseInt(Date.today().toString("dd"));
-	objBudgetMonthPercentage.daysInMonth = parseInt(Date.getDaysInMonth(objBudgetMonthPercentage.yearNumber, objBudgetMonthPercentage.monthNumber));
-	objBudgetMonthPercentage.monthPercentThrough = Math.round(objBudgetMonthPercentage.dayNumber / objBudgetMonthPercentage.daysInMonth * 100);
+	var objBudgetCategoryPercentage = {};
+	objBudgetCategoryPercentage.monthNumber = parseInt(Date.today().toString("M")) - 1;
+	objBudgetCategoryPercentage.yearNumber = parseInt(Date.today().toString("yyyy"));
+	objBudgetCategoryPercentage.dayNumber = parseInt(Date.today().toString("dd"));
+	objBudgetCategoryPercentage.daysInMonth = parseInt(Date.getDaysInMonth(objBudgetCategoryPercentage.yearNumber, objBudgetCategoryPercentage.monthNumber));
+	objBudgetCategoryPercentage.monthPercentThrough = Math.round(objBudgetCategoryPercentage.dayNumber / objBudgetCategoryPercentage.daysInMonth * 100);
 
-	$("#uxBudgetMonth").attr("data-toggle", "tooltip").attr("data-placement", "top").attr("data-original-title", objBudgetMonthPercentage.monthPercentThrough + "%");
+	$("#uxBudgetMonth").attr("data-toggle", "tooltip").attr("data-placement", "top").attr("data-original-title", objBudgetCategoryPercentage.monthPercentThrough + "%");
 }
 
 // Budget Fund

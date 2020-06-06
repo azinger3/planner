@@ -86,13 +86,41 @@
 
 		@media (max-width:414px) {
 			.budget-monthly-chart {
-				height: 150px;
+				display: none;
 			}
 		}
 
 		@media (min-width:415px) and (max-width:812px) {
 			.budget-monthly-chart {
-				height: 185px;
+				display: none;
+			}
+		}
+
+		.budget-balance-metric {
+			display: none;
+		}
+
+		@media (max-width:414px) {
+			.budget-balance-metric {
+				display: inherit;
+				font-size: 24px;
+				font-weight: bolder;
+			}
+
+			.budget-spotlight-as-of {
+				display: none;
+			}
+		}
+
+		@media (min-width:415px) and (max-width:812px) {
+			.budget-balance-metric {
+				display: inherit;
+				font-size: 24px;
+				font-weight: bolder;
+			}
+
+			.budget-spotlight-as-of {
+				display: none;
 			}
 		}
 
@@ -163,12 +191,13 @@
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						Budget Trend
-						<div class="pull-right">
+						<div class="budget-spotlight-as-of pull-right">
 							<sub><i>Since Inception</i><sub>
 						</div>
 					</div>
 					<div class="panel-body">
 						<div id="uxBudgetSpotlight"></div>
+						<div id="uxBudgetBalanceMetric"></div>
 					</div>
 				</div>
 			</div>
@@ -221,6 +250,12 @@
 	<script id="tmplBudgetSpotlight" type="text/x-handlebars-template">
 		<div class="budget-monthly-chart">
 			<canvas id="uxBudgetAverageMonthlySpotlightChart"></canvas>
+		</div>
+	</script>
+
+	<script id="tmplBudgetBalanceMetric" type="text/x-handlebars-template">
+		<div class="budget-balance-metric text-center">
+			<div id="uxBudgetBalance"></div>
 		</div>
 	</script>
 
