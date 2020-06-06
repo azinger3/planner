@@ -154,6 +154,8 @@ function BudgetBreakdownChartRender() {
 			]
 		},
 		options: {
+			responsive: true,
+			maintainAspectRatio: true,
 			legend: {
 				display: true,
 				position: "bottom",
