@@ -59,7 +59,7 @@
                                     <thead>
                                         <tr>
                                             <th>Category</th>
-                                            <th class="custom-hidden-xs hidden-sm">Actual</th>
+                                            <th class="custom-hidden-xs">Actual</th>
                                             <th>Average</th>
                                         </tr>
                                     </thead>
@@ -68,10 +68,10 @@
                                         <tr>
                                             <td><a class="normalLink" href="javascript:GoToSection('{{BudgetCategoryID}}');">{{BudgetCategory}}</a></td>
                                         {{#if IsExpenseFlg}}
-                                            <td class="custom-hidden-xs hidden-sm amount-red">${{NumberCommaFormat CategoryActual}}</td>
+                                            <td class="custom-hidden-xs amount-red">${{NumberCommaFormat CategoryActual}}</td>
                                             <td class="amount-red">${{NumberCommaFormat CategoryAverage}}</td>
                                         {{else}}
-                                            <td class="custom-hidden-xs hidden-sm">${{NumberCommaFormat CategoryActual}}</td>
+                                            <td class="custom-hidden-xs">${{NumberCommaFormat CategoryActual}}</td>
                                             <td class="">${{NumberCommaFormat CategoryAverage}}</td>
                                         {{/if}}
                                         </tr>
@@ -81,9 +81,9 @@
                                         <tr>
                                             <td><h4><strong>TOTAL</strong></h4></td>
                                         {{#if IsTotalIncomeVsExpenseActualNegative}}
-                                            <td class="custom-hidden-xs hidden-sm amount-red"><h4><strong>${{NumberCommaFormat TotalIncomeVsExpenseActual}}</strong></h4></td>
+                                            <td class="custom-hidden-xs amount-red"><h4><strong>${{NumberCommaFormat TotalIncomeVsExpenseActual}}</strong></h4></td>
                                         {{else}}
-                                            <td class="custom-hidden-xs hidden-sm"><h4><strong>${{NumberCommaFormat TotalIncomeVsExpenseActual}}</strong></h4></td>
+                                            <td class="custom-hidden-xs"><h4><strong>${{NumberCommaFormat TotalIncomeVsExpenseActual}}</strong></h4></td>
                                         {{/if}}
 
                                         {{#if IsTotalIncomeVsExpenseAverageNegative}}
