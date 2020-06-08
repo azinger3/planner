@@ -84,50 +84,9 @@
 			height: 375px;
 		}
 
-		@media (max-width:414px) {
-			.budget-monthly-chart {
-				display: none;
-			}
-		}
-
-		@media (min-width:415px) and (max-width:812px) {
-			.budget-monthly-chart {
-				display: inherit;
-			}
-		}
-
 		.budget-balance-metric {
-			display: inherit;
-		}
-
-		@media (max-width:414px) {
-			.budget-balance-metric {
-				display: inherit;
-				font-size: 44px;
-				font-weight: bolder;
-			}
-
-			.budget-spotlight-as-of {
-				display: none;
-			}
-		}
-
-		@media (min-width:415px) and (max-width:812px) {
-			.budget-balance-metric {
-				display: none;
-				font-size: 44px;
-				font-weight: bolder;
-			}
-
-			.budget-spotlight-as-of {
-				display: none;
-			}
-		}
-
-		@media (min-width:813px) {
-			.budget-balance-metric {
-				display: none;
-			}
+			font-size: 24px;
+			font-weight: bolder;
 		}
 
 		.transaction-week-chart {
@@ -197,13 +156,13 @@
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						Budget Trend
-						<div class="budget-spotlight-as-of pull-right">
+						<div class="budget-spotlight-as-of pull-right hidden-xs hidden-sm">
 							<sub><i>Since Inception</i><sub>
 						</div>
 					</div>
 					<div class="panel-body">
-						<div id="uxBudgetSpotlight"></div>
-						<div id="uxBudgetBalanceMetric"></div>
+						<div id="uxBudgetSpotlight" class="hidden-xs hidden-sm"></div>
+						<div id="uxBudgetBalanceMetric" class="hidden-md hidden-lg"></div>
 					</div>
 				</div>
 			</div>
