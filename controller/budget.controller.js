@@ -68,32 +68,6 @@ function BudgetSpotlightRender() {
 	$("#uxBudgetSpotlight").html(html);
 }
 
-function BudgetBalanceMetricRender() {
-	var source = $("#tmplBudgetBalanceMetric").html();
-	var template = Handlebars.compile(source);
-	var context = objBudget;
-	var html = template(context);
-
-	$("#uxBudgetBalanceMetric").html(html);
-}
-
-function BudgetBalanceMetricSet(result) {
-	var budgetBalance = result[(result.length - 1)].TotalIncomeVsExpenseActual;
-
-	if (budgetBalance > 0) {
-		$("#uxBudgetBalance").addClass("text-success");
-
-		budgetBalance = "$" + NumberCommaFormat(budgetBalance);
-	}
-	else {
-		$("#uxBudgetBalance").addClass("text-danger");
-
-		budgetBalance = "$" + NumberCommaFormat(budgetBalance)
-	}
-
-	$("#uxBudgetBalance").html(budgetBalance);
-}
-
 function BudgetAverageMonthlySpotlightGet() {
 	$.ajax({
 		type: "GET",
@@ -109,12 +83,12 @@ function BudgetAverageMonthlySpotlightGet() {
 		success: function (result) {
 			objBudget.BudgetSpotlight = result;
 
-			BudgetBalanceMetricSet(result);
-
 			BudgetAverageMonthlySpotlightChartLabelSet(result);
 			BudgetAverageMonthlySpotlightChartDataSet(result);
 
 			BudgetAverageMonthlySpotlightChartRender();
+
+			BudgetBalanceMetricSet(result);
 		},
 		error: function (XMLHttpRequest, textStatus, errorThrown) {
 			if (XMLHttpRequest.readyState < 4) {
@@ -244,6 +218,32 @@ function BudgetAverageMonthlySpotlightChartRender() {
 			}
 		]
 	})
+}
+
+function BudgetBalanceMetricRender() {
+	var source = $("#tmplBudgetBalanceMetric").html();
+	var template = Handlebars.compile(source);
+	var context = objBudget;
+	var html = template(context);
+
+	$("#uxBudgetBalanceMetric").html(html);
+}
+
+function BudgetBalanceMetricSet(result) {
+	var budgetBalance = result[(result.length - 1)].TotalIncomeVsExpenseActual;
+
+	if (budgetBalance > 0) {
+		$("#uxBudgetBalance").addClass("text-success");
+
+		budgetBalance = "$" + NumberCommaFormat(budgetBalance);
+	}
+	else {
+		$("#uxBudgetBalance").addClass("text-danger");
+
+		budgetBalance = "$" + NumberCommaFormat(budgetBalance)
+	}
+
+	$("#uxBudgetBalance").html(budgetBalance);
 }
 
 // Budget Category
