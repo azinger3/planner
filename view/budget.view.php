@@ -156,13 +156,13 @@
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						Budget Trend
-						<div class="budget-spotlight-as-of pull-right hidden-xs hidden-sm">
+						<div class="budget-spotlight-as-of pull-right hidden-xs">
 							<sub><i>Since Inception</i><sub>
 						</div>
 					</div>
 					<div class="panel-body">
-						<div id="uxBudgetSpotlight" class="hidden-xs hidden-sm"></div>
-						<div id="uxBudgetBalanceMetric" class="hidden-md hidden-lg"></div>
+						<div id="uxBudgetSpotlight" class="hidden-xs"></div>
+						<div id="uxBudgetBalanceMetric" class="hidden-sm hidden-md hidden-lg"></div>
 					</div>
 				</div>
 			</div>
