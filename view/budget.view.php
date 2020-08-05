@@ -23,6 +23,10 @@
 			text-align: right;
 		}
 
+		.transaction-balance {
+			text-align: right;
+		}
+
 		.total {
 			background-color: #f2f2f2;
 		}
@@ -60,6 +64,10 @@
 
 		.amount-red {
 			color: red;
+		}
+
+		.amount-balance {
+			font-size: 14px;
 		}
 
 		a.summaryLink {
@@ -380,10 +388,14 @@
 		<table class="table table-hover table-striped">
 			<tbody>
 				{{#each TransactionBalance}}
-					<tr>
-						<td>{{Description}}</td>
-						<td class="balance">${{NumberCommaFormat TotalIncomeVsExpenseActual}}</td>
-					</tr>
+				<tr>
+					<td>{{Description}}</td>
+					{{#if IsNegativeFlg}}
+					<td class="transaction-balance"><span class="label label-danger amount-balance">${{NumberCommaFormat TotalIncomeVsExpenseActual}}</span></td>
+					{{else}}
+					<td class="transaction-balance"><span class="label label-success amount-balance">${{NumberCommaFormat TotalIncomeVsExpenseActual}}</span></td>
+					{{/if}}
+				</tr>
 				{{/each}}
 			</tbody>
 		</table>
