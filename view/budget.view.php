@@ -403,7 +403,7 @@
 
 	<?php require_once('include/footer.php'); ?>
 
-	<script type="text/javascript" src="../../../controller/budget.controller.js"></script>
+	<script type="text/javascript" src="../../../controller/budget.controller.js?version=1.0.0"></script>
 </body>
 
 </html>
