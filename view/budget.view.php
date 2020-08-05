@@ -199,6 +199,14 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="panel panel-primary">
+							<div class="panel-heading">Business Performance</div>
+							<div class="panel-body">
+								<div id="uxTransactionBalance"></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="panel panel-primary">
 							<div class="panel-heading">Savings Breakdown</div>
 							<div class="panel-body">
 								<div id="uxBudgetFundSpotlight"></div>
@@ -363,6 +371,19 @@
 					<td class="hidden-xs">{{Note}}</td>
 					<td>${{NumberCommaFormat Amount}}</td>
 				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</script>
+
+	<script id="tmplTransactionBalance" type="text/x-handlebars-template">
+		<table class="table table-hover table-striped">
+			<tbody>
+				{{#each TransactionBalance}}
+					<tr>
+						<td>{{Description}}</td>
+						<td class="balance">${{NumberCommaFormat TotalIncomeVsExpenseActual}}</td>
+					</tr>
 				{{/each}}
 			</tbody>
 		</table>

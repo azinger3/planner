@@ -8,6 +8,7 @@ objBudget.BudgetFundSpotlight = "";
 objBudget.BudgetSummarySpotlight = "";
 objBudget.TransactionSpotlight = "";
 objBudget.TransactionLeaderboard = "";
+objBudget.TransactionBalance = "";
 
 var objBudgetSpotlightChart = {
 	Monthly: {
@@ -38,6 +39,7 @@ $(document).ready(function () {
 	BudgetSummarySpotlightGet();
 	TransactionSpotlightGet();
 	TransactionLeaderboardGet();
+	TransactionBalanceGet("UBAM");
 
 	console.log("State!");
 	console.log(objBudget);
@@ -772,8 +774,40 @@ function TransactionLeaderboardRender() {
 	$("#uxTransactionLeaderboard").html(html);
 }
 
+// Transaction Balance
 
+function TransactionBalanceGet(description) {
+	$.ajax({
+		type: "GET",
+		url: api + "/transaction/balance",
+		cache: false,
+		data: { Keyword: description } ,
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		async: true,
+		beforeSend: function () {
+			$("#uxTransactionBalance").html("<div class='text-center'><i class='fa fa-refresh fa-spin fa-2x fa-fw'></i><span class='loading'>Loading...</span></div>");
+		},
+		success: function (result) {
+			objBudget.TransactionBalance = result;
 
+			TransactionBalanceRender();
+		},
+		error: function (XMLHttpRequest, textStatus, errorThrown) {
+			if (XMLHttpRequest.readyState < 4) {
+				return true;
+			} else {
+				alert('Error :' + XMLHttpRequest.responseText);
+			}
+		}
+	});
+}
 
+function TransactionBalanceRender() {
+	var source = $("#tmplTransactionBalance").html();
+	var template = Handlebars.compile(source);
+	var context = objBudget;
+	var html = template(context);
 
-
+	$("#uxTransactionBalance").html(html);
+}
