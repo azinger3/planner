@@ -262,6 +262,6 @@
 
         <?php require_once('include/footer.php'); ?>
 
-        <script type="text/javascript" src="../../../controller/transaction.controller.js?version=1.0.0"></script>
+        <script type="text/javascript" src="../../../controller/transaction.controller.js?version=1.1.0"></script>
     </body>
 </html>
