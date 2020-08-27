@@ -241,7 +241,7 @@ function TransactionClear() {
     $("#uxAmount").val("");
     $("#uxBudgetCategory option[value='']").prop("selected", true);
     $("#uxTransactionNumber").val("");
-    $("#uxNote").val("CC");
+    $("#uxNote").val("");
     $("#HardErrorMessage").html("");
 }
 
