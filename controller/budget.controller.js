@@ -110,8 +110,6 @@ function BudgetAverageMonthlySpotlightRefresh() {
 			$("#uxBudgetSpotlight").html("<div class='text-center'><i class='fa fa-refresh fa-spin fa-2x fa-fw'></i><span class='loading'>Loading...</span></div>");
 		},
 		success: function (result) {
-			console.log(result);
-
 			objBudgetSpotlightChart.Monthly.chartLabel = [];
 			objBudgetSpotlightChart.Monthly.chartData = [];
 
