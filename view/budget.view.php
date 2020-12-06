@@ -165,7 +165,7 @@
 					<div class="panel-heading">
 						Budget Trend
 						<div class="pull-right hidden-xs">
-							<div class="quickLink" onclick="BudgetSpotlightRefresh()">
+							<div onclick="BudgetSpotlightRefresh()" title="Refresh" class="quickLink">
 								<i class="fa fa-refresh" aria-hidden="true"></i>
 							</div>
 						</div>
@@ -405,7 +405,7 @@
 
 	<?php require_once('include/footer.php'); ?>
 
-	<script type="text/javascript" src="../../../controller/budget.controller.js?version=1.0.0"></script>
+	<script type="text/javascript" src="../../../controller/budget.controller.js?version=1.1.0"></script>
 </body>
 
 </html>
