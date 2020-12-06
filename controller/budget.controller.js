@@ -40,15 +40,6 @@ $(document).ready(function () {
 	TransactionSpotlightGet();
 	TransactionLeaderboardGet();
 	TransactionBalanceGet("UBAM");
-
-	console.log("State!");
-	console.log(objBudget);
-
-	console.log("Budget Trend");
-	console.log(objBudgetSpotlightChart);
-
-	console.log("Transaction Trend");
-	console.log(objTransactionSpotlightChart);
 });
 
 // Budget
@@ -68,6 +59,10 @@ function BudgetSpotlightRender() {
 	var html = template(context);
 
 	$("#uxBudgetSpotlight").html(html);
+}
+
+function BudgetSpotlightRefresh() {
+	BudgetAverageMonthlySpotlightRefresh();
 }
 
 function BudgetAverageMonthlySpotlightGet() {
@@ -91,6 +86,36 @@ function BudgetAverageMonthlySpotlightGet() {
 			BudgetAverageMonthlySpotlightChartRender();
 
 			BudgetBalanceMetricSet(result);
+		},
+		error: function (XMLHttpRequest, textStatus, errorThrown) {
+			if (XMLHttpRequest.readyState < 4) {
+				return true;
+			} else {
+				alert("Error :" + XMLHttpRequest.responseText);
+			}
+		}
+	});
+}
+
+function BudgetAverageMonthlySpotlightRefresh() {
+	$.ajax({
+		type: "POST",
+		url: api + "/average/snapshot/refresh",
+		cache: false,
+		data: null,
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		async: true,
+		beforeSend: function () {
+			$("#uxBudgetSpotlight").html("<div class='text-center'><i class='fa fa-refresh fa-spin fa-2x fa-fw'></i><span class='loading'>Loading...</span></div>");
+		},
+		success: function (result) {
+			console.log(result);
+
+			objBudgetSpotlightChart.Monthly.chartLabel = [];
+			objBudgetSpotlightChart.Monthly.chartData = [];
+
+			BudgetSpotlightGet();
 		},
 		error: function (XMLHttpRequest, textStatus, errorThrown) {
 			if (XMLHttpRequest.readyState < 4) {

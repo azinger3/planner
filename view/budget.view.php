@@ -164,8 +164,10 @@
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						Budget Trend
-						<div class="budget-spotlight-as-of pull-right hidden-xs">
-							<sub><i>Since Inception</i><sub>
+						<div class="pull-right hidden-xs">
+							<div class="quickLink" onclick="BudgetSpotlightRefresh()">
+								<i class="fa fa-refresh" aria-hidden="true"></i>
+							</div>
 						</div>
 					</div>
 					<div class="panel-body">
